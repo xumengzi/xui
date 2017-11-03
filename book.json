@@ -1,18 +1,10 @@
 {
-    "plugins": [ "theme-api" ],
-    "pluginsConfig": {
-        "theme-api": {
-            "languages": [
-                {
-                    "lang": "js",
-                    "name": "JavaScript",
-                    "default": true
-                },
-                {
-                    "lang": "go",
-                    "name": "Go"
-                }
-            ]
-        }
-    }
+	"title" : "XUI文档简介",
+	"author" : "xumeng",
+	"description" : "个人收藏",
+	"links": {
+	    "sidebar" : {
+	        "Home" : "http://xumengzi.top/"
+	    }
+	}
 }

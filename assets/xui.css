@@ -1,0 +1,470 @@
+/*
+* @Author: Administrator
+* @Date:   2017-11-01 11:21:25
+* @Last Modified by:   Administrator
+* @Last Modified time: 2017-11-02 16:52:49
+*/
+
+
+/*常用样式*/
+/*按钮样式*/
+.xui_btn {
+  box-sizing: border-box;
+  padding: .37em .57em;
+  margin: .57em;
+  border: 1px solid #dbdbdb;
+  border-radius: .28em;
+  font-size: 1em;
+  line-height: 1.4;
+  padding-left: 1.14em;
+  padding-right: 1.14em;
+  white-space: nowrap;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+.xui_btn_default {
+  color: #f8f9f8;
+  border-color: #4eb900;
+  background-color: #4eb900;
+}
+.xui_btn_default:hover {
+  border-color: #3b8704;
+  background-color: #3b8704;
+}
+.xui_btn-secondary {
+  color: #f8f9f8;
+  border-color: #fd7127;
+  background-color: #fd7127;
+}
+.xui_btn-secondary:hover {
+  border-color: #ec580a;
+  background-color: #ec580a;
+}
+.xui_btn:disabled {
+  color: #f8f9f8;
+  border-color: #cccccc;
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+.xui_btn_cancel {
+  color: #fd7127;
+  border-color: #fd7127;
+  background-color: #ffffff;
+}
+.xui_btn_cancel:not(:disabled):hover {
+  color: #f8f9f8;
+  border-color: #fd7127;
+  background-color: #fd7127;
+}
+.xui_btn_cancel:disabled {
+  color: #cccccc;
+  border-color: #cccccc;
+  background-color: #f8f9f8;
+}
+
+
+/*
+弹框样式
+*/
+.xu_prompt,.xu_tips{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.56);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 14px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    z-index: 99999;
+}
+.xu_prompt .xu_content{
+    position: relative;
+    width: 30em;
+    margin: 0 auto;
+    color: #000;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 1em 2em;
+    background: #fff;
+    opacity: 0.9;
+}
+.xu_prompt .xu_close{
+    position: absolute;
+    right: .6em;
+    top: .6em;
+    display: block;
+    width: 1.5em;
+    height: 1.5em;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAFVBMVEUAAABQUFBQUFBRUVFQUFBQUFBRUVHFwiN3AAAABnRSTlMAYFCwMK9g6AnkAAAAZ0lEQVQoz2OgDnBVgLGYQsCUWSJMQCwZTKmlCUD4jGlJUDoRqgAoA2MgJGAshDiciVAAZqMoAHPAgshKoAoQSqAKEEoQChACGFowDcWwFtNhmE7H9Bym9zEDCDMIMQPZGRENJtSJWAABAR0XeOxDfQAAAABJRU5ErkJggg==) no-repeat center center;
+    background-size: contain;
+}
+.xu_prompt .xu_text{
+    padding: 1em 0 2em;
+    text-align: center;
+}
+.xu_prompt .xu_text span{
+    position: relative;
+    font-size: 1.6em;
+    color: #666;
+    font-weight: bold;
+}
+.xu_prompt .xu_text .tips{
+    color: #999;
+}
+.xu_prompt .xu_text span::before{
+    content: '';
+    width: 1.4em;
+    height: 1.4em;
+    display: inline-block;
+    margin-right: .4em;
+    margin-bottom: .2em;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEUAAABQUFBRUVFQUFBQUFBQUFBQUFBQUFBQUFBRUVFQUFBQUFBQUFBQUFBQUFBQUFBRUVHTA1i6AAAAEHRSTlMAgMCQ0PBQIKDgMJ8Q30Bg/VX/7QAAAMhJREFUOMuVk1sOxCAIRRGtz9qy/9VOzEzkoZmm5+8CcltBeMPlMRAF9HWXPd1Bk8OdNh87KXrUeU8LTuYzbWi78zmlvPaIM1SGLFPG3/d3PqP79W+BY1vPBcJE/D8OjayPoS9iwggEYqq9glFApD1RBhJAkhpNR7qmJXuS5Aa4yXjaAThbEIwnWgvUE2pK4m7S9jcr/aHyVdtx81WDM7MIdlhn4YA+UOzC2A5xXbmWUuN+D0ubQeB2a6+IRadLfHh6sKPy433BB/EyJmCj6kCaAAAAAElFTkSuQmCC) no-repeat center center;
+    background-size: contain;
+    vertical-align: middle;
+}
+.xu_prompt .xu_text span.success{
+    color: #3b8704;
+}
+.xu_prompt .xu_text span.success::before{
+    color: #55bb6c;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC5zwKfAAAAgVBMVEUAAABV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nWTd8wqAAAAKnRSTlMA4/jF1AqMhDMGEOq6Ri4Wz8BlOcuf9NzYeCKvb00cs1lT8F+SP6d9mSgEebzVAAAD7ElEQVRYw6VY6cKiMAykcskpKJccoqifyvs/4O5n2yzQlrbs/JLDsU0mk1RDAv90feVhmlVVlob563ryjf/A6dwH4wJBfz5tY4tf1iiA9Yq16aJwXEUYadFdzVEK865Mt0+XcSsT00zKZTxTtWDaj1m48mNU2+RJHR3zWWDftkJmy8muzjEnWedJPMqnjO8M7w7OXhgTZ4DXzut8P/S9wj2svXdwC/pmsxY+0Ep+MSS45JAbYSD9hGYiUpIqzU/iC9ZHX8g9QwleThfAXyNN3tFQxpHKgfewIQ8jrQqFzIj0stO0kv0gUM+J8O21TWmHv7lYiB3AfnXxJPU+T0wO+dDHnWhjFgm4pw9YzTRaWIGlsRElVuPET+EntgA2eIUbFWx4I95fgopedlgx/nZCG6uxI5fZ98rV5/kJ6afXlyIj0ty4wNocR4cuEdsjNnhn2wKvvyXyoFfu3wvC76Hv53pLHtp/fvslQR6UjqlH90mWhYpb7xPiqVd0t9+QFSe2AF9/P+E+clHlgoAV8zo44AnFMPwCykYRdsMYHYiv8EkIHxoGWHL8D8TyJG3hqh4+bKgdKyOSC5f5PZXJ4s6ZYYicG8iJhvU5vGFih7uVqeGEfirqceBZJk5Oola8ZDBD/McZ9gdLuU6edD768J+nWH8I63EBn5PekUA0Cvd49TzCuAr2oqlj/DEEaDBhxW65xetg74GhiLdcsUmJTJAGwwedTJwUVjZvOIr48/1KfJikF4dyd+CNxeg0y4fERPyvsHvDIaXHMkIg9yMgljVnh2sODRA8YJCSNp4bMYeIV5w9UIT2hL6Uuu4Y4Zpmai8EkgT7i9yTMpoMXPAHVlQAVtJCs0lhqXfuCA+QjwJXCDIOYsqcGbIlYWusIYQJ2Av4FmsnQCXLCDS94FuXD8Eh0K9mhJFCa3hMFDnY64zh+qEqmBa6JQrRAVu0wFVZ87BmGg9sDiOC46nKAm/0GglbWY3fZHTKbfJo6U4fMaOzPostTzkeGoW9Lx7k423CePkTTJp/mHMUNjw+OfbSCYxudYEd/m4/T2eByzXmlqmrcBwtDtyfGWpDE5cBNscNRPDRPFsgYfhNwrjXOuUF4j8dPIvYXqfO1+1IMwTFcOvMVR/eMdBBEF/KaMZKw7ZJ+S5ClwRPdW3pWcCF5n9ZcQ3odqi1V+laJPvrC9QDlOdaqJUz0MkPJLdhBPT3CyfS934EFFcF6f9MW2fq3mKoZD++uelu8rip1dRljTMUlhk2TWhaxfx+paxYr61GKcrWMzRwTNbpkqNnaCJ6IxEbekfGFng3J9sxE07m3DxjO+quffRJhYYBVUn/aDtZXv8A65cQGb//BqgAAAAASUVORK5CYII=) no-repeat center center;
+    background-size: contain;
+}
+.xu_prompt .xu_text span.fail{
+    color: #fd7127;
+}
+.xu_prompt .xu_text span.fail::before{
+    color: #ef655b;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC5zwKfAAAAjVBMVEUAAAD/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGZjXSPDAAAALnRSTlMABgrBBLO2q+TVhcSM+uvLn0b1u2XPe9o6NB0P8VhNI5IwdF4V3lIrGa9tQJhL661++wAAA9dJREFUWMOlmOeaqjAQhoeihg4qYAELuK5tuf/LO8/DhBDQMOD5fu2G5DWZlgEgtN/kSTg3gjQNjHmY5Js9/Ic2xYxVPbFZsfmO9ptYlUJW8jsZF62qQa2iSbjSqUgF5Wjctr87P40dJ0793rAxzpj6qWOucB0ddf7kGK3DjmFf+xGe/WnnO8UZ3nQuJHv8PCleIeZm7lZpEzcT05Jh3qKZt7RvMKCbvWxmLobMJ7wR7oDQLhQRpCvTLG48EY0K1cY/scI1ejMhNGGUzLDZwOc9Ns5bw2itm3CAD7pXqGhShnq46A5vSrh3J5aSbaaIng2Oe1uYqDPfY28juq84L60nz/euY0KlP2iVPDY6+27GpqvdjZz3FmY6fCmsJ1Y7kFe1ZIfkdj5A0Gx/edJbV+P6dkXaP7A5H8xRbdab/6oBKXAdMAKljLxiRdZVPFwgBQlG4wFQQf2f3Y1yJKp5LbBdEPD7EkN6L2dUpSAiD3WSCxWWR7xdXbHBVqEgKnlzTR626zG3dgA2B8duZVrIRJoHO2wrTMxiPL6KSPFQhsjohCcdQSR4UIqig/fIDggiwYMb3i/oH0wbgqjmoQIezE8eAgSR4IlgefJroQSCSPIg576wuXcoIsFrKoSNd5N3A4pI8eDi4W3l8EpIEQleU7McdE4MFJHmISkAC7kUkeaBgfHHMB4pIs2D2sqMBGK8tNGj1h2BaEqSRxPxyCnpFOS1RNIpDnJJHk1E96IpvQvFmy8o4qWuMjOe0xuKp5kUEVPP5cUhp3gAFPHKi0OEYJJHEm3evt08dDPBq4mrIWLQVBkD/6B41B6x2BhiqyXBI4m5uN0jnEHwSOJcdMCaj9cewSOIF+yL69mnD228K/EUxFXnUSHdddsPTbff8lTEtjdoj7mVG+ICJDHBUxNf0OrRaYqv71t0BU9NfEgjfjff2Fu2aK7PTtrgW2Og97OE9d8BJ3yMOdilCUK/faOaPxXm35eK8a3EfHu9ciej5Bh79m8sbOOn64BrZx/KbeWdAb58HV1ePv5MdpzK2/n8cApD+BOJR6Y0v8OJ20nn9dUfHTQLn3l/43l/Hq6xPubAhVUoeyzPrlDsorBv8x3NGZUzv07D24FCt7jisnUKp9vNXGsHSmni4xd76IO4B2ubEzqNEJkclbGSIA6LNKFrVgnNyg+n2ZVS/5TlI0JfbqqXhn0978Vb8flqG8uq1eI4LtutqqPMclb3+8qxsu54OrqWmI+0IpU+NBgvcx0P4+K1CRMVvZiKxl4RfCPt6gZeH+YF7lWD73U8FKd5bLEsY1Y8PxUHyq//ACAbOvkFtrQUAAAAAElFTkSuQmCC) no-repeat center center;
+    background-size: contain;
+}
+.xu_prompt .xu_btn{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+.xu_prompt .xu_btn button{
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    position: relative;
+    outline: none;
+    height: 3.2em;
+    margin: 1em;
+    -webkit-transition: .1s linear;
+    transition: .1s linear;
+}
+.xu_prompt .xu_btn button:hover{
+    filter: brightness(1.1);
+	-webkit-transition: .1s linear;
+	transition: .1s linear;
+}
+.xu_prompt .xu_btn button:active{
+	-webkit-transition: .1s linear;
+	transition: .1s linear;
+    -webkit-transform: translateY(1px);
+            transform: translateY(1px);
+    -webkit-box-shadow: 0 0 0;
+            box-shadow: 0 0 0;
+}
+.xu_prompt .xu_btn button.xu_confirm{
+    color: #fff;
+    background: #61cf7c;
+}
+.xu_prompt .xu_btn button.xu_cancel{
+    color: #fff;
+    background: #f08078;
+}
+.xu_prompt .xu_btn button:nth-child(2){
+    color: #fff;
+    background: #ef655b;
+}
+
+/*loading*/
+.xu_loading > div{
+    width: 60px;
+    height: 60px;
+    position: relative;
+}
+/*栅栏式*/
+.xu_loading{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(255, 255, 255, 0.51);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    z-index: 99999;
+}
+.xu_loading .fence{
+    width: 4px;
+    height: 2em;
+    display: inline-block;
+    background: #000;
+    animation: fence 1.2s infinite ease-in-out;
+    -webkit-animation: fence 1.2s infinite ease-in-out;
+}
+.xu_loading .fence1{
+    animation-delay: -1.1s;
+}
+.xu_loading .fence1{
+    animation-delay: -1.0s;
+}
+.xu_loading .fence2{
+    animation-delay: -0.9s;
+}
+.xu_loading .fence3{
+    animation-delay: -0.8s;
+}
+.xu_loading .fence4{
+    animation-delay: -0.7s;
+}
+.xu_loading .fence5{
+    animation-delay: -0.6s;
+}
+.xu_loading .fence6{
+    animation-delay: -0.5s;
+}
+@keyframes fence{
+    0%,40%,100%{
+        transform: scaleY(.4);
+        -webkit-transform: scaleY(.4);
+    }
+    20%{
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
+    }
+}
+/*圆点*/
+.xu_loading .dot{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.xu_loading .dot:before{
+    content: "";
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 5px;
+    background: #0C57E0;
+}
+.xu_loading .circle1{
+}
+.xu_loading .circle2{
+    transform: rotate(30deg);
+    -webkit-transform:rotate(30deg);
+}
+.xu_loading .circle3{
+    transform: rotate(60deg);
+    -webkit-transform:rotate(60deg);
+}
+.xu_loading .circle4{
+    transform: rotate(90deg);
+    -webkit-transform:rotate(90deg);
+}
+.xu_loading .circle5{
+    transform: rotate(120deg);
+    -webkit-transform:rotate(120deg);
+}
+.xu_loading .circle6{
+    transform: rotate(150deg);
+    -webkit-transform:rotate(150deg);
+}
+.xu_loading .circle7{
+    transform: rotate(180deg);
+    -webkit-transform:rotate(180deg);
+}
+.xu_loading .circle8{
+    transform: rotate(210deg);
+    -webkit-transform:rotate(210deg);
+}
+.xu_loading .circle9{
+    transform: rotate(240deg);
+    -webkit-transform:rotate(240deg);
+}
+.xu_loading .circle10{
+    transform: rotate(270deg);
+    -webkit-transform:rotate(270deg);
+}
+.xu_loading .circle11{
+    transform: rotate(300deg);
+    -webkit-transform:rotate(300deg);
+}
+.xu_loading .circle12{
+    transform: rotate(330deg);
+    -webkit-transform:rotate(330deg);
+}
+.xu_loading .dot:before{
+    animation: circle 1.2s infinite ease-in-out;
+    -webkit-animation: circle 1.2s infinite ease-in-out;
+}
+.xu_loading .circle1:before{
+    animation-delay: -1.1s;
+    -webkit-animation-delay: -1.1s;
+}
+.xu_loading .circle2:before{
+    animation-delay: -1.0s;
+    -webkit-animation-delay: -1.0s;
+}
+.xu_loading .circle3:before{
+    animation-delay: -.9s;
+    -webkit-animation-delay: -.9s;
+}
+.xu_loading .circle4:before{
+    animation-delay: -.8s;
+    -webkit-animation-delay: -.8s;
+}
+.xu_loading .circle5:before{
+    animation-delay: -.7s;
+    -webkit-animation-delay: -.7s;
+}
+.xu_loading .circle6:before{
+    animation-delay: -.6s;
+    -webkit-animation-delay: -.6s;
+}
+.xu_loading .circle7:before{
+    animation-delay: -.5s;
+    -webkit-animation-delay: -.5s;
+}
+.xu_loading .circle8:before{
+    animation-delay: -.4s;
+    -webkit-animation-delay: -.4s;
+}
+.xu_loading .circle9:before{
+    animation-delay: -.3s;
+    -webkit-animation-delay: -.3s;
+}
+.xu_loading .circle10:before{
+    animation-delay: -.2s;
+    -webkit-animation-delay: -.2s;
+}
+.xu_loading .circle11:before{
+    animation-delay: -.1s;
+    -webkit-animation-delay: -.1s;
+}
+.xu_loading .circle12:before{
+    animation-delay: -.0s;
+    -webkit-animation-delay: -.0s;
+}
+@keyframes circle{
+    0%,39%,100%{
+        opacity: 0;
+    }
+    40%{
+        opacity: 1.0;
+    }
+}
+@-webkit-keyframes circle{
+    0%,39%,100%{
+        opacity: 0;
+    }
+    40%{
+        opacity: 1.0;
+    }
+}
+/*圆点左右晃*/
+.xu_loading .dott{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background: #0DE4BC;
+    position: absolute;
+    top: 50px;
+    animation: fly_dot 1.4s infinite ease-in-out;
+    -webkit-animation: fly_dot 1.4s infinite ease-in-out;
+}
+.xu_loading .dot1{
+    animation-delay: -1.2s;
+    -webkit-animation-delay:-1.2s;
+}
+.xu_loading .dot2{
+    animation-delay: -1.0s;
+    -webkit-animation-delay:-1.0s;
+}
+.xu_loading .dot3{
+    animation-delay: -.8s;
+    -webkit-animation-delay:-.8s;
+}
+@keyframes fly_dot{
+    0%{
+        left: 0%;
+        transform: scale(.4);
+        -webkit-transform: scale(.4);
+        opacity: 0;
+    }
+    50%{
+        left: 50%;
+        transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        opacity: 1;
+    }
+    100%{
+        left: 100%;
+        transform: scale(.4);
+        -webkit-transform: scale(.4);
+        opacity: 0;
+    }
+}
+@-webkit-keyframes fly_dot{
+    0%{
+        left: 0%;
+        transform: scale(.4);
+        -webkit-transform: scale(.4);
+        opacity: 0;
+    }
+    50%{
+        left: 50%;
+        transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        opacity: 1;
+    }
+    100%{
+        left: 100%;
+        transform: scale(.4);
+        -webkit-transform: scale(.4);
+        opacity: 0;
+    }
+}
+
+
+.xu_tips{
+    background: transparent;
+}
+.xu_tips span{
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: .6em 3em;
+    border: 1px #ccc solid;
+    border-radius: 4px;
+    white-space: nowrap;
+}
