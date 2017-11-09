@@ -114,13 +114,13 @@ document.getElementById('show_prompt4').onclick=function(){
 		type: 'success',
 		delay: 0,
 		confirmBtn: {
-			text: '朕意已决',
+			text: '算了',
 			fn(){
 				xu.tips('看,劳资删了');
 			}
 		},
 		cancelBtn: {
-			text: '算了',
+			text: '朕意已决',
 			fn(){
 				xu.tips('十年后又是好汉');
 			}

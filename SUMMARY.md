@@ -1,6 +1,6 @@
 # Summary
 
-* [XUI](README.md)
+* [xui](README.md)
 * [样式](styles/README.md)
     * [样式使用](styles/styles.md)
 * [方法](methods/README.md)
