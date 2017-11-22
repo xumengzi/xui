@@ -5,7 +5,7 @@
 
 >说明: 用来缓解用户疲劳,提高用户等待积极性.
 
->目前支持以下几种`loading`效果,分别是: 自己挨个点一下
+>目前支持以下几种`loading`效果,分别是: 栅栏式,圆圈状,圆点状
 
 ### 效果展示
 
@@ -43,7 +43,7 @@ document.getElementById('show_loading2').onclick=function(){
 xu.loading(true, 2);
 ```
 
-3.圆圈状左右晃动
+3.圆点状
 <button class="xui_btn xui_btn_default" id="show_loading3">试试看</button>
 
 <script type="text/javascript">

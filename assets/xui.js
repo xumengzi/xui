@@ -2,7 +2,7 @@
 * @Author: Administrator
 * @Date:   2017-11-01 11:21:36
 * @Last Modified by:   Administrator
-* @Last Modified time: 2017-11-06 15:26:00
+* @Last Modified time: 2017-11-22 10:28:24
 */
 
 ;(function(w) {
@@ -12,13 +12,17 @@
 	Xu.prototype = {
 	    constructor: Xu,
 	    config: {
-	        version: '1.2.1',
+	        version: '1.3.1',
 	    },
 	    addZero(e) {
-	        return e < 10 ? '0' + e : e;
+	        if (e < 0) {
+				return e = e > -10 ? '-0' + (-e) : e;
+			}else{
+				return e = e < 10 ? '0' + e : e;
+			};
 	    },
 	    formatDate(date, bool) {
-	        date = date.replace(/[^\d]/g, '') - 0;
+	        date = (typeof date !== 'number' ? date.replace(/[^\d]/g, '') - 0 : date);
 	        date = new Date(date);
 	        let year = date.getFullYear();
 	        let month = date.getMonth() + 1;
@@ -31,7 +35,7 @@
 	            let min = date.getMinutes();
 	            min = this.addZero(min);
 	            let sec = date.getSeconds();
-	            sec = this.addZero(min);
+	            sec = this.addZero(sec);
 	            return year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + sec;
 	        };
 	        return year + '-' + month + '-' + day;
@@ -43,7 +47,7 @@
 	            reg = /^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$/;
 	            break;
 	        case "mobile":
-	            reg = /^\d{11}$/;
+	            reg = /^1[34578]\d{9}$/;
 	            break;
 	        case "email":
 	            reg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/;
@@ -53,6 +57,30 @@
 	    },
 	    codeStr(str) {
 	        return encodeURIComponent(str);
+	    },
+	    countDown(endD, target, isStop){
+	    	let downTime = null;
+	    	clearInterval(downTime);
+	    	downTime = setInterval(()=>{
+	    		let start = this.now(),
+	    		end = this.now(endD);
+				let diff = end - start;
+		    	let day = parseInt((diff / 1000 / 24 / 3600),10),
+				    hour = parseInt((diff / 1000 / 3600 % 60),10) - 8,
+				    minute = parseInt((diff / 1000 / 60 % 60),10),
+				    second = parseInt((diff / 1000 % 60),10);
+				day = this.addZero(day);
+				hour = this.addZero(hour);
+				minute = this.addZero(minute);
+				second = this.addZero(second);
+				if (isStop && diff <= 0) {
+					clearInterval(downTime);
+				};
+				document.querySelectorAll('.' + target).forEach((item, index)=>{
+					item.innerHTML = day + '天' + hour + '时' + minute + '分' + second + '秒';
+				});
+				// return day + '-' + hour + '-' + minute + '-' + second;
+	    	},1000);
 	    },
 	    decodeStr(str) {
 	        return decodeURIComponent(str);
@@ -117,6 +145,13 @@
 	    isFunction(fn) {
 	        return typeof fn === 'function';
 	    },
+	    randomNum(min, max){
+	    	if (typeof min == 'number' && typeof max == 'number' && max > min) {
+	    		return Math.round(Math.random() * (max - min) + min);
+	    	} else{
+	    		throw new Error('must be two numbers or in right order');
+	    	};
+	    },
 	    tips(){
 	    	//delete already exists
 	    	document.querySelector('.xu_tips') && document.querySelector('.xu_tips').remove();
@@ -127,11 +162,17 @@
 	    	tar.classList.add('xu_tips');
 	    	document.body.appendChild(tar);
 	    	setTimeout(() => {
+	    		arguments[2] && arguments[2]();
     			this.deleteEle('.xu_tips');
 	    	}, arguments[1] || 1000);
 	    },
-	    now() {
-	        return +new Date();
+	    now(date, days, bool) {
+	    	if (typeof days == 'number') {
+	    		return this.formatDate(new Date(date).setDate(new Date(date).getDate() + days), bool);
+	    	} else{
+	    		date = date || new Date();
+	    		return +new Date(date);
+	    	};
 	    },
 	    queryString(str) {
 	        let url = location.href;
