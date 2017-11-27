@@ -2,7 +2,7 @@
 * @Author: Administrator
 * @Date:   2017-11-01 11:21:25
 * @Last Modified by:   Administrator
-* @Last Modified time: 2017-11-09 16:06:47
+* @Last Modified time: 2017-11-27 10:47:34
 */
 .xui_item{
     display: flex;
@@ -352,31 +352,10 @@ input样式
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 弹框样式
 */
-.xu_prompt,.xu_tips{
+.xu_prompt,.xu_message{
     width: 100%;
     height: 100%;
     position: fixed;
@@ -763,15 +742,173 @@ input样式
     }
 }
 
-
-.xu_tips{
+/*提示信息*/
+.xu_message{
     background: transparent;
 }
-.xu_tips span{
+.xu_message span{
     background: rgba(0, 0, 0, 0.75);
     color: #fff;
     padding: .6em 3em;
     border: 1px #ccc solid;
     border-radius: 4px;
     white-space: nowrap;
+}
+
+/*tips*/
+.xui_tips,.xui_tips_bottom{
+    position: relative;
+    line-height: initial;
+}
+.xui_tips:hover::before,.xui_tips_bottom:hover::before{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -9px;
+    left: 20px;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border: 1px solid;
+    border-color: #ccc #ccc transparent transparent;
+    transform: rotate(135deg);
+    z-index: 10001;
+}
+.xui_tips:hover::after,.xui_tips_bottom:hover::after{
+    content: attr(data-xui-tip);
+    display: block;
+    position: absolute;
+    left: 0;
+    top: -2em;
+    max-width: 30em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    border: 1px #ccc solid;
+    padding: .2em .8em;
+    background: #fff;
+    border-radius: 4px;
+    z-index: 10000;
+}
+.xui_tips_bottom:hover::after{
+    top: 2em;
+}
+.xui_tips_bottom:hover::before{
+    top: 22px;
+    transform: rotate(-45deg);
+}
+
+
+/*文件上传*/
+.xui_upload{
+    width: 120px;
+    position: relative;
+    z-index: 10000;
+}
+.xui_upload .xui_file{
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10001;
+    cursor: pointer;
+}
+.xui_upload .xui_file:active + button.xui_btn{
+    top: 1px;
+}
+
+/*点击放大图片*/
+.xui_img_content{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.54);
+    z-index: 99999;
+}
+.xui_img_content img {
+    width: 100%;
+    height: 100%;
+    transition: .2s linear;
+}
+.xui_img_content .xui_close{
+    position: absolute;
+    right: 6%;
+    top: 6%;
+    width: 50px;
+    height: 50px;
+    transition: .2s linear;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAgMAAAAOFJJnAAAADFBMVEUAAAD///////////84wDuoAAAAA3RSTlMAoGAZwxlvAAAAVklEQVQY02MgCkwAEWxAXAJiyIIxlMfuwMDAeIEBRIA4YGGINJAEs8GKQLJgRRAlQAmgJERRCZTBfgHOQEjBFcO1ww1EWAG3FO4MuMMQTkU4HuEdwgAAWN8SZ2r81qsAAAAASUVORK5CYII=) no-repeat center center;
+    background-size: initial;
+    cursor: pointer;
+}
+.xui_img_content .xui_close:hover{
+    transform: rotate(180deg);
+}
+.xui_img_content .xui_img_con{
+    position: relative;
+    /*display: flex;
+    justify-content: center;
+    align-items: center;*/
+}
+.xui_img_content .xui_img_con .xui_icon{
+    position: fixed;
+    bottom: 80px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .3s linear;
+}
+.xui_img_content .xui_img_con .xui_icon:hover{
+    background: rgba(0, 0, 0, .5);
+}
+.xui_img_content .xui_img_con .xui_icon span,.xui_img_content .xui_img_con .xui_icon a{
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin: 0 10px;
+    display: inline-block;
+    transition: .2s linear;
+    cursor: pointer;
+}
+.xui_img_content .xui_img_con .xui_icon span:hover{
+    filter: brightness(1.2);
+}
+.xui_img_content .xui_img_con .xui_icon span:active{
+    top: 1px;
+}
+.xui_img_content .xui_img_con .xui_icon span.xui_left,.xui_img_content .xui_img_con .xui_icon span.xui_right{
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAQlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////8IX9KGAAAAFXRSTlMAwBCAMCDv0G9QsPCQ4N/JYD+fj1+62viHAAAAsUlEQVQ4y81SWw7CMAxbkrbpkzHA978qAsGAdiN/iPxUiivbcTL9b0X+jjtUg6Ed9hBe/O0RuC10OQUA0Oj9loYngESkNoSoo4YLEP9gUsxwA15eLT8D0pkLhZ9oVCDMXRKCtGaAUscZCq1ckqaxEoZur2BEm5vxgchiOFj7h7cO4GhQqKWRuuw5p97mhwjrkBwr4vtpjJ6YQBe+Oz6HEjd9NECJApD93rSSiWrk6ad1Bbc/BkLWY1wGAAAAAElFTkSuQmCC) no-repeat center center;
+    background-size: initial;
+}
+.xui_img_content .xui_img_con .xui_icon span.xui_right{
+    transform: rotate(180deg);
+}
+.xui_img_content .xui_img_con .xui_icon span.xui_zoomin{
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAPFBMVEUAAAD////////////////////////////////////////////////////////////////////////////YSWgTAAAAE3RSTlMAwDBA0PBwEO8gP6BgsI9Q4JCAhPyxkgAAAKxJREFUOMvVkMESgyAMRBOIRBCouv//rwUOtWOY6dW+w3LgzZJAf0asDHCNNEcrIMw7UHV6L9ji6CmQmcHILY/QIqCQISP0A9xzQzaCCF2CLmIWQLiEXnFfxcOTTylBUoMCvBnBOXyI3bcNznsPaeFsg51BzRb7lxBXpjsvnJfA5oXROj4x9zYUsmgB+9ElwOpowrlgZQaW4Ja5oXljPl5KdDMMTzKYfhhKD+ENVQQHawOLpKAAAAAASUVORK5CYII=) no-repeat center center;
+    background-size: initial;
+}
+.xui_img_content .xui_img_con .xui_icon span.xui_zoomout{
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAPFBMVEUAAAD////////////////////////////////////////////////////////////////////////////YSWgTAAAAE3RSTlMA8H8wP8Ag0KDgcFCQYBDZcW9PC1TJlAAAAJdJREFUOMvdj0sOwzAIRMEG40+Tfub+d60UyXIb6D7qW3nkxwjo/9hqAzQViskKmCqDU/zPuB2zYqjk2RvGfFcEHQl9BWO/BzdaiK8Q9C9dz0KHlDTZSOFXkIGJBcLA+IzWzkJBDdNCUVaoECcIjCYPKHlusDIvglBooL5Eng135hwZogAATnv+YVAZqR/t04i5lNEyXYI3mFYF2M4malAAAAAASUVORK5CYII=) no-repeat center center;
+    background-size: initial;
+}
+.xui_img_content .xui_img_con .xui_icon a.xui_download{
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAOVBMVEUAAAD///////////////////////////////////////////////////////////////////////8KOjVvAAAAEnRSTlMAwGCAfxDPQDDw4LBQcCDfn5BxNgoBAAAAjUlEQVQ4y83NSQ7DIBBE0WZowmQnqfsfNkIQsNwIb/k7qCc17Rd/Ei/BC9BPwOwLTstXwPa8gQTHA7BDugGNIiooOzTNRAVjl6KAts9FBr5i9053EVD6v52nkoGiLi47KZgOumi7BENoWgHKmRagJcF7DiLMuCsb/xwBZUUKiFypD5gWPLX4UJMOpk36AaW1CghZ9xrVAAAAAElFTkSuQmCC) no-repeat center center;
+    background-size: initial;
 }

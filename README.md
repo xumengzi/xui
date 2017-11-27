@@ -14,10 +14,19 @@
 * 使用方法: 引用`xui.js`和`xui.css`
 
 
-#### 个人项目,如有问题还请指出,不胜感激.
+##### 本项目包含三个模块:
+1.[样式使用](styles/README.md)
 
-#### 具体方法,组件等使用方法参见下文介绍 :
+2.[方法使用](methods/README.md)
+
+3.[组件使用](plugins/README.md)
+
+##### 详情参见下文介绍 :
 
 ```js
-let's do it.
+How many codes must a man edit before you call him a master?
 ```
+***
+##### 个人项目,如有问题还请指出,不胜感激.
+##### 欢迎不吝赐教
+###### 联系我: *me@xumengzi.top*

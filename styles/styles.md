@@ -1,12 +1,12 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# 一些不错的样式
+#### 默认的样式总是不那么好看,所以我们习惯自定义样式.哈哈,你来对地方了!
 
 >说明: 用来增强页面效果,提高用户体验度
 
 
-#### 按钮`button`
+##### 按钮`button`
 
 <button class="xui_btn xui_btn_default">默认按钮</button>
 <button disabled class="xui_btn xui_btn_default">默认按钮禁止</button>
@@ -21,7 +21,7 @@
 <button disabled class="xui_btn xui_btn_cancel">取消按钮</button>
 ```
 
-#### 输入框`input`
+##### 输入框`input`
 
 <div class="xui_item">
 	<label>默认输入框: </label>
@@ -87,7 +87,7 @@
 </div>
 ```
 
-#### 单选框`radio`
+##### 单选框`radio`
 <div>
 	<input class="xui_radio" id="radio_1" type="radio" name="radio" /><label for="radio_1" class="xui_radio_box">单选1</label>
 	<input class="xui_radio" id="radio_2" type="radio" name="radio" /><label for="radio_2" class="xui_radio_box">单选2</label>
@@ -106,7 +106,7 @@
 <label for="radio_4" class="xui_radio_box">单选4</label>
 ```
 
-#### 多选框`checkbox`
+##### 多选框`checkbox`
 <div>
 	<input class="xui_checkbox" id="checkbox_1" type="checkbox" name="checkbox" /><label for="checkbox_1" class="xui_checkbox_box">多选1</label>
 	<input class="xui_checkbox" id="checkbox_2" type="checkbox" name="checkbox" /><label for="checkbox_2" class="xui_checkbox_box">多选2</label>
@@ -125,7 +125,7 @@
 <label for="checkbox_4" class="xui_checkbox_box">多选4</label>
 ```
 
-#### 下拉框`select`
+##### 下拉框`select`
 <select class="xui_select">
 	<option value="1">hello</option>
 	<option value="2">world</option>
@@ -146,7 +146,7 @@
 </select>
 ```
 
-#### 多行文本框`textarea`
+##### 多行文本框`textarea`
 
 <textarea class="xui_textarea"></textarea>
 
@@ -154,7 +154,7 @@
 <textarea class="xui_textarea"></textarea>
 ```
 
-#### 开关`switch`
+##### 开关`switch`
 > 开关的可配置属性在`label`标签上,分别是`on`和`off`. 默认可以不加这个2个属性
 
 <div>
@@ -188,8 +188,32 @@
 <label for="xui_switch_4" on="on" off="off" class="xui_switch_box"></label>
 ```
 
-#### 表格`table`
-> 表格的一个重要的类目是`xui_table_wrap`, 如果文字过多就省略用`...`表示, 不加则会换行全部显示
+##### 上传文件`button`
+> 上传文件原理很简单,就是把input设置为透明,盖在一个好看的`button`上,是不是感觉被骗了!
+
+> 如果你发现在谷歌浏览器下点击上传文件按钮很卡,那么请把`accept`里面设置修改一下,默认为*,意思是匹配所有的文件.详情[Chrome 文件选择延迟 Bug](https://zhuanlan.zhihu.com/p/27946188)
+
+> 如果你只想上传一下图片,就可以设置只匹配图片好了.[简单代码实现上传预览](http://xumengzi.top/xumeng/20160712/2016-07-12.html)
+
+<div class="xui_upload">
+	<input type="file" class="xui_file" accept="image/jpeg, image/jpg, image/png, image/bmp" />
+	<button class="xui_btn xui_btn_default">上传文件</button>
+</div>
+
+```html
+<div class="xui_upload">
+	<input type="file" class="xui_file" accept="*" />
+	<button class="xui_btn xui_btn_default">上传文件</button>
+</div>
+<div class="xui_upload">
+	<input type="file" class="xui_file" accept="image/jpeg, image/jpg, image/png, image/bmp" />
+	<button class="xui_btn xui_btn_default">上传文件</button>
+</div>
+```
+
+##### 表格`table`
+> 表格的一个重要的类目是`xui_table_wrap`, 如果文字过多就省略用`...`表示, 不加则会换行全部显示.
+
 > 当加上`xui_table_wrap`时,请务必在该标签上加一个`title`属性,以显示完整信息.
 
 <div>
@@ -257,22 +281,22 @@
 
 ```html
 <table class="xui_table">
-		<thead>
-			<tr>
-				<th>姓名</th>
-				<th>到达时间</th>
-				<th>qq</th>
-				<th>籍贯</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>王五</td>
-				<td>2017</td>
-				<td>1161231233</td>
-				<td>我是一只来自北方的狼,为了填饱肚子来到西伯利亚去找喜羊羊吃,可是找了半天还没找到,然后我就饿死了</td>
-			</tr>
-		</tbody>
+	<thead>
+		<tr>
+			<th>姓名</th>
+			<th>到达时间</th>
+			<th>qq</th>
+			<th>籍贯</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>王五</td>
+			<td>2017</td>
+			<td>1161231233</td>
+			<td>我是一只来自北方的狼,为了填饱肚子来到西伯利亚去找喜羊羊吃,可是找了半天还没找到,然后我就饿死了</td>
+		</tr>
+	</tbody>
 </table>
 <table class="xui_table xui_table_wrap">
 	<thead>

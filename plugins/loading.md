@@ -9,7 +9,7 @@
 
 ### 效果展示
 
-##### 默认是栅栏式(可以不写)
+##### 默认是栅栏式
 
 1.栅栏式
 <button class="xui_btn xui_btn_default" id="show_loading1">试试看</button>

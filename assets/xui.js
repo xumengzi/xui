@@ -2,7 +2,7 @@
 * @Author: Administrator
 * @Date:   2017-11-01 11:21:36
 * @Last Modified by:   Administrator
-* @Last Modified time: 2017-11-22 10:28:24
+* @Last Modified time: 2017-11-27 10:50:39
 */
 
 ;(function(w) {
@@ -90,7 +90,7 @@
 	    },
 	    loading(isShow, type){
 	    	//delete already exists
-	    	document.querySelector('.xu_loading') && document.querySelector('.xu_loading').remove();
+	    	this.deleteEle('.xu_loading');
 	    	if (!isShow) {
 	    		return;
 	    	};
@@ -152,18 +152,18 @@
 	    		throw new Error('must be two numbers or in right order');
 	    	};
 	    },
-	    tips(){
+	    message(){
 	    	//delete already exists
-	    	document.querySelector('.xu_tips') && document.querySelector('.xu_tips').remove();
+	    	this.deleteEle('xu_message');
 	    	let tar = document.createElement('div');
 	    	tar.innerHTML = `
 	    		<span>${arguments[0]}</span>
 	    	`;
-	    	tar.classList.add('xu_tips');
+	    	tar.classList.add('xu_message');
 	    	document.body.appendChild(tar);
 	    	setTimeout(() => {
 	    		arguments[2] && arguments[2]();
-    			this.deleteEle('.xu_tips');
+    			this.deleteEle('.xu_message');
 	    	}, arguments[1] || 1000);
 	    },
 	    now(date, days, bool) {
@@ -178,6 +178,19 @@
 	        let url = location.href;
 	        let reg = new RegExp("([?&])" + str + "=([^&]*)([?&]?)");
 	        return (url.match(reg) === null ? '' : decodeURIComponent(url.match(reg)[2]));
+	    },
+	    recordData(){
+	    	if (!arguments[0]) {throw new Error('parameters are required!');}
+	    	let data = arguments[0].data,
+	    		url = arguments[0].url;
+	    	let isQuestionMark = url.indexOf('?') > -1 ? '&' : '?';
+	    	let params = '';
+			for(let i in data){
+				let each = data[i];
+				params += '&' + i + '=' + (each ? each : '');
+			};
+			params = isQuestionMark + params.substr(1, params.length);
+			(new Image(1, 1)).src = url + params;
 	    },
 	    removeMul(arr) {
 	        if (arr instanceof Array) {
@@ -199,12 +212,68 @@
 		  	};
 		  	return newObj;
 		},
+		showBigImg(){
+            //delete already exists
+            let that = this;
+	    	that.deleteEle('xu_img');
+	    	let tar = document.createElement('div');
+	    	tar.innerHTML = `
+	    		<span class="xui_close"></span>
+	    		<div class="xui_img_con">
+	    			<img class="xui_img" src=${arguments[0]} alt="">
+	    			<div class="xui_icon">
+	    				<span class="xui_left" xui-type="1"></span>
+	    				<span class="xui_zoomin" xui-type="2"></span>
+	    				<span class="xui_zoomout" xui-type="3"></span>
+	    				<span class="xui_right" xui-type="4"></span>
+	    				${arguments[1] ? `<a class="xui_download" href=${arguments[0]} download></a>` : ''}
+	    			</div>
+	    		</div>
+	    	`;
+	    	tar.classList.add('xui_img_content');
+	    	document.body.appendChild(tar);
+	    	function showImg(e){
+	    		if (e.target.className == 'xui_close') {
+	    			that.deleteEle('.xui_img_content');
+	    			document.body.removeEventListener('click', showImg, false);
+	    		};
+	    		if (e.target.getAttribute('xui-type')) {
+	    			let tar = document.querySelector('.xui_img');
+	    			//get current img rotate degrees
+	    			let rotate = tar.style.transform && tar.style.transform.match(/-?\d/igm).join('') - 0;
+	    			let width = tar.style.width && tar.style.width.match(/\d/igm).join('') - 0;
+	    			switch(e.target.getAttribute('xui-type') - 0){
+	    				case 1:
+	    					let a = rotate + 90;
+	    					tar.style.transform = `rotate(${a}deg)`;
+	    					break;
+	    				case 2:
+	    					width = (width > 140 ? 140 : width) || 100;
+	    					tar.style.width = width + 10 + '%';
+	    					tar.style.marginLeft = -(width + 10 - 100) / 2 + '%';
+	    					break;
+	    				case 3:
+	    					width = width ? (width < 60 ? 60 : width) : 100;
+	    					tar.style.width = width - 10 + '%';
+	    					tar.style.marginLeft = -(width - 10 - 100) / 2 + '%';
+	    					break;
+	    				case 4:
+	    					let b = rotate - 90;
+	    					tar.style.transform = `rotate(${b}deg)`;
+	    					break;
+	    				default:
+	    					break;
+	    			};
+	    		};
+	    	};
+	    	document.body.addEventListener('click', showImg, false);
+		},
 	    subLastStr(str) {
 	        return str.substr(0, str.length - 1);
 	    },
 	    prompt(){
 	    	//delete already exists
-	    	document.querySelector('.xu_prompt') && document.querySelector('.xu_prompt').remove();
+	    	this.deleteEle('.xu_prompt');
 	    	const defaults = {
 	    		text: '温馨提示',
 	    		tips: '',
