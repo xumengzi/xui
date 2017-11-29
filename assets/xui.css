@@ -1,9 +1,6 @@
-/*
-* @Author: Administrator
-* @Date:   2017-11-01 11:21:25
-* @Last Modified by:   Administrator
-* @Last Modified time: 2017-11-27 10:47:34
-*/
+.none{
+    display: none;
+}
 .xui_item{
     display: flex;
     flex-direction: initial;
@@ -911,4 +908,36 @@ input样式
 .xui_img_content .xui_img_con .xui_icon a.xui_download{
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAOVBMVEUAAAD///////////////////////////////////////////////////////////////////////8KOjVvAAAAEnRSTlMAwGCAfxDPQDDw4LBQcCDfn5BxNgoBAAAAjUlEQVQ4y83NSQ7DIBBE0WZowmQnqfsfNkIQsNwIb/k7qCc17Rd/Ei/BC9BPwOwLTstXwPa8gQTHA7BDugGNIiooOzTNRAVjl6KAts9FBr5i9053EVD6v52nkoGiLi47KZgOumi7BENoWgHKmRagJcF7DiLMuCsb/xwBZUUKiFypD5gWPLX4UJMOpk36AaW1CghZ9xrVAAAAAElFTkSuQmCC) no-repeat center center;
     background-size: initial;
+}
+
+
+
+
+/*tab切换*/
+.xui_tab{
+
+}
+.xui_tab ul.xui_tab_head{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+.xui_tab ul.xui_tab_head li{
+    list-style: none;
+    padding: .3em 1em;
+    margin: 1em .25em 0 .25em;
+    border: 1px solid #dbdbdb;
+    border-bottom: 0px;
+    border-radius: .28em .28em 0 0;
+    line-height: 1.4;
+    cursor: pointer;
+}
+.xui_tab ul.xui_tab_head li.selected{
+    position: relative;
+    border-color: #4eb900;
+}
+.xui_tab ul.xui_tab_body{
+
 }

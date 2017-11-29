@@ -11,3 +11,5 @@
     * [对话弹框 prompt](plugins/prompt.md)
     * [提示信息 message](plugins/message.md)
     * [图片预览 imgShow](plugins/imgShow.md)
+    * [tab切换 tabChange](plugins/tabChange.md)
+* [日志 log](others/changeLog.md)

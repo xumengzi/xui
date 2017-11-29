@@ -1,19 +1,10 @@
-/*
-* @Author: Administrator
-* @Date:   2017-11-01 11:21:36
-* @Last Modified by:   Administrator
-* @Last Modified time: 2017-11-27 10:50:39
-*/
-
 ;(function(w) {
 	function Xu() {
+		this.version = '0.3.0';
 	};
 
 	Xu.prototype = {
 	    constructor: Xu,
-	    config: {
-	        version: '1.3.1',
-	    },
 	    addZero(e) {
 	        if (e < 0) {
 				return e = e > -10 ? '-0' + (-e) : e;
@@ -145,13 +136,6 @@
 	    isFunction(fn) {
 	        return typeof fn === 'function';
 	    },
-	    randomNum(min, max){
-	    	if (typeof min == 'number' && typeof max == 'number' && max > min) {
-	    		return Math.round(Math.random() * (max - min) + min);
-	    	} else{
-	    		throw new Error('must be two numbers or in right order');
-	    	};
-	    },
 	    message(){
 	    	//delete already exists
 	    	this.deleteEle('xu_message');
@@ -179,6 +163,13 @@
 	        let reg = new RegExp("([?&])" + str + "=([^&]*)([?&]?)");
 	        return (url.match(reg) === null ? '' : decodeURIComponent(url.match(reg)[2]));
 	    },
+	    randomNum(min, max){
+	    	if (typeof min == 'number' && typeof max == 'number' && max > min) {
+	    		return Math.round(Math.random() * (max - min) + min);
+	    	} else{
+	    		throw new Error('must be two numbers or in right order');
+	    	};
+	    },
 	    recordData(){
 	    	if (!arguments[0]) {throw new Error('parameters are required!');}
 	    	let data = arguments[0].data,
@@ -204,8 +195,8 @@
 	        };
 	    },
 	    shallowCopy(obj){
-		  	var newObj = {};
-		  	for(var i in obj){
+		  	let newObj = {};
+		  	for(let i in obj){
 			    if(obj.hasOwnProperty(i)){
 			      	newObj[i] = obj[i];
 			    };
@@ -270,6 +261,36 @@
 		},
 	    subLastStr(str) {
 	        return str.substr(0, str.length - 1);
+	    },
+	    tab(){
+	    	let args = arguments[0];
+	    	let tar = document.getElementById(args.id);
+	    	let tab = tar.getElementsByTagName('li');
+			let list = tar.querySelectorAll('.xui_tab_body div');
+			list = Array.prototype.slice.call(list);
+			args.activeIndex = args.activeIndex > tab.length ? 0 : args.activeIndex ? args.activeIndex : 0;
+			if (tab.length !== list.length) {
+				throw new Error("tab's number error");
+			};
+			for(let l  in list){
+				list[l].style.display = l == args.activeIndex ? 'block' : 'none';
+			};
+			for(let i=0; i < tab.length; i++){
+				i == args.activeIndex && tab[i].classList.add('selected');
+				tab[i].onclick = function(e){
+					if (e.currentTarget.className == 'selected') {return;};
+					for(let j in list){
+						if (i == j) {
+							list[j].style.display = 'block';
+							tab[j].classList.add('selected');
+							args.fn && args.fn();
+						} else{
+							list[j].style.display = 'none';
+							tab[j].classList.remove('selected');
+						};
+					};
+				};
+			};
 	    },
 	    prompt(){
 	    	//delete already exists

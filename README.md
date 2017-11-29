@@ -30,3 +30,5 @@ How many codes must a man edit before you call him a master?
 ##### 个人项目,如有问题还请指出,不胜感激.
 ##### 欢迎不吝赐教
 ###### 联系我: *me@xumengzi.top*
+
+##### 查看更新日志: [log](others/changeLog.md)
