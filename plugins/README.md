@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# 组件
+# 插件
 
 >有人说,如果有现成的轮子,那就没必要花时间再去造一个.
 
@@ -11,6 +11,6 @@
 
 1.这里我尝试写了一个方法,主要是用在诸如异步请求,提交表单时的loading效果.
 ```js
-xu.loading(true); //loading
-xu.loading(false); //loading关闭
+xui.loading(true); //loading
+xui.loading(false); //loading关闭
 ```

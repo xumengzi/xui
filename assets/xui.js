@@ -1,16 +1,107 @@
 ;(function(w) {
-	function Xu() {
-		this.version = '0.3.0';
+	function Xui() {
+		this.version = '0.5.0';
 	};
 
-	Xu.prototype = {
-	    constructor: Xu,
+	Xui.prototype = {
+	    constructor: Xui,
 	    addZero(e) {
 	        if (e < 0) {
 				return e = e > -10 ? '-0' + (-e) : e;
 			}else{
 				return e = e < 10 ? '0' + e : e;
 			};
+	    },
+	    dropDown(){
+	    	let that = this;
+	    	const drop = {
+	    		renderHTML(args){
+	    			let tar = document.getElementById(args.id),
+	    			opt = tar.getElementsByTagName('option');
+			    	tar.classList.add('none');
+			    	let uls = document.createElement('ul');
+			    	// add input
+			    	if (args.isSearch) {
+			    		let inp = document.createElement('input');
+				    	inp.setAttribute('type','text');
+				    	args.placeHolder = args.placeHolder || 'type to search'; 
+				    	inp.setAttribute('placeHolder',args.placeHolder);
+				    	inp.classList.add('xui_input');
+				    	inp.classList.add('xui_input_search');
+				    	uls.appendChild(inp);
+			    	};
+			    	// add li
+			    	for(let i = 0; i < opt.length; i++){
+			    		let name = opt[i].innerHTML,
+			    			val = opt[i].value;
+			    		let lis = document.createElement('li');
+			    		lis.innerHTML = name;
+			    		lis.setAttribute('value', val);
+			    		uls.appendChild(lis);
+			    	};
+			    	uls.classList.add('xui_drop_list');
+			    	uls.classList.add('none');
+			    	let con = document.createElement('div');
+			    	con.classList.add('xui_drop_down');
+			    	// add button
+			    	let but = document.createElement('button');
+			    	but.innerHTML = opt[0].innerHTML;
+			    	but.value = opt[0].value;
+			    	but.classList.add('xui_btn');
+			    	but.classList.add('xui_drop_btn');
+			    	con.appendChild(but);
+			    	con.appendChild(uls);
+			    	tar.after(con);
+	    		},
+	    		event(){
+	    			document.body.addEventListener('click', this.choose, false);
+	    			document.body.addEventListener('keyup', this.search, false);
+	    		},
+	    		search(e){
+	    			if (e.target.classList.contains('xui_input_search')) {
+	    				let val = e.target.value.trim();
+	    				let list = e.target.parentNode.querySelectorAll('li');
+	    				list = that.toArray(list);
+	    				for(let i in list){
+	    					if (val != '' && list[i].innerHTML.indexOf(val) == -1) {
+	    						list[i].classList.add('none');
+	    					}else{
+	    						list[i].classList.remove('none');
+	    					};
+	    				};
+	    			}
+	    		},
+	    		choose(e){
+	    			if (e.target.classList.contains('xui_drop_btn')) {
+	    				e.target.nextSibling.classList.remove('none');
+	    				// e.target.nextSibling.classList.toggle('none');
+	    				// if ((e.target.nextSibling.classList.contains('none'))) {
+	    				// 	console.log('3');
+	    				// 	e.target.nextSibling.classList.remove('none');
+	    				// } else{
+	    				// 	e.target.nextSibling.classList.add('none');
+	    				// };
+	    			} else if(e.target.parentNode.className == 'xui_drop_list'){
+	    				if (e.target.nodeName == 'INPUT') {return};
+	    				document.getElementById(args.id).value = e.target.getAttribute('value');
+	    				e.target.parentNode.previousSibling.value = e.target.getAttribute('value');
+	    				e.target.parentNode.previousSibling.innerHTML = e.target.innerHTML;
+	    				e.target.parentNode.classList.add('none');
+	    			} else{
+	    				if (!document.querySelectorAll('.xui_drop_list').length) {return;};
+	    				let newArr = that.toArray(document.querySelectorAll('.xui_drop_list'));
+	    				for(let i in newArr){
+	    					newArr[i].classList.add('none');
+	    				};
+	    			};
+	    		},
+	    		init(args){
+	    			this.renderHTML(args);
+	    			this.event();
+	    		}
+	    	};
+	    	let args = arguments[0];
+	    	drop.init(args);
 	    },
 	    formatDate(date, bool) {
 	        date = (typeof date !== 'number' ? date.replace(/[^\d]/g, '') - 0 : date);
@@ -70,7 +161,6 @@
 				document.querySelectorAll('.' + target).forEach((item, index)=>{
 					item.innerHTML = day + '天' + hour + '时' + minute + '分' + second + '秒';
 				});
-				// return day + '-' + hour + '-' + minute + '-' + second;
 	    	},1000);
 	    },
 	    decodeStr(str) {
@@ -125,6 +215,9 @@
 	    	}
 	    	tar.classList.add('xu_loading');
 	    	document.body.appendChild(tar);
+	    },
+	    hasClass(source, target){
+	    	return source.indexOf(target) > -1 ? true : false;
 	    },
 	    isArray(arr) {
 	        if (Array.isArray) {
@@ -203,9 +296,9 @@
 		  	};
 		  	return newObj;
 		},
-		showBigImg(){
+		showImg(){
+			let that = this;
             //delete already exists
-            let that = this;
 	    	that.deleteEle('xu_img');
 	    	let tar = document.createElement('div');
 	    	tar.innerHTML = `
@@ -217,16 +310,16 @@
 	    				<span class="xui_zoomin" xui-type="2"></span>
 	    				<span class="xui_zoomout" xui-type="3"></span>
 	    				<span class="xui_right" xui-type="4"></span>
-	    				${arguments[1] ? `<a class="xui_download" href=${arguments[0]} download></a>` : ''}
+	    				${arguments[1] ? `<a class="xui_download" href=${arguments[0]} download=${arguments[1]}></a>` : ''}
 	    			</div>
 	    		</div>
 	    	`;
 	    	tar.classList.add('xui_img_content');
 	    	document.body.appendChild(tar);
-	    	function showImg(e){
+	    	function showImgPic(e){
 	    		if (e.target.className == 'xui_close') {
 	    			that.deleteEle('.xui_img_content');
-	    			document.body.removeEventListener('click', showImg, false);
+	    			document.body.removeEventListener('click', showImgPic, false);
 	    		};
 	    		if (e.target.getAttribute('xui-type')) {
 	    			let tar = document.querySelector('.xui_img');
@@ -235,8 +328,11 @@
 	    			let width = tar.style.width && tar.style.width.match(/\d/igm).join('') - 0;
 	    			switch(e.target.getAttribute('xui-type') - 0){
 	    				case 1:
-	    					let a = rotate + 90;
-	    					tar.style.transform = `rotate(${a}deg)`;
+	    					let leftDeg = rotate + 90;
+	    					tar.style.transform = `rotate(${leftDeg}deg)`;
+	    					tar.style.webkitTransform = `rotate(${leftDeg}deg)`;
+	    					tar.style.mozTransform = `rotate(${leftDeg}deg)`;
+	    					tar.style.MsTransform = `rotate(${leftDeg}deg)`;
 	    					break;
 	    				case 2:
 	    					width = (width > 140 ? 140 : width) || 100;
@@ -249,15 +345,18 @@
 	    					tar.style.marginLeft = -(width - 10 - 100) / 2 + '%';
 	    					break;
 	    				case 4:
-	    					let b = rotate - 90;
-	    					tar.style.transform = `rotate(${b}deg)`;
+	    					let rightDeg = rotate - 90;
+	    					tar.style.transform = `rotate(${rightDeg}deg)`;
+	    					tar.style.webkitTransform = `rotate(${rightDeg}deg)`;
+	    					tar.style.mozTransform = `rotate(${rightDeg}deg)`;
+	    					tar.style.MsTransform = `rotate(${rightDeg}deg)`;
 	    					break;
 	    				default:
 	    					break;
 	    			};
 	    		};
 	    	};
-	    	document.body.addEventListener('click', showImg, false);
+	    	document.body.addEventListener('click', showImgPic, false);
 		},
 	    subLastStr(str) {
 	        return str.substr(0, str.length - 1);
@@ -268,12 +367,15 @@
 	    	let tab = tar.getElementsByTagName('li');
 			let list = tar.querySelectorAll('.xui_tab_body div');
 			list = Array.prototype.slice.call(list);
-			args.activeIndex = args.activeIndex > tab.length ? 0 : args.activeIndex ? args.activeIndex : 0;
+			args.activeIndex = args.activeIndex >= tab.length ? 0 : args.activeIndex ? args.activeIndex : 0;
+			console.log(args.activeIndex);
 			if (tab.length !== list.length) {
 				throw new Error("tab's number error");
 			};
-			for(let l  in list){
-				list[l].style.display = l == args.activeIndex ? 'block' : 'none';
+			if (typeof args.activeIndex == 'number') {
+				for(let l  in list){
+					list[l].style.display = l == args.activeIndex ? 'block' : 'none';
+				};
 			};
 			for(let i=0; i < tab.length; i++){
 				i == args.activeIndex && tab[i].classList.add('selected');
@@ -291,6 +393,9 @@
 					};
 				};
 			};
+	    },
+	    toArray(arrLike){
+	    	return Array.prototype.slice.call(arrLike);
 	    },
 	    prompt(){
 	    	//delete already exists
@@ -322,7 +427,6 @@
 	    	`;
 	    	tar.classList.add('xu_prompt');
 	    	document.body.appendChild(tar);
-
 	    	//按钮回调
 	    	let clickEvent = (fn, tar) => {
 	    		document.querySelector('.xu_prompt').addEventListener('click',(e) => {
@@ -333,7 +437,6 @@
 		    		};
 		    	});
 	    	};
-
 	    	if (opts.confirmBtn && this.isFunction(opts.confirmBtn.fn)) {
 	    		clickEvent(opts.confirmBtn.fn, 'xui_btn');
 	    	};
@@ -356,5 +459,5 @@
 	    	};
 	    },
 	};
-	w.xu = new Xu;
+	w.xui = new Xui;
 })(window);

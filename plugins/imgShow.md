@@ -3,7 +3,7 @@
 
 # imgShow
 
->说明: 用来查看大图,给用户极致体验.
+>说明: 用来查看大图,给用户极致体验.并支持放大缩小,旋转,下载操作.
 
 
 ### 效果展示
@@ -12,37 +12,46 @@
 
 1.点击图片查看大图
 <div>
-	<img id="showImg" style="width: 300px" src="http://10.0.4.165:8006/upload/file//b37e4a64afca08c86fa27117f95103e2.jpg">
+	<img id="showImg" style="width: 300px" src="http://img.infinitynewtab.com/wallpaper/2811.jpg">
 </div>
 
 <script type="text/javascript">
 document.getElementById('showImg').onclick = function(e){
-	xu.showBigImg(e.target.src);
+	xui.showImg(e.target.src);
 };
 </script>
 
 ```js
-xu.showBigImg(url); //传入图片url即可预览
+xui.showImg(url); //传入图片url即可预览
 ```
 
-2.可以配置相关操作选项,第二个参数为`true`时,可下载该图片.
->说明: 关于下载图片相关知识, 请戳[HTML a download 属性](http://www.w3school.com.cn/tags/att_a_download.asp)
+2.可以配置相关操作选项,第二个参数为`string`时,可下载该图片.
+>说明: `string`为下载图片的文件名,需要注意的是只有同域下才会生效,跨域的图片下载是更改不了名字的.请戳[a标签下载那些事](http://xumengzi.top/)
+
+>说明: 关于下载图片相关知识, 请戳[a download 属性](http://www.w3school.com.cn/tags/att_a_download.asp)
+
 <div>
-	<img id="showImg1" style="width: 300px" src="http://10.0.4.165:8006/upload/file//b37e4a64afca08c86fa27117f95103e2.jpg">
+	<div>下面这张图片来自网上,是跨域的图片,你试图修改下载文件名,但是失败了</div>
+	<img id="showImg1" style="width: 300px" src="http://img.infinitynewtab.com/wallpaper/2811.jpg">
+	<div>下面这张图片来自本地,是同域,所以可以更改下载文件名</div>
+	<img id="showImg2" style="width: 300px" src="../img/test.jpg">
 </div>
 
 <script type="text/javascript">
 document.getElementById('showImg1').onclick = function(e){
-	xu.showBigImg(e.target.src, true);
+	xui.showImg(e.target.src, 'hello');
+};
+document.getElementById('showImg2').onclick = function(e){
+	xui.showImg(e.target.src, 'hello');
 };
 </script>
 
 ```js
-xu.showBigImg(url, true); //传入图片url即可预览, 第二个参数为true可下载图片
+xui.showImg(url, 'hello'); //传入图片url即可预览, 第二个参数为string可下载图片
 ```
 
 3.完整的配置
 ```js
-//第一个图片地址参数必传,第二个参数`Boolean`提供下载链接非必传
-xu.showBigImg(url, Boolean);
+//第一个图片地址参数必传,第二个参数`string`提供下载链接非必传
+xui.showImg(url, string);
 ```

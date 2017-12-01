@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# tab切换
+# tabChange
 
 >说明: 需要展示多个栏目以及节省空间的时间
 
@@ -23,7 +23,7 @@
 </div>
 
 <script type="text/javascript">
-xu.tab({
+xui.tab({
 	id: 'simpleTest'
 });
 </script>
@@ -41,7 +41,7 @@ xu.tab({
 ```
 
 ```js
-xu.tab({
+xui.tab({
 	id: 'simpleTest'
 });
 ```
@@ -61,7 +61,7 @@ xu.tab({
 </div>
 
 <script type="text/javascript">
-xu.tab({
+xui.tab({
 	id: 'normalTest',
 	activeIndex: 1,
 });
@@ -82,7 +82,7 @@ xu.tab({
 ```
 
 ```js
-xu.tab({
+xui.tab({
 	id: 'normalTest',
 	activeIndex: 1,
 });
@@ -105,11 +105,11 @@ xu.tab({
 </div>
 
 <script type="text/javascript">
-xu.tab({
+xui.tab({
 	id: 'hardTest',
 	activeIndex: 2,
 	fn: function(){
-		xu.message('看,这就是回调哦!');
+		xui.message('看,这就是回调哦!');
 	}
 });
 </script>
@@ -131,11 +131,11 @@ xu.tab({
 ```
 
 ```js
-xu.tab({
+xui.tab({
 	id: 'hardTest',
 	activeIndex: 2,
 	fn: function(){
-		xu.message('看,这就是回调哦!');
+		xui.message('看,这就是回调哦!');
 	}
 });
 ```

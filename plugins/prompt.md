@@ -15,7 +15,7 @@
 
 <script type="text/javascript">
 document.getElementById('show_prompt1').onclick=function(){
-	xu.prompt({
+	xui.prompt({
 		text: `恭喜您,兑换成功?`,
 		tips: '我们正在为您处理',
 		type: 'success',
@@ -25,7 +25,7 @@ document.getElementById('show_prompt1').onclick=function(){
 </script>
 
 ```js
-xu.prompt({
+xui.prompt({
 	text: `恭喜您,兑换成功?`,
 	tips: '我们正在为您处理',
 	type: 'success',
@@ -38,7 +38,7 @@ xu.prompt({
 
 <script type="text/javascript">
 document.getElementById('show_prompt2').onclick=function(){
-	xu.prompt({
+	xui.prompt({
 		text: `真棒,你已经充值了100Q币`,
 		tips: '',
 		type: 'success',
@@ -46,7 +46,7 @@ document.getElementById('show_prompt2').onclick=function(){
 		confirmBtn: {
 			text: '朕知道了',
 			fn(){
-				xu.tips('真墨迹!');
+				xui.tips('真墨迹!');
 			}
 		},
 	});
@@ -54,7 +54,7 @@ document.getElementById('show_prompt2').onclick=function(){
 </script>
 
 ```js
-xu.prompt({
+xui.prompt({
 	text: `真棒,你已经充值了100Q币`,
 	tips: '',
 	type: 'success',
@@ -62,7 +62,7 @@ xu.prompt({
 	confirmBtn: {
 		text: '朕知道了',
 		fn(){
-			xu.tips('真墨迹!');
+			xui.tips('真墨迹!');
 		}
 	},
 });
@@ -73,7 +73,7 @@ xu.prompt({
 
 <script type="text/javascript">
 document.getElementById('show_prompt3').onclick=function(){
-	xu.prompt({
+	xui.prompt({
 		text: `哎,没有抽到奖诶!`,
 		tips: '',
 		type: 'fail',
@@ -81,7 +81,7 @@ document.getElementById('show_prompt3').onclick=function(){
 		cancelBtn: {
 			text: '再试试',
 			fn(){
-				xu.tips('不中就算了!');
+				xui.tips('不中就算了!');
 			}
 		},
 	});
@@ -89,7 +89,7 @@ document.getElementById('show_prompt3').onclick=function(){
 </script>
 
 ```js
-xu.prompt({
+xui.prompt({
 	text: `哎,没有抽到奖诶!`,
 	tips: '',
 	type: 'fail',
@@ -97,7 +97,7 @@ xu.prompt({
 	cancelBtn: {
 		text: '再试试',
 		fn(){
-			xu.tips('不中就算了!');
+			xui.tips('不中就算了!');
 		}
 	}
 });
@@ -108,7 +108,7 @@ xu.prompt({
 
 <script type="text/javascript">
 document.getElementById('show_prompt4').onclick=function(){
-	xu.prompt({
+	xui.prompt({
 		text: `您确定要删除吗?`,
 		tips: '要不再想想',
 		type: 'success',
@@ -116,13 +116,13 @@ document.getElementById('show_prompt4').onclick=function(){
 		confirmBtn: {
 			text: '算了',
 			fn(){
-				xu.tips('看,劳资删了');
+				xui.tips('看,劳资删了');
 			}
 		},
 		cancelBtn: {
 			text: '朕意已决',
 			fn(){
-				xu.tips('十年后又是好汉');
+				xui.tips('十年后又是好汉');
 			}
 		},
 	});
@@ -130,7 +130,7 @@ document.getElementById('show_prompt4').onclick=function(){
 </script>
 
 ```js
-xu.prompt({
+xui.prompt({
 	text: `您确定要删除吗?`,
 	tips: '要不再想想',
 	type: 'success',
@@ -138,13 +138,13 @@ xu.prompt({
 	confirmBtn: {
 		text: '朕意已决',
 		fn(){
-			xu.tips('看,劳资删了');
+			xui.tips('看,劳资删了');
 		}
 	},
 	cancelBtn: {
 		text: '算了',
 		fn(){
-			xu.tips('十年后又是好汉');
+			xui.tips('十年后又是好汉');
 		}
 	},
 });

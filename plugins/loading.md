@@ -16,15 +16,15 @@
 
 <script type="text/javascript">
 document.getElementById('show_loading1').onclick=function(){
-	xu.loading(true);
+	xui.loading(true);
 	setTimeout(()=>{
-		xu.loading(false);
+		xui.loading(false);
 	},3000);
 }
 </script>
 
 ```js
-xu.loading(true);
+xui.loading(true);
 ```
 
 2.圆圈状
@@ -32,15 +32,15 @@ xu.loading(true);
 
 <script type="text/javascript">
 document.getElementById('show_loading2').onclick=function(){
-	xu.loading(true, 1);
+	xui.loading(true, 1);
 	setTimeout(()=>{
-		xu.loading(false);
+		xui.loading(false);
 	},3000);
 }
 </script>
 
 ```js
-xu.loading(true, 2);
+xui.loading(true, 2);
 ```
 
 3.圆点状
@@ -48,13 +48,13 @@ xu.loading(true, 2);
 
 <script type="text/javascript">
 document.getElementById('show_loading3').onclick=function(){
-	xu.loading(true, 2);
+	xui.loading(true, 2);
 	setTimeout(()=>{
-		xu.loading(false);
+		xui.loading(false);
 	},3000);
 }
 </script>
 
 ```js
-xu.loading(true, 3);
+xui.loading(true, 3);
 ```
