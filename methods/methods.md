@@ -40,7 +40,7 @@ xui.randomNum(1, 10);  //参数是从小到大排的
 ```
 
 7.记录用户行为轨迹`get`方式请求
-* 关于如何记录详情请戳[如何记录用户行为点击](http://xumengzi.top/).
+* 关于如何记录详情请戳[如何记录用户行为点击](http://xumengzi.top/xumeng/20170924/2017-09-24.html).
 
 <script>
 xui.recordData({
