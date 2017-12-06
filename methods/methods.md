@@ -40,7 +40,7 @@ xui.randomNum(1, 10);  //参数是从小到大排的
 ```
 
 7.记录用户行为轨迹`get`方式请求
-* 关于如何记录详情请戳[如何记录用户行为点击](http://xumengzi.top/xumeng/20170924/2017-09-24.html).
+* 关于如何记录详情请戳[如何记录用户行为点击](http://xumengzi.top/).
 
 <script>
 xui.recordData({
@@ -65,4 +65,22 @@ xui.recordData({
 	url: 'www.example.com?a=1&b=2',
 });
 ```
-* 更多方法详见`xui.js`,哈哈
+
+8.有时候我们想操作一下`cookie`,但是原生的操作方法过于繁琐,所以便捷的方法显得格外重要.
+>说明: 更多`cookie`知识详见[JS积累-cookie](http://xumengzi.top/xumeng/20170624/2017-06-24.html)
+
+>提示: 只有火狐支持本地页面保存cookie，建议使用火狐测试。鼠标右键-查看页面信息-安全-查看cookie
+
+```js
+//`cookie`名和value必传
+xui.setCookie(name, value, days, path)
+
+//传入需要的cookie名即可,没有返回空
+xui.getCookie(name)
+
+//传入需要的cookie名即可删除`cookie`
+xui.removeCookie(name)
+```
+
+
+* 更多方法详见[`xui.js`](../assets/xui.js),哈哈

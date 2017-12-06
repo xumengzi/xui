@@ -1,6 +1,10 @@
+/*
+ created by xumeng
+ http://xumengzi.top/
+*/ 
 ;(function(w) {
 	function Xui() {
-		this.version = '0.5.0';
+		this.version = '0.5.1';
 	};
 
 	Xui.prototype = {
@@ -169,6 +173,21 @@
 	    deleteEle(ele){
 	    	document.querySelector(ele) && document.querySelector(ele).remove();
 	    },
+	    getCookie(name){
+			let myCookie = document.cookie;
+			let reg = new RegExp("([\\s]?)" + name + "=([\\d\\w]+)");
+			//2017/12/06 修改为正则匹配
+			//是的,普通循环显得太low
+			return (myCookie.match(reg) === null ? '' : decodeURIComponent(myCookie.match(reg)[2]));
+			// myCookie = myCookie.split('; ');
+			// for(let i = 0;i < myCookie.length; i++){
+			// 	let sinCookie = myCookie[i].split('=');
+			// 	if (sinCookie[0] == name) {
+			// 		return sinCookie[1];
+			// 	};
+			// };
+			// return '';
+	    },
 	    loading(isShow, type){
 	    	//delete already exists
 	    	this.deleteEle('.xu_loading');
@@ -276,6 +295,10 @@
 			params = isQuestionMark + params.substr(1, params.length);
 			(new Image(1, 1)).src = url + params;
 	    },
+	    removeCookie(name){
+			let val = this.getCookie(name);
+			this.setCookie(name, val, -1);
+	    },
 	    removeMul(arr) {
 	        if (arr instanceof Array) {
 	            let newArr = [];
@@ -286,6 +309,28 @@
 	        } else {
 	            return false;
 	        };
+	    },
+	    setCookie(name, value, days, path){
+			if (!name) {
+				throw new Error('cookie名必传');
+			};
+			if (!value) {
+				throw new Error('cookie值必传');
+			};
+			let now = new Date();
+			let date = now.setDate(days);
+			let newDate = new Date(date);
+			switch(arguments.length){
+				case 3:
+				document.cookie = name + '=' + value + '; expires=' + newDate;
+				break;
+				case 4:
+				document.cookie = name + '=' + value + '; expires=' + newDate + '; path=/' + path;
+				break;
+				default:
+				document.cookie = name + '=' + value;
+				break;
+			};
 	    },
 	    shallowCopy(obj){
 		  	let newObj = {};
