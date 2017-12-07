@@ -4,7 +4,7 @@
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '0.5.1';
+		this.version = '0.6.1';
 	};
 
 	Xui.prototype = {
@@ -15,6 +15,62 @@
 			}else{
 				return e = e < 10 ? '0' + e : e;
 			};
+	    },
+	    checkLegal(type, str) {
+	        let reg;
+	        switch (type) {
+	        case "name":
+	            reg = /^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$/;
+	            break;
+	        case "mobile":
+	            reg = /^1[34578]\d{9}$/;
+	            break;
+	        case "email":
+	            reg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/;
+	            break;
+	        };
+	        return reg.test(str);
+	    },
+	    codeStr(str) {
+	        return encodeURIComponent(str);
+	    },
+	    countDown(){
+	    	let downTime = null;
+	    	let args = arguments[0];
+	    	if (!(args.endDate && args.target)) {
+	    		throw new Error('结束日期和目标元素必传');
+	    	};
+	    	args.endDate = args.endDate.replace(/\//g,'-');
+	    	clearInterval(downTime);
+	    	downTime = setInterval(()=>{
+	    		let start = this.now(),
+	    		end = this.now(args.endDate);
+				let diff = (end - start) / 1000;
+		    	let day = parseInt((diff / 24 / 3600),10),
+				    hour = parseInt((diff % (24 * 3600) / 3600),10) - 8,
+				    minute = parseInt((diff % 3600 / 60),10),
+				    second = parseInt((diff % 60),10);
+				day = this.addZero(day);
+				hour = this.addZero(hour);
+				minute = this.addZero(minute);
+				second = this.addZero(second);
+				if (args.isStop && diff <= 0) {
+					clearInterval(downTime);
+					day = hour = minute = second = '00';
+				};
+				function addNode(tar, nodeName){
+					return '<'+nodeName + '>' + tar + '</' + nodeName + '>';
+				};
+				if (args.nodeName) {
+					day = addNode(day, args.nodeName);
+					hour = addNode(hour, args.nodeName);
+					minute = addNode(minute, args.nodeName);
+					second = addNode(second, args.nodeName);
+				};
+				document.querySelectorAll('.' + args.target).forEach((item, index)=>{
+					item.innerHTML = day + '天' + hour + '时' + minute + '分' + second + '秒';
+				});
+	    	},1000);
 	    },
 	    dropDown(){
 	    	let that = this;
@@ -96,6 +152,13 @@
 	    				let newArr = that.toArray(document.querySelectorAll('.xui_drop_list'));
 	    				for(let i in newArr){
 	    					newArr[i].classList.add('none');
+	    					for(let j = 0; j < newArr[i].childNodes.length ; j++){
+	    						newArr[i].childNodes[j].classList.contains('none') && newArr[i].childNodes[j].classList.remove('none');
+	    					};
+	    				};
+	    				let inpArr = that.toArray(document.querySelectorAll('.xui_input_search'));
+	    				for(let i in newArr){
+	    					inpArr[i].value = '';
 	    				};
 	    			};
 	    		},
@@ -125,47 +188,6 @@
 	            return year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + sec;
 	        };
 	        return year + '-' + month + '-' + day;
-	    },
-	    checkLegal(type, str) {
-	        let reg;
-	        switch (type) {
-	        case "name":
-	            reg = /^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$/;
-	            break;
-	        case "mobile":
-	            reg = /^1[34578]\d{9}$/;
-	            break;
-	        case "email":
-	            reg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/;
-	            break;
-	        };
-	        return reg.test(str);
-	    },
-	    codeStr(str) {
-	        return encodeURIComponent(str);
-	    },
-	    countDown(endD, target, isStop){
-	    	let downTime = null;
-	    	clearInterval(downTime);
-	    	downTime = setInterval(()=>{
-	    		let start = this.now(),
-	    		end = this.now(endD);
-				let diff = end - start;
-		    	let day = parseInt((diff / 1000 / 24 / 3600),10),
-				    hour = parseInt((diff / 1000 / 3600 % 60),10) - 8,
-				    minute = parseInt((diff / 1000 / 60 % 60),10),
-				    second = parseInt((diff / 1000 % 60),10);
-				day = this.addZero(day);
-				hour = this.addZero(hour);
-				minute = this.addZero(minute);
-				second = this.addZero(second);
-				if (isStop && diff <= 0) {
-					clearInterval(downTime);
-				};
-				document.querySelectorAll('.' + target).forEach((item, index)=>{
-					item.innerHTML = day + '天' + hour + '时' + minute + '分' + second + '秒';
-				});
-	    	},1000);
 	    },
 	    decodeStr(str) {
 	        return decodeURIComponent(str);
