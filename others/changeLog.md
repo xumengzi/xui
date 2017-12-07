@@ -8,6 +8,11 @@
 
 >输入`xui.version`获取当前版本号
 
+##v0.6.1  <span style="font-size: 16px;">2017/12/07</span>
+####新增：     
+1.[倒计时插件](../plugins/countDown.md)
+>是否兼容现有代码：是
+
 ##v0.5.1  <span style="font-size: 16px;">2017/12/06</span>
 ####新增：     
 1.对`cookie`的操作,包括新增,查询,删除.详见[方法](../methods/methods.md)第八条.
@@ -15,7 +20,7 @@
 
 ##v0.5.0  <span style="font-size: 16px;">2017/12/01</span>
 ####新增：     
-1.[下拉框](../plugins/dropDown.md)
+1.[下拉框插件](../plugins/dropDown.md)
 >是否兼容现有代码：是
 
 ##v0.4.0  <span style="font-size: 16px;">2017/11/22</span>
