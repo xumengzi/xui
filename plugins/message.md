@@ -5,9 +5,16 @@
 
 >说明: 用来提示用户,具体行为是出现一个`message`,然后一段时间后消失
 
+##### 使用及参数说明:
+```js
+xui.message(string, time, callback);
+```
+* `string`表示提示信息的文案 **必传**
+* `time`表示提示信息显示的时间,默认是1000ms
+* `callback`表示提示信息消失后的回调
+* 没有你想要的功能? 快联系我: `me@xumengzi.top`添加吧
 
 ### 效果展示
-
 
 1.我们可以就配置一些显示的文字,默认时间为1s.
 <button class="xui_btn xui_btn_default" id="show_message">1s后消失</button>

@@ -51,6 +51,7 @@ xui.recordData({
 	url: 'www.example.com?a=1&b=2',
 });
 </script>
+
 ```js
 /*
 传入需要统计的参数列表(对象形式)和异步接口地址API.
@@ -83,4 +84,4 @@ xui.removeCookie(name)
 ```
 
 
-* 更多方法详见[`xui.js`](../assets/xui.js),哈哈
+* 更多方法详见`xui.js`,哈哈

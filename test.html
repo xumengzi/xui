@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>测试</title>
+	<meta charset="utf-8">
+</head>
+<link rel="stylesheet" type="text/css" href="./assets/xui.css">
+<body>
+	<button class="xui_btn xui_btn_default" id="show_prompt">试试看prompt</button>
+	<div>
+		设置一个结束日期<input type="date" id="endDate" name=""><br/>
+		倒计时: <div class="count_down"></div>
+	</div>
+	<script type="text/javascript" src="./assets/xui.js"></script>
+	<script type="text/javascript">
+		document.getElementById('endDate').onchange = function(e){
+			xui.countDown({
+				endDate: '2017/12/31',
+				isStop: true,
+				target: 'count_down',
+			});
+		};
+		document.getElementById('show_prompt').onclick=function(){
+			xui.prompt({
+				text: `您确定要删除吗?`,
+				tips: '要不再想想',
+				type: 'success',
+				delay: 0,
+				confirmBtn: {
+					text: '算了',
+					fn(){
+						xui.tips('看,劳资删了');
+					}
+				},
+				cancelBtn: {
+					text: '朕意已决',
+					fn(){
+						xui.tips('十年后又是好汉');
+					}
+				},
+			});
+		};
+	</script>
+</body>
+</html>

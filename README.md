@@ -14,12 +14,14 @@
 * 使用方法: 引用`xui.js`和`xui.css`
 
 
-##### 本项目包含三个模块:
+##### 本项目包含四个模块:
 1.[样式使用](styles/README.md)
 
 2.[方法使用](methods/README.md)
 
 3.[组件使用](plugins/README.md)
+
+4.[更新日志](others/changeLog.md)
 
 ##### 详情参见下文介绍 :
 

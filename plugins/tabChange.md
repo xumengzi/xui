@@ -5,7 +5,30 @@
 
 >说明: 需要展示多个栏目以及节省空间的时间
 
->使用: 先复制好相应的`html`,取一个独特的`id`,然后初始化`init`就可以使用了,非常方便
+##### 使用及参数说明:
+```js
+<div class="xui_tab" id="hardTest">
+	<ul class="xui_tab_head">
+		<li>tab1</li>
+		<li>tab2</li>
+	</ul>
+	<div class="xui_tab_body">
+		<div>内容1</div>
+		<div>内容2</div>
+	</div>
+</div>
+
+xui.tab({
+	id: string,
+	activeIndex: number,
+	fn: callback
+});
+```
+* 复制好相应的`html`,取一个独特的`id`,然后初始化`init`就可以使用了,非常方便
+* `id`表示下拉框的`id` **必传**
+* `activeIndex`表示当前显示哪一个`tab`的数据
+* `fn`表示`tab`切换之后的回调
+* 没有你想要的功能? 快联系我: `me@xumengzi.top`添加吧
 
 ### 效果展示
 

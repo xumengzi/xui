@@ -4,7 +4,7 @@
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '0.6.1';
+		this.version = '0.6.2';
 	};
 
 	Xui.prototype = {
