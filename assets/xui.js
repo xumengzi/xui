@@ -2,6 +2,7 @@
  created by xumeng
  http://xumengzi.top/
 */ 
+
 ;(function(w) {
 	function Xui() {
 		this.version = '0.6.2';
@@ -527,4 +528,111 @@
 	    },
 	};
 	w.xui = new Xui;
+})(window);
+
+;(function(w){
+	function calendar(){
+		cal.config = Object.assign(arguments[0]);
+		cal.init();
+	};
+	const cal = {
+		config: {
+
+		},
+		event(){
+
+		},
+		renderHTML(){
+			let calHTML = `
+					<div class="xui_calendar_head">
+						<div class="xui_calendar_icon xui_calendar_left"></div>
+						<div class="xui_calendar_choose">2017年12月</div>
+						<div class="xui_calendar_icon xui_calendar_right"></div>
+					</div>
+					<div class="xui_calendar_body">
+						<table>
+							<thead>
+								<tr>
+									<th>Su</th>
+									<th>Mo</th>
+									<th>Tu</th>
+									<th>We</th>
+									<th>Th</th>
+									<th>Fr</th>
+									<th>Sa</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><div class="xui_calendar_valid">1</div></td>
+									<td><div class="xui_calendar_invalid">2</div></td>
+									<td><div>3</div></td>
+									<td><div>4</div></td>
+									<td><div>5</div></td>
+									<td><div>6</div></td>
+									<td><div>7</div></td>
+								</tr>
+								<tr>
+									<td><div>1</div></td>
+									<td><div>2</div></td>
+									<td><div>3</div></td>
+									<td><div>4</div></td>
+									<td><div>5</div></td>
+									<td><div>6</div></td>
+									<td><div>7</div></td>
+								</tr>
+								<tr>
+									<td><div>1</div></td>
+									<td><div>2</div></td>
+									<td><div>3</div></td>
+									<td><div>4</div></td>
+									<td><div>5</div></td>
+									<td><div>6</div></td>
+									<td><div>7</div></td>
+								</tr>
+								<tr>
+									<td><div>1</div></td>
+									<td><div>2</div></td>
+									<td><div>3</div></td>
+									<td><div>4</div></td>
+									<td><div>5</div></td>
+									<td><div>6</div></td>
+									<td><div>7</div></td>
+								</tr>
+								<tr>
+									<td><div>1</div></td>
+									<td><div>2</div></td>
+									<td><div>3</div></td>
+									<td><div>4</div></td>
+									<td><div>5</div></td>
+									<td><div>6</div></td>
+									<td><div>7</div></td>
+								</tr>
+								<tr>
+									<td><div>1</div></td>
+									<td><div>2</div></td>
+									<td><div>3</div></td>
+									<td><div>4</div></td>
+									<td><div>5</div></td>
+									<td><div>6</div></td>
+									<td><div>7</div></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="xui_calendar_foot">
+						<span>today</span>
+					</div>
+			`;
+			let con = document.createElement('div');
+			con.classList.add('xui_calendar_picker');
+			con.innerHTML = calHTML;
+			document.getElementById(this.config.id).after(con);
+		},
+		init(){
+			xui.deleteEle('.xui_calendar_picker');
+			this.renderHTML();
+		}
+	};
+	xui.__proto__.calendar = calendar;
 })(window);

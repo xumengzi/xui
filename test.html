@@ -6,40 +6,100 @@
 </head>
 <link rel="stylesheet" type="text/css" href="./assets/xui.css">
 <body>
-	<button class="xui_btn xui_btn_default" id="show_prompt">试试看prompt</button>
-	<div>
-		设置一个结束日期<input type="date" id="endDate" name=""><br/>
-		倒计时: <div class="count_down"></div>
+	<div style="width:200px;">
+		<input type="text" name="" id="test">
 	</div>
+	<!-- <div class="xui_calendar_picker">
+		<div class="xui_calendar_head">
+			<div class="xui_calendar_icon xui_calendar_left"></div>
+			<div class="xui_calendar_choose">2017年12月</div>
+			<div class="xui_calendar_icon xui_calendar_right"></div>
+		</div>
+		<div class="xui_calendar_body">
+			<table>
+				<thead>
+					<tr>
+						<th>Su</th>
+						<th>Mo</th>
+						<th>Tu</th>
+						<th>We</th>
+						<th>Th</th>
+						<th>Fr</th>
+						<th>Sa</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><div class="xui_calendar_valid">1</div></td>
+						<td><div class="xui_calendar_invalid">2</div></td>
+						<td><div>3</div></td>
+						<td><div>4</div></td>
+						<td><div>5</div></td>
+						<td><div>6</div></td>
+						<td><div>7</div></td>
+					</tr>
+					<tr>
+						<td><div>1</div></td>
+						<td><div>2</div></td>
+						<td><div>3</div></td>
+						<td><div>4</div></td>
+						<td><div>5</div></td>
+						<td><div>6</div></td>
+						<td><div>7</div></td>
+					</tr>
+					<tr>
+						<td><div>1</div></td>
+						<td><div>2</div></td>
+						<td><div>3</div></td>
+						<td><div>4</div></td>
+						<td><div>5</div></td>
+						<td><div>6</div></td>
+						<td><div>7</div></td>
+					</tr>
+					<tr>
+						<td><div>1</div></td>
+						<td><div>2</div></td>
+						<td><div>3</div></td>
+						<td><div>4</div></td>
+						<td><div>5</div></td>
+						<td><div>6</div></td>
+						<td><div>7</div></td>
+					</tr>
+					<tr>
+						<td><div>1</div></td>
+						<td><div>2</div></td>
+						<td><div>3</div></td>
+						<td><div>4</div></td>
+						<td><div>5</div></td>
+						<td><div>6</div></td>
+						<td><div>7</div></td>
+					</tr>
+					<tr>
+						<td><div>1</div></td>
+						<td><div>2</div></td>
+						<td><div>3</div></td>
+						<td><div>4</div></td>
+						<td><div>5</div></td>
+						<td><div>6</div></td>
+						<td><div>7</div></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="xui_calendar_foot">
+			<span>today</span>
+		</div>
+	</div> -->
 	<script type="text/javascript" src="./assets/xui.js"></script>
 	<script type="text/javascript">
-		document.getElementById('endDate').onchange = function(e){
-			xui.countDown({
+		document.getElementById('test').onclick = function(){
+			xui.calendar({
+				id: 'test',
+				startDate: '2017/11/11',
 				endDate: '2017/12/31',
-				isStop: true,
-				target: 'count_down',
-			});
-		};
-		document.getElementById('show_prompt').onclick=function(){
-			xui.prompt({
-				text: `您确定要删除吗?`,
-				tips: '要不再想想',
-				type: 'success',
-				delay: 0,
-				confirmBtn: {
-					text: '算了',
-					fn(){
-						xui.tips('看,劳资删了');
-					}
-				},
-				cancelBtn: {
-					text: '朕意已决',
-					fn(){
-						xui.tips('十年后又是好汉');
-					}
-				},
-			});
-		};
+				isToday: false,
+			})
+		}
 	</script>
 </body>
 </html>
