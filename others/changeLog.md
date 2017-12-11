@@ -8,6 +8,11 @@
 
 >输入`xui.version`获取当前版本号
 
+##v0.7.0  <span style="font-size: 16px;">2017/12/11</span>
+####新增：     
+1.[日历插件](../plugins/calendar.md)
+>是否兼容现有代码：是
+
 ##v0.6.2  <span style="font-size: 16px;">2017/12/08</span>
 ####新增：     
 1.[插件模块](../plugins/README.md)新增使用及参数说明

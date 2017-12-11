@@ -3,9 +3,12 @@
  http://xumengzi.top/
 */ 
 
+/*
+include most functions and styles etc.
+*/ 
 ;(function(w) {
 	function Xui() {
-		this.version = '0.6.2';
+		this.version = '0.7.0';
 	};
 
 	Xui.prototype = {
@@ -72,6 +75,19 @@
 					item.innerHTML = day + '天' + hour + '时' + minute + '分' + second + '秒';
 				});
 	    	},1000);
+	    },
+	    decodeStr(str) {
+	        return decodeURIComponent(str);
+	    },
+	    deleteEle(ele){
+	    	// document.querySelector(ele) && document.querySelector(ele).remove();
+	    	let tar = document.querySelectorAll(ele);
+	    	if (tar) {
+	    		let list = [...tar];
+	    		for(let i in list){
+	    			list[i].remove();
+	    		};
+	    	};
 	    },
 	    dropDown(){
 	    	let that = this;
@@ -189,12 +205,6 @@
 	            return year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + sec;
 	        };
 	        return year + '-' + month + '-' + day;
-	    },
-	    decodeStr(str) {
-	        return decodeURIComponent(str);
-	    },
-	    deleteEle(ele){
-	    	document.querySelector(ele) && document.querySelector(ele).remove();
 	    },
 	    getCookie(name){
 			let myCookie = document.cookie;
@@ -530,108 +540,251 @@
 	w.xui = new Xui;
 })(window);
 
+/*
+here is a calendar plugin
+*/ 
 ;(function(w){
 	function calendar(){
-		cal.config = Object.assign(arguments[0]);
+		xui.deleteEle('.xui_calendar_picker');
+		cal.config = {};
+		let tar = new Date();
+		const t = {
+			y: tar.getFullYear(),
+			m: tar.getMonth() + 1,
+		};
+		cal.config.year = t.y;
+		cal.config.month = t.m;
+		cal.config = Object.assign({}, cal.config, arguments[0]);
+		// 是否禁止点击
+		let ele = document.getElementById(cal.config.id),
+			child = ele && ele.children[0];
+		if (ele.getAttribute('disabled')) {
+			return;
+		};
+		//初始化日历
 		cal.init();
 	};
 	const cal = {
-		config: {
-
-		},
+		config: {},
 		event(){
-
+			// let tar = document.querySelector('.xui_calendar_picker');
+			let tar = document.body;
+			tar.addEventListener('click', cal.handleClickCal, false);
 		},
-		renderHTML(){
+		handleClickCal(e){
+			let that = cal;
+			let o = e.target.classList;
+			//choose date
+			let isChooseDate = !o.contains('xui_calendar_invalid') && (o.contains('xui_calendar_valid') || o.contains('xui_calendar_foot') || o.contains('xui_close_small'));
+			if (isChooseDate) {
+				let date = e.target.getAttribute('data-date');
+				that.config.fn && that.config.fn(date);
+				xui.deleteEle('.xui_calendar_picker');
+				// that.removeCal();
+			};
+			//set date
+			if (o.contains('xui_calendar_icon')) {
+				let type = e.target.getAttribute('data-set');
+				that.config.month -=0;
+				that.config.year -=0;
+				if (type == 1) {
+					that.config.month += 1;
+					if (that.config.month > 12) {
+						that.config.month = 1;
+						that.config.year++;
+					};
+				} else{
+					that.config.month -= 1;
+					if (that.config.month < 1) {
+						that.config.month = 12;
+						that.config.year--;
+					};
+				};
+				that.renderHTML(that.config.year, that.config.month);
+			};
+			//remove calendar
+			if (e.target.className == '') {
+				xui.deleteEle('.xui_calendar_picker');
+			};
+		},
+		removeCal(){
+			let del = document.getElementById(this.config.id).parentNode;
+			let eact = del.querySelectorAll('.xui_calendar_picker');
+			if (eact.length) {
+				for(let d = 0; d < eact.length; d++){
+					eact[d] && eact[d].remove();
+					// document.querySelector('.xui_calendar_picker') && document.querySelector('.xui_calendar_picker').removeEventListener('click', cal.test, false)
+					document.body.removeEventListener('click', cal.handleClickCal, false);
+				};
+			};
+		},
+		renderHTML(year, month){
+			this.removeCal();
+			//换行标志位
+			let tag = 0,
+				lTag = 0;
+			//总的表格数
+			let totalNum = 42;
+			let tar = new Date();
+			const t = {
+				y: year,
+				m: month,
+			};
+			let firstDay = new Date(`${t.y}-${t.m}`).getDay(),
+				allDays = new Date(t.y, t.m, 0).getDate();
+			let tds = `<tr>`;
+			//prev month
+			if (this.config.isOtherMonths) {
+				let lastDays = new Date(t.y, t.m - 1, 0).getDate();
+				for(let i = firstDay -1; i >= 0; i--){
+					tag++;
+					lTag++;
+					let prevd= (month == 1 ? `${t.y-1}-12-${lastDays - i}` : `${t.y}-${this.setNum(t.m-1)}-${lastDays - i}`);
+					let isStarted = '',isEnded = '';
+					if (this.config.startDate) {
+						if (new Date(prevd) < new Date(this.config.startDate) || new Date(prevd) > new Date(this.config.endDate)) {
+							isStarted = 'xui_calendar_invalid';
+						};
+					};
+					if (this.config.endDate) {
+						isEnded = new Date(this.config.endDate) > new Date(prevd) ? '' : 'xui_calendar_invalid';
+					};
+					tds += `
+						<td>
+							<div data-date=${prevd} title=${prevd} class="xui_calendar_valid xui_calendar_prev ${isStarted} ${isStarted}">
+								${lastDays - i}
+							</div>
+						</td>
+					`;
+					if (tag % 7 == 0) {
+						tds += `</tr><tr>`;
+					};
+				};
+			} else{
+				for(let i = firstDay -1; i >= 0; i--){
+					tag++;
+					lTag++;
+					tds += `<td><div></div></td>`;
+					if (tag % 7 == 0) {
+						tds += `</tr><tr>`;
+					};
+				};
+			};
+			//current month
+			for(let j = 1; j <= allDays; j++){
+				tag++;
+				lTag++;
+				let currd = `${t.y}-${this.setNum(t.m)}-${this.setNum(j)}`;
+				let isStarted = '',isEnded = '',isSelected = '';
+				if (this.config.startDate) {
+					isStarted = new Date(this.config.startDate) < new Date(currd) ? '' : 'xui_calendar_invalid';
+				};
+				if (this.config.endDate) {
+					isEnded = new Date(this.config.endDate) > new Date(currd) ? '' : 'xui_calendar_invalid';
+				};
+				isSelected = (j == tar.getDate() ? 'xui_calendar_selected' : '');
+				tds += `
+					<td>
+						<div data-date=${currd} title=${currd} class="xui_calendar_valid ${isStarted} ${isEnded} ${isSelected}">
+							${j}
+						</div>
+					</td>
+				`
+				if (tag % 7 == 0) {
+					tds += `</tr><tr>`;
+				};
+			};
+			//next month
+			if (this.config.isOtherMonths){
+				for(let k = 1; k <= totalNum - lTag; k++){
+					tag++;
+					let nextd= (month != 12 ? `${t.y}-${this.setNum(t.m+1)}-${this.setNum(k)}` : `${t.y+1}-01-${this.setNum(k)}`);
+					let isStarted = '',isEnded = '';
+					if (this.config.startDate) {
+						isStarted = new Date(this.config.startDate) < new Date(nextd) ? '' : 'xui_calendar_invalid';
+					};
+					if (this.config.endDate) {
+						isEnded = new Date(this.config.endDate) > new Date(nextd) ? '' : 'xui_calendar_invalid';
+					};
+					tds += `
+						<td>
+							<div data-date=${nextd} title=${nextd} class="xui_calendar_valid xui_calendar_next ${isStarted} ${isEnded}">
+								${k}
+							</div>
+						</td>
+					`
+					if (tag % 7 == 0) {
+						tds += `</tr><tr>`;
+					};
+				};
+			} else{
+				for(let k = 1; k <= totalNum - lTag; k++){
+					tag++;
+					tds += `<td><div></div></td>`
+					if (tag % 7 == 0) {
+						tds += `</tr><tr>`;
+					};
+				};
+			};
+			//是否显示今天
+			let isToday = ``;
+			if (this.config.isToday) {
+				let istoDay = '';;
+				let tDate = `${t.y}-${this.setNum(t.m)}-${this.setNum(tar.getDate())}`;
+				if (this.config.startDate) {
+					if (new Date(tDate) < new Date(this.config.startDate) || new Date(tDate) > new Date(this.config.endDate)) {
+						istoDay = 'xui_calendar_invalid';
+					};
+				};
+				isToday = `
+					<div class="xui_calendar_foot ${istoDay}" data-date=${tDate}>
+						today
+					</div>
+				`;
+			}
 			let calHTML = `
 					<div class="xui_calendar_head">
-						<div class="xui_calendar_icon xui_calendar_left"></div>
-						<div class="xui_calendar_choose">2017年12月</div>
-						<div class="xui_calendar_icon xui_calendar_right"></div>
+						<div data-set=-1 class="xui_calendar_icon xui_calendar_left"></div>
+						<div class="xui_calendar_choose">${year}年${this.setNum(month)}月</div>
+						<div data-set=1 class="xui_calendar_icon xui_calendar_right"></div>
 					</div>
 					<div class="xui_calendar_body">
 						<table>
 							<thead>
 								<tr>
-									<th>Su</th>
-									<th>Mo</th>
-									<th>Tu</th>
-									<th>We</th>
-									<th>Th</th>
-									<th>Fr</th>
-									<th>Sa</th>
+									<th class="xui_calendar_th">Su</th>
+									<th class="xui_calendar_th">Mo</th>
+									<th class="xui_calendar_th">Tu</th>
+									<th class="xui_calendar_th">We</th>
+									<th class="xui_calendar_th">Th</th>
+									<th class="xui_calendar_th">Fr</th>
+									<th class="xui_calendar_th">Sa</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td><div class="xui_calendar_valid">1</div></td>
-									<td><div class="xui_calendar_invalid">2</div></td>
-									<td><div>3</div></td>
-									<td><div>4</div></td>
-									<td><div>5</div></td>
-									<td><div>6</div></td>
-									<td><div>7</div></td>
-								</tr>
-								<tr>
-									<td><div>1</div></td>
-									<td><div>2</div></td>
-									<td><div>3</div></td>
-									<td><div>4</div></td>
-									<td><div>5</div></td>
-									<td><div>6</div></td>
-									<td><div>7</div></td>
-								</tr>
-								<tr>
-									<td><div>1</div></td>
-									<td><div>2</div></td>
-									<td><div>3</div></td>
-									<td><div>4</div></td>
-									<td><div>5</div></td>
-									<td><div>6</div></td>
-									<td><div>7</div></td>
-								</tr>
-								<tr>
-									<td><div>1</div></td>
-									<td><div>2</div></td>
-									<td><div>3</div></td>
-									<td><div>4</div></td>
-									<td><div>5</div></td>
-									<td><div>6</div></td>
-									<td><div>7</div></td>
-								</tr>
-								<tr>
-									<td><div>1</div></td>
-									<td><div>2</div></td>
-									<td><div>3</div></td>
-									<td><div>4</div></td>
-									<td><div>5</div></td>
-									<td><div>6</div></td>
-									<td><div>7</div></td>
-								</tr>
-								<tr>
-									<td><div>1</div></td>
-									<td><div>2</div></td>
-									<td><div>3</div></td>
-									<td><div>4</div></td>
-									<td><div>5</div></td>
-									<td><div>6</div></td>
-									<td><div>7</div></td>
-								</tr>
+								${tds}
 							</tbody>
 						</table>
 					</div>
-					<div class="xui_calendar_foot">
-						<span>today</span>
-					</div>
+					${isToday}
 			`;
 			let con = document.createElement('div');
 			con.classList.add('xui_calendar_picker');
 			con.innerHTML = calHTML;
+			// let close = document.createElement('span');
+			// close.classList.add('xui_close_small');
+			// close.setAttribute('data-date','');
+			// document.getElementById(this.config.id).after(close);
 			document.getElementById(this.config.id).after(con);
+			this.event();
+		},
+		setNum(num){
+			return num < 10 ? '0' + num : num;
 		},
 		init(){
-			xui.deleteEle('.xui_calendar_picker');
-			this.renderHTML();
+			let y = this.config.year,
+				m = this.config.month;
+			this.renderHTML(y, m);
 		}
 	};
 	xui.__proto__.calendar = calendar;

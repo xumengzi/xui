@@ -14,4 +14,5 @@
     * [3.5tab切换 tabChange](plugins/tabChange.md)
     * [3.6下拉框 dropDown](plugins/dropDown.md)
     * [3.7倒计时 countDown](plugins/countDown.md)
+    * [3.8日历 calendar](plugins/calendar.md)
 * [4.日志 log](others/changeLog.md)
