@@ -291,7 +291,7 @@ input样式
     display: none;
 }
 .xui_switch:checked + .xui_switch_box::before{
-    background-color: #108ee9;
+    background-color: #4eb900;
 }
 .xui_switch:checked + .xui_switch_box::after{
     left: 24px;
@@ -1098,10 +1098,10 @@ input样式
     padding: 0 20px;
     border-bottom: 1px solid #e8e8e8;
 }
-.xui_calendar_picker .xui_calendar_head > div{
+.xui_calendar_picker .xui_calendar_head div{
 
 }
-.xui_calendar_picker .xui_calendar_head > div.xui_calendar_icon{
+.xui_calendar_picker .xui_calendar_head div.xui_calendar_icon{
     width: .8em;
     height: .8em;
     display: inline-block;
@@ -1109,14 +1109,22 @@ input样式
     background-size: contain;
     cursor: pointer;
 }
-.xui_calendar_picker .xui_calendar_head > div.xui_calendar_left{
+.xui_calendar_picker .xui_calendar_head div.xui_calendar_icon_year{
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAKlBMVEUAAACPj4+JiYmKioqKioqKioqJiYmJiYmKioqJiYmJiYmLi4uKioqKiorxhV3AAAAADXRSTlMAEKDP8DDQcMBQgH9gDHscKwAAADxJREFUCNdjgAPGjQycBSAG+2UBjktgIV1DVl8FEIPpskAIQSFG20QIQ/gaUAqvAPs1qBWMCxk4DzAgAQCEIxQZOCyoGgAAAABJRU5ErkJggg==) no-repeat center center;
+    background-size: contain;
+}
+.xui_calendar_picker .xui_calendar_head div.xui_calendar_left{
     transform: rotate(180deg);
 }
-.xui_calendar_picker .xui_calendar_head > div.xui_calendar_icon:hover{
+.xui_calendar_picker .xui_calendar_head div.xui_calendar_icon:hover{
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAElBMVEUAAABbvB1YvxhbvR1cvRxcvR3moqY/AAAABXRSTlMAoCDwgE5JO8kAAAAkSURBVAjXY0ACTDCGsgCUwRgIExLFJxQCl4NLERJQFoBbigIA0pAC7gt0HowAAAAASUVORK5CYII=) no-repeat center center;
     background-size: contain;
 }
-.xui_calendar_picker .xui_calendar_head > div.xui_calendar_choose{
+.xui_calendar_picker .xui_calendar_head div.xui_calendar_icon_year:hover{
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJ1BMVEUAAABAzzBKyjpKyjlKyjlKyjpKyzlKyjlJyTlKyTpKyzpKyjhLyjpPqRAtAAAADHRSTlMAENCg8DBwwFCAf2CQwJWJAAAAOElEQVQI12OAA8aFDBwJIAbbIQH2w2AhG0VWHwMQg/mQQAhBIUYdKEMIJIVPAGEF40QGjg0MSAAAIMgSbnyw8N8AAAAASUVORK5CYII=) no-repeat center center;
+    background-size: contain;
+}
+.xui_calendar_picker .xui_calendar_head div.xui_calendar_choose{
 
 }
 .xui_calendar_picker .xui_calendar_body{
@@ -1195,4 +1203,65 @@ input样式
 .xui_calendar_picker .xui_calendar_foot.xui_calendar_invalid{
     color: rgba(0, 0, 0, 0.15);
     cursor: not-allowed;
+}
+
+
+
+/*分页*/
+.xui_page_content{
+
+}
+.xui_page_content span{
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    min-width: 24px;
+    height: 30px;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: center;
+    box-sizing: initial;
+    padding: 0 4px;
+    display: inline-block;
+    border: 1px solid #d9d9d9;
+    margin-right: 8px;
+    font-family: consolas;
+    cursor: pointer;
+}
+.xui_page_content span.xui_page_selected{
+    background: #4eb900;
+    color: #fff;
+    border-color: #4eb900;
+}
+.xui_page_content span.xui_page_valid{
+    cursor: pointer;
+}
+.xui_page_content span.xui_page_invalid{
+    cursor: not-allowed;
+    color: rgba(0, 0, 0, 0.5);
+}
+.xui_page_content span.xui_page_initial{
+    cursor: initial;
+    border: none;
+}
+.xui_page_content span.xui_page_valid:hover{
+    border-color: #4eb900;
+    color: #4eb900;
+}
+.xui_page_content span.xui_page_selected:hover{
+    background: #4eb900;
+    color: #fff;
+}
+.xui_page_content span.xui_page_invalid:hover{
+    /*background: rgba(206, 206, 206, 0.1);*/
+}
+.xui_page_content .xui_page_nav{
+    border: none;
+}
+.xui_page_content .xui_page_go{
+    width: 40px;
+    margin: 0;
+    line-height: initial;
 }

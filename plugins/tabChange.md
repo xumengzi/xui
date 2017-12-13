@@ -6,7 +6,7 @@
 >说明: 需要展示多个栏目以及节省空间的时间
 
 ##### 使用及参数说明:
-```js
+```html
 <div class="xui_tab" id="hardTest">
 	<ul class="xui_tab_head">
 		<li>tab1</li>
@@ -17,7 +17,8 @@
 		<div>内容2</div>
 	</div>
 </div>
-
+```
+```js
 xui.tab({
 	id: string,
 	activeIndex: number,

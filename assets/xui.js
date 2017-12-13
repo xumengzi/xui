@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '0.7.0';
+		this.version = '0.8.0';
 	};
 
 	Xui.prototype = {
@@ -446,7 +446,6 @@ include most functions and styles etc.
 			let list = tar.querySelectorAll('.xui_tab_body div');
 			list = Array.prototype.slice.call(list);
 			args.activeIndex = args.activeIndex >= tab.length ? 0 : args.activeIndex ? args.activeIndex : 0;
-			console.log(args.activeIndex);
 			if (tab.length !== list.length) {
 				throw new Error("tab's number error");
 			};
@@ -509,7 +508,6 @@ include most functions and styles etc.
 	    	let clickEvent = (fn, tar) => {
 	    		document.querySelector('.xu_prompt').addEventListener('click',(e) => {
 		    		if (e.target.nodeName == 'BUTTON' && e.target.className.indexOf(tar) > -1) {
-		    			console.log(fn);
 		    			// fn();
 		    			this.deleteEle('.xu_prompt');
 		    		};
@@ -588,16 +586,19 @@ here is a calendar plugin
 				that.config.month -=0;
 				that.config.year -=0;
 				if (type == 1) {
-					that.config.month += 1;
-					if (that.config.month > 12) {
-						that.config.month = 1;
-						that.config.year++;
-					};
-				} else{
 					that.config.month -= 1;
 					if (that.config.month < 1) {
 						that.config.month = 12;
 						that.config.year--;
+					};
+				};
+				type == 2 && (that.config.year -= 1);
+				type == 3 && (that.config.year += 1);
+				if (type == 4) {
+					that.config.month += 1;
+					if (that.config.month > 12) {
+						that.config.month = 1;
+						that.config.year++;
 					};
 				};
 				that.renderHTML(that.config.year, that.config.month);
@@ -744,9 +745,15 @@ here is a calendar plugin
 			}
 			let calHTML = `
 					<div class="xui_calendar_head">
-						<div data-set=-1 class="xui_calendar_icon xui_calendar_left"></div>
+						<div>
+							<div data-set=1 title="month" class="xui_calendar_icon xui_calendar_left"></div>
+							<div data-set=2 title="year" class="xui_calendar_icon xui_calendar_icon_year xui_calendar_left"></div>
+						</div>
 						<div class="xui_calendar_choose">${year}年${this.setNum(month)}月</div>
-						<div data-set=1 class="xui_calendar_icon xui_calendar_right"></div>
+						<div>
+							<div data-set=3 title="year" class="xui_calendar_icon xui_calendar_icon_year xui_calendar_right"></div>
+							<div data-set=4 title="month" class="xui_calendar_icon xui_calendar_right"></div>
+						</div>
 					</div>
 					<div class="xui_calendar_body">
 						<table>
@@ -788,4 +795,115 @@ here is a calendar plugin
 		}
 	};
 	xui.__proto__.calendar = calendar;
+})(window);
+
+/*
+here is a page plugin
+*/
+;(function(w){
+	function Page(){
+		let args = arguments[0];
+		let that = this;
+		if (!args.id) {
+			throw new Error("element'id is required");
+		};
+		if (!args.total) {
+			throw new Error("total is required");
+		};
+		that.id = args.id;
+		that.index = args.index || 1;
+		that.total = args.total;
+		that.isShowDot = args.isShowDot;
+		that.isShowNum = args.isShowNum;
+		that.isJumpPage = args.isJumpPage;
+
+		that.renderHTML(that.index);
+		this.event();
+	};
+	Page.prototype.event = function(){
+		let tar = document.getElementById(this.id);
+		tar.addEventListener('click', this.handleClick.bind(this), false);
+		tar.addEventListener('keyup', this.handleEnter.bind(this), false);
+	};
+	Page.prototype.handleEnter = function(e){
+		let reg = /^\d{1,}$/,
+			val = e.target.value;
+		if (!reg.test(val) || val == 0) {
+			e.target.value = '';
+		};
+		if (e.keyCode == 13) {
+			val = val > this.total ? this.total : val;
+			this.renderHTML(val);
+		};
+	};
+	Page.prototype.handleClick = function(e){
+		let tar = e.target;
+		let ele = tar.classList;
+		if (ele.contains('xui_page_valid')) {
+			let index = tar.getAttribute('data-num');
+			this.onClick(index);
+			this.renderHTML(index);
+		};
+	};
+	Page.prototype.renderHTML = function(index){
+		index -=0;
+		let tot = this.total;
+		// 循环中间的5个数字
+		let spans = '';
+		let tag = 0;
+		if (index < 3) {
+			tag = 1;
+		} else if(index <= tot - 2){
+			tag = index - 2;
+		} else if(index > tot - 2){
+			tag = index - 3;
+			tag = tag > (tot - 4) ? (tot - 4) : tag;
+		};
+		for(let i = tag; i < (tag + 5) ; i++){
+			let isSelected = '';
+			isSelected = index == i ? 'xui_page_selected' : '';
+			spans += `
+				<span class="xui_page_valid ${isSelected}" title=${i} data-num=${i}>${i}</span>
+			`
+		};
+		/*
+		提供配置选项,分别是是否展示..., 分页数字,go快捷选项
+		*/ 
+		let isShowPrevDot = '', 
+			isShowLastDot = '',
+			isShowNumber = '',
+			isJumpPage = '';
+		if (this.isShowDot && index > 3) {
+			isShowPrevDot = `<span class="xui_page_initial">...</span>`;
+		};
+		if (this.isShowDot && index < tot - 2) {
+			isShowLastDot = `<span class="xui_page_initial">...</span>`;
+		};
+		if (this.isShowNum) {
+			isShowNumber = `<span class="xui_page_initial">${index}/${this.total}</span>`;
+		};
+		if (this.isJumpPage) {
+			isJumpPage = `<input type="text" class="xui_input xui_page_go" placeholder="go" />
+	    	`;
+		};
+		let isPrevInvalid = '', isLastInvalid = '';
+		isPrevInvalid = index == 1 ? 'xui_page_invalid' : 'xui_page_valid';
+		isLastInvalid = ((index == this.total) ? 'xui_page_invalid' : 'xui_page_valid');
+		let page = `
+			<div class="xui_page_content">
+				<span class="xui_page_nav ${isPrevInvalid}" title="First Page" data-num=1>First</span>
+				<span class="xui_page_nav ${isPrevInvalid}" title="Previous Page" data-num=${index-1}>Prev</span>
+				${isShowPrevDot}
+				${spans}
+				${isShowLastDot}
+				<span class="xui_page_nav ${isLastInvalid}" title="Next Page" data-num=${index+1}>Next</span>
+				<span class="xui_page_nav ${isLastInvalid}" title="Last Page" data-num=${this.total}>Last</span>
+				${isJumpPage}
+				${isShowNumber}
+			</div>
+		`;
+
+		document.getElementById(this.id).innerHTML = page;
+	};
+	xui.__proto__.pagination = Page;
 })(window);

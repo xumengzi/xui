@@ -6,11 +6,12 @@
 >说明: 嫌原生下拉框比较丑,需要美化的时候,或者希望能够模糊搜索下拉框里的内容时.
 
 ##### 使用及参数说明:
-```js
+```html
 <select class="xui_select" id="">
 	<option value="1">1</option>
 </select>
-
+```
+```js
 xui.dropDown({
 	id: string,
 	isSearch: boolean,

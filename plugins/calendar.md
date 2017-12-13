@@ -6,12 +6,13 @@
 >说明: 比原生的日历框好看了一点点,可以配置的功能也多了一点点
 
 ##### 使用及参数说明:
-```js
+```html
 <div class="xui_date_picker" >
 	<input type="text" id="test" placeholder="请选择日期" class="xui_input xui_date_input" />
 	<span class="xui_close_small" data-date=""></span>
 </div>
-
+```
+```js
 xui.calendar({
 	id: string,
 	startDate: string,
