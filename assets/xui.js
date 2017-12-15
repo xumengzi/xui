@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '0.8.0';
+		this.version = '0.9.0';
 	};
 
 	Xui.prototype = {
@@ -565,7 +565,6 @@ here is a calendar plugin
 	const cal = {
 		config: {},
 		event(){
-			// let tar = document.querySelector('.xui_calendar_picker');
 			let tar = document.body;
 			tar.addEventListener('click', cal.handleClickCal, false);
 		},
@@ -573,12 +572,15 @@ here is a calendar plugin
 			let that = cal;
 			let o = e.target.classList;
 			//choose date
-			let isChooseDate = !o.contains('xui_calendar_invalid') && (o.contains('xui_calendar_valid') || o.contains('xui_calendar_foot') || o.contains('xui_close_small'));
+			let isChooseDate = !o.contains('xui_calendar_invalid') && (o.contains('xui_calendar_valid') || o.contains('xui_calendar_foot'));
 			if (isChooseDate) {
 				let date = e.target.getAttribute('data-date');
 				that.config.fn && that.config.fn(date);
 				xui.deleteEle('.xui_calendar_picker');
-				// that.removeCal();
+			};
+			//remove value
+			if (o.contains('xui_close_small')) {
+				e.target.previousElementSibling.value = ''
 			};
 			//set date
 			if (o.contains('xui_calendar_icon')) {
@@ -906,4 +908,102 @@ here is a page plugin
 		document.getElementById(this.id).innerHTML = page;
 	};
 	xui.__proto__.pagination = Page;
+})(window);
+
+/*
+here is a slider plugin
+*/
+;(function(w){
+	function Slider(){
+		let defaults = {
+			index: 0,
+			duration: 3000,
+			animation: '.5s linear',
+			timer: null,
+		};
+		let args = arguments[0];
+		defaults = Object.assign({}, defaults, args);
+		this.defaults = defaults;
+		this.init();
+	};
+	Slider.prototype.event = function(){
+		let ele = document.getElementById(this.defaults.id);
+		let tar = ele.querySelector('.xui_slider_dot_con');
+		tar.addEventListener('mouseover', this.handleCountAng.bind(this), false);
+		tar.addEventListener('mouseout', this.autoAnimated.bind(this), false);
+	};
+	Slider.prototype.autoAnimated = function(){
+		let time = this.defaults.duration;
+		this.defaults.timer = setInterval(()=>{
+			this.defaults.index++;
+			this.defaults.index = (this.defaults.index > this.defaults.imgList.length - 1 ? 0 : this.defaults.index);
+			this.handleChangeImg();
+		}, time);
+	};
+	Slider.prototype.handleCountAng = function(e){
+		clearInterval(this.defaults.timer);
+		if (e.target.classList.contains('xui_slider_dot')) {
+			let inx = e.target.getAttribute('data-index');
+			this.defaults.index = inx;
+			this.handleChangeImg();
+		};
+	};
+	Slider.prototype.handleChangeImg = function(){
+		//修改圆点的位置
+		this.handleChangeDot();
+		let each = 100 / (this.defaults.imgList.length - 0);
+		let ang = - (each * this.defaults.index) + '%';
+		//切换回调
+		this.defaults.fn && this.defaults.fn(this.defaults.index);
+		//修改图片的位置
+		let ele = document.getElementById(this.defaults.id),
+			tar = ele.querySelector('.xui_slider_img').style;
+		tar.transform = `translate(${ang})`;
+		tar.webkitTransform = `translate(${ang})`;
+		tar.mozTransform = `translate(${ang})`;
+		tar.MsTransform = `translate(${ang})`;
+		tar.transition = this.defaults.animation;
+		tar.webkitTransition = this.defaults.animation;
+	};
+	Slider.prototype.handleChangeDot = function(){
+		let ele = document.getElementById(this.defaults.id);
+		let tar = ele.querySelector('.xui_slider_dot_con');
+		let spans = tar.children;
+		for(let i = 0; i< spans.length ; i++){
+			spans[i].getAttribute('data-index') == this.defaults.index
+				? 
+				spans[i].classList.add('selected') 
+				: 
+				spans[i].classList.remove('selected');
+		};
+	};
+	Slider.prototype.renderHTML = function(){
+		let imgs = this.defaults.imgList, list = '', spans = '';
+		for(let i in imgs){
+			let isSelected = i == 0 ? 'selected' : '';
+			list += `
+				<div><a href=${imgs[i].link} target="_blank"><img src="${imgs[i].img}"></a></div>
+			`;
+			spans += `
+				<span data-index=${i} class="xui_slider_dot ${isSelected}"></span>
+			`;
+		};
+		let slider = `
+			<div class="xui_slider_content">
+				<div class="xui_slider_img" style="width:${this.defaults.imgList.length}00%">
+					${list}
+				</div>
+				<div class="xui_slider_dot_con">
+					${spans}
+				</div>
+			</div>
+		`;
+		document.getElementById(this.defaults.id).innerHTML = slider;
+		this.event();
+		this.autoAnimated();
+	};
+	Slider.prototype.init = function(){
+		this.renderHTML();
+	};
+	xui.__proto__.slider = Slider;
 })(window);

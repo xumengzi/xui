@@ -16,4 +16,5 @@
     * [3.7 倒计时 countDown](plugins/countDown.md)
     * [3.8 日历 calendar](plugins/calendar.md)
     * [3.9 分页 pagination](plugins/pagination.md)
+    * [4.0 幻灯片 slider](plugins/slider.md)
 * [4.日志 log](others/changeLog.md)

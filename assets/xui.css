@@ -1265,3 +1265,45 @@ input样式
     margin: 0;
     line-height: initial;
 }
+
+
+/*幻灯片*/
+.xui_slider_content{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.xui_slider_content .xui_slider_img{
+    width: 400%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .4s linear;
+}
+.xui_slider_content .xui_slider_img div{
+    flex: 1;
+}
+.xui_slider_content .xui_slider_img img{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.xui_slider_content .xui_slider_dot_con{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+.xui_slider_content .xui_slider_dot_con span{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    -moz-userstart:none;
+}
+.xui_slider_content .xui_slider_dot_con span.selected{
+    background: #4eb900;
+}
