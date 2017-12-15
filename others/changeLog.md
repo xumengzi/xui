@@ -8,6 +8,11 @@
 
 >输入`xui.version`获取当前版本号
 
+###v0.9.0  <span style="font-size: 16px;">2017/12/15</span>
+#####新增：     
+1.[幻灯片插件](../plugins/slider.md)
+>是否兼容现有代码：是
+
 ###v0.8.0  <span style="font-size: 16px;">2017/12/13</span>
 #####新增：     
 1.[分页插件](../plugins/pagination.md)
