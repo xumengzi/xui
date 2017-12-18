@@ -931,6 +931,7 @@ input样式
     align-items: center;
     margin: 0;
     padding: 0;
+    border-bottom: 1px solid #4eb900;
 }
 .xui_tab ul.xui_tab_head li{
     list-style: none;
@@ -946,10 +947,32 @@ input样式
     position: relative;
     border-color: #4eb900;
 }
-.xui_tab ul.xui_tab_body{
-
+.xui_tab ul.xui_tab_head li.selected::before{
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    z-index: 99;
 }
-
+.xui_tab .xui_tab_body{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.xui_tab .xui_tab_body > div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    transform: translate(0);
+    transition: .4s ease;
+}
 
 /*升级版下拉框*/
 .xui_drop_down{

@@ -1,5 +1,11 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
+<style type="text/css">
+.xui_tab{
+    width: 800px;
+	height: 300px;
+}
+</style>
 
 # tabChange
 
@@ -22,12 +28,15 @@
 xui.tab({
 	id: string,
 	activeIndex: number,
+	animateType: string,
 	fn: callback
 });
 ```
 * 复制好相应的`html`,取一个独特的`id`,然后初始化`init`就可以使用了,非常方便
+* 记得给你的`tab`来一个宽度和高度哦!
 * `id`表示下拉框的`id` **必传**
 * `activeIndex`表示当前显示哪一个`tab`的数据
+* `animateType`表示`tab`切换的动画效果, 默认为`none`,可以配置`toLeft`,`toRight`
 * `fn`表示`tab`切换之后的回调
 * 没有你想要的功能? 快联系我: `me@xumengzi.top`添加吧
 
@@ -88,6 +97,7 @@ xui.tab({
 xui.tab({
 	id: 'normalTest',
 	activeIndex: 1,
+	animateType: 'toLeft',
 });
 </script>
 ```html
@@ -109,6 +119,7 @@ xui.tab({
 xui.tab({
 	id: 'normalTest',
 	activeIndex: 1,
+	animateType: 'toLeft',
 });
 ```
 
@@ -132,6 +143,7 @@ xui.tab({
 xui.tab({
 	id: 'hardTest',
 	activeIndex: 2,
+	animateType: 'toRight',
 	fn: function(){
 		xui.message('看,这就是回调哦!');
 	}
@@ -158,6 +170,7 @@ xui.tab({
 xui.tab({
 	id: 'hardTest',
 	activeIndex: 2,
+	animateType: 'toRight',
 	fn: function(){
 		xui.message('看,这就是回调哦!');
 	}
