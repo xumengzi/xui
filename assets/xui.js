@@ -444,14 +444,21 @@ include most functions and styles etc.
 	    	let tar = document.getElementById(args.id);
 	    	let tab = tar.getElementsByTagName('li');
 			let list = tar.querySelectorAll('.xui_tab_body div');
-			list = Array.prototype.slice.call(list);
+			list = [...list];
+			args.animateType = args.animateType || 'none';
 			args.activeIndex = args.activeIndex >= tab.length ? 0 : args.activeIndex ? args.activeIndex : 0;
 			if (tab.length !== list.length) {
 				throw new Error("tab's number error");
 			};
 			if (typeof args.activeIndex == 'number') {
 				for(let l  in list){
-					list[l].style.display = l == args.activeIndex ? 'block' : 'none';
+					if (args.animateType == 'toLeft') {
+						list[l].style.transform = l == args.activeIndex ? 'translate(0%)' : 'translate(-100%)';
+					} else if(args.animateType == 'toRight'){
+						list[l].style.transform = l == args.activeIndex ? 'translate(0%)' : 'translate(100%)';
+					} else{
+						list[l].style.display = l == args.activeIndex ? 'block' : 'none';
+					};
 				};
 			};
 			for(let i=0; i < tab.length; i++){
@@ -460,11 +467,21 @@ include most functions and styles etc.
 					if (e.currentTarget.className == 'selected') {return;};
 					for(let j in list){
 						if (i == j) {
-							list[j].style.display = 'block';
+							if (args.animateType != 'none') {
+								list[j].style.transform = 'translate(0%)';
+							} else{
+								list[j].style.display = 'block';
+							};
 							tab[j].classList.add('selected');
 							args.fn && args.fn();
 						} else{
-							list[j].style.display = 'none';
+							if (args.animateType == 'toLeft') {
+								list[j].style.transform = 'translate(-100%)';
+							} else if(args.animateType == 'toRight'){
+								list[j].style.transform = 'translate(100%)';
+							} else{
+								list[j].style.display = 'none';
+							};
 							tab[j].classList.remove('selected');
 						};
 					};
