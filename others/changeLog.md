@@ -8,6 +8,11 @@
 
 >输入`xui.version`获取当前版本号
 
+###v1.0.0  <span style="font-size: 16px;">2017/12/22</span>
+#####新增：     
+1.[下拉加载插件](../plugins/scrollLoad.md)
+>是否兼容现有代码：是
+
 ###v0.9.0  <span style="font-size: 16px;">2017/12/15</span>
 #####新增：     
 1.[幻灯片插件](../plugins/slider.md)

@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '0.9.0';
+		this.version = '1.0.0';
 	};
 
 	Xui.prototype = {
@@ -221,7 +221,7 @@ include most functions and styles etc.
 			// };
 			// return '';
 	    },
-	    loading(isShow, type){
+	    loading(isShow, ele, type){
 	    	//delete already exists
 	    	this.deleteEle('.xu_loading');
 	    	if (!isShow) {
@@ -266,7 +266,12 @@ include most functions and styles etc.
 		    	`;
 	    	}
 	    	tar.classList.add('xu_loading');
-	    	document.body.appendChild(tar);
+	    	if (ele) {
+	    		tar.classList.add('xu_part_loading');
+	    		document.querySelector(ele).appendChild(tar);
+	    	} else{
+	    		document.body.appendChild(tar);
+	    	};
 	    },
 	    hasClass(source, target){
 	    	return source.indexOf(target) > -1 ? true : false;
@@ -1023,4 +1028,65 @@ here is a slider plugin
 		this.renderHTML();
 	};
 	xui.__proto__.slider = Slider;
+})(window);
+
+/*
+here is a scrollLoad plugin
+*/ 
+;(function(w){
+	let that = null;
+	function Scroll(){
+		this.id = arguments.length && arguments[0].id;
+		that = this;
+	};
+	Scroll.prototype.toBottomHeight = function(){
+		let diff = 0;
+		if (this.getScrollTop() == 0) {
+			return this.getClientHeight()
+		} else{
+			return this.getScrollHeight() - this.getScrollTop() - this.getClientHeight();
+		};
+	};
+	//获取可视区域的高度
+	Scroll.prototype.getClientHeight = function(){
+		let clientHeight = 0;
+		if (that.id) {
+			return document.getElementById(that.id).clientHeight;
+		};
+		if (document.body.clientHeight && document.documentElement.clientHeight) {
+			clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight);
+		} else{
+			clientHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
+		};
+		return clientHeight;
+	};
+	//滚动条当前的位置
+	Scroll.prototype.getScrollTop = function(){
+		let scrollTop = 0;
+		if (that.id) {
+			return document.getElementById(that.id).scrollTop;
+		};
+		if (document.documentElement && document.documentElement.scrollTop) {
+			scrollTop = document.documentElement.scrollTop;
+		} else if(document.body){
+			scrollTop = document.body.scrollTop;
+		};
+		return scrollTop;
+	};
+	//文档总高度
+	Scroll.prototype.getScrollHeight = function(){
+		if (that.id) {
+			return document.getElementById(that.id).scrollHeight;
+		};
+		return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+	};
+	Scroll.prototype.init = function(){
+		let tar = that.id ? document.getElementById(that.id) : window;
+		tar.onscroll = function(){
+			let height = that.toBottomHeight();
+			that.onscroll(height);
+		};
+	};
+
+	xui.__proto__.scroll = Scroll;
 })(window);

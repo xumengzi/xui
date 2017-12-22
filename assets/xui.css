@@ -487,10 +487,14 @@ input样式
 
 /*loading*/
 .xu_loading > div{
-    width: 60px;
-    height: 60px;
+    width: 3em;
+    /*height: 60px;*/
     position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
+
 /*栅栏式*/
 .xu_loading{
     width: 100%;
@@ -509,6 +513,11 @@ input样式
         -ms-flex-align: center;
             align-items: center;
     z-index: 99999;
+}
+.xu_part_loading{
+    position: relative;
+    height: auto;
+    margin-bottom: 1em;
 }
 .xu_loading .fence{
     width: 4px;

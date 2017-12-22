@@ -34,3 +34,21 @@ How many codes must a man edit before you call him a master?
 ###### 联系我: *me@xumengzi.top*
 
 ##### 查看更新日志: [log](others/changeLog.md)
+
+<br/><br/><br/>
+
+##### 归去来兮? 归去也!
+
+>寓形宇内复几时，曷不委心任去留？
+
+>胡为乎遑遑欲何之？
+
+>富贵非吾愿，帝乡不可期。
+
+>怀良辰以孤往，或植杖而耘耔。
+
+>登东皋以舒啸，临清流而赋诗。
+
+>聊乘化以归尽，乐夫天命复奚疑！
+
+>——节选自陶渊  《归去来兮辞》
