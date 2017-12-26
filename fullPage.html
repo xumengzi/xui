@@ -1,0 +1,37 @@
+<html>
+<head>
+	<title>全屏滚动特效</title>
+	<meta charset="utf-8">
+	<!-- <link rel="stylesheet" type="text/css" href="http://192.168.29.38:4000/assets/xui.css"> -->
+	<link rel="stylesheet" type="text/css" href="https://jarveniv.github.io/xui.js/assets/xui.css">
+	<style type="text/css">
+		#fullPage{
+			font-size: 40px;
+		}
+	</style>
+</head>
+<body>
+	<div id="fullPage" class="xui_full_page">
+		<div>寓形宇内复几时，曷不委心任去留？</div>
+		<div>胡为乎遑遑欲何之？</div>
+		<div>富贵非吾愿，帝乡不可期。</div>
+		<div>怀良辰以孤往，或植杖而耘耔。</div>
+		<div>登东皋以舒啸，临清流而赋诗。</div>
+		<div>聊乘化以归尽，乐夫天命复奚疑！</div>
+		<div>——节选自陶渊 《归去来兮辞》</div>
+	</div>
+	<script type="text/javascript" src="https://jarveniv.github.io/xui.js/assets/xui.js"></script>
+	<!-- <script type="text/javascript" src="http://192.168.29.38:4000/assets/xui.js"></script> -->
+	<script type="text/javascript">
+		xui.fullPage({
+			id: 'fullPage',
+			currentPage: 0,
+			direction: 'Y',
+			isShowDot: true,
+			transition: '0.8s cubic-bezier(0.4, -0.57, 0.57, 1.23)',
+			fn: function(prev, curr){
+				
+			}
+		});
+	</script>
+</body></html>

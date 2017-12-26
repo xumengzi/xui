@@ -1,6 +1,6 @@
 # Summary
 
-* [xui.js](README.md)
+* [xui](README.md)
 * [1.样式 styles](styles/README.md)
     * [1.1 样式使用](styles/styles.md)
     * [1.2 其他样式](styles/extraStyle.md)
@@ -18,4 +18,5 @@
     * [3.9 分页 pagination](plugins/pagination.md)
     * [4.0 幻灯片 slider](plugins/slider.md)
     * [4.1 下拉加载 scrollLoad](plugins/scrollLoad.md)
+    * [4.2 全屏滚动 fullPage](plugins/fullPage.md)
 * [4.日志 log](others/changeLog.md)

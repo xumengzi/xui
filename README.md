@@ -35,7 +35,7 @@ How many codes must a man edit before you call him a master?
 
 ##### 查看更新日志: [log](others/changeLog.md)
 
-<br/><br/><br/>
+<br/><br/>
 
 ##### 归去来兮? 归去也!
 

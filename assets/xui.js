@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.0.0';
+		this.version = '1.1.0';
 	};
 
 	Xui.prototype = {
@@ -1089,4 +1089,90 @@ here is a scrollLoad plugin
 	};
 
 	xui.__proto__.scroll = Scroll;
+})(window);
+
+/*
+here is a fullPage plugin
+*/ 
+;(function(w){
+	function full(){
+		let args = arguments[0];
+		const defaults = {
+			currentPage: 0,
+			direction: 'Y',
+			isShowDot: true,
+			transition: '1s ease',
+		};
+		this.obj = Object.assign({}, defaults, args);
+		if (!this.obj.id) {
+			throw new Error("element'id is required");
+		};
+		page.config = this.obj;
+		page.config.list = document.getElementById(page.config.id).children;
+		if (!page.config.list.length) {
+			throw new Error('nothing aha ?');
+		};
+		page.init();
+	};
+	const page = {
+		config: {},
+		event(e){
+			if (e.target.classList.contains('xui_page')) {
+				let dir = e.deltaY > 0 ? '1' : '-1';
+				this.move(e, dir);
+			};
+		},
+		move(e, direction){
+			let tar = e.target,
+				sty = tar.style,
+				prev = tar.previousElementSibling && tar.previousElementSibling.style,
+				next = tar.nextElementSibling && tar.nextElementSibling.style,
+				dir = this.config.direction;
+			if (direction == 1) {
+				if (tar.nextElementSibling && sty.transform == `translate${dir}(0%)`) {
+					sty.transform = `translate${dir}(-100%)`;
+					sty.webkitTransform = `translate${dir}(-100%)`;
+					next.transform = `translate${dir}(0%)`;
+					next.webkitTransform = `translate${dir}(0%)`;
+					next.mozTransform = `translate${dir}(0%)`;
+					next.transition = this.config.transition;
+					next.webkitTransition = this.config.transition;
+					this.config.fn && this.config.fn(tar, tar.nextElementSibling);
+				};
+			} else{
+				if (tar.previousElementSibling && sty.transform == `translate${dir}(0%)`) {
+					sty.transform = `translate${dir}(100%)`;
+					sty.webkitTransform = `translate${dir}(100%)`;
+					prev.transform = `translate${dir}(0%)`;
+					prev.webkitTransform = `translate${dir}(0%)`;
+					prev.mozTransform = `translate${dir}(0%)`;
+					prev.transition = this.config.transition;
+					prev.webkitTransition = this.config.transition;
+					this.config.fn && this.config.fn(tar, tar.previousElementSibling);
+				};
+			};
+			sty.transition = this.config.transition;
+			sty.webkitTransition = this.config.transition;
+		},
+		init(){
+			let tar = document.getElementById(this.config.id);
+			let ele = tar.children, dir = this.config.direction;
+			let fst = this.config.currentPage;
+			for(let i = 0;i < ele.length; i++){
+				ele[i].classList.add('xui_page');
+				this.config.isShowDot && ele[i].setAttribute('data-page', `${i+1}/${ele.length}`);
+				if (i < fst) {
+					ele[i].style.transform = `translate${dir}(-100%)`;
+				} else if(i == fst){
+					ele[i].style.transform = `translate${dir}(0%)`;
+				} else{
+					ele[i].style.transform = `translate${dir}(100%)`;
+				};
+			};
+			w.onwheel = (e) => {
+				this.event(e);
+			};
+		},
+	};
+	xui.__proto__.fullPage = full;
 })(window);

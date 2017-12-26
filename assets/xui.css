@@ -2,7 +2,10 @@
  created by xumeng
  http://xumengzi.top/
 */ 
-
+body{
+    padding: 0;
+    margin: 0;
+}
 .none{
     display: none;
 }
@@ -1338,4 +1341,30 @@ input样式
 }
 .xui_slider_content .xui_slider_dot_con span.selected{
     background: #4eb900;
+}
+
+/*全屏滚动*/
+.xui_full_page{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+.xui_full_page > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: 1s ease;
+}
+.xui_full_page .xui_page::after{
+    content: attr(data-page);
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    border-radius: 50%;
+    padding: .2em;
 }
