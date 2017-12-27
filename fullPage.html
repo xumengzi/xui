@@ -3,10 +3,13 @@
 	<title>全屏滚动特效</title>
 	<meta charset="utf-8">
 	<!-- <link rel="stylesheet" type="text/css" href="http://192.168.29.38:4000/assets/xui.css"> -->
-	<link rel="stylesheet" type="text/css" href="https://jarveniv.github.io/xui.js/assets/xui.css">
+	<!-- <link rel="stylesheet" type="text/css" href="https://jarveniv.github.io/xui.js/assets/xui.css"> -->
+	<link rel="stylesheet" type="text/css" href="./assets/xui.css">
+
 	<style type="text/css">
 		#fullPage{
 			font-size: 40px;
+			color: #fff;
 		}
 	</style>
 </head>
@@ -20,18 +23,16 @@
 		<div>聊乘化以归尽，乐夫天命复奚疑！</div>
 		<div>——节选自陶渊 《归去来兮辞》</div>
 	</div>
-	<script type="text/javascript" src="https://jarveniv.github.io/xui.js/assets/xui.js"></script>
+	<!-- <script type="text/javascript" src="https://jarveniv.github.io/xui.js/assets/xui.js"></script> -->
+	<script type="text/javascript" src="./assets/xui.js"></script>
 	<!-- <script type="text/javascript" src="http://192.168.29.38:4000/assets/xui.js"></script> -->
 	<script type="text/javascript">
-		xui.fullPage({
-			id: 'fullPage',
-			currentPage: 0,
-			direction: 'Y',
-			isShowDot: true,
-			transition: '0.8s cubic-bezier(0.4, -0.57, 0.57, 1.23)',
-			fn: function(prev, curr){
-				
-			}
-		});
+		window.onload = function(){
+			xui.fullPage({
+				id: 'fullPage',
+				transition: '0.8s cubic-bezier(0.4, -0.57, 0.57, 1.23)',
+			});
+		}
+		
 	</script>
 </body></html>

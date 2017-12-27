@@ -221,52 +221,54 @@ include most functions and styles etc.
 			// };
 			// return '';
 	    },
-	    loading(isShow, ele, type){
+	    loading(isShow, ele, string){
 	    	//delete already exists
 	    	this.deleteEle('.xu_loading');
 	    	if (!isShow) {
 	    		return;
 	    	};
 	    	let tar = document.createElement('div');
+	    	type = undefined;
 	    	if (type == 1) {
 	    		tar.innerHTML = `
 	    			<div>
-		    		<div class="dot circle1"></div>
-					<div class="dot circle2"></div>
-					<div class="dot circle3"></div>
-					<div class="dot circle4"></div>
-					<div class="dot circle5"></div>
-					<div class="dot circle6"></div>
-					<div class="dot circle7"></div>
-					<div class="dot circle8"></div>
-					<div class="dot circle9"></div>
-					<div class="dot circle10"></div>
-					<div class="dot circle11"></div>
-					<div class="dot circle12"></div>
+			    		<div class="dot circle1"></div>
+						<div class="dot circle2"></div>
+						<div class="dot circle3"></div>
+						<div class="dot circle4"></div>
+						<div class="dot circle5"></div>
+						<div class="dot circle6"></div>
+						<div class="dot circle7"></div>
+						<div class="dot circle8"></div>
+						<div class="dot circle9"></div>
+						<div class="dot circle10"></div>
+						<div class="dot circle11"></div>
+						<div class="dot circle12"></div>
 					</div>
 		    	`;
 	    	} else if(type == 2){
 	    		tar.innerHTML = `
 	    			<div>
-		    		<div class="dott dot1"></div>
-					<div class="dott dot2"></div>
-					<div class="dott dot3"></div>
+			    		<div class="dott dot1"></div>
+						<div class="dott dot2"></div>
+						<div class="dott dot3"></div>
 					</div>
 		    	`;
 	    	} else{
 	    		tar.innerHTML = `
 	    			<div>
-		    		<div class="fence fence1"></div>
-		    		<div class="fence fence2"></div>
-		    		<div class="fence fence3"></div>
-		    		<div class="fence fence4"></div>
-		    		<div class="fence fence5"></div>
-		    		<div class="fence fence6"></div>
+			    		<div class="fence fence1"></div>
+			    		<div class="fence fence2"></div>
+			    		<div class="fence fence3"></div>
+			    		<div class="fence fence4"></div>
+			    		<div class="fence fence5"></div>
+			    		<div class="fence fence6"></div>
 		    		</div>
+		    		${string ? `<div>${string}</div>`: ``}
 		    	`;
 	    	}
 	    	tar.classList.add('xu_loading');
-	    	if (ele) {
+	    	if (typeof ele == 'string') {
 	    		tar.classList.add('xu_part_loading');
 	    		document.querySelector(ele).appendChild(tar);
 	    	} else{
@@ -1101,7 +1103,20 @@ here is a fullPage plugin
 			currentPage: 0,
 			direction: 'Y',
 			isShowDot: true,
+			isBackground: true,
 			transition: '1s ease',
+			colorArr: [
+				'rgb(200,200,169)',
+				'rgb(131,175,155)',
+				'rgb(114,111,128)',
+				'rgb(6,157,128)',
+				'rgb(252,157,154)',
+				'rgb(229,187,129)',
+				'rgb(34,8,7)',
+				'rgb(227,160,93)',
+				'rgb(56,13,49)',
+				'rgb(89,61,67)',
+			],
 		};
 		this.obj = Object.assign({}, defaults, args);
 		if (!this.obj.id) {
@@ -1160,6 +1175,14 @@ here is a fullPage plugin
 			let fst = this.config.currentPage;
 			for(let i = 0;i < ele.length; i++){
 				ele[i].classList.add('xui_page');
+				let tips = '↓↑';
+				i == 0 && (tips = '↓');
+				i == ele.length - 1 && (tips = '↑');
+				
+
+				//一些配置项
+				let arr = this.config.colorArr;
+				this.config.isBackground && arr.length && (ele[i].style.background = arr[xui.randomNum(0,arr.length - 1)]);
 				this.config.isShowDot && ele[i].setAttribute('data-page', `${i+1}/${ele.length}`);
 				if (i < fst) {
 					ele[i].style.transform = `translate${dir}(-100%)`;
@@ -1175,4 +1198,15 @@ here is a fullPage plugin
 		},
 	};
 	xui.__proto__.fullPage = full;
+})(window);
+
+;(function(w){
+	class test{
+		constructor(){
+
+		};
+		a(){};
+		b(){};
+	}
+	w.test = test;
 })(window);

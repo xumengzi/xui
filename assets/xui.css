@@ -496,6 +496,7 @@ input样式
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin: 0 .6em;
 }
 
 /*栅栏式*/

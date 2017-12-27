@@ -1,7 +1,8 @@
 <html><head>
 	<title>测试</title>
 	<meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="./assets/xui.css"></head>
+<link rel="stylesheet" type="text/css" href="./assets/xui.css">
+</head>
 <style type="text/css">
 	.done{
 		color: green;
@@ -16,22 +17,24 @@
 		<li>可以设置开始,结束日期 <span class="done">√</span></li>
 		<li>禁止日期选择框 <span class="done">√</span></li>
 		<li>显示数字优化,补0 <span class="done">√</span></li>
-		<li>撰写文档</li>
+		<li>撰写文档 <span class="done">√</span></li>
+		<li>支持手动输入正确的日期</li>
 	</ol>
 	<div style="display: flex;">
 		<div class="xui_date_picker" >
-			<input type="text" id="test" class="xui_input xui_date_input" />
+			<input type="text" readonly="readonly" id="test" class="xui_input xui_date_input" />
 			<span class="xui_close_small" data-date=""></span>
 		</div>
 		<div class="xui_date_picker" >
-			<input type="text" id="test1" class="xui_input xui_date_input" />
+			<input type="text" readonly="readonly" id="test1" class="xui_input xui_date_input" />
 			<span class="xui_close_small" data-date=""></span>
 		</div>
 		<div class="xui_date_picker" >
-			<input type="text" id="test2" class="xui_input xui_date_input" />
+			<input type="text" readonly="readonly" id="test2" class="xui_input xui_date_input" />
 		</div>
 	</div>
-	<script async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" src="./assets/xui.js"></script>
+	<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script type="text/javascript" src="./assets/xui.js"></script>
 	<script type="text/javascript">
 		document.getElementById('test').onclick = function(){
 			xui.calendar({
@@ -41,6 +44,7 @@
 				isToday: false, //是否显示快速选择今天的按钮
 				isOtherMonths: false,
 				fn: function(date){
+					console.log(date);
 					document.getElementById('test').value = date;
 				}
 			});
@@ -54,6 +58,7 @@
 				isToday: true, //是否显示快速选择今天的按钮
 				isOtherMonths: true,
 				fn: function(date){
+					console.log(date);
 					document.getElementById('test1').value = date;
 				}
 			});
@@ -66,6 +71,7 @@
 				isToday: false, //是否显示快速选择今天的按钮
 				isOtherMonths: true,
 				fn: function(date){
+					console.log(date);
 					document.getElementById('test2').value = date;
 				}
 			});
