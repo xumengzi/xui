@@ -1,58 +1,37 @@
 <html><head>
 	<title>测试</title>
 	<meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="./assets/xui.css"></head>
+<link rel="stylesheet" type="text/css" href="./assets/xui.css">
 <style type="text/css">
 	.done{
 		color: green;
 	}
 </style>
+</head>
+
 <body>
-	<div>
-		总页数20
-	</div>
-	<div id="pagerId">
-	</div>
-	<div id="pagerId1">
-	</div>
-	<div id="pagerId2">
-	</div>
+	<button class="xui_btn xui_btn_default" id="test">click</button>
 	<script type="text/javascript" src="./assets/xui.js"></script>
 	<script type="text/javascript">
-		let myPage = new xui.pagination({
-			id: 'pagerId',
-			index: 1,
-			total: 11,
-			isShowDot: true,
-			isShowNum: true,
-			isJumpPage: true,
-		});
-		myPage.onClick = function(index){
-			console.log(index);
-		}
-
-		let myPage1 = new xui.pagination({
-			id: 'pagerId1',
-			index: 2,
-			total: 22,
-			// isShowDot: true,
-			// isShowNum: true,
-			// isJumpPage: true,
-		});
-		myPage1.onClick = function(index){
-			console.log(index);
-		}
-
-		let myPage2 = new xui.pagination({
-			id: 'pagerId2',
-			index: 1,
-			total: 10,
-			// isShowDot: true,
-			isShowNum: true,
-			// isJumpPage: true,
-		});
-		myPage2.onClick = function(index){
-			console.log(index);
+		window.onload = function(){
+			document.getElementById('test').onclick = function(){
+				xui.prompt({
+				    // tips: 'Title',
+				    // text: 'some comments',
+				    // confirmBtn: {
+				    //     text: 'ok',
+				    //     fn(){
+				    //         xui.message('you clicked ok');
+				    //     }
+				    // },
+				    // cancelBtn: {
+				    //     text: 'cancel',
+				    //     fn(){
+				    //         xui.message('you clicked cancel');
+				    //     }
+				    // },
+				});
+			}
 		}
 	</script>
 </body></html>

@@ -381,39 +381,58 @@ input样式
 }
 .xu_prompt .xu_content{
     position: relative;
-    width: 22em;
+    width: 500px;
     margin: 0 auto;
     color: #000;
     box-sizing: border-box;
-    border-radius: 8px;
-    padding: 1em;
     background: #fff;
     opacity: 0.9;
+    background-color: #fff;
+    border: 0;
+    border-radius: 4px;
+    background-clip: padding-box;
+    -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 .xu_prompt .xu_close{
     position: absolute;
-    right: .6em;
-    top: .6em;
+    right: 1em;
+    top: 1.3em;
     display: block;
-    width: 1.5em;
-    height: 1.5em;
+    width: 1.2em;
+    height: 1.2em;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAFVBMVEUAAABQUFBQUFBRUVFQUFBQUFBRUVHFwiN3AAAABnRSTlMAYFCwMK9g6AnkAAAAZ0lEQVQoz2OgDnBVgLGYQsCUWSJMQCwZTKmlCUD4jGlJUDoRqgAoA2MgJGAshDiciVAAZqMoAHPAgshKoAoQSqAKEEoQChACGFowDcWwFtNhmE7H9Bym9zEDCDMIMQPZGRENJtSJWAABAR0XeOxDfQAAAABJRU5ErkJggg==) no-repeat center center;
     background-size: contain;
+    z-index: 99;
+    cursor: pointer;
 }
 .xu_prompt .xu_text{
-    padding: 1em 0 1em;
-    text-align: center;
 }
-.xu_prompt .xu_text span{
+.xu_prompt .xu_text .xui_title{
     position: relative;
     font-size: 1.2em;
     color: #666;
     font-weight: bold;
+    padding: 16px 24px;
+    border-radius: 4px 4px 0 0;
+    background: #fff;
+    color: rgba(0, 0, 0, 0.65);
+    border-bottom: 1px solid #e8e8e8;
+}
+.xu_prompt .xu_text .xui_title span{
+    margin: 0;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.85);
 }
 .xu_prompt .xu_text .tips{
-    color: #999;
+    padding: 24px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #666;
 }
-.xu_prompt .xu_text span::before{
+/*.xu_prompt .xu_text span::before{
     content: '';
     width: 1.2em;
     height: 1.2em;
@@ -424,14 +443,11 @@ input样式
     background-size: contain;
     vertical-align: middle;
 }
-.xu_prompt .xu_text span.success{
-    /*color: #3b8704;*/
-}
 .xu_prompt .xu_text span.success::before{
     color: #55bb6c;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC5zwKfAAAAgVBMVEUAAABV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nWTd8wqAAAAKnRSTlMA4/jF1AqMhDMGEOq6Ri4Wz8BlOcuf9NzYeCKvb00cs1lT8F+SP6d9mSgEebzVAAAD7ElEQVRYw6VY6cKiMAykcskpKJccoqifyvs/4O5n2yzQlrbs/JLDsU0mk1RDAv90feVhmlVVlob563ryjf/A6dwH4wJBfz5tY4tf1iiA9Yq16aJwXEUYadFdzVEK865Mt0+XcSsT00zKZTxTtWDaj1m48mNU2+RJHR3zWWDftkJmy8muzjEnWedJPMqnjO8M7w7OXhgTZ4DXzut8P/S9wj2svXdwC/pmsxY+0Ep+MSS45JAbYSD9hGYiUpIqzU/iC9ZHX8g9QwleThfAXyNN3tFQxpHKgfewIQ8jrQqFzIj0stO0kv0gUM+J8O21TWmHv7lYiB3AfnXxJPU+T0wO+dDHnWhjFgm4pw9YzTRaWIGlsRElVuPET+EntgA2eIUbFWx4I95fgopedlgx/nZCG6uxI5fZ98rV5/kJ6afXlyIj0ty4wNocR4cuEdsjNnhn2wKvvyXyoFfu3wvC76Hv53pLHtp/fvslQR6UjqlH90mWhYpb7xPiqVd0t9+QFSe2AF9/P+E+clHlgoAV8zo44AnFMPwCykYRdsMYHYiv8EkIHxoGWHL8D8TyJG3hqh4+bKgdKyOSC5f5PZXJ4s6ZYYicG8iJhvU5vGFih7uVqeGEfirqceBZJk5Oola8ZDBD/McZ9gdLuU6edD768J+nWH8I63EBn5PekUA0Cvd49TzCuAr2oqlj/DEEaDBhxW65xetg74GhiLdcsUmJTJAGwwedTJwUVjZvOIr48/1KfJikF4dyd+CNxeg0y4fERPyvsHvDIaXHMkIg9yMgljVnh2sODRA8YJCSNp4bMYeIV5w9UIT2hL6Uuu4Y4Zpmai8EkgT7i9yTMpoMXPAHVlQAVtJCs0lhqXfuCA+QjwJXCDIOYsqcGbIlYWusIYQJ2Av4FmsnQCXLCDS94FuXD8Eh0K9mhJFCa3hMFDnY64zh+qEqmBa6JQrRAVu0wFVZ87BmGg9sDiOC46nKAm/0GglbWY3fZHTKbfJo6U4fMaOzPostTzkeGoW9Lx7k423CePkTTJp/mHMUNjw+OfbSCYxudYEd/m4/T2eByzXmlqmrcBwtDtyfGWpDE5cBNscNRPDRPFsgYfhNwrjXOuUF4j8dPIvYXqfO1+1IMwTFcOvMVR/eMdBBEF/KaMZKw7ZJ+S5ClwRPdW3pWcCF5n9ZcQ3odqi1V+laJPvrC9QDlOdaqJUz0MkPJLdhBPT3CyfS934EFFcF6f9MW2fq3mKoZD++uelu8rip1dRljTMUlhk2TWhaxfx+paxYr61GKcrWMzRwTNbpkqNnaCJ6IxEbekfGFng3J9sxE07m3DxjO+quffRJhYYBVUn/aDtZXv8A65cQGb//BqgAAAAASUVORK5CYII=) no-repeat center center;
     background-size: contain;
-}
+}*/
 .xu_prompt .xu_text span.fail{
     /*color: #fd7127;*/
 }
@@ -444,12 +460,16 @@ input样式
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: space-around;
-        -ms-flex-pack: space-around;
-            justify-content: space-around;
+    -webkit-box-pack: flex-end;
+        -ms-flex-pack: flex-end;
+            justify-content: flex-end;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+    border-top: 1px solid #e8e8e8;
+    padding: 5px 10px;
+    text-align: right;
+    border-radius: 0 0 4px 4px;
 }
 /*.xu_prompt .xu_btn button{
     -webkit-box-flex: 1;

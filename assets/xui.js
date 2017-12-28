@@ -502,11 +502,9 @@ include most functions and styles etc.
 	    	//delete already exists
 	    	this.deleteEle('.xu_prompt');
 	    	const defaults = {
-	    		text: '温馨提示',
-	    		tips: '',
-				type: 'default',
-				isShowClose: false,
-				delay: 1000,
+	    		tips: '温馨提示',
+	    		text: 'hello,world',
+				isShowClose: true,
 				fn: null,
 				confirmBtn: null,
 				cancelBtn: null,
@@ -517,46 +515,29 @@ include most functions and styles etc.
 	    		<div class="xu_content">
 	    			${opts.isShowClose ? `<span class="xu_close"></span>` : ``}
 			    	<div class="xu_text">
-			    		<span class=${opts.type}>${opts.text}</span>
-			    		<div class="tips">${opts.tips}</div>
+			    		<div class="xui_title"><span>${opts.tips}</span></div>
+			    		<div class="tips">${opts.text}</div>
 			    	</div>
 			    	<div class="xu_btn">
-				    	${opts.confirmBtn ? '<button class="xui_btn xui_btn_default">'+ opts.confirmBtn.text +'</button>' : ''}
-				    	${opts.cancelBtn ? '<button class="xui_btn xui_btn_cancel">'+ opts.cancelBtn.text +'</button>' : ''}
+				    	${opts.cancelBtn ? '<button class="xui_btn xui_btn_cancel xui_cancel">'+ opts.cancelBtn.text +'</button>' : ''}
+				    	${opts.confirmBtn ? '<button class="xui_btn xui_btn_default xui_confirm">'+ opts.confirmBtn.text +'</button>' : ''}
 			    	</div>
 			    </div>
 	    	`;
 	    	tar.classList.add('xu_prompt');
 	    	document.body.appendChild(tar);
 	    	//按钮回调
-	    	let clickEvent = (fn, tar) => {
-	    		document.querySelector('.xu_prompt').addEventListener('click',(e) => {
-		    		if (e.target.nodeName == 'BUTTON' && e.target.className.indexOf(tar) > -1) {
-		    			// fn();
-		    			this.deleteEle('.xu_prompt');
-		    		};
-		    	});
-	    	};
-	    	if (opts.confirmBtn && this.isFunction(opts.confirmBtn.fn)) {
-	    		clickEvent(opts.confirmBtn.fn, 'xui_btn');
-	    	};
-	    	if (opts.cancelBtn && this.isFunction(opts.cancelBtn.fn)) {
-	    		clickEvent(opts.cancelBtn.fn, 'xui_btn');
-	    	};
-	    	if (opts.isShowClose) {
-	    		document.querySelector('.xu_close').addEventListener('click',(e) => {
+    		document.querySelector('.xu_content').addEventListener('click',(e) => {
+	    		let tar = e.target.classList;
+	    		if (tar.contains('xu_close') || tar.contains('xui_cancel')) {
 	    			this.deleteEle('.xu_prompt');
-		    	});
-	    	};
-	    	//remove element
-	    	if (opts.delay !== 0) {
-	    		setTimeout(() => {
+	    			opts.cancelBtn && opts.cancelBtn.fn && opts.cancelBtn.fn();
+	    		};
+	    		if (tar.contains('xui_confirm')) {
 	    			this.deleteEle('.xu_prompt');
-	    			if (opts.fn) {
-	    				opts.fn();
-	    			};
-		    	}, opts.delay);
-	    	};
+	    			opts.confirmBtn && opts.confirmBtn.fn && opts.confirmBtn.fn();
+	    		};
+	    	});
 	    },
 	};
 	w.xui = new Xui;

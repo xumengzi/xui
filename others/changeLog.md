@@ -4,63 +4,63 @@
 # 日志
 
 ###### 当前版本: <span class="version"></span>
->版本说明: 第一个数字代表史诗级修改,第二个数字代表新增一个插件或者比较大的改动,第三个数字代表修复bug,新建文档之类
+>版本说明: 第二个数字代表新增一个插件或者比较大的改动,第三个数字代表修复bug,优化之类
 
 >输入`xui.version`获取当前版本号
 
-###v1.1.0  <span style="font-size: 16px;">2017/12/26</span>
+###v1.1.0  <span style="font-size: 16px;">2017/12/20</span>
 #####新增：     
 1.[全屏滚动插件](../plugins/fullPage.md)
 >是否兼容现有代码：是
 
-###v1.0.0  <span style="font-size: 16px;">2017/12/22</span>
+###v1.0.0  <span style="font-size: 16px;">2017/12/12</span>
 #####新增：     
 1.[下拉加载插件](../plugins/scrollLoad.md)
 >是否兼容现有代码：是
 
-###v0.9.0  <span style="font-size: 16px;">2017/12/15</span>
+###v0.9.0  <span style="font-size: 16px;">2017/12/05</span>
 #####新增：     
 1.[幻灯片插件](../plugins/slider.md)
 >是否兼容现有代码：是
 
-###v0.8.0  <span style="font-size: 16px;">2017/12/13</span>
+###v0.8.0  <span style="font-size: 16px;">2017/12/01</span>
 #####新增：     
 1.[分页插件](../plugins/pagination.md)
 >是否兼容现有代码：是
 
-###v0.7.0  <span style="font-size: 16px;">2017/12/11</span>
+###v0.7.0  <span style="font-size: 16px;">2017/11/22</span>
 #####新增：     
 1.[日历插件](../plugins/calendar.md)
 >是否兼容现有代码：是
 
-###v0.6.2  <span style="font-size: 16px;">2017/12/08</span>
+###v0.6.2  <span style="font-size: 16px;">2017/11/17</span>
 #####新增：     
 1.[插件模块](../plugins/README.md)新增使用及参数说明
 >是否兼容现有代码：是
 
-###v0.6.1  <span style="font-size: 16px;">2017/12/01</span>
+###v0.6.1  <span style="font-size: 16px;">2017/11/11</span>
 #####新增：     
 1.[倒计时插件](../plugins/countDown.md)
 >是否兼容现有代码：是
 
-###v0.5.1  <span style="font-size: 16px;">2017/11/26</span>
+###v0.5.1  <span style="font-size: 16px;">2017/11/06</span>
 #####新增：     
 1.对`cookie`的操作,包括新增,查询,删除.详见[方法](../methods/methods.md)第八条.
 >是否兼容现有代码：是
 
-###v0.5.0  <span style="font-size: 16px;">2017/11/18</span>
+###v0.5.0  <span style="font-size: 16px;">2017/11/01</span>
 #####新增：     
 1.[下拉框插件](../plugins/dropDown.md)
 >是否兼容现有代码：是
 
-###v0.4.0  <span style="font-size: 16px;">2017/11/01</span>
+###v0.4.0  <span style="font-size: 16px;">2017/10/24</span>
 #####修改：     
 1.修改挂在在window对象上的方法名`xu`为`xui`
 
 2.[图片预览插件](../plugins/imgShow.md)支持下载修改文件名(同域下)
 >是否兼容现有代码：不,需要全面修改
 
-###v0.3.0  <span style="font-size: 16px;">2017/10/16</span>
+###v0.3.0  <span style="font-size: 16px;">2017/10/10</span>
 #####新增：     
 1.[tab切换插件](../plugins/tabChange.md)
 >是否兼容现有代码：是

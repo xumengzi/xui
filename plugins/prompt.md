@@ -8,104 +8,97 @@
 ##### 使用及参数说明:
 ```js
 xui.prompt({
-	text: `主要的文案,字体较大`,
-	tips: '次要的文案,字体较小,颜色较淡',
-	type: 'success',
-	delay: 0,
+	tips: `主要的文案,字体较大`,
+	text: '次要的文案,字体较小,颜色较淡',
+	isShowClose: boolean,
 	confirmBtn: {
 		text: '确定按钮的文案',
 		fn(){
-			xui.tips('确定按钮的回调');
+			xui.message('确定按钮的回调');
 		}
 	},
 	cancelBtn: {
 		text: '取消按钮的文案',
 		fn(){
-			xui.tips('取消按钮的文案');
+			xui.message('取消按钮的文案');
 		}
 	},
 });
 ```
-* 当没有按钮的时候,和提示信息展示类似,文案均可定制.
-* 不限制按钮的个数,`type`提示弹框的风格有`default`,`success`,`fail`
+* 所有的参数都是非必传,如果你觉得我写的文案也不错的话
+* `isShowClose`表示是否显示右上角关闭按钮
+* 不限制按钮的个数,当然如果一个按钮都不配置, 那么保证`isShowClose`为`true`, 不然弹框无法关闭
+* 按钮都有回调,右上角的关闭按钮和取消按钮的回调是一样的
 * 没有你想要的功能? 快联系我: `me@xumengzi.top`添加吧
 
 
 ### 效果展示
 
 
-1.先来看看简单的效果,仅仅是弹个框然后消失而已啦!
+1.先来看看简单的效果,仅仅是弹个框
 <button class="xui_btn xui_btn_default" id="show_prompt1">试试看</button>
 
 <script type="text/javascript">
 document.getElementById('show_prompt1').onclick=function(){
 	xui.prompt({
-		text: `恭喜您,兑换成功?`,
-		tips: '我们正在为您处理',
-		type: 'success',
-		delay: 2000,
+		tips: 'Title',
+	    text: 'some comments',
 	});
 }
 </script>
 
 ```js
 xui.prompt({
-	text: `恭喜您,兑换成功?`,
-	tips: '我们正在为您处理',
-	type: 'success',
-	delay: 2000,
+	tips: 'Title',
+    text: 'some comments',
 });
 ```
 
-2.接下来增加一点别的东西
+2.有些时候,我们的场景不太一样,PM不想要那个要右上角那个关闭按钮
 <button class="xui_btn xui_btn_default" id="show_prompt2">试试看</button>
 
 <script type="text/javascript">
 document.getElementById('show_prompt2').onclick=function(){
 	xui.prompt({
-		text: `真棒,你已经充值了100Q币`,
-		tips: '',
-		type: 'success',
-		delay: 0,
-		confirmBtn: {
-			text: '朕知道了',
-			fn(){
-				xui.tips('真墨迹!');
-			}
-		},
+		tips: '警告',
+	    text: '您没有联网哦',
+	    isShowClose: false,
+	    cancelBtn: {
+	        text: '朕明白',
+	        fn(){
+	            xui.message('联网去了');
+	        }
+	    },
 	});
 }
 </script>
 
 ```js
 xui.prompt({
-	text: `真棒,你已经充值了100Q币`,
-	tips: '',
-	type: 'success',
-	delay: 0,
-	confirmBtn: {
-		text: '朕知道了',
-		fn(){
-			xui.tips('真墨迹!');
-		}
-	},
+	tips: '警告',
+    text: '您没有联网哦',
+    isShowClose: false,
+    cancelBtn: {
+        text: '朕明白',
+        fn(){
+            xui.message('联网去了');
+        }
+    },
 });
 ```
 
-3.还有失败的案例
+3.接下来增加一点别的东西
 <button class="xui_btn xui_btn_default" id="show_prompt3">试试看</button>
 
 <script type="text/javascript">
 document.getElementById('show_prompt3').onclick=function(){
 	xui.prompt({
-		text: `哎,没有抽到奖诶!`,
-		tips: '',
-		type: 'fail',
-		delay: 0,
-		cancelBtn: {
-			text: '再试试',
+		tips: '提示',
+	    text: '充值成功',
+		confirmBtn: {
+			text: 'ok',
 			fn(){
-				xui.tips('不中就算了!');
+				xui.message('朕晓得了');
 			}
 		},
 	});
@@ -114,16 +107,14 @@ document.getElementById('show_prompt3').onclick=function(){
 
 ```js
 xui.prompt({
-	text: `哎,没有抽到奖诶!`,
-	tips: '',
-	type: 'fail',
-	delay: 0,
-	cancelBtn: {
-		text: '再试试',
+	tips: '提示',
+    text: '充值成功',
+	confirmBtn: {
+		text: 'ok',
 		fn(){
-			xui.tips('不中就算了!');
+			xui.message('朕晓得了');
 		}
-	}
+	},
 });
 ```
 
@@ -133,43 +124,41 @@ xui.prompt({
 <script type="text/javascript">
 document.getElementById('show_prompt4').onclick=function(){
 	xui.prompt({
-		text: `您确定要删除吗?`,
-		tips: '要不再想想',
-		type: 'success',
-		delay: 0,
-		confirmBtn: {
-			text: '算了',
-			fn(){
-				xui.tips('看,劳资删了');
-			}
-		},
-		cancelBtn: {
-			text: '朕意已决',
-			fn(){
-				xui.tips('十年后又是好汉');
-			}
-		},
+	    tips: 'Title',
+	    text: 'some comments',
+	    isShowClose: true,
+	    confirmBtn: {
+	        text: 'ok',
+	        fn(){
+	            xui.message('you clicked ok');
+	        }
+	    },
+	    cancelBtn: {
+	        text: 'cancel',
+	        fn(){
+	            xui.message('you clicked cancel');
+	        }
+	    },
 	});
 }
 </script>
 
 ```js
 xui.prompt({
-	text: `您确定要删除吗?`,
-	tips: '要不再想想',
-	type: 'success',
-	delay: 0,
-	confirmBtn: {
-		text: '朕意已决',
-		fn(){
-			xui.tips('看,劳资删了');
-		}
-	},
-	cancelBtn: {
-		text: '算了',
-		fn(){
-			xui.tips('十年后又是好汉');
-		}
-	},
+    tips: 'Title',
+    text: 'some comments',
+    isShowClose: true,
+    confirmBtn: {
+        text: 'ok',
+        fn(){
+            xui.message('you clicked ok');
+        }
+    },
+    cancelBtn: {
+        text: 'cancel',
+        fn(){
+            xui.message('you clicked cancel');
+        }
+    },
 });
 ```

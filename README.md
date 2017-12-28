@@ -23,19 +23,15 @@
 
 4.[更新日志](others/changeLog.md)
 
-##### 详情参见下文介绍 :
-
-```js
-How many codes must a man edit before you call him a master?
-```
 ***
+
 ##### 个人项目,如有问题还请指出,不胜感激.
 ##### 欢迎不吝赐教
 ###### 联系我: *me@xumengzi.top*
 
-##### 查看更新日志: [log](others/changeLog.md)
-
-<br/><br/>
+```js
+How many codes must a man edit before you call him a master?
+```
 
 ##### 归去来兮? 归去也!
 
