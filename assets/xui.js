@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.1.0';
+		this.version = '1.1.1';
 	};
 
 	Xui.prototype = {
@@ -287,6 +287,9 @@ include most functions and styles etc.
 	    },
 	    isFunction(fn) {
 	        return typeof fn === 'function';
+	    },
+	    isMobile(){
+	    	return /(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent);
 	    },
 	    message(){
 	    	//delete already exists
@@ -1085,6 +1088,7 @@ here is a fullPage plugin
 			direction: 'Y',
 			isShowDot: true,
 			isBackground: true,
+			distance: 60,
 			transition: '1s ease',
 			colorArr: [
 				'rgb(200,200,169)',
@@ -1156,11 +1160,6 @@ here is a fullPage plugin
 			let fst = this.config.currentPage;
 			for(let i = 0;i < ele.length; i++){
 				ele[i].classList.add('xui_page');
-				let tips = '↓↑';
-				i == 0 && (tips = '↓');
-				i == ele.length - 1 && (tips = '↑');
-				
-
 				//一些配置项
 				let arr = this.config.colorArr;
 				this.config.isBackground && arr.length && (ele[i].style.background = arr[xui.randomNum(0,arr.length - 1)]);
@@ -1176,18 +1175,99 @@ here is a fullPage plugin
 			w.onwheel = (e) => {
 				this.event(e);
 			};
+			if (xui.isMobile()) {
+				let startX = 0, endX = 0,
+					startY = 0, endY = 0;
+				tar.addEventListener('touchstart',(e)=>{
+					startX = e.touches[0].pageX;
+					startY = e.touches[0].pageY;
+				});
+				// tar.addEventListener('touchmove',(e)=>{
+				// 	console.log(e);
+				// });
+				tar.addEventListener('touchend',(e)=>{
+					endX = e.changedTouches[0].pageX;
+					endY = e.changedTouches[0].pageY;
+					let diffX = endX - startX,
+						diffY = endY - startY;
+					let dis = this.config.distance;
+					let diff = this.config.direction == 'X' ? diffX : diffY;
+					let dir = 0;
+					if (diff > Math.abs(dis)) {
+						dir = -1;
+						this.move(e, dir);
+					} else if(diff < -dis){
+						dir = 1;
+						this.move(e, dir);
+					};
+				});
+			};
 		},
 	};
 	xui.__proto__.fullPage = full;
 })(window);
 
+/*
+here is a cascader plugin
+*/ 
 ;(function(w){
-	class test{
+	class Cascader{
 		constructor(){
-
+			this.id = arguments[0].id;
+			this.data = arguments[0].data;
+			this.init();
 		};
-		a(){};
-		b(){};
-	}
-	w.test = test;
+		event(){
+			let ele = document.getElementById(this.id),
+				tar = ele.querySelector('.xui_select');
+			tar.onchange = (e) => {
+				console.log(e.target.value);
+				this.renderHTML(e.target.value, 'css');
+			}
+		};
+		renderHTML(val, val1){
+			let firSelect = '',
+				secSelect = '',
+				thiSelect = '';
+			firSelect += `<select class="xui_select">`;
+			secSelect += `<select class="xui_select">`;
+			thiSelect += `<select class="xui_select">`;
+			for(let i in this.data){
+				let f = this.data[i];
+				firSelect += `<option value=${f.a}>${f.a}</option>`;
+				if (f.a == val) {
+					for(let j in f.b){
+						let s = f.b[j];
+						secSelect += `<option value=${s.c}>${s.c}</option>`;
+						if (s.c == val1) {
+							for(let k in s.d){
+								let t = s.d[k];
+								console.log(f.a);
+								thiSelect += `<option value=${t.e}>${t.e}</option>`;
+							};
+						}
+					};
+				}
+			};
+			firSelect += `</select>`;
+			secSelect += `</select>`;
+			thiSelect += `</select>`;
+			document.getElementById(this.id).innerHTML = firSelect + secSelect + thiSelect;
+			this.event();
+		};
+		forHTML(data, val){
+			let select = '';
+			select += `<select class="xui_select">`;
+			for(let i in data){
+				let z = data[i];
+				select += `<option value=${z.id}>${z.name}</option>`;
+			};
+			select += `</select>`;
+			return select;
+		};
+		init(){
+			this.renderHTML('前端', 'css');
+		};
+	};
+	xui.__proto__.cascader = Cascader;
 })(window);

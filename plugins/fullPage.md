@@ -23,6 +23,7 @@ xui.fullPage({
 	isShowDot: boolean,
 	transition: string,
 	colorArr: array,
+	distance: number,
 	fn: function(prev, curr){
 		console.log(prev);
 		console.log(curr);
@@ -36,6 +37,7 @@ xui.fullPage({
 * `isShowDot`表示是否显示当前页和总页数, 格式为1/5
 * `transition`表示动画的过渡的特效, 可以随意配置哦! 就像写`css`的`transition`一样, 期待你的更多发现
 * `colorArr`表示页面背景色,随机选择,所以数量越多越好
+* `distance`适用于手机端, 用来判断手指滑动的距离,才去触发滚动事件, 事实证明这个是很有必要的
 * `fn`表示动画的回调了, 返回当前和之前2个元素
 * 没有你想要的功能? 快联系我: `me@xumengzi.top`添加吧
 
