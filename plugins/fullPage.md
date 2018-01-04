@@ -44,7 +44,7 @@ xui.fullPage({
 ### 效果展示
 
 1.因为需要全屏展示,所以我在这里放一个链接哦,更多请自行探寻
->说明:仅仅需要配置一点点即可! [戳我看看](https://jarveniv.github.io/xui.js/fullPage.html)
+>说明:仅仅需要配置一点点即可! [戳我看看](https://jarveniv.github.io/xui/fullPage.html)
 
 ```html
 <div id="fullPage" class="xui_full_page">
