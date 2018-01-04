@@ -8,7 +8,8 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.1.1';
+		this.version = '1.1.2';
+		console.log("xui v" + this.version)
 	};
 
 	Xui.prototype = {
@@ -926,6 +927,8 @@ here is a slider plugin
 		let defaults = {
 			index: 0,
 			duration: 3000,
+			isShowDot: true,
+			isShowSwitch: false,
 			animation: '.5s linear',
 			timer: null,
 		};
@@ -936,11 +939,16 @@ here is a slider plugin
 	};
 	Slider.prototype.event = function(){
 		let ele = document.getElementById(this.defaults.id);
-		let tar = ele.querySelector('.xui_slider_dot_con');
-		tar.addEventListener('mouseover', this.handleCountAng.bind(this), false);
-		tar.addEventListener('mouseout', this.autoAnimated.bind(this), false);
+		let dot = ele.querySelector('.xui_slider_dot_con');
+		dot.addEventListener('mouseover', this.handleCountAng.bind(this), false);
+		dot.addEventListener('mouseout', this.autoAnimated.bind(this), false);
+
+		let ang = ele.querySelector('.xui_slider_tab_con');
+		ang.addEventListener('click', this.handleCountAng.bind(this), false);
+		ang.addEventListener('mouseout', this.autoAnimated.bind(this), false);
 	};
 	Slider.prototype.autoAnimated = function(){
+		clearInterval(this.defaults.timer);
 		let time = this.defaults.duration;
 		this.defaults.timer = setInterval(()=>{
 			this.defaults.index++;
@@ -950,9 +958,17 @@ here is a slider plugin
 	};
 	Slider.prototype.handleCountAng = function(e){
 		clearInterval(this.defaults.timer);
+		document.querySelector('.xui_slider_tab_con').removeEventListener('click', this.handleCountAng.bind(this), false);
 		if (e.target.classList.contains('xui_slider_dot')) {
 			let inx = e.target.getAttribute('data-index');
 			this.defaults.index = inx;
+			this.handleChangeImg();
+		};
+		if (e.target.classList.contains('xui_slider_ang')) {
+			let inx = e.target.getAttribute('data-type') - 0;
+			this.defaults.index += inx;
+			this.defaults.index = (this.defaults.index > this.defaults.imgList.length - 1 ? 0 : this.defaults.index);
+			this.defaults.index = this.defaults.index < 0 ? this.defaults.imgList.length - 1 : this.defaults.index;
 			this.handleChangeImg();
 		};
 	};
@@ -1001,13 +1017,17 @@ here is a slider plugin
 				<div class="xui_slider_img" style="width:${this.defaults.imgList.length}00%">
 					${list}
 				</div>
-				<div class="xui_slider_dot_con">
+				<div class="xui_slider_dot_con ${this.defaults.isShowDot ? '' : 'none'}">
 					${spans}
+				</div>
+				<div class="xui_slider_tab_con ${this.defaults.isShowSwitch ? '' : 'none'}">
+					<span data-type=-1 class="xui_slider_ang"></span>
+					<span data-type=1 class="xui_slider_ang"></span>
 				</div>
 			</div>
 		`;
 		document.getElementById(this.defaults.id).innerHTML = slider;
-		this.event();
+		(this.defaults.isShowDot || this.defaults.isShowSwitch) && this.event();
 		this.autoAnimated();
 	};
 	Slider.prototype.init = function(){
