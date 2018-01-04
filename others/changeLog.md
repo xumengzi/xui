@@ -8,9 +8,14 @@
 
 >输入`xui.version`获取当前版本号
 
+###v1.1.2  <span style="font-size: 16px;">2018/01/04</span>
+#####新增：     
+1.[幻灯片插件](../plugins/slider.md)支持显示左右按钮切换和右下角圆点
+>是否兼容现有代码：是
+
 ###v1.1.1  <span style="font-size: 16px;">2017/12/29</span>
 #####新增：     
-1.全屏滚动插件支持手机端(横着,竖着都阔以)滑动咯!
+1.[全屏滚动插件](../plugins/fullPage.md)支持手机端, 且配置项更丰富
 >是否兼容现有代码：是
 
 ###v1.1.0  <span style="font-size: 16px;">2017/12/20</span>
