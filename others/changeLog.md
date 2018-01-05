@@ -8,6 +8,11 @@
 
 >输入`xui.version`获取当前版本号
 
+###v1.2.2  <span style="font-size: 16px;">2018/01/05</span>
+#####新增：     
+1.[雪花插件](../plugins/snowFlake.md)
+>是否兼容现有代码：是
+
 ###v1.1.2  <span style="font-size: 16px;">2018/01/04</span>
 #####新增：     
 1.[幻灯片插件](../plugins/slider.md)支持显示左右按钮切换和右下角圆点

@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.1.2';
+		this.version = '1.2.2';
 		console.log("xui v" + this.version)
 	};
 
@@ -446,6 +446,12 @@ include most functions and styles etc.
 	    		};
 	    	};
 	    	document.body.addEventListener('click', showImgPic, false);
+		},
+		snowFlake(){
+			let args = arguments[0],
+				tar = document.getElementById(args.id);
+			args.direction == 'left' && tar.classList.add('xui_snow_left');
+			tar.classList.add('xui_snow');
 		},
 	    subLastStr(str) {
 	        return str.substr(0, str.length - 1);
