@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.2.2';
+		this.version = '1.3.2';
 		console.log("xui v" + this.version)
 	};
 
@@ -81,7 +81,6 @@ include most functions and styles etc.
 	        return decodeURIComponent(str);
 	    },
 	    deleteEle(ele){
-	    	// document.querySelector(ele) && document.querySelector(ele).remove();
 	    	let tar = document.querySelectorAll(ele);
 	    	if (tar) {
 	    		let list = [...tar];
@@ -104,6 +103,7 @@ include most functions and styles etc.
 				    	inp.setAttribute('type','text');
 				    	args.placeHolder = args.placeHolder || 'type to search'; 
 				    	inp.setAttribute('placeHolder',args.placeHolder);
+				    	inp.setAttribute('value', '');
 				    	inp.classList.add('xui_input');
 				    	inp.classList.add('xui_input_search');
 				    	uls.appendChild(inp);
@@ -115,6 +115,7 @@ include most functions and styles etc.
 			    		let lis = document.createElement('li');
 			    		lis.innerHTML = name;
 			    		lis.setAttribute('value', val);
+			    		lis.classList.add('xui_drop_li');
 			    		uls.appendChild(lis);
 			    	};
 			    	uls.classList.add('xui_drop_list');
@@ -131,9 +132,13 @@ include most functions and styles etc.
 			    	con.appendChild(uls);
 			    	tar.after(con);
 	    		},
-	    		event(){
-	    			document.body.addEventListener('click', this.choose, false);
-	    			document.body.addEventListener('keyup', this.search, false);
+	    		event(args){
+	    			let tar = document.getElementById(args.id),
+	    				ele = tar.nextElementSibling,
+	    				search = ele.querySelector('.xui_input_search');
+	    			ele.addEventListener('click', this.choose, false);
+	    			// document.body.addEventListener('click', this.choose, false);
+	    			search && search.addEventListener('keyup', this.search, false);
 	    		},
 	    		search(e){
 	    			if (e.target.classList.contains('xui_input_search')) {
@@ -150,23 +155,24 @@ include most functions and styles etc.
 	    			}
 	    		},
 	    		choose(e){
-	    			if (e.target.classList.contains('xui_drop_btn')) {
-	    				e.target.nextSibling.classList.remove('none');
-	    				// e.target.nextSibling.classList.toggle('none');
+	    			let tar = e.target.classList;
+	    			if (tar.contains('xui_drop_btn')) {
+	    				// e.target.nextSibling.classList.remove('none');
+	    				e.target.nextSibling.classList.toggle('none');
 	    				// if ((e.target.nextSibling.classList.contains('none'))) {
 	    				// 	console.log('3');
 	    				// 	e.target.nextSibling.classList.remove('none');
 	    				// } else{
 	    				// 	e.target.nextSibling.classList.add('none');
 	    				// };
-	    			} else if(e.target.parentNode.className == 'xui_drop_list'){
+	    			} else if(e.target.parentNode.classList.contains('xui_drop_list')){
 	    				if (e.target.nodeName == 'INPUT') {return};
 	    				document.getElementById(args.id).value = e.target.getAttribute('value');
 	    				e.target.parentNode.previousSibling.value = e.target.getAttribute('value');
 	    				e.target.parentNode.previousSibling.innerHTML = e.target.innerHTML;
 	    				e.target.parentNode.classList.add('none');
 	    			} else{
-	    				if (!document.querySelectorAll('.xui_drop_list').length) {return;};
+    					if (!document.querySelectorAll('.xui_drop_list').length) {return;};
 	    				let newArr = that.toArray(document.querySelectorAll('.xui_drop_list'));
 	    				for(let i in newArr){
 	    					newArr[i].classList.add('none');
@@ -176,13 +182,13 @@ include most functions and styles etc.
 	    				};
 	    				let inpArr = that.toArray(document.querySelectorAll('.xui_input_search'));
 	    				for(let i in newArr){
-	    					inpArr[i].value = '';
+	    					inpArr[i] && (inpArr[i].value = '');
 	    				};
 	    			};
 	    		},
 	    		init(args){
 	    			this.renderHTML(args);
-	    			this.event();
+	    			this.event(args);
 	    		}
 	    	};
 	    	let args = arguments[0];
@@ -222,6 +228,7 @@ include most functions and styles etc.
 			// };
 			// return '';
 	    },
+	    
 	    loading(isShow, ele, string){
 	    	//delete already exists
 	    	this.deleteEle('.xu_loading');
@@ -550,6 +557,23 @@ include most functions and styles etc.
 	    	});
 	    },
 	};
+
+	function glabalClick(){
+    	document.body.onclick = function(e){
+    		let tar = e.target.classList;
+    		if (!(tar.contains('xui_drop_li') || tar.contains('xui_drop_btn') || tar.contains('xui_input_search'))) {
+    			let newArr = [...(document.querySelectorAll('.xui_drop_list'))];
+				for(let i in newArr){
+					newArr[i].classList.add('none');
+					for(let j = 0; j < newArr[i].childNodes.length ; j++){
+						newArr[i].childNodes[j].classList.contains('none') && newArr[i].childNodes[j].classList.remove('none');
+					};
+				};
+    		}
+    	};
+    };
+    glabalClick();
+
 	w.xui = new Xui;
 })(window);
 
@@ -581,9 +605,10 @@ here is a calendar plugin
 		config: {},
 		event(){
 			let tar = document.body;
-			tar.addEventListener('click', cal.handleClickCal, false);
+			tar.addEventListener('click', cal.handleClickCal.bind(this), false);
 		},
 		handleClickCal(e){
+			e.stopPropagation();
 			let that = cal;
 			let o = e.target.classList;
 			//choose date
@@ -591,11 +616,12 @@ here is a calendar plugin
 			if (isChooseDate) {
 				let date = e.target.getAttribute('data-date');
 				that.config.fn && that.config.fn(date);
+				document.body.removeEventListener('click', cal.handleClickCal.bind(this), false);
 				xui.deleteEle('.xui_calendar_picker');
 			};
 			//remove value
 			if (o.contains('xui_close_small')) {
-				e.target.previousElementSibling.value = ''
+				e.target.parentNode.querySelector('.xui_date_input').value = ''
 			};
 			//set date
 			if (o.contains('xui_calendar_icon')) {
@@ -1240,59 +1266,88 @@ here is a cascader plugin
 	class Cascader{
 		constructor(){
 			this.id = arguments[0].id;
+			this.val = {
+				v0: '',
+				v1: '',
+				v2: '',
+			};
 			this.data = arguments[0].data;
+			this.rep = arguments[0].rep;
 			this.init();
 		};
 		event(){
 			let ele = document.getElementById(this.id),
-				tar = ele.querySelector('.xui_select');
-			tar.onchange = (e) => {
-				console.log(e.target.value);
-				this.renderHTML(e.target.value, 'css');
-			}
+				tar = ele.querySelectorAll('.xui_select');
+			for(let i = 0; i < tar.length; i++){
+				tar[i].onchange = (e) => {
+					let val = e.target.value;
+					i == 0 && (this.val.v0 = val);
+					i == 1 && (this.val.v1 = val);
+					i == 2 && (this.val.v2 = val);
+					this.renderHTML(val, i);
+					ele.setAttribute('data-value', JSON.stringify(this.val));
+				};
+			};
 		};
-		renderHTML(val, val1){
+		renderHTML(chose, index){
 			let firSelect = '',
 				secSelect = '',
-				thiSelect = '';
-			firSelect += `<select class="xui_select">`;
-			secSelect += `<select class="xui_select">`;
-			thiSelect += `<select class="xui_select">`;
+				thiSelect = '', 
+				isEmpty = true;
+			firSelect += `<select class="xui_select"><option>请选择</option>`;
+			secSelect += `<select class="xui_select"><option>请选择</option>`;
+			thiSelect += `<select class="xui_select"><option>请选择</option>`;
 			for(let i in this.data){
 				let f = this.data[i];
-				firSelect += `<option value=${f.a}>${f.a}</option>`;
-				if (f.a == val) {
-					for(let j in f.b){
-						let s = f.b[j];
-						secSelect += `<option value=${s.c}>${s.c}</option>`;
-						if (s.c == val1) {
-							for(let k in s.d){
-								let t = s.d[k];
-								console.log(f.a);
-								thiSelect += `<option value=${t.e}>${t.e}</option>`;
-							};
-						}
+				let a = this.rep.firKey,
+					b = this.rep.firList,
+					c = this.rep.secKey,
+					d = this.rep.secList,
+					e = this.rep.thiKey;
+				(firSelect += `<option value=${f[a]} ${f[a] == chose ? 'selected' : ''}>${f[a]}</option>`);
+				for(let j in f[b]){
+					let s = f[b][j];
+					if (index == 0) {
+						f[a] == chose && (secSelect += `<option value=${s[c]} ${s[c] == chose ? 'selected' : ''}>${s[c]}</option>`);
+					} else if(index == 1){
+						this.val.v0 == f[a] && (secSelect += `<option value=${s[c]} ${s[c] == chose ? 'selected' : ''}>${s[c]}</option>`);
 					};
-				}
+					for(let k in s[d]){
+						let t = s[d][k];
+						if (this.val.v0 == f[a] && this.val.v1 == s[c]) {
+							isEmpty = false;
+							(thiSelect += `<option value=${t[e]} ${t[e] == chose ? 'selected' : ''}>${t[e]}</option>`);
+						};
+					};
+				};
 			};
 			firSelect += `</select>`;
 			secSelect += `</select>`;
 			thiSelect += `</select>`;
-			document.getElementById(this.id).innerHTML = firSelect + secSelect + thiSelect;
+
+			let des = document.getElementById(this.id),
+				sec = des.querySelectorAll('.xui_select');
+			if (chose) {
+				if (index == 0) {
+					des.innerHTML = firSelect + secSelect + thiSelect;
+				} else if(index == 1){
+					sec[1].innerHTML = secSelect;
+					sec[2].innerHTML = thiSelect;
+					if (isEmpty) {
+						sec[2].classList.add('none');
+					} else{
+						sec[2].classList.remove('none');
+					};
+				} else{
+					sec[2].innerHTML = thiSelect;
+				};
+			} else{
+				des.innerHTML = firSelect + secSelect + thiSelect;
+			};
 			this.event();
 		};
-		forHTML(data, val){
-			let select = '';
-			select += `<select class="xui_select">`;
-			for(let i in data){
-				let z = data[i];
-				select += `<option value=${z.id}>${z.name}</option>`;
-			};
-			select += `</select>`;
-			return select;
-		};
 		init(){
-			this.renderHTML('前端', 'css');
+			this.renderHTML(undefined, 0);
 		};
 	};
 	xui.__proto__.cascader = Cascader;

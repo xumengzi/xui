@@ -1081,6 +1081,12 @@ input样式
     transition: color, background-color 0.3s;
     list-style: none;
 }
+.xui_drop_down .xui_drop_list li:nth-child(2n){
+
+}
+.xui_drop_down .xui_drop_list li:nth-child(2n+1){
+    background: #f8f8f8;
+}
 .xui_drop_down .xui_drop_list li:hover{
     background-color: #4eb900;
     color: #fff;

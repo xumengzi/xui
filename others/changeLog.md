@@ -8,6 +8,11 @@
 
 >输入`xui.version`获取当前版本号
 
+###v1.3.2  <span style="font-size: 16px;">2018/01/11</span>
+#####新增：     
+1.[三级联动](../plugins/cascader.md)
+>是否兼容现有代码：是
+
 ###v1.2.2  <span style="font-size: 16px;">2018/01/05</span>
 #####新增：     
 1.[雪花插件](../plugins/snowFlake.md)

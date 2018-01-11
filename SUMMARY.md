@@ -20,4 +20,5 @@
     * [4.1 下拉加载 scrollLoad](plugins/scrollLoad.md)
     * [4.2 全屏滚动 fullPage](plugins/fullPage.md)
     * [4.3 雪花飘洒 snowFlake](plugins/snowFlake.md)
+    * [4.4 三级联动 cascader](plugins/cascader.md)
 * [4.日志 log](others/changeLog.md)
