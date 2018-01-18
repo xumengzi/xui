@@ -9,6 +9,64 @@ body{
 .none{
     display: none;
 }
+
+/*栅格布局*/
+.xui-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.xui-flex-vertical{
+    flex-direction: column;
+}
+
+.xui-flex > div{
+    width: 100%;
+    height: 100%;
+}
+.xui-flex-10 > div{
+    margin-right: 10px;
+}
+.xui-flex-10 > div:last-child{
+    margin-right: 0;
+}
+.xui-flex-vertical-10 > div{
+    margin-bottom: 10px;
+}
+.xui-flex-vertical-10 > div:last-child{
+    margin-bottom: 0;
+}
+.xui-flex .xui-col-1{
+    flex: 1;
+}
+.xui-flex .xui-col-2{
+    flex: 2;
+}
+.xui-flex .xui-col-3{
+    flex: 3;
+}
+.xui-flex .xui-col-4{
+    flex: 4;
+}
+.xui-flex .xui-col-6{
+    flex: 6;
+}
+.xui-flex .xui-col-8{
+    flex: 8;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .xui_item{
     display: flex;
     flex-direction: initial;
@@ -104,9 +162,6 @@ input样式
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
 }
-/*.xui_input:hover{
-    border-color: #87cba3;
-}*/
 .xui_input:focus,.xui_textarea:focus{
     border-color: #87cba3;
 }
@@ -130,7 +185,6 @@ input样式
 .xui_input_search .xui_input{
     text-indent: 1.5em;
 }
-
 .xui_radio_box{
     position: relative;
     padding-left: 1.5em;
@@ -353,10 +407,6 @@ input样式
 }
 
 
-
-
-
-
 /*
 弹框样式
 */
@@ -406,8 +456,6 @@ input样式
     z-index: 99;
     cursor: pointer;
 }
-.xu_prompt .xu_text{
-}
 .xu_prompt .xu_text .xui_title{
     position: relative;
     font-size: 1.2em;
@@ -432,25 +480,6 @@ input样式
     line-height: 1.5;
     color: #666;
 }
-/*.xu_prompt .xu_text span::before{
-    content: '';
-    width: 1.2em;
-    height: 1.2em;
-    display: inline-block;
-    margin-right: .4em;
-    margin-bottom: .2em;
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEUAAABQUFBRUVFQUFBQUFBQUFBQUFBQUFBQUFBRUVFQUFBQUFBQUFBQUFBQUFBQUFBRUVHTA1i6AAAAEHRSTlMAgMCQ0PBQIKDgMJ8Q30Bg/VX/7QAAAMhJREFUOMuVk1sOxCAIRRGtz9qy/9VOzEzkoZmm5+8CcltBeMPlMRAF9HWXPd1Bk8OdNh87KXrUeU8LTuYzbWi78zmlvPaIM1SGLFPG3/d3PqP79W+BY1vPBcJE/D8OjayPoS9iwggEYqq9glFApD1RBhJAkhpNR7qmJXuS5Aa4yXjaAThbEIwnWgvUE2pK4m7S9jcr/aHyVdtx81WDM7MIdlhn4YA+UOzC2A5xXbmWUuN+D0ubQeB2a6+IRadLfHh6sKPy433BB/EyJmCj6kCaAAAAAElFTkSuQmCC) no-repeat center center;
-    background-size: contain;
-    vertical-align: middle;
-}
-.xu_prompt .xu_text span.success::before{
-    color: #55bb6c;
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC5zwKfAAAAgVBMVEUAAABV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nVV2nWTd8wqAAAAKnRSTlMA4/jF1AqMhDMGEOq6Ri4Wz8BlOcuf9NzYeCKvb00cs1lT8F+SP6d9mSgEebzVAAAD7ElEQVRYw6VY6cKiMAykcskpKJccoqifyvs/4O5n2yzQlrbs/JLDsU0mk1RDAv90feVhmlVVlob563ryjf/A6dwH4wJBfz5tY4tf1iiA9Yq16aJwXEUYadFdzVEK865Mt0+XcSsT00zKZTxTtWDaj1m48mNU2+RJHR3zWWDftkJmy8muzjEnWedJPMqnjO8M7w7OXhgTZ4DXzut8P/S9wj2svXdwC/pmsxY+0Ep+MSS45JAbYSD9hGYiUpIqzU/iC9ZHX8g9QwleThfAXyNN3tFQxpHKgfewIQ8jrQqFzIj0stO0kv0gUM+J8O21TWmHv7lYiB3AfnXxJPU+T0wO+dDHnWhjFgm4pw9YzTRaWIGlsRElVuPET+EntgA2eIUbFWx4I95fgopedlgx/nZCG6uxI5fZ98rV5/kJ6afXlyIj0ty4wNocR4cuEdsjNnhn2wKvvyXyoFfu3wvC76Hv53pLHtp/fvslQR6UjqlH90mWhYpb7xPiqVd0t9+QFSe2AF9/P+E+clHlgoAV8zo44AnFMPwCykYRdsMYHYiv8EkIHxoGWHL8D8TyJG3hqh4+bKgdKyOSC5f5PZXJ4s6ZYYicG8iJhvU5vGFih7uVqeGEfirqceBZJk5Oola8ZDBD/McZ9gdLuU6edD768J+nWH8I63EBn5PekUA0Cvd49TzCuAr2oqlj/DEEaDBhxW65xetg74GhiLdcsUmJTJAGwwedTJwUVjZvOIr48/1KfJikF4dyd+CNxeg0y4fERPyvsHvDIaXHMkIg9yMgljVnh2sODRA8YJCSNp4bMYeIV5w9UIT2hL6Uuu4Y4Zpmai8EkgT7i9yTMpoMXPAHVlQAVtJCs0lhqXfuCA+QjwJXCDIOYsqcGbIlYWusIYQJ2Av4FmsnQCXLCDS94FuXD8Eh0K9mhJFCa3hMFDnY64zh+qEqmBa6JQrRAVu0wFVZ87BmGg9sDiOC46nKAm/0GglbWY3fZHTKbfJo6U4fMaOzPostTzkeGoW9Lx7k423CePkTTJp/mHMUNjw+OfbSCYxudYEd/m4/T2eByzXmlqmrcBwtDtyfGWpDE5cBNscNRPDRPFsgYfhNwrjXOuUF4j8dPIvYXqfO1+1IMwTFcOvMVR/eMdBBEF/KaMZKw7ZJ+S5ClwRPdW3pWcCF5n9ZcQ3odqi1V+laJPvrC9QDlOdaqJUz0MkPJLdhBPT3CyfS934EFFcF6f9MW2fq3mKoZD++uelu8rip1dRljTMUlhk2TWhaxfx+paxYr61GKcrWMzRwTNbpkqNnaCJ6IxEbekfGFng3J9sxE07m3DxjO+quffRJhYYBVUn/aDtZXv8A65cQGb//BqgAAAAASUVORK5CYII=) no-repeat center center;
-    background-size: contain;
-}*/
-.xu_prompt .xu_text span.fail{
-    /*color: #fd7127;*/
-}
 .xu_prompt .xu_text span.fail::before{
     color: #ef655b;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC5zwKfAAAAjVBMVEUAAAD/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGZjXSPDAAAALnRSTlMABgrBBLO2q+TVhcSM+uvLn0b1u2XPe9o6NB0P8VhNI5IwdF4V3lIrGa9tQJhL661++wAAA9dJREFUWMOlmOeaqjAQhoeihg4qYAELuK5tuf/LO8/DhBDQMOD5fu2G5DWZlgEgtN/kSTg3gjQNjHmY5Js9/Ic2xYxVPbFZsfmO9ptYlUJW8jsZF62qQa2iSbjSqUgF5Wjctr87P40dJ0793rAxzpj6qWOucB0ddf7kGK3DjmFf+xGe/WnnO8UZ3nQuJHv8PCleIeZm7lZpEzcT05Jh3qKZt7RvMKCbvWxmLobMJ7wR7oDQLhQRpCvTLG48EY0K1cY/scI1ejMhNGGUzLDZwOc9Ns5bw2itm3CAD7pXqGhShnq46A5vSrh3J5aSbaaIng2Oe1uYqDPfY28juq84L60nz/euY0KlP2iVPDY6+27GpqvdjZz3FmY6fCmsJ1Y7kFe1ZIfkdj5A0Gx/edJbV+P6dkXaP7A5H8xRbdab/6oBKXAdMAKljLxiRdZVPFwgBQlG4wFQQf2f3Y1yJKp5LbBdEPD7EkN6L2dUpSAiD3WSCxWWR7xdXbHBVqEgKnlzTR626zG3dgA2B8duZVrIRJoHO2wrTMxiPL6KSPFQhsjohCcdQSR4UIqig/fIDggiwYMb3i/oH0wbgqjmoQIezE8eAgSR4IlgefJroQSCSPIg576wuXcoIsFrKoSNd5N3A4pI8eDi4W3l8EpIEQleU7McdE4MFJHmISkAC7kUkeaBgfHHMB4pIs2D2sqMBGK8tNGj1h2BaEqSRxPxyCnpFOS1RNIpDnJJHk1E96IpvQvFmy8o4qWuMjOe0xuKp5kUEVPP5cUhp3gAFPHKi0OEYJJHEm3evt08dDPBq4mrIWLQVBkD/6B41B6x2BhiqyXBI4m5uN0jnEHwSOJcdMCaj9cewSOIF+yL69mnD228K/EUxFXnUSHdddsPTbff8lTEtjdoj7mVG+ICJDHBUxNf0OrRaYqv71t0BU9NfEgjfjff2Fu2aK7PTtrgW2Og97OE9d8BJ3yMOdilCUK/faOaPxXm35eK8a3EfHu9ciej5Bh79m8sbOOn64BrZx/KbeWdAb58HV1ePv5MdpzK2/n8cApD+BOJR6Y0v8OJ20nn9dUfHTQLn3l/43l/Hq6xPubAhVUoeyzPrlDsorBv8x3NGZUzv07D24FCt7jisnUKp9vNXGsHSmni4xd76IO4B2ubEzqNEJkclbGSIA6LNKFrVgnNyg+n2ZVS/5TlI0JfbqqXhn0978Vb8flqG8uq1eI4LtutqqPMclb3+8qxsu54OrqWmI+0IpU+NBgvcx0P4+K1CRMVvZiKxl4RfCPt6gZeH+YF7lWD73U8FKd5bLEsY1Y8PxUHyq//ACAbOvkFtrQUAAAAAElFTkSuQmCC) no-repeat center center;
@@ -471,47 +500,10 @@ input样式
     text-align: right;
     border-radius: 0 0 4px 4px;
 }
-/*.xu_prompt .xu_btn button{
-    -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
-    position: relative;
-    outline: none;
-    height: 3.2em;
-    margin: 1em;
-    -webkit-transition: .1s linear;
-    transition: .1s linear;
-}
-.xu_prompt .xu_btn button:hover{
-    filter: brightness(1.1);
-	-webkit-transition: .1s linear;
-	transition: .1s linear;
-}
-.xu_prompt .xu_btn button:active{
-	-webkit-transition: .1s linear;
-	transition: .1s linear;
-    -webkit-transform: translateY(1px);
-            transform: translateY(1px);
-    -webkit-box-shadow: 0 0 0;
-            box-shadow: 0 0 0;
-}
-.xu_prompt .xu_btn button.xu_confirm{
-    color: #fff;
-    background: #61cf7c;
-}
-.xu_prompt .xu_btn button.xu_cancel{
-    color: #fff;
-    background: #f08078;
-}
-.xu_prompt .xu_btn button:nth-child(2){
-    color: #fff;
-    background: #ef655b;
-}*/
 
 /*loading*/
 .xu_loading > div{
     width: 3em;
-    /*height: 60px;*/
     position: relative;
     display: flex;
     justify-content: space-around;
@@ -597,8 +589,6 @@ input样式
     display: inline-block;
     border-radius: 5px;
     background: #0C57E0;
-}
-.xu_loading .circle1{
 }
 .xu_loading .circle2{
     transform: rotate(30deg);
@@ -898,9 +888,6 @@ input样式
 .xui_img_content .xui_img_con{
     position: relative;
     max-width: 1100px;
-    /*display: flex;
-    justify-content: center;
-    align-items: center;*/
 }
 .xui_img_content .xui_img_con .xui_icon{
     position: fixed;
@@ -951,13 +938,7 @@ input样式
     background-size: initial;
 }
 
-
-
-
 /*tab切换*/
-.xui_tab{
-
-}
 .xui_tab ul.xui_tab_head{
     display: flex;
     justify-content: flex-start;
@@ -1034,7 +1015,6 @@ input样式
     padding: 0.2em .4em;
     font-size: 14px;
 }
-
 .xui_drop_down .xui_drop_btn::after{
     content: "";
     display: block;
@@ -1080,9 +1060,6 @@ input样式
     -webkit-transition: color, background-color 0.3s;
     transition: color, background-color 0.3s;
     list-style: none;
-}
-.xui_drop_down .xui_drop_list li:nth-child(2n){
-
 }
 .xui_drop_down .xui_drop_list li:nth-child(2n+1){
     background: #f8f8f8;
@@ -1160,9 +1137,6 @@ input样式
     padding: 0 20px;
     border-bottom: 1px solid #e8e8e8;
 }
-.xui_calendar_picker .xui_calendar_head div{
-
-}
 .xui_calendar_picker .xui_calendar_head div.xui_calendar_icon{
     width: .8em;
     height: .8em;
@@ -1185,9 +1159,6 @@ input样式
 .xui_calendar_picker .xui_calendar_head div.xui_calendar_icon_year:hover{
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJ1BMVEUAAABAzzBKyjpKyjlKyjlKyjpKyzlKyjlJyTlKyTpKyzpKyjhLyjpPqRAtAAAADHRSTlMAENCg8DBwwFCAf2CQwJWJAAAAOElEQVQI12OAA8aFDBwJIAbbIQH2w2AhG0VWHwMQg/mQQAhBIUYdKEMIJIVPAGEF40QGjg0MSAAAIMgSbnyw8N8AAAAASUVORK5CYII=) no-repeat center center;
     background-size: contain;
-}
-.xui_calendar_picker .xui_calendar_head div.xui_calendar_choose{
-
 }
 .xui_calendar_picker .xui_calendar_body{
     padding: 6px 12px;
@@ -1226,7 +1197,6 @@ input样式
     width: 100%;
     height: 100%;
     line-height: 24px;
-    /*border: 1px solid transparent;*/
     background: transparent;
     text-align: center;
     -webkit-transition: background 0.3s ease;
@@ -1251,7 +1221,6 @@ input样式
 .xui_calendar_picker .xui_calendar_body tr td div.xui_calendar_valid:hover {
     background: #b1ebc9;
 }
-
 .xui_calendar_picker .xui_calendar_foot{
     border-top: 1px solid #e8e8e8;
     line-height: 34px;
@@ -1267,12 +1236,7 @@ input样式
     cursor: not-allowed;
 }
 
-
-
 /*分页*/
-.xui_page_content{
-
-}
 .xui_page_content span{
     border-radius: 4px;
     -webkit-user-select: none;
@@ -1315,9 +1279,6 @@ input样式
 .xui_page_content span.xui_page_selected:hover{
     background: #4eb900;
     color: #fff;
-}
-.xui_page_content span.xui_page_invalid:hover{
-    /*background: rgba(206, 206, 206, 0.1);*/
 }
 .xui_page_content .xui_page_nav{
     border: none;
@@ -1370,8 +1331,6 @@ input样式
 }
 .xui_slider_content .xui_slider_dot_con span.selected{
     background: #4eb900;
-}
-.xui_slider_content .xui_slider_tab_con{
 }
 .xui_slider_content .xui_slider_tab_con span{
     position: absolute;
@@ -1507,9 +1466,6 @@ input样式
     background-color: #fafafa;
     border-radius: 4px;
     border: 1px solid #d9d9d9;
-}
-.xui_collapse .xui_collapse_section{
-
 }
 .xui_collapse .xui_collapse_section .xui_collapse_head{
     line-height: 22px;

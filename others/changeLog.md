@@ -8,6 +8,11 @@
 
 >输入`xui.version`获取当前版本号
 
+###v1.4.3  <span style="font-size: 16px;">2018/01/11</span>
+#####新增：     
+1.[flex布局](../styles/layout.md)
+>是否兼容现有代码：是
+
 ###v1.4.2  <span style="font-size: 16px;">2018/01/11</span>
 #####新增：     
 1.[手风琴](../plugins/collapse.md)
@@ -112,7 +117,6 @@
 1.前端框架项目[xui.js](../README.md)
 
 2.[`gitbook`地址](https://www.gitbook.com/@jarveniv/dashboard)
-
 
 <script>
 	document.querySelector('.version').innerHTML = xui.version;
