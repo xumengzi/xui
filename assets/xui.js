@@ -600,15 +600,26 @@ here is a calendar plugin
 		};
 		//初始化日历
 		cal.init();
+		document.body.onclick = function(e){
+			let o = e.target.classList;
+			let isClose = o.contains('xui_date_input') || o.contains('xui_calendar_icon') || o.contains('xui_date_picker');
+			if (!isClose) {
+				xui.deleteEle('.xui_calendar_picker');
+			};
+			//remove value
+			if (o.contains('xui_close_small')) {
+				e.target.parentNode.querySelector('.xui_date_input').value = ''
+			};
+		};
 	};
 	const cal = {
 		config: {},
 		event(){
-			let tar = document.body;
+			let tar = document.querySelector('.xui_calendar_picker');
 			tar.addEventListener('click', cal.handleClickCal.bind(this), false);
 		},
 		handleClickCal(e){
-			e.stopPropagation();
+			// e.stopPropagation();
 			let that = cal;
 			let o = e.target.classList;
 			//choose date
@@ -616,13 +627,10 @@ here is a calendar plugin
 			if (isChooseDate) {
 				let date = e.target.getAttribute('data-date');
 				that.config.fn && that.config.fn(date);
-				document.body.removeEventListener('click', cal.handleClickCal.bind(this), false);
 				xui.deleteEle('.xui_calendar_picker');
+				document.body.removeEventListener('click', cal.handleClickCal.bind(this), false);
 			};
-			//remove value
-			if (o.contains('xui_close_small')) {
-				e.target.parentNode.querySelector('.xui_date_input').value = ''
-			};
+			
 			//set date
 			if (o.contains('xui_calendar_icon')) {
 				let type = e.target.getAttribute('data-set');
@@ -638,7 +646,9 @@ here is a calendar plugin
 				type == 2 && (that.config.year -= 1);
 				type == 3 && (that.config.year += 1);
 				if (type == 4) {
+					console.log(that.config.month);
 					that.config.month += 1;
+					console.log(that.config.month);
 					if (that.config.month > 12) {
 						that.config.month = 1;
 						that.config.year++;
@@ -649,6 +659,7 @@ here is a calendar plugin
 			//remove calendar
 			if (e.target.className == '') {
 				xui.deleteEle('.xui_calendar_picker');
+				document.body.removeEventListener('click', cal.handleClickCal.bind(this), false);
 			};
 		},
 		removeCal(){
@@ -1384,6 +1395,7 @@ here is a collapse plugin
 						this.isOneTab && this.isShow();
 						ele.add('xui_collapse_active');
 					};
+					console.log();
 					this.fn && this.fn(e.target, eleSib);
 				};
 			};
