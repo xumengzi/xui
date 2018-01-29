@@ -8,6 +8,11 @@
 
 >输入`xui.version`获取当前版本号
 
+###v1.4.4  <span style="font-size: 16px;">2018/01/21</span>
+#####新增：     
+1.插件部分新增淡入以及向下滑动动画, 快去看看吧
+>是否兼容现有代码：是
+
 ###v1.4.3  <span style="font-size: 16px;">2018/01/11</span>
 #####新增：     
 1.[flex布局](../styles/layout.md)

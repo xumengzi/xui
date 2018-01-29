@@ -1,6 +1,7 @@
 /*
  created by xumeng
  http://xumengzi.top/
+ v1.4.4
 */ 
 body{
     padding: 0;
@@ -443,6 +444,8 @@ input样式
     background-clip: padding-box;
     -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: .2s toToDown linear;
+    -webkit-animation: .2s toToDown linear;
 }
 .xu_prompt .xu_close{
     position: absolute;
@@ -509,6 +512,8 @@ input样式
     justify-content: space-around;
     align-items: center;
     margin: 0 .6em;
+    animation: .2s toToDown linear;
+    -webkit-animation: .2s toToDown linear;
 }
 
 /*栅栏式*/
@@ -778,6 +783,8 @@ input样式
     border: 1px #ccc solid;
     border-radius: 4px;
     white-space: nowrap;
+    animation: .2s toToDown linear;
+    -webkit-animation: .2s toToDown linear;
 }
 
 /*tips*/
@@ -888,6 +895,8 @@ input样式
 .xui_img_content .xui_img_con{
     position: relative;
     max-width: 1100px;
+    animation: .3s toToDown linear;
+    -webkit-animation: .3s toToDown linear;
 }
 .xui_img_content .xui_img_con .xui_icon{
     position: fixed;
@@ -1048,6 +1057,8 @@ input样式
     border-radius: 0 0 .28em .28em;
     max-height: 300px;
     overflow: auto;
+    animation: .3s easeIn linear;
+    -webkit-animation: .3s easeIn linear;
 }
 .xui_drop_down .xui_drop_search{
     top: 4em;
@@ -1122,6 +1133,8 @@ input样式
     line-height: 1.5;
     font-family: consolas;
     z-index: 9999;
+    animation: .3s easeIn linear;
+    -webkit-animation: .3s easeIn linear;
 }
 .xui_calendar_picker .xui_calendar_head{
     height: 40px;
@@ -1495,13 +1508,63 @@ input样式
 }
 .xui_collapse .xui_collapse_section .xui_collapse_active + .xui_collapse_body{
     height: auto;
+    display: block;
+    animation: .2s toToDown linear;
+    -webkit-animation: .2s toToDown linear;
 }
 .xui_collapse .xui_collapse_section .xui_collapse_body{
-    overflow: hidden;
     color: rgba(0, 0, 0, 0.65);
     padding: 0 16px;
     background-color: #fff;
     border-top: 1px solid #d9d9d9;
     height: 0;
-    transition: .3s linear;
+    display: none;
+}
+
+
+
+
+
+/*全部动画*/
+/*从上往下淡入*/
+@-webkit-keyframes toToDown{
+    0%{
+        opacity: .2;
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+    100%{
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+        transform: translateY(0%);
+    }
+}
+@keyframes toToDown{
+    0%{
+        opacity: .2;
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+    100%{
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+        transform: translateY(0%);
+    }
+}
+/*从上往下淡入*/
+@-webkit-keyframes easeIn{
+    0%{
+        opacity: .2;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes easeIn{
+    0%{
+        opacity: .2;
+    }
+    100%{
+        opacity: 1;
+    }
 }
