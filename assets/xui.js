@@ -82,7 +82,7 @@ include most functions and styles etc.
 	    },
 	    deleteEle(ele){
 	    	let tar = document.querySelectorAll(ele);
-	    	if (tar) {
+	    	if (tar.length) {
 	    		let list = [...tar];
 	    		for(let i in list){
 	    			list[i].remove();
@@ -137,7 +137,18 @@ include most functions and styles etc.
 	    				ele = tar.nextElementSibling,
 	    				search = ele.querySelector('.xui_input_search');
 	    			ele.addEventListener('click', this.choose, false);
-	    			// document.body.addEventListener('click', this.choose, false);
+	    			document.body.onclick = function(e){
+			    		let tar = e.target.classList;
+			    		if (!(tar.contains('xui_drop_li') || tar.contains('xui_drop_btn') || tar.contains('xui_input_search'))) {
+			    			let newArr = [...(document.querySelectorAll('.xui_drop_list'))];
+							for(let i in newArr){
+								newArr[i].classList.add('none');
+								for(let j = 0; j < newArr[i].childNodes.length ; j++){
+									newArr[i].childNodes[j].classList.contains('none') && newArr[i].childNodes[j].classList.remove('none');
+								};
+							};
+			    		}
+			    	};
 	    			search && search.addEventListener('keyup', this.search, false);
 	    		},
 	    		search(e){
@@ -557,22 +568,6 @@ include most functions and styles etc.
 	    	});
 	    },
 	};
-
-	function glabalClick(){
-    	document.body.onclick = function(e){
-    		let tar = e.target.classList;
-    		if (!(tar.contains('xui_drop_li') || tar.contains('xui_drop_btn') || tar.contains('xui_input_search'))) {
-    			let newArr = [...(document.querySelectorAll('.xui_drop_list'))];
-				for(let i in newArr){
-					newArr[i].classList.add('none');
-					for(let j = 0; j < newArr[i].childNodes.length ; j++){
-						newArr[i].childNodes[j].classList.contains('none') && newArr[i].childNodes[j].classList.remove('none');
-					};
-				};
-    		}
-    	};
-    };
-    glabalClick();
 
 	w.xui = new Xui;
 })(window);
