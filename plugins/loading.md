@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# loading
+# 3.1.1 loading
 
 >说明: 用来缓解用户疲劳,提高用户等待积极性.
 

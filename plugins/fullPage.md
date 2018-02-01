@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# fullPage
+# 3.1.12 fullPage
 
 >说明: 代码比jQuery的fullPage要少很多, 但是功能却没有少很多哦
 

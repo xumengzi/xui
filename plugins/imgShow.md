@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# imgShow
+# 3.1.4 imgShow
 
 >说明: 用来查看大图,给用户极致体验.并支持放大缩小,旋转,下载操作.
 

@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# scrollLoad
+# 3.1.11 scrollLoad
 
 >说明: 用于移动端滑动加载数据, 当然pc端也是可以的
 

@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# collapse
+# 3.1.15 collapse
 
 >说明: 需要展示复杂的内容时使用手风琴插件
 

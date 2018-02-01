@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# prompt
+# 3.1.2 prompt
 
 >说明: 用来提示用户,是否进行下一步操作?
 

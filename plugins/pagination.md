@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# pagination
+# 3.1.9 pagination
 
 >说明: 当加载/渲染所有数据将花费很多时间时,可切换页码浏览数据。
 

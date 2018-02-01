@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# dropDown
+# 3.1.6 dropDown
 
 >说明: 嫌原生下拉框比较丑,需要美化的时候,或者希望能够模糊搜索下拉框里的内容时.
 

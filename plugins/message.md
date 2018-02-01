@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# message
+# 3.1.3 message
 
 >说明: 用来提示用户,具体行为是出现一个`message`,然后一段时间后消失
 

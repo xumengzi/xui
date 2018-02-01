@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# snowFlake
+# 3.1.13 snowFlake
 
 >说明: 希望给页面上某个元素添加雪花飘洒的效果
 

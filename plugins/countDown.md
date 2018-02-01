@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# countDown
+# 3.1.7 countDown
 
 >说明: 希望给页面上的商品加上倒计时,增加用户的积极性
 

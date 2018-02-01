@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# calendar
+# 3.1.8 calendar
 
 >说明: 比原生的日历框好看了一点点,可以配置的功能也多了一点点
 
