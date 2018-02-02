@@ -23,4 +23,5 @@
     * [3.1.13 雪花飘洒 snowFlake](plugins/snowFlake.md)
     * [3.1.14 三级联动 cascader](plugins/cascader.md)
     * [3.1.15 手风琴 collapse](plugins/collapse.md)
+    * [3.1.16 数字输入框 digital](plugins/digital.md)
 * [4.日志 log](others/changeLog.md)

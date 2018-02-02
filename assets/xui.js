@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.4.4';
+		this.version = '1.5.4';
 		console.log("xui v" + this.version)
 	};
 
@@ -1390,7 +1390,6 @@ here is a collapse plugin
 						this.isOneTab && this.isShow();
 						ele.add('xui_collapse_active');
 					};
-					console.log();
 					this.fn && this.fn(e.target, eleSib);
 				};
 			};
@@ -1421,4 +1420,108 @@ here is a collapse plugin
 		};
 	};
 	xui.__proto__.collapse = Collapse;
+})(window);
+
+/*
+here is a digitalOperation plugin
+*/ 
+;(function(w){
+	class Digital{
+		constructor(){
+			if (!arguments[0].id) {
+				throw new Error("element'id is required");
+			};
+			const defaults = {
+				min: 1,
+                max: 1000,
+                step: 1,
+                precision: 2,
+                isLimit: 9,
+                isInput: true,
+                fn: null,
+			};
+			const opts = Object.assign({}, defaults, arguments[0]);
+			this.opts = opts;
+			this.id = arguments[0].id;
+			this.init();
+		};
+		event(){
+			let tar = document.getElementById(this.id),
+				add = tar.querySelector('.xui_add'),
+				sub = tar.querySelector('.xui_sub'),
+				step = this.opts.step,
+				min = this.opts.min,
+				max = this.opts.max,
+				isPrecision = step.toString().indexOf('.') > -1;
+			tar.onclick = (e) =>{
+				let ele = e.target.classList,
+					int = tar.querySelector('.xui_digital_input');
+				if (ele.contains('xui_sub') || ele.contains('xui_add')) {
+					let type = e.target.getAttribute('data-type');
+					int.value = type == 1 
+								? 
+								(int.value-0+step > max ? max : int.value-0+step)
+								: 
+								(int.value-step < min ? min : int.value-step);
+					//如果是小数, 那么需要精度
+					isPrecision && (int.value = Number(int.value).toFixed(this.opts.precision));
+					isDisabled(int.value);
+					this.opts.fn && this.opts.fn(int.value);
+				};
+			};
+			tar.querySelector('.xui_digital_input').onchange = (e) => {
+				let reg = /^[\+\-\.]?(\d)*\.*\d+$/,
+					val = e.target.value;
+				if (!reg.test(val)) {
+					e.target.value = min;
+				} else{
+					e.target.value = (val > max)
+									? 
+									this.opts.max 
+									: 
+									(val < min) ? min : val;
+					e.target.value -= 0;
+					//如果是小数, 那么需要精度
+					isPrecision && (e.target.value = Number(e.target.value).toFixed(this.opts.precision));
+					isDisabled(e.target.value);
+					this.opts.fn && this.opts.fn(e.target.value);
+				};
+			};
+			function isDisabled(val){
+				if (val >= max) {
+					add.setAttribute('disabled', true);
+				} else{
+					add.removeAttribute('disabled');
+				};
+				if (val <= min) {
+					sub.setAttribute('disabled', true);
+				} else{
+					sub.removeAttribute('disabled');
+				};
+			};
+		};
+		renderHTML(){
+			let dig = `
+				<button class="xui_btn xui_btn_default xui_sub" disabled data-type="-1">-</button>
+        		<input type="text" class="xui_input xui_digital_input" 
+	        		maxlength=${this.opts.isLimit}
+	        		value=${
+			        			(this.opts.step.toString().indexOf('.') > -1) 
+				        		? 
+				        		this.opts.min.toFixed(this.opts.precision) 
+				        		: 
+				        		this.opts.min
+				        	}
+	        		${this.opts.isInput ? '' : 'readonly'}
+        		/>
+        		<button class="xui_btn xui_btn_default xui_add" data-type="1">+</button>
+			`;
+			document.getElementById(this.id).innerHTML = dig;
+			this.event();
+		};
+		init(){
+			this.renderHTML();
+		};
+	};
+	xui.__proto__.digital = Digital;
 })(window);

@@ -1,7 +1,7 @@
 /*
  created by xumeng
  http://xumengzi.top/
- v1.4.4
+ v1.5.4
 */ 
 body{
     padding: 0;
@@ -1677,6 +1677,39 @@ input样式
     height: 0;
     display: none;
 }
+
+/*加加减减*/
+.xui_digital{
+    display: flex;
+}
+.xui_digital button, .xui_digital input{
+    margin: 0;
+    padding: .2em .57em;
+    border-radius: 0;
+}
+.xui_digital_small button, .xui_digital_small input{
+    padding: .1em .5em;
+}
+.xui_digital button.xui_sub{
+    border-bottom-left-radius: .2em;
+    border-top-left-radius: .2em;
+}
+.xui_digital button.xui_add{
+    border-bottom-right-radius: .2em;
+    border-top-right-radius: .2em;
+}
+.xui_digital input{
+    width: 60px;
+    text-align: center;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+}
+.xui_digital_small input{
+    width: 40px;
+}
+
+
 
 
 

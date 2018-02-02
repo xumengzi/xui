@@ -8,6 +8,11 @@
 
 >输入`xui.version`获取当前版本号
 
+###v1.5.4  <span style="font-size: 16px;">2018/01/30</span>
+#####新增：     
+1.[数字输入框](../plugins/digital.md)
+>是否兼容现有代码：是
+
 ###v1.4.4  <span style="font-size: 16px;">2018/01/21</span>
 #####新增：     
 1.插件部分新增淡入以及向下滑动动画, 快去看看吧
