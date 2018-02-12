@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.5.4';
+		this.version = '1.5.5';
 		console.log("xui v" + this.version)
 	};
 
@@ -883,6 +883,7 @@ here is a page plugin
 		if (e.keyCode == 13) {
 			val = val > this.total ? this.total : val;
 			this.renderHTML(val);
+			this.onKeyUp && this.onKeyUp(val);
 		};
 	};
 	Page.prototype.handleClick = function(e){
@@ -890,7 +891,7 @@ here is a page plugin
 		let ele = tar.classList;
 		if (ele.contains('xui_page_valid')) {
 			let index = tar.getAttribute('data-num');
-			this.onClick(index);
+			this.onClick && this.onClick(index);
 			this.renderHTML(index);
 		};
 	};

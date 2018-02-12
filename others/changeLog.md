@@ -8,6 +8,12 @@
 
 >输入`xui.version`获取当前版本号
 
+###v1.5.5  <span style="font-size: 16px;">2018/02/12</span>
+#####新增：     
+1.修复分页输入数字回车缺少回调的bug
+2.修改部分文案
+>是否兼容现有代码：是
+
 ###v1.5.4  <span style="font-size: 16px;">2018/01/30</span>
 #####新增：     
 1.[数字输入框](../plugins/digital.md)
