@@ -8,15 +8,21 @@
 
 >输入`xui.version`获取当前版本号
 
+###v1.6.5  <span style="font-size: 16px;">2018/02/22</span>
+#####新增：     
+1.[滑动选择框](../plugins/sliderBar.md)
+>是否兼容现有代码：是
+
 ###v1.5.5  <span style="font-size: 16px;">2018/02/12</span>
 #####新增：     
 1.修复分页输入数字回车缺少回调的bug
+
 2.修改部分文案
 >是否兼容现有代码：是
 
 ###v1.5.4  <span style="font-size: 16px;">2018/01/30</span>
 #####新增：     
-1.[数字输入框](../plugins/digital.md)
+1.[数字输入框插件](../plugins/digital.md)
 >是否兼容现有代码：是
 
 ###v1.4.4  <span style="font-size: 16px;">2018/01/21</span>
@@ -26,17 +32,17 @@
 
 ###v1.4.3  <span style="font-size: 16px;">2018/01/11</span>
 #####新增：     
-1.[flex布局](../styles/layout.md)
+1.[flex布局样式](../styles/layout.md)
 >是否兼容现有代码：是
 
 ###v1.4.2  <span style="font-size: 16px;">2018/01/11</span>
 #####新增：     
-1.[手风琴](../plugins/collapse.md)
+1.[手风琴插件](../plugins/collapse.md)
 >是否兼容现有代码：是
 
 ###v1.3.2  <span style="font-size: 16px;">2018/01/01</span>
 #####新增：     
-1.[三级联动](../plugins/cascader.md)
+1.[三级联动插件](../plugins/cascader.md)
 >是否兼容现有代码：是
 
 ###v1.2.2  <span style="font-size: 16px;">2017/12/25</span>
@@ -118,7 +124,7 @@
 
 ###v0.1.2  <span style="font-size: 16px;">2017/09/01</span>
 #####新增：
-1.[常用插件](../plugins/README.md)
+1.[常用插件列表](../plugins/README.md)
 
 ###v0.1.1  <span style="font-size: 16px;">2017/08/21</span>
 #####新增：

@@ -19,6 +19,7 @@ xui.calendar({
 	endDate: string,
 	isToday: boolean,
 	isOtherMonths: boolean,
+	isChinese: boolean,
 	fn: function(date){
 		//callback
 		document.getElementById('test').value = date;
@@ -30,6 +31,7 @@ xui.calendar({
 * `startDate`和`endDate`表示日历的开始日期和结束日期 非必传,哈哈,就是你可以传1个或者2个,或者干脆不写
 * `isToday`表示是否在日历下边显示'today'按钮, 用户就可以快速选择今天了.
 * `isOtherMonths`表示是否显示除当前月的前一个月,后一个月的日期, 不传就是不显示咯!
+* `isChinese`表示日历显示的语言,设置为true时显示为中文,默认为英文.
 * `callback`表示选择日期后的回调, 怎么说呢,你不写不会报错,但是你无法获取用户选择的日期了哟!
 * `<span class="xui_close_small" data-date=""></span>`表示鼠标`hover`显示一个清空选择的值,当然不加上去也不会报错
 * 没有你想要的功能? 快联系我: `me@xumengzi.top`添加吧
@@ -106,6 +108,7 @@ document.getElementById('test2').onclick = function(){
 		endDate: '2018/12/31',
 		isToday: true,
 		isOtherMonths: true,
+		isChinese: true,
 		fn: function(date){
 			document.getElementById('test2').value = date;
 		}
@@ -120,6 +123,7 @@ xui.calendar({
 	endDate: '2018/12/31',
 	isToday: true,
 	isOtherMonths: true,
+	isChinese: true,
 	fn: function(date){
 		document.getElementById('test2').value = date;
 	}

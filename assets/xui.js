@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.5.5';
+		this.version = '1.6.5';
 		console.log("xui v" + this.version)
 	};
 
@@ -614,7 +614,6 @@ here is a calendar plugin
 			tar.addEventListener('click', cal.handleClickCal.bind(this), false);
 		},
 		handleClickCal(e){
-			// e.stopPropagation();
 			let that = cal;
 			let o = e.target.classList;
 			//choose date
@@ -641,9 +640,7 @@ here is a calendar plugin
 				type == 2 && (that.config.year -= 1);
 				type == 3 && (that.config.year += 1);
 				if (type == 4) {
-					console.log(that.config.month);
 					that.config.month += 1;
-					console.log(that.config.month);
 					if (that.config.month > 12) {
 						that.config.month = 1;
 						that.config.year++;
@@ -776,6 +773,22 @@ here is a calendar plugin
 					};
 				};
 			};
+			//文字是否设置为中文
+			let calHeadEn = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+				calHeadCn = ['日', '一', '二', '三', '四', '五', '六'],
+				calMonthEn = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+				calMonthCn = ['', '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+				calHeadArr = '',
+				calHeadHtml = '',
+				calMonthHtml= '';
+			calHeadArr = this.config.isChinese ? calHeadCn : calHeadEn;
+			todayText = this.config.isChinese ? '今天' : 'today';
+			calMonthHtml = this.config.isChinese ? calMonthCn[Number(this.setNum(month))] : calMonthEn[Number(this.setNum(month))];
+			let calHeadYear = this.config.isChinese ? `年` : `year`;
+			let calHeadMonth = this.config.isChinese ? `月` : `month`;
+			for(let i in calHeadArr){
+				calHeadHtml += `<th class="xui_calendar_th">${calHeadArr[i]}</th>`;
+			};
 			//是否显示今天
 			let isToday = ``;
 			if (this.config.isToday) {
@@ -788,33 +801,31 @@ here is a calendar plugin
 				};
 				isToday = `
 					<div class="xui_calendar_foot ${istoDay}" data-date=${tDate}>
-						today
+						${todayText}
 					</div>
 				`;
-			}
+			};
+			//绘制日历
 			let calHTML = `
 					<div class="xui_calendar_head">
 						<div>
-							<div data-set=1 title="month" class="xui_calendar_icon xui_calendar_left"></div>
-							<div data-set=2 title="year" class="xui_calendar_icon xui_calendar_icon_year xui_calendar_left"></div>
+							<div data-set=1 title=${calHeadMonth} class="xui_calendar_icon xui_calendar_left"></div>
+							<div data-set=2 title=${calHeadYear} class="xui_calendar_icon xui_calendar_icon_year xui_calendar_left"></div>
 						</div>
-						<div class="xui_calendar_choose">${year}年${this.setNum(month)}月</div>
+						<div class="xui_calendar_choose">
+							<span title=${year}>${year}</span>
+							<span title=${calMonthHtml}>${calMonthHtml}</span>
+						</div>
 						<div>
-							<div data-set=3 title="year" class="xui_calendar_icon xui_calendar_icon_year xui_calendar_right"></div>
-							<div data-set=4 title="month" class="xui_calendar_icon xui_calendar_right"></div>
+							<div data-set=3 title=${calHeadYear} class="xui_calendar_icon xui_calendar_icon_year xui_calendar_right"></div>
+							<div data-set=4 title=${calHeadMonth} class="xui_calendar_icon xui_calendar_right"></div>
 						</div>
 					</div>
 					<div class="xui_calendar_body">
 						<table>
 							<thead>
 								<tr>
-									<th class="xui_calendar_th">Su</th>
-									<th class="xui_calendar_th">Mo</th>
-									<th class="xui_calendar_th">Tu</th>
-									<th class="xui_calendar_th">We</th>
-									<th class="xui_calendar_th">Th</th>
-									<th class="xui_calendar_th">Fr</th>
-									<th class="xui_calendar_th">Sa</th>
+									${calHeadHtml}
 								</tr>
 							</thead>
 							<tbody>
@@ -1525,4 +1536,117 @@ here is a digitalOperation plugin
 		};
 	};
 	xui.__proto__.digital = Digital;
+})(window);
+
+/*
+here is a sliderBar plugin
+*/ 
+;(function(w){
+	class sliderBar{
+		constructor(){
+			if (!arguments[0].id) {
+				throw new Error("element'id is required");
+			};
+			const defaults = {
+                max: 100,
+                currentVal: .5,
+                unit: '',
+                precision: 0,
+                dragStart: null,
+                dragMove: null,
+                dragEnd: null
+			};
+			const opts = Object.assign({}, defaults, arguments[0]);
+			this.opts = opts;
+			this.id = arguments[0].id;
+			this.init();
+		};
+		event(){
+			let that = this;
+			let tar = document.getElementById(this.opts.id),
+                progress = tar.querySelector('.xui_bar_progress'),
+                dot = tar.querySelector('.xui_bar_dot'),
+                percent  = tar.querySelector('.xui_bar_percent');
+            let currDis = 0,
+                tarDis = 0,
+                tarWidth = tar.offsetWidth,
+                dis = 0,
+                laterPercent = 0,
+                showPercent = 0;
+            tar.addEventListener('mousedown', dragStart, false);
+            function dragStart(e){
+            	if (e.currentTarget.classList.contains('xui_slider_disabled')) {
+            		return;
+            	};
+                currDis = e.clientX || e.pageX;
+                tarDis = that.calLeftDis(tar);
+                dis = currDis - tarDis;
+                that.opts.dragStart && that.opts.dragStart(dis);
+                document.addEventListener('mousemove', dragMove, false);
+                document.addEventListener('mouseup', dragEnd, false);
+            };
+            function dragMove(e){
+                let nowDis = e.clientX || e.pageX;
+                dis = nowDis - tarDis;
+                that.opts.dragMove && that.opts.dragMove(dis);
+                setDistance(dis, true);
+            };
+            function dragEnd(e, bool){
+                setDistance(dis);
+                that.opts.dragEnd && that.opts.dragEnd(setDistance(dis));
+                document.removeEventListener('mousemove', dragMove);
+                document.removeEventListener('mouseup', dragEnd);
+            };
+            function setDistance(dis){
+                showPercent = laterPercent = (dis / tarWidth);
+                let prop = that.opts.max / 100;
+                laterPercent *= that.opts.max / prop;
+                showPercent *= that.opts.max;
+                showPercent = showPercent.toFixed(that.opts.precision);
+                laterPercent = laterPercent > 100 ? 100 : laterPercent < 0 ? 0 : laterPercent;
+                showPercent = showPercent > that.opts.max ? that.opts.max : showPercent < 0 ? 0 : showPercent;
+                showPercent += that.opts.unit;
+                laterPercent += '%';
+                dot.style.left = laterPercent;
+                dot.setAttribute('title', showPercent);
+                dot.setAttribute('data-num', showPercent);
+                progress.style.width = laterPercent;
+                return showPercent;
+            }
+		};
+		calLeftDis(ele){
+			let tmp = ele.offsetLeft,
+			par = ele.offsetParent;
+			while(par != null){
+				tmp += par.offsetLeft;
+				par = par.offsetParent;
+			};
+			return tmp;
+		};
+		renderHTML(){
+			let currentPer,showPer;
+			currentPer = this.opts.currentVal * this.opts.max / (this.opts.max / 100);
+			currentPer = currentPer.toFixed(this.opts.precision);
+			showPer = this.opts.currentVal * this.opts.max;
+			showPer = showPer.toFixed(this.opts.precision);
+			showPer += this.opts.unit;
+			currentPer += '%';
+			let dig = `
+				<div class="xui_bar">
+	                <div class="xui_bar_progress" style="width: ${currentPer}"></div>
+	                <span class="xui_bar_dot" 
+		                title="${showPer}" 
+		                data-num="${showPer}" 
+		                style="left: ${currentPer}"
+	                ></span>
+	            </div>
+			`;
+			document.getElementById(this.id).innerHTML = dig;
+			this.event();
+		};
+		init(){
+			this.renderHTML();
+		};
+	};
+	xui.__proto__.sliderBar = sliderBar;
 })(window);

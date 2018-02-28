@@ -24,4 +24,5 @@
     * [3.1.14 三级联动 cascader](plugins/cascader.md)
     * [3.1.15 手风琴 collapse](plugins/collapse.md)
     * [3.1.16 数字输入框 digital](plugins/digital.md)
+    * [3.1.17 滑动选择框 sliderBar](plugins/sliderBar.md)
 * [4.日志 log](others/changeLog.md)
