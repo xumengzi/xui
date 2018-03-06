@@ -1,7 +1,7 @@
 /*
  created by xumeng
  http://xumengzi.top/
- v1.6.4
+ v1.6.6
 */ 
 body{
     padding: 0;
@@ -76,17 +76,6 @@ body{
         -ms-flex: 8;
             flex: 8;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 .xui_item{
@@ -447,7 +436,7 @@ input样式
 /*
 弹框样式
 */
-.xu_prompt,.xu_message{
+.xui_prompt,.xui_message{
     width: 100%;
     height: 100%;
     position: fixed;
@@ -466,7 +455,7 @@ input样式
             align-items: center;
     z-index: 99999;
 }
-.xu_prompt .xu_content{
+.xui_prompt .xui_content{
     position: relative;
     width: 500px;
     margin: 0 auto;
@@ -484,7 +473,7 @@ input样式
     animation: .2s toToDown linear;
     -webkit-animation: .2s toToDown linear;
 }
-.xu_prompt .xu_close{
+.xui_prompt .xui_close{
     position: absolute;
     right: 1em;
     top: 1.3em;
@@ -496,7 +485,7 @@ input样式
     z-index: 99;
     cursor: pointer;
 }
-.xu_prompt .xu_text .xui_title{
+.xui_prompt .xui_text .xui_title{
     position: relative;
     font-size: 1.2em;
     color: #666;
@@ -507,25 +496,25 @@ input样式
     color: rgba(0, 0, 0, 0.65);
     border-bottom: 1px solid #e8e8e8;
 }
-.xu_prompt .xu_text .xui_title span{
+.xui_prompt .xui_text .xui_title span{
     margin: 0;
     font-size: 16px;
     line-height: 22px;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.85);
 }
-.xu_prompt .xu_text .tips{
+.xui_prompt .xui_text .tips{
     padding: 24px;
     font-size: 14px;
     line-height: 1.5;
     color: #666;
 }
-.xu_prompt .xu_text span.fail::before{
+.xui_prompt .xui_text span.fail::before{
     color: #ef655b;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC5zwKfAAAAjVBMVEUAAAD/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGb/cGZjXSPDAAAALnRSTlMABgrBBLO2q+TVhcSM+uvLn0b1u2XPe9o6NB0P8VhNI5IwdF4V3lIrGa9tQJhL661++wAAA9dJREFUWMOlmOeaqjAQhoeihg4qYAELuK5tuf/LO8/DhBDQMOD5fu2G5DWZlgEgtN/kSTg3gjQNjHmY5Js9/Ic2xYxVPbFZsfmO9ptYlUJW8jsZF62qQa2iSbjSqUgF5Wjctr87P40dJ0793rAxzpj6qWOucB0ddf7kGK3DjmFf+xGe/WnnO8UZ3nQuJHv8PCleIeZm7lZpEzcT05Jh3qKZt7RvMKCbvWxmLobMJ7wR7oDQLhQRpCvTLG48EY0K1cY/scI1ejMhNGGUzLDZwOc9Ns5bw2itm3CAD7pXqGhShnq46A5vSrh3J5aSbaaIng2Oe1uYqDPfY28juq84L60nz/euY0KlP2iVPDY6+27GpqvdjZz3FmY6fCmsJ1Y7kFe1ZIfkdj5A0Gx/edJbV+P6dkXaP7A5H8xRbdab/6oBKXAdMAKljLxiRdZVPFwgBQlG4wFQQf2f3Y1yJKp5LbBdEPD7EkN6L2dUpSAiD3WSCxWWR7xdXbHBVqEgKnlzTR626zG3dgA2B8duZVrIRJoHO2wrTMxiPL6KSPFQhsjohCcdQSR4UIqig/fIDggiwYMb3i/oH0wbgqjmoQIezE8eAgSR4IlgefJroQSCSPIg576wuXcoIsFrKoSNd5N3A4pI8eDi4W3l8EpIEQleU7McdE4MFJHmISkAC7kUkeaBgfHHMB4pIs2D2sqMBGK8tNGj1h2BaEqSRxPxyCnpFOS1RNIpDnJJHk1E96IpvQvFmy8o4qWuMjOe0xuKp5kUEVPP5cUhp3gAFPHKi0OEYJJHEm3evt08dDPBq4mrIWLQVBkD/6B41B6x2BhiqyXBI4m5uN0jnEHwSOJcdMCaj9cewSOIF+yL69mnD228K/EUxFXnUSHdddsPTbff8lTEtjdoj7mVG+ICJDHBUxNf0OrRaYqv71t0BU9NfEgjfjff2Fu2aK7PTtrgW2Og97OE9d8BJ3yMOdilCUK/faOaPxXm35eK8a3EfHu9ciej5Bh79m8sbOOn64BrZx/KbeWdAb58HV1ePv5MdpzK2/n8cApD+BOJR6Y0v8OJ20nn9dUfHTQLn3l/43l/Hq6xPubAhVUoeyzPrlDsorBv8x3NGZUzv07D24FCt7jisnUKp9vNXGsHSmni4xd76IO4B2ubEzqNEJkclbGSIA6LNKFrVgnNyg+n2ZVS/5TlI0JfbqqXhn0978Vb8flqG8uq1eI4LtutqqPMclb3+8qxsu54OrqWmI+0IpU+NBgvcx0P4+K1CRMVvZiKxl4RfCPt6gZeH+YF7lWD73U8FKd5bLEsY1Y8PxUHyq//ACAbOvkFtrQUAAAAAElFTkSuQmCC) no-repeat center center;
     background-size: contain;
 }
-.xu_prompt .xu_btn{
+.xui_prompt .xui_btn_box{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -542,7 +531,7 @@ input样式
 }
 
 /*loading*/
-.xu_loading > div{
+.xui_loading > div{
     width: 3em;
     position: relative;
     display: -webkit-box;
@@ -559,7 +548,7 @@ input样式
 }
 
 /*栅栏式*/
-.xu_loading{
+.xui_loading{
     width: 100%;
     height: 100%;
     position: fixed;
@@ -577,12 +566,12 @@ input样式
             align-items: center;
     z-index: 99999;
 }
-.xu_part_loading{
+.xui_part_loading{
     position: relative;
     height: auto;
     margin-bottom: 1em;
 }
-.xu_loading .fence{
+.xui_loading .fence{
     width: 4px;
     height: 2em;
     display: inline-block;
@@ -590,31 +579,31 @@ input样式
     animation: fence 1.2s infinite ease-in-out;
     -webkit-animation: fence 1.2s infinite ease-in-out;
 }
-.xu_loading .fence1{
+.xui_loading .fence1{
     -webkit-animation-delay: -1.1s;
             animation-delay: -1.1s;
 }
-.xu_loading .fence1{
+.xui_loading .fence1{
     -webkit-animation-delay: -1.0s;
             animation-delay: -1.0s;
 }
-.xu_loading .fence2{
+.xui_loading .fence2{
     -webkit-animation-delay: -0.9s;
             animation-delay: -0.9s;
 }
-.xu_loading .fence3{
+.xui_loading .fence3{
     -webkit-animation-delay: -0.8s;
             animation-delay: -0.8s;
 }
-.xu_loading .fence4{
+.xui_loading .fence4{
     -webkit-animation-delay: -0.7s;
             animation-delay: -0.7s;
 }
-.xu_loading .fence5{
+.xui_loading .fence5{
     -webkit-animation-delay: -0.6s;
             animation-delay: -0.6s;
 }
-.xu_loading .fence6{
+.xui_loading .fence6{
     -webkit-animation-delay: -0.5s;
             animation-delay: -0.5s;
 }
@@ -639,14 +628,14 @@ input样式
     }
 }
 /*圆点*/
-.xu_loading .dot{
+.xui_loading .dot{
     width: 100%;
     height: 100%;
     position: absolute;
     left: 0;
     top: 0;
 }
-.xu_loading .dot:before{
+.xui_loading .dot:before{
     content: "";
     width: 10px;
     height: 10px;
@@ -654,99 +643,99 @@ input样式
     border-radius: 5px;
     background: #0C57E0;
 }
-.xu_loading .circle2{
+.xui_loading .circle2{
     transform: rotate(30deg);
     -webkit-transform:rotate(30deg);
 }
-.xu_loading .circle3{
+.xui_loading .circle3{
     transform: rotate(60deg);
     -webkit-transform:rotate(60deg);
 }
-.xu_loading .circle4{
+.xui_loading .circle4{
     transform: rotate(90deg);
     -webkit-transform:rotate(90deg);
 }
-.xu_loading .circle5{
+.xui_loading .circle5{
     transform: rotate(120deg);
     -webkit-transform:rotate(120deg);
 }
-.xu_loading .circle6{
+.xui_loading .circle6{
     transform: rotate(150deg);
     -webkit-transform:rotate(150deg);
 }
-.xu_loading .circle7{
+.xui_loading .circle7{
     transform: rotate(180deg);
     -webkit-transform:rotate(180deg);
 }
-.xu_loading .circle8{
+.xui_loading .circle8{
     transform: rotate(210deg);
     -webkit-transform:rotate(210deg);
 }
-.xu_loading .circle9{
+.xui_loading .circle9{
     transform: rotate(240deg);
     -webkit-transform:rotate(240deg);
 }
-.xu_loading .circle10{
+.xui_loading .circle10{
     transform: rotate(270deg);
     -webkit-transform:rotate(270deg);
 }
-.xu_loading .circle11{
+.xui_loading .circle11{
     transform: rotate(300deg);
     -webkit-transform:rotate(300deg);
 }
-.xu_loading .circle12{
+.xui_loading .circle12{
     transform: rotate(330deg);
     -webkit-transform:rotate(330deg);
 }
-.xu_loading .dot:before{
+.xui_loading .dot:before{
     animation: circle 1.2s infinite ease-in-out;
     -webkit-animation: circle 1.2s infinite ease-in-out;
 }
-.xu_loading .circle1:before{
+.xui_loading .circle1:before{
     animation-delay: -1.1s;
     -webkit-animation-delay: -1.1s;
 }
-.xu_loading .circle2:before{
+.xui_loading .circle2:before{
     animation-delay: -1.0s;
     -webkit-animation-delay: -1.0s;
 }
-.xu_loading .circle3:before{
+.xui_loading .circle3:before{
     animation-delay: -.9s;
     -webkit-animation-delay: -.9s;
 }
-.xu_loading .circle4:before{
+.xui_loading .circle4:before{
     animation-delay: -.8s;
     -webkit-animation-delay: -.8s;
 }
-.xu_loading .circle5:before{
+.xui_loading .circle5:before{
     animation-delay: -.7s;
     -webkit-animation-delay: -.7s;
 }
-.xu_loading .circle6:before{
+.xui_loading .circle6:before{
     animation-delay: -.6s;
     -webkit-animation-delay: -.6s;
 }
-.xu_loading .circle7:before{
+.xui_loading .circle7:before{
     animation-delay: -.5s;
     -webkit-animation-delay: -.5s;
 }
-.xu_loading .circle8:before{
+.xui_loading .circle8:before{
     animation-delay: -.4s;
     -webkit-animation-delay: -.4s;
 }
-.xu_loading .circle9:before{
+.xui_loading .circle9:before{
     animation-delay: -.3s;
     -webkit-animation-delay: -.3s;
 }
-.xu_loading .circle10:before{
+.xui_loading .circle10:before{
     animation-delay: -.2s;
     -webkit-animation-delay: -.2s;
 }
-.xu_loading .circle11:before{
+.xui_loading .circle11:before{
     animation-delay: -.1s;
     -webkit-animation-delay: -.1s;
 }
-.xu_loading .circle12:before{
+.xui_loading .circle12:before{
     animation-delay: -.0s;
     -webkit-animation-delay: -.0s;
 }
@@ -767,7 +756,7 @@ input样式
     }
 }
 /*圆点左右晃*/
-.xu_loading .dott{
+.xui_loading .dott{
     display: inline-block;
     width: 10px;
     height: 10px;
@@ -778,15 +767,15 @@ input样式
     animation: fly_dot 1.4s infinite ease-in-out;
     -webkit-animation: fly_dot 1.4s infinite ease-in-out;
 }
-.xu_loading .dot1{
+.xui_loading .dot1{
     animation-delay: -1.2s;
     -webkit-animation-delay:-1.2s;
 }
-.xu_loading .dot2{
+.xui_loading .dot2{
     animation-delay: -1.0s;
     -webkit-animation-delay:-1.0s;
 }
-.xu_loading .dot3{
+.xui_loading .dot3{
     animation-delay: -.8s;
     -webkit-animation-delay:-.8s;
 }
@@ -832,10 +821,10 @@ input样式
 }
 
 /*提示信息*/
-.xu_message{
+.xui_message{
     background: transparent;
 }
-.xu_message span{
+.xui_message span{
     background: rgba(0, 0, 0, 0.75);
     color: #fff;
     padding: .6em 3em;
@@ -1776,6 +1765,7 @@ input样式
 .xui_slider_bar.xui_slider_disabled .xui_bar_progress{
     background: rgba(0, 0, 0, 0.25);
 }
+
 /*全部动画*/
 /*从上往下淡入*/
 @-webkit-keyframes toToDown{

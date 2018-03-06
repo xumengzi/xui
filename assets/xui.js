@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.6.5';
+		this.version = '1.6.6';
 		console.log("xui v" + this.version)
 	};
 
@@ -242,7 +242,7 @@ include most functions and styles etc.
 	    
 	    loading(isShow, ele, string){
 	    	//delete already exists
-	    	this.deleteEle('.xu_loading');
+	    	this.deleteEle('.xui_loading');
 	    	if (!isShow) {
 	    		return;
 	    	};
@@ -286,9 +286,9 @@ include most functions and styles etc.
 		    		${string ? `<div>${string}</div>`: ``}
 		    	`;
 	    	}
-	    	tar.classList.add('xu_loading');
+	    	tar.classList.add('xui_loading');
 	    	if (typeof ele == 'string') {
-	    		tar.classList.add('xu_part_loading');
+	    		tar.classList.add('xui_part_loading');
 	    		document.querySelector(ele).appendChild(tar);
 	    	} else{
 	    		document.body.appendChild(tar);
@@ -312,16 +312,16 @@ include most functions and styles etc.
 	    },
 	    message(){
 	    	//delete already exists
-	    	this.deleteEle('xu_message');
+	    	this.deleteEle('xui_message');
 	    	let tar = document.createElement('div');
 	    	tar.innerHTML = `
 	    		<span>${arguments[0]}</span>
 	    	`;
-	    	tar.classList.add('xu_message');
+	    	tar.classList.add('xui_message');
 	    	document.body.appendChild(tar);
 	    	setTimeout(() => {
 	    		arguments[2] && arguments[2]();
-    			this.deleteEle('.xu_message');
+    			this.deleteEle('.xui_message');
 	    	}, arguments[1] || 1000);
 	    },
 	    now(date, days, bool) {
@@ -406,7 +406,7 @@ include most functions and styles etc.
 		showImg(){
 			let that = this;
             //delete already exists
-	    	that.deleteEle('xu_img');
+	    	that.deleteEle('xui_img');
 	    	let tar = document.createElement('div');
 	    	tar.innerHTML = `
 	    		<span class="xui_close"></span>
@@ -528,7 +528,7 @@ include most functions and styles etc.
 	    },
 	    prompt(){
 	    	//delete already exists
-	    	this.deleteEle('.xu_prompt');
+	    	this.deleteEle('.xui_prompt');
 	    	const defaults = {
 	    		tips: '温馨提示',
 	    		text: 'hello,world',
@@ -540,29 +540,29 @@ include most functions and styles etc.
 	    	const opts = Object.assign({},defaults, arguments[0]);
 	    	let tar = document.createElement('div');
 	    	tar.innerHTML = `
-	    		<div class="xu_content">
-	    			${opts.isShowClose ? `<span class="xu_close"></span>` : ``}
-			    	<div class="xu_text">
+	    		<div class="xui_content">
+	    			${opts.isShowClose ? `<span class="xui_close"></span>` : ``}
+			    	<div class="xui_text">
 			    		<div class="xui_title"><span>${opts.tips}</span></div>
 			    		<div class="tips">${opts.text}</div>
 			    	</div>
-			    	<div class="xu_btn">
+			    	<div class="xui_btn_box">
 				    	${opts.cancelBtn ? '<button class="xui_btn xui_btn_cancel xui_cancel">'+ opts.cancelBtn.text +'</button>' : ''}
 				    	${opts.confirmBtn ? '<button class="xui_btn xui_btn_default xui_confirm">'+ opts.confirmBtn.text +'</button>' : ''}
 			    	</div>
 			    </div>
 	    	`;
-	    	tar.classList.add('xu_prompt');
+	    	tar.classList.add('xui_prompt');
 	    	document.body.appendChild(tar);
 	    	//按钮回调
-    		document.querySelector('.xu_content').addEventListener('click',(e) => {
+    		document.querySelector('.xui_content').addEventListener('click',(e) => {
 	    		let tar = e.target.classList;
-	    		if (tar.contains('xu_close') || tar.contains('xui_cancel')) {
-	    			this.deleteEle('.xu_prompt');
+	    		if (tar.contains('xui_close') || tar.contains('xui_cancel')) {
+	    			this.deleteEle('.xui_prompt');
 	    			opts.cancelBtn && opts.cancelBtn.fn && opts.cancelBtn.fn();
 	    		};
 	    		if (tar.contains('xui_confirm')) {
-	    			this.deleteEle('.xu_prompt');
+	    			this.deleteEle('.xui_prompt');
 	    			opts.confirmBtn && opts.confirmBtn.fn && opts.confirmBtn.fn();
 	    		};
 	    	});
