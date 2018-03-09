@@ -1766,6 +1766,56 @@ input样式
     background: rgba(0, 0, 0, 0.25);
 }
 
+/*3D轮播图*/
+.xui_dimensions{
+    width: 400px;
+    height: 200px;
+    margin: 20px auto;
+    border: 1px red solid;
+}
+.xui_dimensions .xui_dimensions_box{
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.xui_dimensions .xui_dimensions_img{
+    position: absolute;
+    top: 50%;
+    margin-top: -50px;
+    width: 200px;
+    height: 100px;
+    list-style: none;
+    cursor: pointer;
+}
+.xui_dimensions .xui_dimensions_img:nth-child(1){
+    left: 0;
+    z-index: 2;
+    transform: scale(.8);
+    opacity: .6;
+}
+.xui_dimensions .xui_dimensions_img:nth-child(2){
+    left: 0;
+    transform: translate(50%);
+    z-index: 3;
+}
+.xui_dimensions .xui_dimensions_img:nth-child(3){
+    left: 50%;
+    transform: scale(.8);
+    z-index: 2;
+    opacity: .6;
+}
+.xui_dimensions .xui_dimensions_img img{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+
+
+
 /*全部动画*/
 /*从上往下淡入*/
 @-webkit-keyframes toToDown{

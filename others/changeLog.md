@@ -8,7 +8,12 @@
 
 >输入`xui.version`获取当前版本号
 
-###v1.6.6  <span style="font-size: 16px;">2018/03/06</span>
+###v1.7.6  <span style="font-size: 16px;">2018/03/08</span>
+#####新增：     
+1.[复制剪贴板](../plugins/copyToClipBoard.md)
+>是否兼容现有代码：是
+
+###v1.6.6  <span style="font-size: 16px;">2018/03/01</span>
 #####新增：     
 1.修复[loading](../plugins/loading.md),[prompt](../plugins/prompt.md)组件类名问题,不影响使用
 >是否兼容现有代码：是

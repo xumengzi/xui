@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.6.6';
+		this.version = '1.7.6';
 		console.log("xui v" + this.version)
 	};
 
@@ -38,6 +38,29 @@ include most functions and styles etc.
 	    },
 	    codeStr(str) {
 	        return encodeURIComponent(str);
+	    },
+	    copyToClipBoard(str, tips){
+	    	if (typeof str == 'undefined') {
+	    		throw new Error('oops,nothing to copy?');
+	    	};
+	    	if (document.execCommand('copy')) {
+	    		tips = tips || '复制成功';
+	    		document.querySelector('.fake_input_value') && document.querySelector('.fake_input_value').remove();
+                let fakeInput = document.createElement('input');
+                fakeInput.style.position = 'absolute';
+                fakeInput.style.left = '-100%';
+                fakeInput.value = str;
+                fakeInput.classList.add('fake_input_value');
+                fakeInput.setSelectionRange(0, str.length);
+                document.body.appendChild(fakeInput);
+                document.querySelector('.fake_input_value').select();
+                document.querySelector('.fake_input_value').focus();
+                document.execCommand('copy');
+                this.message(tips);
+                document.querySelector('.fake_input_value') && document.querySelector('.fake_input_value').remove();
+	    	} else{
+	    		this.message("Your browser doesn't support");
+	    	};
 	    },
 	    countDown(){
 	    	let downTime = null;
@@ -239,7 +262,6 @@ include most functions and styles etc.
 			// };
 			// return '';
 	    },
-	    
 	    loading(isShow, ele, string){
 	    	//delete already exists
 	    	this.deleteEle('.xui_loading');
