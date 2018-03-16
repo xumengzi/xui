@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.7.6';
+		this.version = '1.7.7';
 		console.log("xui v" + this.version)
 	};
 
@@ -20,6 +20,26 @@ include most functions and styles etc.
 			}else{
 				return e = e < 10 ? '0' + e : e;
 			};
+	    },
+	    ajax(){
+    	    let arg = arguments[0];
+		    let url = arg.url,
+		        type = arg.type || 'GET',
+		        params = arg.params || null;
+		    return new Promise(function(resove, reject){
+		        let XHR = new XMLHttpRequest();
+		        XHR.open(type, url, true);
+		        XHR.send(JSON.stringify(params));
+		        XHR.onreadystatechange = function(){
+		            if(XHR.readyState == 4){
+		                if(XHR.status == 200){
+		                    resove(XHR.response);
+		                } else{
+		                    reject(new Error(XHR.response));
+		                }
+		            }
+		        };
+		    })
 	    },
 	    checkLegal(type, str) {
 	        let reg;
@@ -330,7 +350,11 @@ include most functions and styles etc.
 	        return typeof fn === 'function';
 	    },
 	    isMobile(){
-	    	return /(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent);
+	    	return Math.random() > .5 
+						    	? 
+						    	/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)
+						    	:
+						    	'ontouchstart' in window;
 	    },
 	    message(){
 	    	//delete already exists
@@ -876,7 +900,7 @@ here is a calendar plugin
 			this.renderHTML(y, m);
 		}
 	};
-	xui.__proto__.calendar = calendar;
+	Object.getPrototypeOf(xui).calendar = calendar;
 })(window);
 
 /*
@@ -985,10 +1009,9 @@ here is a page plugin
 				${isShowNumber}
 			</div>
 		`;
-
 		document.getElementById(this.id).innerHTML = page;
 	};
-	xui.__proto__.pagination = Page;
+	Object.getPrototypeOf(xui).pagination = Page;
 })(window);
 
 /*
@@ -1105,7 +1128,7 @@ here is a slider plugin
 	Slider.prototype.init = function(){
 		this.renderHTML();
 	};
-	xui.__proto__.slider = Slider;
+	Object.getPrototypeOf(xui).slider = Slider;
 })(window);
 
 /*
@@ -1165,8 +1188,7 @@ here is a scrollLoad plugin
 			that.onscroll(height);
 		};
 	};
-
-	xui.__proto__.scroll = Scroll;
+	Object.getPrototypeOf(xui).scroll = Scroll;
 })(window);
 
 /*
@@ -1296,7 +1318,7 @@ here is a fullPage plugin
 			};
 		},
 	};
-	xui.__proto__.fullPage = full;
+	Object.getPrototypeOf(xui).fullPage = full;
 })(window);
 
 /*
@@ -1390,7 +1412,7 @@ here is a cascader plugin
 			this.renderHTML(undefined, 0);
 		};
 	};
-	xui.__proto__.cascader = Cascader;
+	Object.getPrototypeOf(xui).cascader = Cascader;
 })(window);
 
 /*
@@ -1453,7 +1475,7 @@ here is a collapse plugin
 			this.renderHTML();
 		};
 	};
-	xui.__proto__.collapse = Collapse;
+	Object.getPrototypeOf(xui).collapse = Collapse;
 })(window);
 
 /*
@@ -1557,7 +1579,7 @@ here is a digitalOperation plugin
 			this.renderHTML();
 		};
 	};
-	xui.__proto__.digital = Digital;
+	Object.getPrototypeOf(xui).digital = Digital;
 })(window);
 
 /*
@@ -1670,5 +1692,5 @@ here is a sliderBar plugin
 			this.renderHTML();
 		};
 	};
-	xui.__proto__.sliderBar = sliderBar;
+	Object.getPrototypeOf(xui).sliderBar = sliderBar;
 })(window);

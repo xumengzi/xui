@@ -4,9 +4,19 @@
 # 日志
 
 ###### 当前版本: <span class="version"></span>
->版本说明: 第二个数字代表新增一个插件或者比较大的改动,第三个数字代表修复bug,优化之类
+>版本说明: 
+>次版本号代表新增一个插件或者比较大的改动
+>修订版本号代表修复bug,优化之类
 
 >输入`xui.version`获取当前版本号
+
+###v1.7.7  <span style="font-size: 16px;">2018/03/16</span>
+#####新增：     
+1.新增`ajax`异步请求方法.详见[方法](../methods/methods.md)第9条.
+
+2.代码编写更加规范啦
+
+>是否兼容现有代码：是
 
 ###v1.7.6  <span style="font-size: 16px;">2018/03/08</span>
 #####新增：     
@@ -15,7 +25,7 @@
 
 ###v1.6.6  <span style="font-size: 16px;">2018/03/01</span>
 #####新增：     
-1.修复[loading](../plugins/loading.md),[prompt](../plugins/prompt.md)组件类名问题,不影响使用
+1.修复[loading](../plugins/loading.md),[prompt](../plugins/prompt.md)组件类名问题
 >是否兼容现有代码：是
 
 ###v1.6.5  <span style="font-size: 16px;">2018/02/22</span>

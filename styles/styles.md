@@ -20,6 +20,7 @@
 <button class="xui_btn xui_btn_cancel">取消按钮</button>
 <button disabled class="xui_btn xui_btn_cancel">取消按钮</button>
 ```
+>说明:没看够? 戳我[动感十足的按钮](https://jarveniv.github.io/beautyCss3Buttons/Css3Buttons.html)
 
 ##### 输入框`input`
 

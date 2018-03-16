@@ -83,5 +83,40 @@ xui.getCookie(name)
 xui.removeCookie(name)
 ```
 
+9.这里使用`Promise`封装的一个`ajax`异步请求,使用方法如下
+```//get请求
+var url = 'https://hq.tigerbrokers.com/fundamental/finance_calendar/getType/2017-02-26/2017-06-10';
+xui.ajax({
+    url: url + '?name=vuejs',
+    type: 'get',
+}).then(res =>{
+    console.log(res);
+});
+
+//这里是post请求
+xui.ajax({
+    url: url,
+    type: 'post',
+    params: {
+        x: 1,
+        y: 2,
+        z: 3,
+    },
+}).then(res =>{
+    console.log(res);
+});
+```
+
+10.我才不会告诉你,使用下面的方法可以快速判断当前环境是否为手机端
+```
+xui.isMobile()   //返回boolean
+
+//有兴趣查看源码么?
+return Math.random() > .5 
+    ? 
+    /(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)
+    :
+    'ontouchstart' in window;
+```
 
 * 更多方法详见`xui.js`,哈哈
