@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.6.5';
+		this.version = '1.7.7';
 		console.log("xui v" + this.version)
 	};
 
@@ -20,6 +20,26 @@ include most functions and styles etc.
 			}else{
 				return e = e < 10 ? '0' + e : e;
 			};
+	    },
+	    ajax(){
+    	    let arg = arguments[0];
+		    let url = arg.url,
+		        type = arg.type || 'GET',
+		        params = arg.params || null;
+		    return new Promise(function(resove, reject){
+		        let XHR = new XMLHttpRequest();
+		        XHR.open(type, url, true);
+		        XHR.send(JSON.stringify(params));
+		        XHR.onreadystatechange = function(){
+		            if(XHR.readyState == 4){
+		                if(XHR.status == 200){
+		                    resove(XHR.response);
+		                } else{
+		                    reject(new Error(XHR.response));
+		                }
+		            }
+		        };
+		    })
 	    },
 	    checkLegal(type, str) {
 	        let reg;
@@ -38,6 +58,29 @@ include most functions and styles etc.
 	    },
 	    codeStr(str) {
 	        return encodeURIComponent(str);
+	    },
+	    copyToClipBoard(str, tips){
+	    	if (typeof str == 'undefined') {
+	    		throw new Error('oops,nothing to copy?');
+	    	};
+	    	if (document.execCommand('copy')) {
+	    		tips = tips || '复制成功';
+	    		document.querySelector('.fake_input_value') && document.querySelector('.fake_input_value').remove();
+                let fakeInput = document.createElement('input');
+                fakeInput.style.position = 'absolute';
+                fakeInput.style.left = '-100%';
+                fakeInput.value = str;
+                fakeInput.classList.add('fake_input_value');
+                fakeInput.setSelectionRange(0, str.length);
+                document.body.appendChild(fakeInput);
+                document.querySelector('.fake_input_value').select();
+                document.querySelector('.fake_input_value').focus();
+                document.execCommand('copy');
+                this.message(tips);
+                document.querySelector('.fake_input_value') && document.querySelector('.fake_input_value').remove();
+	    	} else{
+	    		this.message("Your browser doesn't support");
+	    	};
 	    },
 	    countDown(){
 	    	let downTime = null;
@@ -239,10 +282,9 @@ include most functions and styles etc.
 			// };
 			// return '';
 	    },
-	    
 	    loading(isShow, ele, string){
 	    	//delete already exists
-	    	this.deleteEle('.xu_loading');
+	    	this.deleteEle('.xui_loading');
 	    	if (!isShow) {
 	    		return;
 	    	};
@@ -286,9 +328,9 @@ include most functions and styles etc.
 		    		${string ? `<div>${string}</div>`: ``}
 		    	`;
 	    	}
-	    	tar.classList.add('xu_loading');
+	    	tar.classList.add('xui_loading');
 	    	if (typeof ele == 'string') {
-	    		tar.classList.add('xu_part_loading');
+	    		tar.classList.add('xui_part_loading');
 	    		document.querySelector(ele).appendChild(tar);
 	    	} else{
 	    		document.body.appendChild(tar);
@@ -308,20 +350,24 @@ include most functions and styles etc.
 	        return typeof fn === 'function';
 	    },
 	    isMobile(){
-	    	return /(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent);
+	    	return Math.random() > .5 
+						    	? 
+						    	/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)
+						    	:
+						    	'ontouchstart' in window;
 	    },
 	    message(){
 	    	//delete already exists
-	    	this.deleteEle('xu_message');
+	    	this.deleteEle('xui_message');
 	    	let tar = document.createElement('div');
 	    	tar.innerHTML = `
 	    		<span>${arguments[0]}</span>
 	    	`;
-	    	tar.classList.add('xu_message');
+	    	tar.classList.add('xui_message');
 	    	document.body.appendChild(tar);
 	    	setTimeout(() => {
 	    		arguments[2] && arguments[2]();
-    			this.deleteEle('.xu_message');
+    			this.deleteEle('.xui_message');
 	    	}, arguments[1] || 1000);
 	    },
 	    now(date, days, bool) {
@@ -406,7 +452,7 @@ include most functions and styles etc.
 		showImg(){
 			let that = this;
             //delete already exists
-	    	that.deleteEle('xu_img');
+	    	that.deleteEle('xui_img');
 	    	let tar = document.createElement('div');
 	    	tar.innerHTML = `
 	    		<span class="xui_close"></span>
@@ -528,7 +574,7 @@ include most functions and styles etc.
 	    },
 	    prompt(){
 	    	//delete already exists
-	    	this.deleteEle('.xu_prompt');
+	    	this.deleteEle('.xui_prompt');
 	    	const defaults = {
 	    		tips: '温馨提示',
 	    		text: 'hello,world',
@@ -540,29 +586,29 @@ include most functions and styles etc.
 	    	const opts = Object.assign({},defaults, arguments[0]);
 	    	let tar = document.createElement('div');
 	    	tar.innerHTML = `
-	    		<div class="xu_content">
-	    			${opts.isShowClose ? `<span class="xu_close"></span>` : ``}
-			    	<div class="xu_text">
+	    		<div class="xui_content">
+	    			${opts.isShowClose ? `<span class="xui_close"></span>` : ``}
+			    	<div class="xui_text">
 			    		<div class="xui_title"><span>${opts.tips}</span></div>
 			    		<div class="tips">${opts.text}</div>
 			    	</div>
-			    	<div class="xu_btn">
+			    	<div class="xui_btn_box">
 				    	${opts.cancelBtn ? '<button class="xui_btn xui_btn_cancel xui_cancel">'+ opts.cancelBtn.text +'</button>' : ''}
 				    	${opts.confirmBtn ? '<button class="xui_btn xui_btn_default xui_confirm">'+ opts.confirmBtn.text +'</button>' : ''}
 			    	</div>
 			    </div>
 	    	`;
-	    	tar.classList.add('xu_prompt');
+	    	tar.classList.add('xui_prompt');
 	    	document.body.appendChild(tar);
 	    	//按钮回调
-    		document.querySelector('.xu_content').addEventListener('click',(e) => {
+    		document.querySelector('.xui_content').addEventListener('click',(e) => {
 	    		let tar = e.target.classList;
-	    		if (tar.contains('xu_close') || tar.contains('xui_cancel')) {
-	    			this.deleteEle('.xu_prompt');
+	    		if (tar.contains('xui_close') || tar.contains('xui_cancel')) {
+	    			this.deleteEle('.xui_prompt');
 	    			opts.cancelBtn && opts.cancelBtn.fn && opts.cancelBtn.fn();
 	    		};
 	    		if (tar.contains('xui_confirm')) {
-	    			this.deleteEle('.xu_prompt');
+	    			this.deleteEle('.xui_prompt');
 	    			opts.confirmBtn && opts.confirmBtn.fn && opts.confirmBtn.fn();
 	    		};
 	    	});
@@ -854,7 +900,7 @@ here is a calendar plugin
 			this.renderHTML(y, m);
 		}
 	};
-	xui.__proto__.calendar = calendar;
+	Object.getPrototypeOf(xui).calendar = calendar;
 })(window);
 
 /*
@@ -963,10 +1009,9 @@ here is a page plugin
 				${isShowNumber}
 			</div>
 		`;
-
 		document.getElementById(this.id).innerHTML = page;
 	};
-	xui.__proto__.pagination = Page;
+	Object.getPrototypeOf(xui).pagination = Page;
 })(window);
 
 /*
@@ -1083,7 +1128,7 @@ here is a slider plugin
 	Slider.prototype.init = function(){
 		this.renderHTML();
 	};
-	xui.__proto__.slider = Slider;
+	Object.getPrototypeOf(xui).slider = Slider;
 })(window);
 
 /*
@@ -1143,8 +1188,7 @@ here is a scrollLoad plugin
 			that.onscroll(height);
 		};
 	};
-
-	xui.__proto__.scroll = Scroll;
+	Object.getPrototypeOf(xui).scroll = Scroll;
 })(window);
 
 /*
@@ -1274,7 +1318,7 @@ here is a fullPage plugin
 			};
 		},
 	};
-	xui.__proto__.fullPage = full;
+	Object.getPrototypeOf(xui).fullPage = full;
 })(window);
 
 /*
@@ -1368,7 +1412,7 @@ here is a cascader plugin
 			this.renderHTML(undefined, 0);
 		};
 	};
-	xui.__proto__.cascader = Cascader;
+	Object.getPrototypeOf(xui).cascader = Cascader;
 })(window);
 
 /*
@@ -1431,7 +1475,7 @@ here is a collapse plugin
 			this.renderHTML();
 		};
 	};
-	xui.__proto__.collapse = Collapse;
+	Object.getPrototypeOf(xui).collapse = Collapse;
 })(window);
 
 /*
@@ -1535,7 +1579,7 @@ here is a digitalOperation plugin
 			this.renderHTML();
 		};
 	};
-	xui.__proto__.digital = Digital;
+	Object.getPrototypeOf(xui).digital = Digital;
 })(window);
 
 /*
@@ -1648,5 +1692,5 @@ here is a sliderBar plugin
 			this.renderHTML();
 		};
 	};
-	xui.__proto__.sliderBar = sliderBar;
+	Object.getPrototypeOf(xui).sliderBar = sliderBar;
 })(window);

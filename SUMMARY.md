@@ -25,4 +25,6 @@
     * [3.1.15 手风琴 collapse](plugins/collapse.md)
     * [3.1.16 数字输入框 digital](plugins/digital.md)
     * [3.1.17 滑动选择框 sliderBar](plugins/sliderBar.md)
+    * [3.1.18 复制剪贴板 copyToClipBoard](plugins/copyToClipBoard.md)
+    * [3.1.19 穿梭框 transfer](plugins/transfer.md)
 * [4.日志 log](others/changeLog.md)
