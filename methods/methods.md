@@ -119,4 +119,52 @@ return Math.random() > .5
     'ontouchstart' in window;
 ```
 
-* 更多方法详见`xui.js`,哈哈
+11.用过目前很火的`vue`(其他的不熟悉, 暂不考虑),双向绑定格外吸引人注意,那么它是如何做出开的呢?
+先看看下面的例子吧
+
+>说明:用到的是`es5`里的`Object.defineProperty`,不支持`IE`8及以下(同样IE9也是bug众多).详情请戳[mdn介绍](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)
+
+<div class="xui_item">
+    <label>手机号: </label>
+    <div class="xui_content">
+        <input type="text" id="demo" maxlength="11" class="xui_input" placeholder="输入手机号试试呢" />
+    </div>
+</div>
+
+<div>
+    手机号为:
+    <span id="display"></span>
+</div>
+
+<script type="text/javascript">
+    xui.twoWayBinding('#demo', '#display');
+</script>
+
+```html
+<div class="xui_item">
+    <label>手机号: </label>
+    <div class="xui_content">
+        <input type="text" id="demo" maxlength="11" class="xui_input" placeholder="输入手机号试试呢" />
+    </div>
+</div>
+<div>
+    手机号为:
+    <span id="display"></span>
+</div>
+```
+
+```js
+xui.twoWayBinding('#demo', '#display');
+```
+
+* 更多方法详见`xui.js`,可以在控制台打印一下`xui`对象,你就知道所有的方法啦!
+
+>说明:点击查看大图哦!还可以像风一样旋转,跳跃,奔跑
+
+<img id="xui" style="width: 300px" src="../img/xui.png">
+
+<script type="text/javascript">
+document.getElementById('xui').onclick = function(e){
+    xui.showImg(e.target.src, 'xui');
+};
+</script>

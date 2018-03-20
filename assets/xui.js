@@ -572,6 +572,30 @@ include most functions and styles etc.
 	    toArray(arrLike){
 	    	return Array.prototype.slice.call(arrLike);
 	    },
+	    twoWayBinding(input, output){
+	    	let obj = {},arr = [];
+			Object.defineProperty(obj, 'outVal', {
+				set(val){
+					let num = val;
+					let reg1 = /^(\d{3})(\d{0,3})$/,
+						reg2 = /^(\d{3})(\d{4})(\d{0,4})$/;
+					let lastVal = num;
+					reg1.test(num) && (lastVal = num.replace(reg1, `$1 $2`));
+					reg2.test(num) && (lastVal = num.replace(reg2, `$1 $2 $3`));
+					arr['outVal'] = lastVal;
+				},
+				get(){
+					return arr['outVal'];
+				},
+			});
+
+			let tar = document.querySelector(input),
+				show = document.querySelector(output);
+			tar.onkeyup = function(e){
+				obj['outVal'] = e.target.value;
+				show.innerHTML = arr['outVal'];
+			};
+	    },
 	    prompt(){
 	    	//delete already exists
 	    	this.deleteEle('.xui_prompt');
