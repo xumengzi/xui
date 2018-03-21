@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.7.7';
+		this.version = '1.7.8';
 		console.log("xui v" + this.version)
 	};
 
@@ -879,16 +879,16 @@ here is a calendar plugin
 			let calHTML = `
 					<div class="xui_calendar_head">
 						<div>
+							<div data-set=2 title=${calHeadYear} class="xui_calendar_icon xui_cal endar_icon_year xui_calendar_left"></div>
 							<div data-set=1 title=${calHeadMonth} class="xui_calendar_icon xui_calendar_left"></div>
-							<div data-set=2 title=${calHeadYear} class="xui_calendar_icon xui_calendar_icon_year xui_calendar_left"></div>
 						</div>
 						<div class="xui_calendar_choose">
 							<span title=${year}>${year}</span>
 							<span title=${calMonthHtml}>${calMonthHtml}</span>
 						</div>
 						<div>
-							<div data-set=3 title=${calHeadYear} class="xui_calendar_icon xui_calendar_icon_year xui_calendar_right"></div>
 							<div data-set=4 title=${calHeadMonth} class="xui_calendar_icon xui_calendar_right"></div>
+							<div data-set=3 title=${calHeadYear} class="xui_calendar_icon xui_calendar_icon_year xui_calendar_right"></div>
 						</div>
 					</div>
 					<div class="xui_calendar_body">
