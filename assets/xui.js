@@ -8,13 +8,13 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.7.8';
+		this.version = '1.7.9';
 		console.log("xui v" + this.version)
 	};
 
 	Xui.prototype = {
 	    constructor: Xui,
-	    addZero(e) {
+	    zeroFill(e) {
 	        if (e < 0) {
 				return e = e > -10 ? '-0' + (-e) : e;
 			}else{
@@ -98,10 +98,10 @@ include most functions and styles etc.
 				    hour = parseInt((diff % (24 * 3600) / 3600),10) - 8,
 				    minute = parseInt((diff % 3600 / 60),10),
 				    second = parseInt((diff % 60),10);
-				day = this.addZero(day);
-				hour = this.addZero(hour);
-				minute = this.addZero(minute);
-				second = this.addZero(second);
+				day = this.zeroFill(day);
+				hour = this.zeroFill(hour);
+				minute = this.zeroFill(minute);
+				second = this.zeroFill(second);
 				if (args.isStop && diff <= 0) {
 					clearInterval(downTime);
 					day = hour = minute = second = '00';
@@ -253,16 +253,16 @@ include most functions and styles etc.
 	        date = new Date(date);
 	        let year = date.getFullYear();
 	        let month = date.getMonth() + 1;
-	        month = this.addZero(month);
+	        month = this.zeroFill(month);
 	        let day = date.getDate();
-	        day = this.addZero(day);
+	        day = this.zeroFill(day);
 	        if (bool) {
 	            let hour = date.getHours();
-	            hour = this.addZero(hour);
+	            hour = this.zeroFill(hour);
 	            let min = date.getMinutes();
-	            min = this.addZero(min);
+	            min = this.zeroFill(min);
 	            let sec = date.getSeconds();
-	            sec = this.addZero(sec);
+	            sec = this.zeroFill(sec);
 	            return year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + sec;
 	        };
 	        return year + '-' + month + '-' + day;

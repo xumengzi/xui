@@ -10,6 +10,12 @@
 
 >输入`xui.version`获取当前版本号
 
+###v1.7.9  <span style="font-size: 16px;">2018/04/10</span>
+#####change：     
+1.补零方法修改为`xui.zeroFill()`,更加规范
+
+>是否兼容现有代码：是(如果用到补零方法则需要修改)
+
 ###v1.7.8  <span style="font-size: 16px;">2018/03/21</span>
 #####bugfix：     
 1.修复[图片预览](../plugins/imgShow.md)插件左右旋转图标的展示问题
@@ -138,11 +144,11 @@
 >是否兼容现有代码：是
 
 ###v0.4.0  <span style="font-size: 16px;">2017/09/24</span>
-#####bugfix：     
+#####bugfix&change：     
 1.修改挂在在window对象上的方法名`xu`为`xui`
 
 2.[图片预览插件](../plugins/imgShow.md)支持下载修改文件名(同域下)
->是否兼容现有代码：不,需要全面修改
+>是否兼容现有代码：不
 
 ###v0.3.0  <span style="font-size: 16px;">2017/09/13</span>
 #####add：     
