@@ -1814,7 +1814,68 @@ input样式
 }
 
 
-
+/*穿梭框*/
+.xui-transfer{
+    width: 300px;
+    justify-content: space-around;
+    border: 1px #ccc solid;
+    align-items: flex-start;
+}
+.xui-transfer ul{
+    flex: 2;
+    text-align: center;
+    height: 200px;
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+}
+.xui-transfer ul li{
+    height: 35px;
+    line-height: 35px;
+    padding: 0 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-transition: background 0.3s ease;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+    cursor: pointer;
+}
+.xui-transfer ul li.xui-transfer-disabled{
+    color: rgba(0, 0, 0, 0.4);
+}
+.xui-transfer ul li.xui-transfer-list:hover{
+    background: #b1ebc9;
+}
+.xui-transfer ul li.xui-transfer-disabled:hover{
+    background: rgba(177, 235, 201, 0.4);
+}
+.xui-transfer ul li.selected{
+    background: #b1ebc9;
+}
+.xui-transfer .xui-transfer-prev{
+    
+}
+.xui-transfer .xui-transfer-type{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    border: 1px #ccc solid;
+    border-top: none;
+    border-bottom: none;
+}
+.xui-transfer .xui-transfer-type .xui-transfer-opt{
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+}
+.xui-transfer .xui-transfer-type .xui-transfer-opt:active{
+    top: 1px;
+}
+.xui-transfer .xui-transfer-last{
+    
+}
 
 /*全部动画*/
 /*从上往下淡入*/

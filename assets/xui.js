@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.7.9';
+		this.version = '1.8.0';
 		console.log("xui v" + this.version)
 	};
 
@@ -1717,4 +1717,160 @@ here is a sliderBar plugin
 		};
 	};
 	Object.getPrototypeOf(xui).sliderBar = sliderBar;
+})(window);
+
+/*
+here is a transfer plugin
+*/
+;(function(w){
+	class transfer{
+		constructor(){
+			if (!arguments[0].id) {
+				throw new Error("element'id is required");
+			};
+			const defaults = {
+                prevList: ['todo'],
+                lastList: ['todo'],
+                fn: null
+			};
+			const opts = Object.assign({}, defaults, arguments[0]);
+			this.opts = opts;
+			this.id = arguments[0].id;
+			this.tar = document.getElementById(this.id);
+			this.init();
+		}
+		event(){
+			let that = this;
+			that.tar.onclick = function(e){
+				let tarList = e.target.classList;
+				if (tarList.contains('xui-transfer-list') && !tarList.contains('xui-transfer-disabled')) {
+					tarList.toggle('selected');
+				};
+				if (tarList.contains('xui-transfer-opt')) {
+					let type = e.target.getAttribute('data-type') || 0;
+					that.getTransferData(type);
+				};
+			};
+		}
+		getTransferData(type){
+			/* 
+			type值
+			1-右移
+			2-左移
+			3-全部右移
+			4-全部左移
+			*/
+			let prevList = this.tar.querySelectorAll('.xui-transfer-prevlist'),
+				lastList = this.tar.querySelectorAll('.xui-transfer-lastlist');
+			prevList = [...prevList];
+			lastList = [...lastList];
+			if (type == 1 || type == 3) {
+				let prevNewList = [],
+					prevOldList = [];
+				for(let i of prevList){
+					if (type == 1 && i.classList.contains('selected')) {
+						prevNewList.push({
+							value: i.getAttribute('data-val'),
+							disabled: i.getAttribute('data-disabled'),
+						});
+					} else if (type == 3 && i.getAttribute('data-disabled') == 'false') {
+						prevNewList.push({
+							value: i.getAttribute('data-val'),
+							disabled: i.getAttribute('data-disabled'),
+						});
+					} else{
+						prevOldList.push({
+							value: i.getAttribute('data-val'),
+							disabled: i.getAttribute('data-disabled'),
+						});
+					}
+				};
+				this.opts.prevList = prevOldList;
+				this.opts.lastList = this.opts.lastList.concat(prevNewList);
+			};
+			if (type == 2 || type == 4) {
+				let lastNewList = [],
+					lastOldList = [];
+				for(let i of lastList){
+					if (type == 2 && i.classList.contains('selected')) {
+						lastNewList.push({
+							value: i.getAttribute('data-val'),
+							disabled: i.getAttribute('data-disabled'),
+						});
+					} else if (type == 4 && i.getAttribute('data-disabled') == 'false') {
+						lastNewList.push({
+							value: i.getAttribute('data-val'),
+							disabled: i.getAttribute('data-disabled'),
+						});
+					} else{
+						lastOldList.push({
+							value: i.getAttribute('data-val'),
+							disabled: i.getAttribute('data-disabled'),
+						});
+					};
+				};
+				this.opts.prevList = this.opts.prevList.concat(lastNewList);
+				this.opts.lastList = lastOldList;
+			};
+			//重新绘制transfer框
+			this.renderHTML(this.opts.prevList, this.opts.lastList);
+			const callbackList = {
+				leftList: this.opts.prevList,
+				rightList: this.opts.lastList
+			};
+			this.opts.fn && this.opts.fn(callbackList);
+		}
+		renderHTML(leftData, rightData){
+			let leftList = leftData || this.opts.prevList,
+				rightList = rightData || this.opts.lastList;
+			//默认左边的数据展示
+			let prevBox = '';
+			for(let i of leftList){
+				let isDisabled = i.disabled == 'true' ? 'xui-transfer-disabled' : '';
+				prevBox += `
+					<li class="xui-transfer-list xui-transfer-prevlist ${isDisabled}" 
+						data-disabled=${i.disabled}
+						data-val="${i.value}"
+						title="${i.value}"
+					>
+						${i.value}
+					</li>
+				`;
+			};
+			//默认右边的数据展示
+			let lastBox = '';
+			for(let i of rightList){
+				let isDisabled = i.disabled =='true' ? 'xui-transfer-disabled' : '';
+				lastBox += `
+					<li class="xui-transfer-list xui-transfer-lastlist ${isDisabled}" 
+						data-disabled=${i.disabled}
+						data-val="${i.value}"
+						title="${i.value}"
+					>
+						${i.value}
+					</li>
+				`;
+			};
+			let transferBox = `
+				<ul class="xui-transfer-prev">
+					${prevBox}
+				</ul>
+				<ul class="xui-transfer-type">
+					<li class="xui-transfer-opt" data-type="1" title="choose to right">></li>
+					<li class="xui-transfer-opt" data-type="2" title="choose to left"><</li>
+					<li class="xui-transfer-opt" data-type="3" title="all to right">>></li>
+					<li class="xui-transfer-opt" data-type="4" title="all to left"><<</li>
+				</ul>
+				<ul class="xui-transfer-last">
+					${lastBox}
+				</ul>
+			`;
+			this.tar.innerHTML = transferBox;
+			this.event();
+		}
+		init(){
+			this.renderHTML();
+		}
+	};
+	Object.getPrototypeOf(xui).transfer = transfer;
 })(window);

@@ -1,37 +1,68 @@
 <html><head>
 	<title>测试</title>
 	<meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="./assets/xui.css">
-<style type="text/css">
-	.done{
-		color: green;
-	}
-</style>
+	<link rel="stylesheet" type="text/css" href="./assets/xui.css">
 </head>
 
 <body>
-	<button class="xui_btn xui_btn_default" id="test">click</button>
+	<div id="transfer" class="xui-flex xui-transfer"></div>
 	<script type="text/javascript" src="./assets/xui.js"></script>
 	<script type="text/javascript">
 		window.onload = function(){
-			document.getElementById('test').onclick = function(){
-				xui.prompt({
-				    // tips: 'Title',
-				    // text: 'some comments',
-				    // confirmBtn: {
-				    //     text: 'ok',
-				    //     fn(){
-				    //         xui.message('you clicked ok');
-				    //     }
-				    // },
-				    // cancelBtn: {
-				    //     text: 'cancel',
-				    //     fn(){
-				    //         xui.message('you clicked cancel');
-				    //     }
-				    // },
-				});
-			}
+			new xui.transfer({
+				id: 'transfer',
+				prevList: [
+					{
+						value: 'javascript and something else',
+						disabled: "false",
+					},
+					{
+						value: 'vue',
+						disabled: "false",
+					},
+					{
+						value: 'react',
+						disabled: "true",
+					},
+					{
+						value: 'angular',
+						disabled: "false",
+					},
+					{
+						value: 'es6',
+						disabled: "false",
+					},
+					{
+						value: 'es7',
+						disabled: "true",
+					},
+					{
+						value: 'es8',
+						disabled: "false",
+					},
+					{
+						value: 'es9',
+						disabled: "true",
+					},
+					{
+						value: 'es10',
+						disabled: "false",
+					},
+				],
+				lastList: [
+					{
+						value: 'todo',
+						disabled: "false",
+					},
+					{
+						value: 'todo1',
+						disabled: "true",
+					}
+				],
+				fn(data){
+					console.log(data);
+				}
+			});
 		}
 	</script>
 </body></html>

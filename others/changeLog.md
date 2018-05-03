@@ -10,6 +10,11 @@
 
 >输入`xui.version`获取当前版本号
 
+###v1.8.0  <span style="font-size: 16px;">2018/04/25</span>
+#####add：     
+1.[穿梭框](../plugins/transfer.md)
+>是否兼容现有代码：是
+
 ###v1.7.9  <span style="font-size: 16px;">2018/04/10</span>
 #####change：     
 1.补零方法修改为`xui.zeroFill()`,更加规范
