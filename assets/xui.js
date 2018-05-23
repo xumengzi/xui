@@ -879,7 +879,7 @@ here is a calendar plugin
 			let calHTML = `
 					<div class="xui_calendar_head">
 						<div>
-							<div data-set=2 title=${calHeadYear} class="xui_calendar_icon xui_cal endar_icon_year xui_calendar_left"></div>
+							<div data-set=2 title=${calHeadYear} class="xui_calendar_icon xui_calendar_icon_year xui_calendar_left"></div>
 							<div data-set=1 title=${calHeadMonth} class="xui_calendar_icon xui_calendar_left"></div>
 						</div>
 						<div class="xui_calendar_choose">
