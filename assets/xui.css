@@ -1,7 +1,7 @@
 /*
  created by xumeng
  http://xumengzi.top/
- v1.6.6
+ v1.6.7
 */ 
 body{
     padding: 0;
@@ -11,7 +11,7 @@ body{
     display: none;
 }
 
-/*栅格布局*/
+/*flex*/
 .xui-flex{
     display: -webkit-box;
     display: -ms-flexbox;
@@ -96,8 +96,7 @@ body{
 .xui_content{
     position: relative;
 }
-/*常用样式*/
-/*按钮样式*/
+
 input[disabled],button[disabled] {
   cursor: not-allowed;
 }
@@ -166,9 +165,7 @@ button.xui_btn:disabled{
   border-color: #ccc;
   background-color: #f8f9f8;
 }
-/*
-input样式
-*/
+
 .xui_input{
     position: relative;
     width: 200px;
@@ -291,7 +288,6 @@ input样式
     cursor: not-allowed;
 }
 
-/*下拉框*/
 .xui_select{
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
@@ -302,7 +298,7 @@ input样式
     font-size: 14px;
     outline: none;
 }
-/*多行文本框*/
+
 .xui_textarea{
     width: 300px;
     height: 100px;
@@ -320,7 +316,7 @@ input样式
     resize: none;
 }
 
-/*开关*/
+
 .xui_switch_box{
     position: relative;
     width: 44px;
@@ -383,7 +379,7 @@ input样式
     cursor: not-allowed;
 }
 
-/*表格*/
+
 .xui_table{
     width: 100%;
     font-size: 12px;
@@ -433,9 +429,7 @@ input样式
 }
 
 
-/*
-弹框样式
-*/
+
 .xui_prompt,.xui_message{
     width: 100%;
     height: 100%;
@@ -530,7 +524,7 @@ input样式
     border-radius: 0 0 4px 4px;
 }
 
-/*loading*/
+
 .xui_loading > div{
     width: 3em;
     position: relative;
@@ -547,7 +541,8 @@ input样式
     -webkit-animation: .2s toToDown linear;
 }
 
-/*栅栏式*/
+
+
 .xui_loading{
     width: 100%;
     height: 100%;
@@ -627,7 +622,8 @@ input样式
         -webkit-transform: scaleY(1.0);
     }
 }
-/*圆点*/
+
+
 .xui_loading .dot{
     width: 100%;
     height: 100%;
@@ -755,7 +751,8 @@ input样式
         opacity: 1.0;
     }
 }
-/*圆点左右晃*/
+
+
 .xui_loading .dott{
     display: inline-block;
     width: 10px;
@@ -820,7 +817,7 @@ input样式
     }
 }
 
-/*提示信息*/
+
 .xui_message{
     background: transparent;
 }
@@ -835,7 +832,8 @@ input样式
     -webkit-animation: .2s toToDown linear;
 }
 
-/*tips*/
+
+
 .xui_tips,.xui_tips_bottom{
     position: relative;
     line-height: initial;
@@ -882,7 +880,6 @@ input样式
 }
 
 
-/*文件上传*/
 .xui_upload{
     width: 120px;
     position: relative;
@@ -903,7 +900,7 @@ input样式
     top: 1px;
 }
 
-/*点击放大图片*/
+
 .xui_img_content{
     position: fixed;
     top: 0;
@@ -1010,7 +1007,7 @@ input样式
     background-size: initial;
 }
 
-/*tab切换*/
+
 .xui_tab ul.xui_tab_head{
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1068,7 +1065,7 @@ input样式
     transition: .4s ease;
 }
 
-/*升级版下拉框*/
+
 .xui_drop_down{
     position: relative;
     display: -webkit-box;
@@ -1163,7 +1160,6 @@ input样式
 }
 
 
-/*日历*/
 .xui_date_picker{
     width: 200px;
     position: relative;
@@ -1338,7 +1334,7 @@ input样式
     cursor: not-allowed;
 }
 
-/*分页*/
+
 .xui_page_content span{
     border-radius: 4px;
     -webkit-user-select: none;
@@ -1393,7 +1389,6 @@ input样式
 }
 
 
-/*幻灯片*/
 .xui_slider_content{
     position: relative;
     width: 100%;
@@ -1484,7 +1479,7 @@ input样式
     background: rgba(0, 0, 0, 0.4);
 }
 
-/*全屏滚动*/
+
 .xui_full_page{
     width: 100%;
     height: 100%;
@@ -1518,7 +1513,7 @@ input样式
     padding: .2em;
 }
 
-/*雪花飘~~*/
+
 .xui_snow{
     position: relative;
 }
@@ -1609,7 +1604,7 @@ input样式
     }
 }
 
-/*手风琴*/
+
 .xui_collapse{
     font-size: 14px;
     line-height: 1.5;
@@ -1667,7 +1662,7 @@ input样式
     display: none;
 }
 
-/*加加减减*/
+
 .xui_digital{
     display: flex;
 }
@@ -1698,7 +1693,6 @@ input样式
     width: 40px;
 }
 
-/*滑动输入条*/
 .xui_slider_bar{
     position: relative;
     width: 100%;
@@ -1766,7 +1760,7 @@ input样式
     background: rgba(0, 0, 0, 0.25);
 }
 
-/*3D轮播图*/
+
 .xui_dimensions{
     width: 400px;
     height: 200px;
@@ -1814,7 +1808,7 @@ input样式
 }
 
 
-/*穿梭框*/
+
 .xui-transfer{
     width: 300px;
     justify-content: space-around;
@@ -1877,8 +1871,7 @@ input样式
     
 }
 
-/*全部动画*/
-/*从上往下淡入*/
+
 @-webkit-keyframes toToDown{
     0%{
         opacity: .2;

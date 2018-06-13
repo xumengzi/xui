@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.8.0';
+		this.version = '1.8.1';
 		console.log("xui v" + this.version)
 	};
 
@@ -64,7 +64,7 @@ include most functions and styles etc.
 	    		throw new Error('oops,nothing to copy?');
 	    	};
 	    	if (document.execCommand('copy')) {
-	    		tips = tips || '复制成功';
+	    		tips = tips || 'Successfully copied';
 	    		document.querySelector('.fake_input_value') && document.querySelector('.fake_input_value').remove();
                 let fakeInput = document.createElement('input');
                 fakeInput.style.position = 'absolute';
@@ -86,7 +86,7 @@ include most functions and styles etc.
 	    	let downTime = null;
 	    	let args = arguments[0];
 	    	if (!(args.endDate && args.target)) {
-	    		throw new Error('结束日期和目标元素必传');
+	    		throw new Error('end date and target are required');
 	    	};
 	    	args.endDate = args.endDate.replace(/\//g,'-');
 	    	clearInterval(downTime);
@@ -270,8 +270,7 @@ include most functions and styles etc.
 	    getCookie(name){
 			let myCookie = document.cookie;
 			let reg = new RegExp("([\\s]?)" + name + "=([\\d\\w]+)");
-			//2017/12/06 修改为正则匹配
-			//是的,普通循环显得太low
+			//2017/12/06 use RegExp
 			return (myCookie.match(reg) === null ? '' : decodeURIComponent(myCookie.match(reg)[2]));
 			// myCookie = myCookie.split('; ');
 			// for(let i = 0;i < myCookie.length; i++){
@@ -420,10 +419,10 @@ include most functions and styles etc.
 	    },
 	    setCookie(name, value, days, path){
 			if (!name) {
-				throw new Error('cookie名必传');
+				throw new Error("cookie'name is required");
 			};
 			if (!value) {
-				throw new Error('cookie值必传');
+				throw new Error("cookie'value is required");
 			};
 			let now = new Date();
 			let date = now.setDate(days);
@@ -600,7 +599,7 @@ include most functions and styles etc.
 	    	//delete already exists
 	    	this.deleteEle('.xui_prompt');
 	    	const defaults = {
-	    		tips: '温馨提示',
+	    		tips: 'warm tips',
 	    		text: 'hello,world',
 				isShowClose: true,
 				fn: null,
@@ -624,7 +623,7 @@ include most functions and styles etc.
 	    	`;
 	    	tar.classList.add('xui_prompt');
 	    	document.body.appendChild(tar);
-	    	//按钮回调
+	    	//callback
     		document.querySelector('.xui_content').addEventListener('click',(e) => {
 	    		let tar = e.target.classList;
 	    		if (tar.contains('xui_close') || tar.contains('xui_cancel')) {
@@ -657,13 +656,13 @@ here is a calendar plugin
 		cal.config.year = t.y;
 		cal.config.month = t.m;
 		cal.config = Object.assign({}, cal.config, arguments[0]);
-		// 是否禁止点击
+		// isDisabled or not
 		let ele = document.getElementById(cal.config.id),
 			child = ele && ele.children[0];
 		if (ele.getAttribute('disabled')) {
 			return;
 		};
-		//初始化日历
+		//init
 		cal.init();
 		document.body.onclick = function(e){
 			let o = e.target.classList;
@@ -730,17 +729,16 @@ here is a calendar plugin
 			if (eact.length) {
 				for(let d = 0; d < eact.length; d++){
 					eact[d] && eact[d].remove();
-					// document.querySelector('.xui_calendar_picker') && document.querySelector('.xui_calendar_picker').removeEventListener('click', cal.test, false)
 					document.body.removeEventListener('click', cal.handleClickCal, false);
 				};
 			};
 		},
 		renderHTML(year, month){
 			this.removeCal();
-			//换行标志位
+			//tag
 			let tag = 0,
 				lTag = 0;
-			//总的表格数
+			//total
 			let totalNum = 42;
 			let tar = new Date();
 			const t = {
@@ -843,7 +841,7 @@ here is a calendar plugin
 					};
 				};
 			};
-			//文字是否设置为中文
+			//zh-cn or en
 			let calHeadEn = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
 				calHeadCn = ['日', '一', '二', '三', '四', '五', '六'],
 				calMonthEn = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -859,7 +857,7 @@ here is a calendar plugin
 			for(let i in calHeadArr){
 				calHeadHtml += `<th class="xui_calendar_th">${calHeadArr[i]}</th>`;
 			};
-			//是否显示今天
+			//show today or not
 			let isToday = ``;
 			if (this.config.isToday) {
 				let istoDay = '';;
@@ -875,7 +873,7 @@ here is a calendar plugin
 					</div>
 				`;
 			};
-			//绘制日历
+			//render calendar
 			let calHTML = `
 					<div class="xui_calendar_head">
 						<div>
@@ -908,10 +906,6 @@ here is a calendar plugin
 			let con = document.createElement('div');
 			con.classList.add('xui_calendar_picker');
 			con.innerHTML = calHTML;
-			// let close = document.createElement('span');
-			// close.classList.add('xui_close_small');
-			// close.setAttribute('data-date','');
-			// document.getElementById(this.config.id).after(close);
 			document.getElementById(this.config.id).after(con);
 			this.event();
 		},
@@ -938,7 +932,7 @@ here is a page plugin
 			throw new Error("element'id is required");
 		};
 		if (!args.total) {
-			throw new Error("total is required");
+			throw new Error("element'total is required");
 		};
 		that.id = args.id;
 		that.index = args.index || 1;
@@ -979,7 +973,7 @@ here is a page plugin
 	Page.prototype.renderHTML = function(index){
 		index -=0;
 		let tot = this.total;
-		// 循环中间的5个数字
+		// count 5 numbers between them
 		let spans = '';
 		let tag = 0;
 		if (index < 3) {
@@ -998,7 +992,7 @@ here is a page plugin
 			`
 		};
 		/*
-		提供配置选项,分别是是否展示..., 分页数字,go快捷选项
+		some options
 		*/ 
 		let isShowPrevDot = '', 
 			isShowLastDot = '',
@@ -1092,13 +1086,12 @@ here is a slider plugin
 		};
 	};
 	Slider.prototype.handleChangeImg = function(){
-		//修改圆点的位置
 		this.handleChangeDot();
 		let each = 100 / (this.defaults.imgList.length - 0);
 		let ang = - (each * this.defaults.index) + '%';
-		//切换回调
+		//callback
 		this.defaults.fn && this.defaults.fn(this.defaults.index);
-		//修改图片的位置
+		//change position of the imgs
 		let ele = document.getElementById(this.defaults.id),
 			tar = ele.querySelector('.xui_slider_img').style;
 		tar.transform = `translate(${ang})`;
@@ -1172,7 +1165,6 @@ here is a scrollLoad plugin
 			return this.getScrollHeight() - this.getScrollTop() - this.getClientHeight();
 		};
 	};
-	//获取可视区域的高度
 	Scroll.prototype.getClientHeight = function(){
 		let clientHeight = 0;
 		if (that.id) {
@@ -1185,7 +1177,6 @@ here is a scrollLoad plugin
 		};
 		return clientHeight;
 	};
-	//滚动条当前的位置
 	Scroll.prototype.getScrollTop = function(){
 		let scrollTop = 0;
 		if (that.id) {
@@ -1198,7 +1189,6 @@ here is a scrollLoad plugin
 		};
 		return scrollTop;
 	};
-	//文档总高度
 	Scroll.prototype.getScrollHeight = function(){
 		if (that.id) {
 			return document.getElementById(that.id).scrollHeight;
@@ -1216,7 +1206,7 @@ here is a scrollLoad plugin
 })(window);
 
 /*
-here is a fullPage plugin
+here is a fullPage plugin, just for fun
 */ 
 ;(function(w){
 	function full(){
@@ -1298,7 +1288,7 @@ here is a fullPage plugin
 			let fst = this.config.currentPage;
 			for(let i = 0;i < ele.length; i++){
 				ele[i].classList.add('xui_page');
-				//一些配置项
+				//some options
 				let arr = this.config.colorArr;
 				this.config.isBackground && arr.length && (ele[i].style.background = arr[xui.randomNum(0,arr.length - 1)]);
 				this.config.isShowDot && ele[i].setAttribute('data-page', `${i+1}/${ele.length}`);
@@ -1320,9 +1310,6 @@ here is a fullPage plugin
 					startX = e.touches[0].pageX;
 					startY = e.touches[0].pageY;
 				});
-				// tar.addEventListener('touchmove',(e)=>{
-				// 	console.log(e);
-				// });
 				tar.addEventListener('touchend',(e)=>{
 					endX = e.changedTouches[0].pageX;
 					endY = e.changedTouches[0].pageY;
@@ -1380,10 +1367,11 @@ here is a cascader plugin
 				secSelect = '',
 				thiSelect = '', 
 				isEmpty = true;
-			firSelect += `<select class="xui_select"><option>请选择</option>`;
-			secSelect += `<select class="xui_select"><option>请选择</option>`;
-			thiSelect += `<select class="xui_select"><option>请选择</option>`;
+			firSelect += `<select class="xui_select"><option>choose</option>`;
+			secSelect += `<select class="xui_select"><option>choose</option>`;
+			thiSelect += `<select class="xui_select"><option>choose</option>`;
 			for(let i in this.data){
+				//var that ?
 				let f = this.data[i];
 				let a = this.rep.firKey,
 					b = this.rep.firList,
@@ -1449,7 +1437,7 @@ here is a collapse plugin
 				throw new Error("element'id is required");
 			};
 			if (!arguments[0].list.length) {
-				throw new Error("array is required");
+				throw new Error("element'array is required");
 			};
 			this.id = arguments[0].id;
 			this.isOneTab = typeof arguments[0].isOneTab == 'undefined' ? true : arguments[0].isOneTab;
@@ -1543,7 +1531,7 @@ here is a digitalOperation plugin
 								(int.value-0+step > max ? max : int.value-0+step)
 								: 
 								(int.value-step < min ? min : int.value-step);
-					//如果是小数, 那么需要精度
+					//digital
 					isPrecision && (int.value = Number(int.value).toFixed(this.opts.precision));
 					isDisabled(int.value);
 					this.opts.fn && this.opts.fn(int.value);
@@ -1561,7 +1549,6 @@ here is a digitalOperation plugin
 									: 
 									(val < min) ? min : val;
 					e.target.value -= 0;
-					//如果是小数, 那么需要精度
 					isPrecision && (e.target.value = Number(e.target.value).toFixed(this.opts.precision));
 					isDisabled(e.target.value);
 					this.opts.fn && this.opts.fn(e.target.value);
@@ -1682,6 +1669,7 @@ here is a sliderBar plugin
                 return showPercent;
             }
 		};
+		//count elem' distance
 		calLeftDis(ele){
 			let tmp = ele.offsetLeft,
 			par = ele.offsetParent;
@@ -1754,11 +1742,11 @@ here is a transfer plugin
 		}
 		getTransferData(type){
 			/* 
-			type值
-			1-右移
-			2-左移
-			3-全部右移
-			4-全部左移
+			type
+			1-move to right
+			2-move to left
+			3-move to right all
+			4-move to left all
 			*/
 			let prevList = this.tar.querySelectorAll('.xui-transfer-prevlist'),
 				lastList = this.tar.querySelectorAll('.xui-transfer-lastlist');
@@ -1812,7 +1800,7 @@ here is a transfer plugin
 				this.opts.prevList = this.opts.prevList.concat(lastNewList);
 				this.opts.lastList = lastOldList;
 			};
-			//重新绘制transfer框
+			//render transfer
 			this.renderHTML(this.opts.prevList, this.opts.lastList);
 			const callbackList = {
 				leftList: this.opts.prevList,
@@ -1823,7 +1811,7 @@ here is a transfer plugin
 		renderHTML(leftData, rightData){
 			let leftList = leftData || this.opts.prevList,
 				rightList = rightData || this.opts.lastList;
-			//默认左边的数据展示
+			//render left box
 			let prevBox = '';
 			for(let i of leftList){
 				let isDisabled = i.disabled == 'true' ? 'xui-transfer-disabled' : '';
@@ -1837,7 +1825,7 @@ here is a transfer plugin
 					</li>
 				`;
 			};
-			//默认右边的数据展示
+			//render right box
 			let lastBox = '';
 			for(let i of rightList){
 				let isDisabled = i.disabled =='true' ? 'xui-transfer-disabled' : '';
