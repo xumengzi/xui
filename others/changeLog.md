@@ -10,7 +10,13 @@
 
 >输入`xui.version`获取当前版本号
 
-###v1.8.1  <span style="font-size: 16px;">2018/05/05</span>
+###v1.9.1  <span style="font-size: 16px;">2018/06/22</span>
+#####add：     
+1.[懒加载插件](../plugins/lazyLoad.md)
+
+>是否兼容现有代码：是
+
+###v1.8.1  <span style="font-size: 16px;">2018/05/14</span>
 #####change：     
 1.`xui.js`注释和错误提示改为英文
 
@@ -19,7 +25,7 @@
 
 ###v1.8.0  <span style="font-size: 16px;">2018/04/25</span>
 #####add：     
-1.[穿梭框](../plugins/transfer.md)
+1.[穿梭框插件](../plugins/transfer.md)
 >是否兼容现有代码：是
 
 ###v1.7.9  <span style="font-size: 16px;">2018/04/10</span>
