@@ -27,4 +27,5 @@
     * [3.1.17 滑动选择框 sliderBar](plugins/sliderBar.md)
     * [3.1.18 复制剪贴板 copyToClipBoard](plugins/copyToClipBoard.md)
     * [3.1.19 穿梭框 transfer](plugins/transfer.md)
+    * [3.1.19 懒加载 lazyLoad](plugins/lazyLoad.md)
 * [4.日志 log](others/changeLog.md)

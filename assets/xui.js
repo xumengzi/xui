@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.8.1';
+		this.version = '1.9.1';
 		console.log("xui v" + this.version)
 	};
 
@@ -344,6 +344,14 @@ include most functions and styles etc.
 	        } else {
 	            return Object.prototype.toString.call(arr) === '[object Array]';
 	        };
+	    },
+	    isElementInViewport (el, offset = 0) {
+	        const box = el.getBoundingClientRect(),
+	              top = (box.top >= 0),
+	              left = (box.left >= 0),
+	              bottom = (box.bottom <= (window.innerHeight || document.documentElement.clientHeight) + offset),
+	              right = (box.right <= (window.innerWidth || document.documentElement.clientWidth) + offset);
+	        return (top && left && bottom && right);
 	    },
 	    isFunction(fn) {
 	        return typeof fn === 'function';
@@ -1861,4 +1869,70 @@ here is a transfer plugin
 		}
 	};
 	Object.getPrototypeOf(xui).transfer = transfer;
+})(window);
+
+/*
+here is a lazyLoad plugin
+*/
+;(function(w){
+	class LazyLoad{
+		constructor(){
+			const args = arguments[0];
+			if (!args.id) {
+				throw new Error("element'id is required");
+			};
+			if (!args.list) {
+				throw new Error("img not found");
+			};
+			const defaults = {
+				loadingImg: 'http://xumengzi.top/images/loading.gif',
+				errorImg: 'http://xumengzi.top/images/error.jpg',
+				hrefTarget: '',
+			};
+			this.opts = Object.assign({}, defaults, args);
+			this.ele = document.getElementById(args.id);
+			this.init();
+		};
+		event(){
+			this.showImg();
+			window.onscroll = () => {
+				this.showImg();
+			};
+		};
+		showImg(){
+			this.ele.querySelectorAll('.xui_img_box').forEach((item, index) => {
+				this.setImgUrl(item);
+			});
+		};
+		setImgUrl(item){
+			let isShow = xui.isElementInViewport(item);
+			let img = item.querySelector('.xui_img_load'),
+				url = img.getAttribute('data-src');
+			if (isShow && url) {
+				img.previousElementSibling && img.previousElementSibling.remove()
+				img.setAttribute('src', url);
+				img.removeAttribute('data-src');
+			};
+		};
+		renderHTML(){
+			let imgs = ``;
+			const {list, loadingImg, errorImg, hrefTarget} = this.opts;
+			for(let i in list){
+				imgs += `
+					<a href="${list[i].href || 'javascript:void(0)'}" target="${hrefTarget}">
+						<div class="xui_img_box">
+							<span class="xui_img_loading"><img src="${loadingImg}"/></span>
+							<img class="xui_img_load" onerror="this.src='${errorImg}'" data-src="${list[i].src || list[i]}"/>
+						</div>
+					</a>
+					`;
+			};
+			document.getElementById(this.opts.id).innerHTML = imgs;
+			this.event();
+		};
+		init(){
+			this.renderHTML();
+		};
+	};
+	Object.getPrototypeOf(xui).lazyLoad = LazyLoad;
 })(window);
