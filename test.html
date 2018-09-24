@@ -1,0 +1,29 @@
+<html>
+<head>
+	<title>测试</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="./assets/xui.css">
+
+	<style type="text/css">
+		#fullPage{
+			font-size: 40px;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div>asdaasdasd ads asd</div>
+	<div id="sliderBar" class="xui_slider_bar">123</div>
+	<div>asdadqwq34512</div>
+	<script type="text/javascript" src="./assets/xui.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			new xui.sliderBar({
+			    id: 'sliderBar',
+			    dragEnd(val){
+			        xui.message(val);
+			    }
+			});
+		}
+	</script>
+</body></html>

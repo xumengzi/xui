@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.9.1';
+		this.version = '1.9.2';
 		console.log("xui v" + this.version)
 	};
 
@@ -1638,6 +1638,7 @@ here is a sliderBar plugin
                 showPercent = 0;
             tar.addEventListener('mousedown', dragStart, false);
             function dragStart(e){
+            	e.preventDefault();
             	if (e.currentTarget.classList.contains('xui_slider_disabled')) {
             		return;
             	};
@@ -1647,6 +1648,7 @@ here is a sliderBar plugin
                 that.opts.dragStart && that.opts.dragStart(dis);
                 document.addEventListener('mousemove', dragMove, false);
                 document.addEventListener('mouseup', dragEnd, false);
+                return false;
             };
             function dragMove(e){
                 let nowDis = e.clientX || e.pageX;
