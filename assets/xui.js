@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '1.9.2';
+		this.version = '2.0.2';
 		console.log("xui v" + this.version)
 	};
 
@@ -1911,7 +1911,7 @@ here is a lazyLoad plugin
 			let img = item.querySelector('.xui_img_load'),
 				url = img.getAttribute('data-src');
 			if (isShow && url) {
-				img.previousElementSibling && img.previousElementSibling.remove()
+				img.previousElementSibling && img.previousElementSibling.remove();
 				img.setAttribute('src', url);
 				img.removeAttribute('data-src');
 			};
@@ -1937,4 +1937,66 @@ here is a lazyLoad plugin
 		};
 	};
 	Object.getPrototypeOf(xui).lazyLoad = LazyLoad;
+})(window);
+
+/*
+here is a pullLoad plugin
+*/
+;(function(w){
+	class PullLoad{
+		constructor(){
+			const args = arguments[0];
+			if (!args.id) {
+				throw new Error("element'id is required");
+			};
+			this.opts = Object.assign({}, args);
+			this.isRefresh = false;
+			this.ele = document.getElementById(args.id).querySelector('.xui_pull_content');
+			this.init();
+		};
+		event(){
+			let that = this;
+			that.ele.addEventListener('mousedown',mouseDown, false);
+			function mouseDown(e){
+				that.curY = e.pageY;
+				document.addEventListener('mousemove', mouseMove, false);
+				document.addEventListener('mouseup', mouseUp, false);
+				return false;
+			};
+			function mouseMove(e){
+				let disY = e.pageY - that.curY;
+				if (disY > 0 && disY <= 60) {
+					disY >= 50 && (that.isRefresh = true);
+					that.ele.style.transform = `translateY(${disY}px)`
+				}
+			};
+			function mouseUp(){
+				// that.renderLoading();
+				document.removeEventListener('mousemove', mouseMove);
+				document.removeEventListener('mouseup', mouseUp);
+				if (that.isRefresh) {
+					setTimeout(()=>{
+						that.reSet();
+					},2000);
+				};
+			};
+		};
+		renderLoading(){
+			let loading = document.createElement('p');
+			loading.innerHTML = Math.floor(Math.random() * 100 + 1);
+			this.ele.appendChild(loading, this.ele.childNodes[0]);
+		}
+		reSet(){
+			if (this.opts.fn) {
+				this.opts.fn();
+				this.renderLoading();
+				this.ele.style.transform = `translateY(0px)`;
+				this.ele.style.transition = 'transform .3s ease-in-out';
+			};
+		}
+		init(){
+			this.event();
+		};
+	};
+	Object.getPrototypeOf(xui).pullLoad = PullLoad;
 })(window);

@@ -10,6 +10,12 @@
 
 >输入`xui.version`获取当前版本号
 
+###v2.0.2  <span style="font-size: 16px;">2018/08/12</span>
+#####add：     
+1.[下拉加载插件](../plugins/pullLoad.md)
+
+>是否兼容现有代码：是
+
 ###v1.9.2  <span style="font-size: 16px;">2018/07/04</span>
 #####bugfix：     
 1.修复[滑动选择框](../plugins/sliderBar.md)拖动时选中默认文字
