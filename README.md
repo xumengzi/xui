@@ -40,7 +40,6 @@
 How many codes must a man edit before you call him a master?
 ```
 
-##### 归去来兮? 归去也!
 
 >寓形宇内复几时，曷不委心任去留？
 
