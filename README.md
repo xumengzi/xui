@@ -11,7 +11,7 @@
 
 * 依赖: `xui.css` (不依赖任何其他框架)
 
-* 兼容性: IE11及以上高级浏览器(需要babel转义)
+* 兼容性: IE10及以上高级浏览器(需要babel转义)
 
 * 使用方法: 在你的框架(`vue`, `react`, `angular`, `etc`)中引用`xui.js`和`xui.css`
 
