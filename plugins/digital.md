@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# 3.1.16 digital
+# 3.2.6 digital
 
 >说明: 当需要用户通过鼠标或键盘,输入范围内的数值.
 

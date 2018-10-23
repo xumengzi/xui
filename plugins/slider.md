@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# 3.1.10 slider
+# 3.2.0 slider
 
 >说明: 凸显网站特色以及展示多张图片等场景需要
 

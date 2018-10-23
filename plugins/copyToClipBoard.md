@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# 3.1.18 copyToClipBoard
+# 3.2.8 copyToClipBoard
 
 >说明: 方便用户复制某些内容,并给出友好提示
 

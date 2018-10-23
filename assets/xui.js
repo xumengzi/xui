@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '2.0.2';
+		this.version = '2.0.3';
 		console.log("xui v" + this.version)
 	};
 

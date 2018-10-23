@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# 3.1.17 sliderBar
+# 3.2.7 sliderBar
 
 >说明: 当用户需要在选择某个值时
 

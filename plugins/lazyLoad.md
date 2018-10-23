@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# 3.1.20 lazyLoad
+# 3.3.0 lazyLoad
 
 >说明: 用来提升用户体验, 降低服务器开销
 
