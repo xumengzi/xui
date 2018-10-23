@@ -1949,50 +1949,73 @@ here is a pullLoad plugin
 			if (!args.id) {
 				throw new Error("element'id is required");
 			};
-			this.opts = Object.assign({}, args);
+			if (args.activeScrollHeight > args.maxScrollHeight) {
+				throw new Error("activeScrollHeight must be smaller than maxScrollHeight");
+			};
+			const defaults = {
+				id: 'pullLoad',
+				loading: 'loading...',
+				maxScrollHeight: 60,
+				activeScrollHeight: 50,
+				fn: null,
+			};
+			this.opts = Object.assign({}, defaults, args);
 			this.isRefresh = false;
-			this.ele = document.getElementById(args.id).querySelector('.xui_pull_content');
+			let loadEle = document.createElement('div');
+			loadEle.innerHTML = this.opts.loading;
+			loadEle.classList += 'xui_pull_loading';
+			loadEle.style.height = this.opts.maxScrollHeight + 'px';
+			let tar = document.getElementById(args.id);
+			tar.insertBefore(loadEle,tar.childNodes[0]);
+			this.ele = tar.querySelector('.xui_pull_content');
 			this.init();
 		};
 		event(){
-			let that = this;
-			that.ele.addEventListener('mousedown',mouseDown, false);
-			function mouseDown(e){
-				that.curY = e.pageY;
-				document.addEventListener('mousemove', mouseMove, false);
-				document.addEventListener('mouseup', mouseUp, false);
+			let that = this, timer = null;
+			that.ele.addEventListener('mousedown',pullDown, false);
+			that.ele.addEventListener('touchstart',pullDown, false);
+			function pullDown(e){
+				e.preventDefault();
+				that.curY = e.pageY || e.touches[0].pageY;
+				document.addEventListener('mousemove', pullMove, false);
+				document.addEventListener('mouseup', pullUp, false);
+				document.addEventListener('touchmove', pullMove, false);
+				document.addEventListener('touchend', pullUp, false);
 				return false;
 			};
-			function mouseMove(e){
-				let disY = e.pageY - that.curY;
-				if (disY > 0 && disY <= 60) {
-					disY >= 50 && (that.isRefresh = true);
+			function pullMove(e){
+				let disY = (e.pageY || e.touches[0].pageY) - that.curY;
+				if (disY > 0 && disY <= that.opts.maxScrollHeight) {
 					that.ele.style.transform = `translateY(${disY}px)`
-				}
+				};
 			};
-			function mouseUp(){
-				// that.renderLoading();
-				document.removeEventListener('mousemove', mouseMove);
-				document.removeEventListener('mouseup', mouseUp);
+			function pullUp(e){
+				document.removeEventListener('mousemove', pullMove);
+				document.removeEventListener('mouseup', pullUp);
+				document.removeEventListener('touchmove', pullMove);
+				document.removeEventListener('touchend', pullUp);
+			 	that.isRefresh = ((e.pageY || e.changedTouches[0].pageY) - that.curY >= that.opts.activeScrollHeight) ? true : false;
 				if (that.isRefresh) {
-					setTimeout(()=>{
-						that.reSet();
-					},2000);
+					typeof that.opts.fn === 'function' && that.opts.fn();
+				} else{
+					that.reSet();
 				};
 			};
 		};
-		renderLoading(){
-			let loading = document.createElement('p');
-			loading.innerHTML = Math.floor(Math.random() * 100 + 1);
-			this.ele.appendChild(loading, this.ele.childNodes[0]);
-		}
 		reSet(){
-			if (this.opts.fn) {
-				this.opts.fn();
-				this.renderLoading();
-				this.ele.style.transform = `translateY(0px)`;
-				this.ele.style.transition = 'transform .3s ease-in-out';
-			};
+			let timer = null;
+			this.ele.style.transform = `translateY(0px)`;
+			this.ele.style.webkitTransform = `translateY(0px)`;
+			this.ele.style.mozTransform = `translateY(0px)`;
+			this.ele.style.transition = 'transform .3s ease-in-out';
+			this.ele.style.webkitTransition = 'transform .3s ease-in-out';
+			clearTimeout(timer);
+			timer = setTimeout(()=>{
+				this.ele.style.transition = '';
+			},300);
+		}
+		finished(){
+			this.reSet();
 		}
 		init(){
 			this.event();

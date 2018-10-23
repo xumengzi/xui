@@ -1,7 +1,7 @@
 /*
  created by xumeng
  http://xumengzi.top/
- v1.7.7
+ v1.8.7
 */ 
 body{
     padding: 0;
@@ -1899,6 +1899,29 @@ button.xui_btn:disabled{
     background: #fff;
     z-index: 1;
 }
+
+/*下拉加载*/
+.xui_pull_load{
+    position: relative;
+}
+.xui_pull_load .xui_pull_loading{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.xui_pull_load .xui_pull_loading img{
+    width: 100%;
+    height: 100%;
+}
+.xui_pull_load .xui_pull_content{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
 
 @-webkit-keyframes toToDown{
     0%{
