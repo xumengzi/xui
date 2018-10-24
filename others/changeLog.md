@@ -210,9 +210,10 @@
 
 ###v0.0.1  <span style="font-size: 16px;">2017/07/21</span>
 #####init：
-1.前端框架项目[xui](../README.md)
+1.[`gitbook`地址](https://legacy.gitbook.com/book/jarveniv/xui/details)
 
-2.[`gitbook`地址](https://www.gitbook.com/@jarveniv/dashboard)
+2.[`github`地址](https://github.com/JarvenIV/xui)
+
 
 <script>
 	document.querySelector('.version').innerHTML = xui.version;
