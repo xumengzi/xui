@@ -10,7 +10,7 @@
 <div id="pagerId"></div>
 ```
 ```js
-let myPage = new xui.pagination({
+var myPage = new xui.pagination({
 	id: string,
 	index: number,
 	total: number,
@@ -43,7 +43,7 @@ myPage.onKeyUp = function(index){
 <div id="pagerId"></div>
 
 <script type="text/javascript">
-let myPage = new xui.pagination({
+var myPage = new xui.pagination({
 	id: 'pagerId',
 	index: 1,
 	total: 11,
@@ -57,7 +57,7 @@ myPage.onClick = function(index){
 ```
 
 ```js
-let myPage = new xui.pagination({
+var myPage = new xui.pagination({
 	id: "pagerId",
 	index: 1,
 	total: 11,
@@ -71,7 +71,7 @@ myPage.onClick = function(index){
 <div id="pagerId1"></div>
 
 <script type="text/javascript">
-let myPage1 = new xui.pagination({
+var myPage1 = new xui.pagination({
 	id: 'pagerId1',
 	index: 3,
 	total: 20,
@@ -91,7 +91,7 @@ myPage1.onKeyUp = function(index){
 ```
 
 ```js
-let myPage1 = new xui.pagination({
+var myPage1 = new xui.pagination({
 	id: "pagerId1",
 	index: 1,
 	total: 11,

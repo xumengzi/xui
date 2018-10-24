@@ -13,7 +13,7 @@
 ```
 
 ```js
-let load = new xui.pullLoad({
+var load = new xui.pullLoad({
 	id: string,
 	loading: string,
 	maxScrollHeight: number,
@@ -59,7 +59,7 @@ let load = new xui.pullLoad({
 </style>
 
 <script type="text/javascript">
-let load = new xui.pullLoad({
+var load = new xui.pullLoad({
 	id: 'pullLoad',
 	fn: function(){
 		setTimeout(() =>{
@@ -77,7 +77,7 @@ let load = new xui.pullLoad({
 </div>```
 
 ```js
-let load = new xui.pullLoad({
+var load = new xui.pullLoad({
 	id: 'pullLoad',
 	fn: function(){
 		setTimeout(() =>{
@@ -95,7 +95,7 @@ let load = new xui.pullLoad({
 </div>
 
 <script type="text/javascript">
-let load1 = new xui.pullLoad({
+var load1 = new xui.pullLoad({
 	id: 'pullLoad1',
 	loading: '<img src="http://xumengzi.top/images/loading.gif" />',
 	maxScrollHeight: 100,
@@ -116,7 +116,7 @@ let load1 = new xui.pullLoad({
 </div>```
 
 ```js
-let load1 = new xui.pullLoad({
+var load1 = new xui.pullLoad({
 	id: 'pullLoad1',
 	loading: '<img src="http://xumengzi.top/images/loading.gif" />',
 	maxScrollHeight: 60,
