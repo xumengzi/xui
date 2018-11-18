@@ -7,7 +7,7 @@
 
 ##### 使用及参数说明:
 ```js
-let test = new xui.scroll();
+var test = new xui.scroll();
 test.onscroll = function(height){
 	if (height == 0) {
 		xui.loading(true, '.loading');
@@ -57,7 +57,7 @@ test.onscroll = function(height){
 </div>
 
 <script type="text/javascript">
-let test = new xui.scroll({
+var test = new xui.scroll({
 	id: 'example'
 });
 test.onscroll = function(height){
@@ -72,7 +72,7 @@ test.init();
 </script>
 
 ```js
-let test = new xui.scroll({
+var test = new xui.scroll({
 	id: 'example'
 });
 test.onscroll = function(height){
