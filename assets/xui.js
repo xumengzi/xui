@@ -1,6 +1,6 @@
 /*
  created by xumeng
- http://xumengzi.top/
+ https://xumeng.site/
 */ 
 
 /*
@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '2.0.3';
+		this.version = '2.0.4';
 		console.log("xui v" + this.version)
 	};
 

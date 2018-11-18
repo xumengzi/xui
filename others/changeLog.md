@@ -10,6 +10,12 @@
 
 >输入`xui.version`获取当前版本号
 
+###v2.0.4  <span style="font-size: 16px;">2018/11/11</span>
+#####bugfix：
+1.`xui`框架指向新域名[xui框架](https://xumeng.site/)
+
+>是否兼容现有代码：是
+
 ###v2.0.3  <span style="font-size: 16px;">2018/09/01</span>
 #####change：
 1.重新整理插件序号

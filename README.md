@@ -5,8 +5,6 @@
 
 ## 项目名称: `xui`
 
->传送门: [xui-vue](http://xumengzi.top/gitbook/xui-vue/#/)
-
 * 简介: 一个基于原生`JS`,可以提供丰富的方法,组件,插件的组件库.
 
 * 依赖: `xui.css` (不依赖任何其他框架)
