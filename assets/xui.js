@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '2.0.4';
+		this.version = '2.0.5';
 		console.log("xui v" + this.version)
 	};
 
@@ -458,7 +458,6 @@ include most functions and styles etc.
 		},
 		showImg(){
 			let that = this;
-            //delete already exists
 	    	that.deleteEle('xui_img');
 	    	let tar = document.createElement('div');
 	    	tar.innerHTML = `
@@ -575,6 +574,34 @@ include most functions and styles etc.
 					};
 				};
 			};
+	    },
+	    throttle(fn, await, leading){
+	    	await = await || 300;
+	    	let context, args;
+	    	let previous = 0,
+	    		timeout = null;
+	    	if (leading) {
+	    		return function(){
+	    			context = this;
+	    			args = arguments;
+	    			if (!timeout) {
+	    				timeout = setTimeout(() =>{
+	    					timeout = null;
+	    					xui.isFunction(fn) && fn.apply(context, args);
+	    				}, await);
+	    			};
+	    		};
+	    	} else{
+    			return function(){
+		    		context = this;
+		    		args = arguments;
+		    		let now = +new Date();
+		    		if (now - previous > await) {
+		    			previous = now;
+		    			xui.isFunction(fn) && fn.apply(context, args);
+		    		};
+		    	};
+	    	}
 	    },
 	    toArray(arrLike){
 	    	return Array.prototype.slice.call(arrLike);

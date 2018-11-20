@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-#方法集合
+# 2.1.1 方法集合
 
 #### 这里将会是方法集合
 
