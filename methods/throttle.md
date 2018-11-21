@@ -41,6 +41,15 @@ xui.throttle(fn, await, leading);
 	});
 </script>
 
+```js
+var eg = document.getElementById('throttle'),
+	NUM = 0;
+eg.addEventListener('mousemove', function(){
+	NUM++;
+	eg.innerHTML = 'move ' + NUM + ' times';
+});
+```
+
 2.这个时候节流函数就派上用场了, 此时延时为500ms, 意思是不管你移动的多块,500ms内我就是只执行一次
 <div class="xui_test" id="throttle1"></div>
 

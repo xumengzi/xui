@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '2.0.5';
+		this.version = '2.0.6';
 		console.log("xui v" + this.version)
 	};
 
@@ -119,6 +119,18 @@ include most functions and styles etc.
 					item.innerHTML = day + '天' + hour + '时' + minute + '分' + second + '秒';
 				});
 	    	},1000);
+	    },
+	    debounce(fn, await = 300){
+	    	let context, args;
+	    	let timeout;
+	    	return function(){
+	    		clearTimeout(timeout);
+	    		context = this;
+	    		args = arguments;
+	    		timeout = setTimeout(() => {
+	    			xui.isFunction(fn) && fn.apply(context, args);
+	    		}, await);
+	    	};
 	    },
 	    decodeStr(str) {
 	        return decodeURIComponent(str);

@@ -10,7 +10,13 @@
 
 >输入`xui.version`获取当前版本号
 
-###v2.0.5  <span style="font-size: 16px;">2018/11/04</span>
+###v2.0.6  <span style="font-size: 16px;">2018/10/28</span>
+#####add：
+1.新增防抖函数, 详见[防抖 debounce](../methods/debounce.md)
+
+>是否兼容现有代码：是
+
+###v2.0.5  <span style="font-size: 16px;">2018/10/27</span>
 #####add：
 1.新增节流函数, 详见[节流 throttle](../methods/throttle.md)
 

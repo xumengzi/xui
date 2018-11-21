@@ -21,6 +21,7 @@
 	<div class="xui_test" id="throttle"></div>
 	<div class="xui_test" id="throttle1"></div>
 	<div class="xui_test" id="throttle2"></div>
+	<input type="text" id="name" name="" class="xui_input" /><span></span>
 	<script type="text/javascript" src="./assets/xui.js"></script>
 	<script type="text/javascript">
 		window.onload = function(){
@@ -46,6 +47,14 @@
 					NUM2++;
 					e.target.innerHTML = 'move ' + NUM2 + ' times';
 				}, 500, true), false);
+
+			var name = document.getElementById('name'),
+				NUM3 = 0;
+			name.addEventListener('keyup', 
+				xui.debounce(function(e){
+					NUM3++
+					e.target.nextSibling.innerHTML = NUM3;
+				}, 500),false)
 		}
 	</script>
 </body></html>
