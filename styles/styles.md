@@ -1,10 +1,9 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-#### 默认的样式总是不那么好看,所以我们习惯自定义样式.哈哈,你来对地方了!
+# 1.1.1 通用general
 
 >说明: 用来增强页面效果,提高用户体验度
-
 
 ##### 按钮`button`
 
@@ -12,7 +11,6 @@
 <button disabled class="xui_btn xui_btn_default">默认按钮禁止</button>
 <button class="xui_btn xui_btn_cancel">取消按钮</button>
 <button disabled class="xui_btn xui_btn_cancel">取消按钮</button>
-
 
 ```html
 <button class="xui_btn xui_btn_default">默认按钮</button>

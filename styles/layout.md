@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# flex布局
+# 1.1.2 flex布局
 
 >说明: 应用在需要灵活使用各种布局的场景
 
