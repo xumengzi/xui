@@ -17,7 +17,7 @@ xui.debounce(fn, await);
 我们怎么做呢? 像这样? 肯定是不行的, 首先这样会不停的触发异步请求, 服务器性能消耗过大
 
 <div class="xui_item">
-    <label>试试输入点什么吧: </label>
+    <label>write something: </label>
     <div class="xui_content">
         <input type="text" id="debounce" class="xui_input" placeholder="请输入关键字" /><span></span>
     </div>
@@ -26,7 +26,7 @@ xui.debounce(fn, await);
 <script type="text/javascript">
 	var tar = document.getElementById('debounce'),
 		NUM = 0;
-	tar.addEventListener('keyup', function(e){
+	tar.addEventListener('keydown', function(e){
 		//去执行一个异步来判断用户名是否已经注册
 		NUM++;
 		e.target.nextSibling.innerHTML = NUM;
@@ -36,7 +36,7 @@ xui.debounce(fn, await);
 ```js
 var tar = document.getElementById('debounce'),
 	NUM = 0;
-tar.addEventListener('keyup', function(e){
+tar.addEventListener('keydown', function(e){
 	//去执行一个异步来判断用户名是否已经注册
 	NUM++;
 	e.target.nextSibling.innerHTML = NUM;
@@ -46,7 +46,7 @@ tar.addEventListener('keyup', function(e){
 2.那么使用防抖之后是怎样的呢? 
 用户停止输入后500ms, 再去执行异步方法检测用户名是否被注册
 <div class="xui_item">
-    <label>试试输入点什么吧: </label>
+    <label>write something: </label>
     <div class="xui_content">
         <input type="text" id="debounce1" class="xui_input" placeholder="请输入关键字" /><span></span>
     </div>
@@ -55,7 +55,7 @@ tar.addEventListener('keyup', function(e){
 <script type="text/javascript">
 	var name1 = document.getElementById('debounce1'),
 		NUM1 = 0;
-	name1.addEventListener('keyup', 
+	name1.addEventListener('keydown', 
 		xui.debounce(function(e){
 			NUM1++;
 			e.target.nextSibling.innerHTML = NUM1;
@@ -65,7 +65,7 @@ tar.addEventListener('keyup', function(e){
 ```js
 var name1 = document.getElementById('debounce1'),
 	NUM1 = 0;
-name1.addEventListener('keyup', 
+name1.addEventListener('keydown', 
 	xui.debounce(function(e){
 		NUM1++;
 		e.target.nextSibling.innerHTML = NUM1;

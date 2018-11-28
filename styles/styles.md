@@ -192,7 +192,6 @@
 
 > 如果你发现在谷歌浏览器下点击上传文件按钮很卡,那么请把`accept`里面设置修改一下,默认为*,意思是匹配所有的文件.详情[Chrome 文件选择延迟 Bug](https://zhuanlan.zhihu.com/p/27946188)
 
-> 如果你只想上传一下图片,就可以设置只匹配图片好了.[简单代码实现上传预览](http://xumengzi.top/xumeng/20160712/2016-07-12.html)
 
 <div class="xui_upload">
 	<input type="file" class="xui_file" accept="image/jpeg, image/jpg, image/png, image/bmp" />
