@@ -5,63 +5,31 @@
 	<link rel="stylesheet" type="text/css" href="./assets/xui.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<style type="text/css">
-		#pullLoad,#pullLoad1{
-			width: 200px;
-			height: 400px;
-			margin: 20px;
-			background: antiquewhite;
-			text-align: center;
-		    color: brown;
+		.color{
+		    padding: 0;
+		    margin: 0;
+			width: 20%;
+		    border-radius: 4px;
+		    text-align: center;
+		    line-height: 40px;
+		    box-sizing: border-box;
+		    font-size: 14px;
+		    overflow: hidden;
 		}
-		.xui_pull_content{
-		    background: beige;
-		    display: flex;
-	        align-items: center;
-    		justify-content: center;
+		.color span{
+			width: 100%;
+			display: inline-block;
+			transition: transform .4s linear;
+		}
+		.color:hover span:nth-child(1){
+			transform: translateX(-100%);
+		}
+		.color:hover span:nth-child(2){
+			transform: translateX(-100%);
 		}
 	</style>
 </head>
 <body>
-	<div id="sliderBar" class="xui_slider_bar"></div>
-	<div id="pullLoad" class="xui_pull_load">
-		<div class="xui_pull_content">下拉加载</div>
-	</div>
-	<div id="pullLoad1" class="xui_pull_load">
-		<div class="xui_pull_content">下拉加载</div>
-	</div>
+	<div class="color xui_btn xui_btn_default"><span>#4eb900</span><span>#3b8704</span></div>
 	<script type="text/javascript" src="./assets/xui.js"></script>
-	<script type="text/javascript">
-		window.onload = function(){
-			new xui.sliderBar({
-			    id: 'sliderBar',
-			    dragEnd(val){
-			        xui.message(val);
-			    }
-			});
-			
-			let load = new xui.pullLoad({
-				id: 'pullLoad',
-				loading: '<img src="http://xumengzi.top/images/loading.gif" />',
-				maxScrollHeight: 60,
-				activeScrollHeight: 50,
-				fn: function(){
-					setTimeout(() =>{
-						xui.message('异步数据请求成功');
-						load.ele.innerHTML = Math.PI.toString().substr(0, Math.random() * 6 + 4);
-						load.finished();
-					},2000);
-				}
-			});
-			let load1 = new xui.pullLoad({
-				id: 'pullLoad1',
-				fn: function(){
-					setTimeout(() =>{
-						xui.message('异步数据请求成功');
-						load1.ele.innerHTML = Math.round(Math.random() * 1000);
-						load1.finished();
-					},1000);
-				}
-			});
-		}
-	</script>
 </body></html>
