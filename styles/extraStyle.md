@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-# 一些不错的样式
+# 1.1.3 其他样式
 
 >说明: 用来为用户更多信息,hover时出现.
 

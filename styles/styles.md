@@ -1,10 +1,9 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-#### 默认的样式总是不那么好看,所以我们习惯自定义样式.哈哈,你来对地方了!
+# 1.1.1 通用general
 
 >说明: 用来增强页面效果,提高用户体验度
-
 
 ##### 按钮`button`
 
@@ -12,7 +11,6 @@
 <button disabled class="xui_btn xui_btn_default">默认按钮禁止</button>
 <button class="xui_btn xui_btn_cancel">取消按钮</button>
 <button disabled class="xui_btn xui_btn_cancel">取消按钮</button>
-
 
 ```html
 <button class="xui_btn xui_btn_default">默认按钮</button>
@@ -194,7 +192,6 @@
 
 > 如果你发现在谷歌浏览器下点击上传文件按钮很卡,那么请把`accept`里面设置修改一下,默认为*,意思是匹配所有的文件.详情[Chrome 文件选择延迟 Bug](https://zhuanlan.zhihu.com/p/27946188)
 
-> 如果你只想上传一下图片,就可以设置只匹配图片好了.[简单代码实现上传预览](http://xumengzi.top/xumeng/20160712/2016-07-12.html)
 
 <div class="xui_upload">
 	<input type="file" class="xui_file" accept="image/jpeg, image/jpg, image/png, image/bmp" />

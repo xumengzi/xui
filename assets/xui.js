@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '2.0.4';
+		this.version = '2.0.7';
 		console.log("xui v" + this.version)
 	};
 
@@ -119,6 +119,18 @@ include most functions and styles etc.
 					item.innerHTML = day + '天' + hour + '时' + minute + '分' + second + '秒';
 				});
 	    	},1000);
+	    },
+	    debounce(fn, await = 300){
+	    	let context, args;
+	    	let timeout;
+	    	return function(){
+	    		clearTimeout(timeout);
+	    		context = this;
+	    		args = arguments;
+	    		timeout = setTimeout(() => {
+	    			xui.isFunction(fn) && fn.apply(context, args);
+	    		}, await);
+	    	};
 	    },
 	    decodeStr(str) {
 	        return decodeURIComponent(str);
@@ -458,7 +470,6 @@ include most functions and styles etc.
 		},
 		showImg(){
 			let that = this;
-            //delete already exists
 	    	that.deleteEle('xui_img');
 	    	let tar = document.createElement('div');
 	    	tar.innerHTML = `
@@ -575,6 +586,34 @@ include most functions and styles etc.
 					};
 				};
 			};
+	    },
+	    throttle(fn, await, leading){
+	    	await = await || 300;
+	    	let context, args;
+	    	let previous = 0,
+	    		timeout = null;
+	    	if (leading) {
+	    		return function(){
+	    			context = this;
+	    			args = arguments;
+	    			if (!timeout) {
+	    				timeout = setTimeout(() =>{
+	    					timeout = null;
+	    					xui.isFunction(fn) && fn.apply(context, args);
+	    				}, await);
+	    			};
+	    		};
+	    	} else{
+    			return function(){
+		    		context = this;
+		    		args = arguments;
+		    		let now = +new Date();
+		    		if (now - previous > await) {
+		    			previous = now;
+		    			xui.isFunction(fn) && fn.apply(context, args);
+		    		};
+		    	};
+	    	}
 	    },
 	    toArray(arrLike){
 	    	return Array.prototype.slice.call(arrLike);

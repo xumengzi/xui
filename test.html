@@ -5,31 +5,56 @@
 	<link rel="stylesheet" type="text/css" href="./assets/xui.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<style type="text/css">
-		.color{
-		    padding: 0;
-		    margin: 0;
-			width: 20%;
-		    border-radius: 4px;
-		    text-align: center;
-		    line-height: 40px;
-		    box-sizing: border-box;
-		    font-size: 14px;
-		    overflow: hidden;
-		}
-		.color span{
-			width: 100%;
-			display: inline-block;
-			transition: transform .4s linear;
-		}
-		.color:hover span:nth-child(1){
-			transform: translateX(-100%);
-		}
-		.color:hover span:nth-child(2){
-			transform: translateX(-100%);
+		.xui_test{
+		    width: 400px;
+			height: 200px;
+			margin: 20px auto;
+			background: antiquewhite;
+		    color: brown;
+		    display: flex;
+		    align-items: center;
+			justify-content: center;
 		}
 	</style>
 </head>
 <body>
-	<div class="color xui_btn xui_btn_default"><span>#4eb900</span><span>#3b8704</span></div>
+	<div class="xui_test" id="throttle"></div>
+	<div class="xui_test" id="throttle1"></div>
+	<div class="xui_test" id="throttle2"></div>
+	<input type="text" id="name" name="" class="xui_input" /><span></span>
 	<script type="text/javascript" src="./assets/xui.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var eg = document.getElementById('throttle'),
+				NUM = 0;
+			eg.addEventListener('mousemove', function(){
+				NUM++;
+				eg.innerHTML = 'move ' + NUM + ' times';
+			});
+
+			var tar = document.getElementById('throttle1'),
+				NUM1 = 0;
+			tar.addEventListener('mousemove', 
+				xui.throttle(function(e){
+					NUM1++;
+					e.target.innerHTML = 'move ' + NUM1 + ' times';
+				}, 500), false);
+
+			var tar2 = document.getElementById('throttle2'),
+				NUM2 = 0;
+			tar2.addEventListener('mousemove', 
+				xui.throttle(function(e){
+					NUM2++;
+					e.target.innerHTML = 'move ' + NUM2 + ' times';
+				}, 500, true), false);
+
+			var name = document.getElementById('name'),
+				NUM3 = 0;
+			name.addEventListener('keyup', 
+				xui.debounce(function(e){
+					NUM3++
+					e.target.nextSibling.innerHTML = NUM3;
+				}, 500),false)
+		}
+	</script>
 </body></html>

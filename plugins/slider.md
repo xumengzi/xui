@@ -18,11 +18,11 @@ new xui.slider({
 	isShowDot: true,
 	imgList: [
 		{
-			link: 'http://xumengzi.top/',
+			link: 'https://xumeng.site/',
 			img: 'http://img.infinitynewtab.com/wallpaper/1111.jpg',
 		},
 		{
-			link: 'https://www.baidu.com/',
+			link: 'https://github.com/JarvenIV/xui',
 			img: 'http://img.infinitynewtab.com/wallpaper/1234.jpg',
 		},
 		{
@@ -66,11 +66,11 @@ new xui.slider({
 	isShowDot: true,
 	imgList: [
 		{
-			link: 'http://xumengzi.top/',
+			link: 'http://xumeng.site/',
 			img: 'http://img.infinitynewtab.com/wallpaper/1111.jpg',
 		},
 		{
-			link: 'https://www.baidu.com/',
+			link: 'https://github.com/JarvenIV/xui',
 			img: 'http://img.infinitynewtab.com/wallpaper/1234.jpg',
 		},
 		{
@@ -93,11 +93,11 @@ new xui.slider({
 	isShowDot: true,
 	imgList: [
 		{
-			link: 'http://xumengzi.top/',
+			link: 'http://xumeng.site/',
 			img: 'http://img.infinitynewtab.com/wallpaper/1111.jpg',
 		},
 		{
-			link: 'https://www.baidu.com/',
+			link: 'https://github.com/JarvenIV/xui',
 			img: 'http://img.infinitynewtab.com/wallpaper/1234.jpg',
 		},
 		{

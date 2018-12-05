@@ -34,8 +34,6 @@ xui.showImg(url); //传入图片url即可预览
 ```
 
 2.可以配置相关操作选项,第二个参数为`string`时,可下载该图片.
->说明: `string`为下载图片的文件名,需要注意的是只有同域下才会生效,跨域的图片下载是更改不了名字的.请戳[a标签下载那些事](http://xumengzi.top/xumeng/20170918/2017-09-18.html)
-
 >说明: 关于下载图片相关知识, 请戳[a download 属性](http://www.w3school.com.cn/tags/att_a_download.asp)
 
 <div>
