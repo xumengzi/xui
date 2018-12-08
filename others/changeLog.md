@@ -10,6 +10,12 @@
 
 >输入`xui.version`获取当前版本号
 
+###v2.0.8  <span style="font-size: 16px;">2018/11/30</span>
+#####bugfix：
+1.新增进制转换的方法, 详见[进制转换 digital converse](../methods/digitalConverse.md)
+
+>是否兼容现有代码：是
+
 ###v2.0.7  <span style="font-size: 16px;">2018/11/10</span>
 #####bugfix：
 1.删除`md`文件里的冗余代码

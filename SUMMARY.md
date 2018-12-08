@@ -9,6 +9,7 @@
     * [2.1.1 方法系列 series](methods/methods.md)
     * [2.1.2 节流 throttle](methods/throttle.md)
     * [2.1.3 防抖 debounce](methods/debounce.md)
+    * [2.1.4 进制转换 digital converse](methods/digitalConverse.md)
 * [3.插件 plugins](plugins/README.md)
     * [3.1.1 加载效果 loading](plugins/loading.md)
     * [3.1.2 对话弹框 prompt](plugins/prompt.md)
