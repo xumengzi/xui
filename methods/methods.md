@@ -89,6 +89,8 @@ xui.ajax({
     type: 'get',
 }).then(res =>{
     console.log(res);
+}, error =>{
+    console.log(error)
 });
 
 //这里是post请求
@@ -102,6 +104,8 @@ xui.ajax({
     },
 }).then(res =>{
     console.log(res);
+}, error=>{
+    console.log(error);    
 });
 ```
 

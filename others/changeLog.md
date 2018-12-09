@@ -10,6 +10,12 @@
 
 >输入`xui.version`获取当前版本号
 
+###v2.0.9  <span style="font-size: 16px;">2018/12/01</span>
+#####add：
+1.新增收藏章节, 详见[收藏 collection](../collection/README.md)
+
+>是否兼容现有代码：是
+
 ###v2.0.8  <span style="font-size: 16px;">2018/11/30</span>
 #####add：
 1.新增进制转换的方法, 详见[进制转换 digital converse](../methods/digitalConverse.md)

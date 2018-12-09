@@ -25,10 +25,10 @@ include most functions and styles etc.
     	    let arg = arguments[0];
 		    let url = arg.url,
 		        type = arg.type || 'GET',
-		        params = arg.params || null;
+		        params = arg.params || '';
 		    return new Promise(function(resove, reject){
 		        let XHR = new XMLHttpRequest();
-		        XHR.open(type, url, true);
+		        XHR.open(type, url);
 		        XHR.send(JSON.stringify(params));
 		        XHR.onreadystatechange = function(){
 		            if(XHR.readyState == 4){

@@ -32,4 +32,6 @@
     * [3.2.9 穿梭框 transfer](plugins/transfer.md)
     * [3.3.0 懒加载 lazyLoad](plugins/lazyLoad.md)
     * [3.3.1 下拉加载 pullLoad](plugins/pullLoad.md)
-* [4.日志 log](others/changeLog.md)
+* [4.收藏 collection](collection/README.md)
+    * [4.1.1 算法 algorithm](collection/algorithm.md)
+* [5.日志 log](others/changeLog.md)
