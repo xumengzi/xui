@@ -18,43 +18,24 @@
 	</style>
 </head>
 <body>
-	<div class="xui_test" id="throttle"></div>
-	<div class="xui_test" id="throttle1"></div>
-	<div class="xui_test" id="throttle2"></div>
-	<input type="text" id="name" name="" class="xui_input" /><span></span>
+	<div class="xui_item">
+	    <label>write something: </label>
+	    <div class="xui_content">
+	        <input type="text" id="digital" value=10 class="xui_input" placeholder="数字" />
+	        <input type="text" id="dicimal" value=2 class="xui_input" placeholder="进制" />
+	        <button class="xui_btn xui_btn_default" id="count">count</button>
+	        <span id="show"></span>
+	    </div>
+	</div>
+
+
 	<script type="text/javascript" src="./assets/xui.js"></script>
 	<script type="text/javascript">
-		window.onload = function(){
-			var eg = document.getElementById('throttle'),
-				NUM = 0;
-			eg.addEventListener('mousemove', function(){
-				NUM++;
-				eg.innerHTML = 'move ' + NUM + ' times';
-			});
-
-			var tar = document.getElementById('throttle1'),
-				NUM1 = 0;
-			tar.addEventListener('mousemove', 
-				xui.throttle(function(e){
-					NUM1++;
-					e.target.innerHTML = 'move ' + NUM1 + ' times';
-				}, 500), false);
-
-			var tar2 = document.getElementById('throttle2'),
-				NUM2 = 0;
-			tar2.addEventListener('mousemove', 
-				xui.throttle(function(e){
-					NUM2++;
-					e.target.innerHTML = 'move ' + NUM2 + ' times';
-				}, 500, true), false);
-
-			var name = document.getElementById('name'),
-				NUM3 = 0;
-			name.addEventListener('keyup', 
-				xui.debounce(function(e){
-					NUM3++
-					e.target.nextSibling.innerHTML = NUM3;
-				}, 500),false)
+		var btn = document.getElementById('count');
+		btn.onclick = function(){
+			var digital = document.getElementById('digital').value,
+				dicimal = document.getElementById('dicimal').value;
+			document.getElementById('show').innerHTML = xui.digConverse(digital, dicimal);
 		}
 	</script>
 </body></html>

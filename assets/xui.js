@@ -8,7 +8,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '2.0.7';
+		this.version = '2.0.8';
 		console.log("xui v" + this.version)
 	};
 
@@ -25,10 +25,10 @@ include most functions and styles etc.
     	    let arg = arguments[0];
 		    let url = arg.url,
 		        type = arg.type || 'GET',
-		        params = arg.params || null;
+		        params = arg.params || '';
 		    return new Promise(function(resove, reject){
 		        let XHR = new XMLHttpRequest();
-		        XHR.open(type, url, true);
+		        XHR.open(type, url);
 		        XHR.send(JSON.stringify(params));
 		        XHR.onreadystatechange = function(){
 		            if(XHR.readyState == 4){
@@ -2061,4 +2061,36 @@ here is a pullLoad plugin
 		};
 	};
 	Object.getPrototypeOf(xui).pullLoad = PullLoad;
+})(window);
+
+;(function(w){
+	var arr = [];
+	var sign = 0;
+	function digConverse(n, b){
+		n -= 0;
+		b -= 0;
+		if (!n || !b) {
+			throw Error('must be valid')
+		};
+		if (isNaN(n) && isNaN(b)) {
+			throw Error('must be numbers');
+		};
+		if (sign) {
+			arr = [];
+			sign = 0;
+		};
+	    if(n % b === 0){
+	        arr.push(0);
+	        n = n / b;
+	    } else{
+	        arr.push(n%b);
+	        n = Math.floor(n / b);
+	    };
+	    if(n === 0){
+	    	sign = 1;
+	        return arr.reverse().join('') - 0;
+	    };
+	    return digConverse(n, b);
+    };
+    Object.getPrototypeOf(xui).digConverse = digConverse;
 })(window);

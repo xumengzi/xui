@@ -9,17 +9,31 @@
 
 <style type="text/css">
 	.color{
+	    padding: 0;
+	    margin: 0;
 		width: 20%;
 	    border-radius: 4px;
 	    text-align: center;
 	    line-height: 40px;
 	    box-sizing: border-box;
 	    font-size: 14px;
+	    overflow: hidden;
+	}
+	.color span{
+		width: 100%;
+		display: inline-block;
+		transition: transform .4s linear;
+	}
+	.color:hover span:nth-child(1){
+		transform: translateX(-100%);
+	}
+	.color:hover span:nth-child(2){
+		transform: translateX(-100%);
 	}
 </style>
 #### 主色调
 ##### 主色调为绿色(原谅绿)`#4eb900`, hover的时候颜色为`#3b8704`
-<div class="color xui_btn xui_btn_default">#4eb900</div>
+<div class="color xui_btn xui_btn_default"><span>#4eb900</span><span>#3b8704</span></div>
 
 ##### 用于警告的颜色为橘色`#fd7127`, hover的时候颜色为`#fd7127`
 <div class="color xui_btn xui_btn_cancel">#fd7127</div>
