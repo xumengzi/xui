@@ -14,7 +14,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '2.0.8';
+		this.version = '2.0.9';
 		console.log("xui v" + this.version)
 	};
 
