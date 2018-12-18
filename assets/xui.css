@@ -252,6 +252,7 @@ button.xui_btn:disabled{
     position: relative;
     margin: .57em;
     display: inline-block;
+    cursor: pointer;
 }
 .xui_checkbox{
     display: none;
@@ -274,18 +275,26 @@ button.xui_btn:disabled{
     border: 1px solid #4eb900;
 }
 .xui_checkbox:checked + .xui_checkbox_box::after{
-    content: '√';
-    width: 10px;
-    height: 10px;
+    content: '';
     display: block;
     position: absolute;
     left: 3px;
-    top: 0;
+    top: 7px;
     color: #fff;
+    width: 11px;
+    height: 5px;
+    border: 1px solid;
+    border-color: transparent transparent #fff #fff;
+    transform: rotate(-45deg);
 }
-.xui_checkbox:disabled + .xui_checkbox_box,.xui_checkbox:checked + .xui_checkbox_box::before{
+.xui_checkbox:disabled + .xui_checkbox_box{
     color: #ccc;
     cursor: not-allowed;
+}
+.xui_checkbox:disabled + .xui_checkbox_box::before {
+    color: #fff;
+    background-color: #ccc;
+    border: 1px solid #ccc;
 }
 
 .xui_select{

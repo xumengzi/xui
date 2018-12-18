@@ -18,7 +18,7 @@
 <button class="xui_btn xui_btn_cancel">取消按钮</button>
 <button disabled class="xui_btn xui_btn_cancel">取消按钮</button>
 ```
->说明:没看够? 戳我[动感十足的按钮](https://jarveniv.github.io/beautyCss3Buttons/Css3Buttons.html)
+>说明:没看够? 戳我[动感十足的按钮](https://xumengzi.github.io/beautyCss3Buttons/Css3Buttons.html)
 
 ##### 输入框`input`
 
@@ -107,14 +107,16 @@
 
 ##### 多选框`checkbox`
 <div>
-	<input class="xui_checkbox" id="checkbox_1" type="checkbox" name="checkbox" /><label for="checkbox_1" class="xui_checkbox_box">多选1</label>
+	<input class="xui_checkbox" id="checkbox_1" type="checkbox" checked="checked" name="checkbox" /><label for="checkbox_1" class="xui_checkbox_box">多选1</label>
 	<input class="xui_checkbox" id="checkbox_2" type="checkbox" name="checkbox" /><label for="checkbox_2" class="xui_checkbox_box">多选2</label>
 	<input class="xui_checkbox" id="checkbox_3" type="checkbox" name="checkbox" /><label for="checkbox_3" class="xui_checkbox_box">多选3</label>
 	<input disabled class="xui_checkbox" id="checkbox_4" type="checkbox" name="checkbox" /><label for="checkbox_4" class="xui_checkbox_box">多选4</label>
+	<input disabled class="xui_checkbox" id="checkbox_5" type="checkbox" checked="checked" name="checkbox" />
+	<label for="checkbox_5" class="xui_checkbox_box">多选5</label>
 </div>
 
 ```html
-<input class="xui_checkbox" id="checkbox_1" type="checkbox" name="checkbox" />
+<input class="xui_checkbox" id="checkbox_1" type="checkbox" checked="checked" name="checkbox" />
 <label for="checkbox_1" class="xui_checkbox_box">多选1</label>
 <input class="xui_checkbox" id="checkbox_2" type="checkbox" name="checkbox" />
 <label for="checkbox_2" class="xui_checkbox_box">多选2</label>
@@ -122,6 +124,8 @@
 <label for="checkbox_3" class="xui_checkbox_box">多选3</label>
 <input disabled class="xui_checkbox" id="checkbox_4" type="checkbox" name="checkbox" />
 <label for="checkbox_4" class="xui_checkbox_box">多选4</label>
+<input disabled class="xui_checkbox" id="checkbox_5" type="checkbox" checked="checked" name="checkbox" />
+<label for="checkbox_5" class="xui_checkbox_box">多选5</label>
 ```
 
 ##### 下拉框`select`

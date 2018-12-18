@@ -46,7 +46,12 @@ xui.message('hello, world', 2000);
 
 <script type="text/javascript">
 document.getElementById('show_message2').onclick=function(){
-	xui.message('hello, world', 2000, function(){console.log('look, this is callback!');});
+	xui.message('hello, world', 
+		2000, 
+		function(){
+			console.log('look, this is callback!');
+		}
+	);
 }
 </script>
 
@@ -58,10 +63,4 @@ xui.message(
 		console.log('look, this is callback!');
 	}
 );
-```
-
-4.完整的配置
-```js
-//words必须(默认1s), time和callback非必须
-xui.message(words, time, callback);
 ```
