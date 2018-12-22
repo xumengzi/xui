@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="utf-8">
+	<title>小会会</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<meta name="description"  content="HTML examples">
+	<meta name="keywords"  content="HTML,CSS,JavaScript,blog">
+	<meta name="author"  content="xumeng">
+	<link rel="stylesheet" type="text/css" href="https://xumengzi.github.io/xui/assets/xui.css?t=20181222">
+	<link rel="shortcut icon" type="image/x-icon" href="./xu_icon_40.ico" media="screen" />
+	<style type="text/css">
+		.none{
+			display: none !important;
+		}
+		#fullPage{
+			font-size: 24px;
+			color: #fff;
+		}
+		#winter{
+			background: linear-gradient(to bottom, #7dbacc, #fafcfd) !important;
+		}
+		#fullPage > div:nth-child(1){
+			background: url(./rose.jpg) no-repeat center center;
+		}
+		#fullPage > div:nth-child(2){
+			background: pink !important;
+		}
+		#fullPage > div:nth-child(3){
+			background: rgba(0, 0, 255, 0.5) !important;
+		}
+		#fullPage > div:nth-child(4){
+			background: rgba(255, 165, 0, 0.7) !important;
+		}
+		.intro .name{
+			position: relative;
+			color: red;
+		}
+		.flower{
+		    position: absolute;
+		    left: 50%;
+		    top: 50%;
+			transform: translate3d(-50%,-50%,0);
+		}
+
+		.name span{
+			font-size: 40px;
+		    display: inline-block;
+		    animation: jump 1.2s infinite ease-in-out;
+		    -webkit-animation: jump 1.2s infinite ease-in-out;
+		}
+		.name .name_1{
+		    -webkit-animation-delay: -1.1s;
+		            animation-delay: -1.1s;
+		}
+		.name .name_2{
+		    -webkit-animation-delay: -1.0s;
+		            animation-delay: -1.0s;
+		}
+		.name .name_3{
+		    -webkit-animation-delay: -0.9s;
+		            animation-delay: -0.9s;
+		}
+		.name .name_4{
+		    -webkit-animation-delay: -0.8s;
+		            animation-delay: -0.8s;
+		}
+		.name .name_5{
+		    -webkit-animation-delay: -0.7s;
+		            animation-delay: -0.7s;
+		}
+		.name .name_6{
+		    -webkit-animation-delay: -0.6s;
+		            animation-delay: -0.6s;
+		}
+		@-webkit-keyframes jump{
+		    0%,40%,100%{
+		        transform: scaleY(.6);
+		        -webkit-transform: scaleY(.6);
+		    }
+		    20%{
+		        transform: scaleY(1.0);
+		        -webkit-transform: scaleY(1.0);
+		    }
+		}
+	</style>
+</head>
+<body>
+	<div id="fullPage" class="xui_full_page">
+		<div class="intro">
+			
+			<div class="name">
+				<span class="name_1">小</span>
+				<span class="name_2">会</span>
+				<span class="name_3">会</span>
+				<span class="name_4">~</span>
+				<span class="name_5">_</span>
+				<span class="name_6">~</span>
+			</div>
+		</div>
+		<div class="none">
+			初次见面<br>
+			就给我留下了深刻印象
+		</div>
+		<div class="none">
+			微微一笑<br>
+			你嘴角上扬的样子真美
+		</div>
+		<div class="none">
+			真应该遇到最好的人
+		</div>
+		<div class="none" id="winter">
+			圣诞快乐<br>
+			Merry Christmas
+		</div>
+	</div>
+	<script type="text/javascript">
+		;(function(w){
+			function full(){
+				let args = arguments[0];
+				const defaults = {
+					currentPage: 0,
+					direction: 'Y',
+					isShowDot: true,
+					isBackground: true,
+					distance: 60,
+					transition: '1s ease',
+					colorArr: [
+						'rgb(200,200,169)',
+						'rgb(131,175,155)',
+						'rgb(114,111,128)',
+						'rgb(6,157,128)',
+						'rgb(252,157,154)',
+						'rgb(229,187,129)',
+						'rgb(34,8,7)',
+						'rgb(227,160,93)',
+						'rgb(56,13,49)',
+						'rgb(89,61,67)',
+					],
+				};
+				this.obj = Object.assign({}, defaults, args);
+				if (!this.obj.id) {
+					throw new Error("element'id is required");
+				};
+				page.config = this.obj;
+				page.config.list = document.getElementById(page.config.id).children;
+				if (!page.config.list.length) {
+					throw new Error('nothing aha ?');
+				};
+				page.init();
+			};
+			var page = {
+				config: {},
+				event(e){
+					if (e.target.classList.contains('xui_page')) {
+						let dir = e.deltaY > 0 ? '1' : '-1';
+						this.move(e, dir);
+					};
+				},
+				move(e, direction){
+					let tar = e.target,
+						sty = tar.style,
+						prev = tar.previousElementSibling && tar.previousElementSibling.style,
+						next = tar.nextElementSibling && tar.nextElementSibling.style,
+						dir = this.config.direction;
+					if (direction == 1) {
+						if (tar.nextElementSibling && sty.transform == `translate${dir}(0%)`) {
+							sty.transform = `translate${dir}(-100%)`;
+							sty.webkitTransform = `translate${dir}(-100%)`;
+							next.transform = `translate${dir}(0%)`;
+							next.webkitTransform = `translate${dir}(0%)`;
+							next.mozTransform = `translate${dir}(0%)`;
+							next.transition = this.config.transition;
+							next.webkitTransition = this.config.transition;
+							this.config.fn && this.config.fn(tar, tar.nextElementSibling);
+						};
+					} else{
+						if (tar.previousElementSibling && sty.transform == `translate${dir}(0%)`) {
+							sty.transform = `translate${dir}(100%)`;
+							sty.webkitTransform = `translate${dir}(100%)`;
+							prev.transform = `translate${dir}(0%)`;
+							prev.webkitTransform = `translate${dir}(0%)`;
+							prev.mozTransform = `translate${dir}(0%)`;
+							prev.transition = this.config.transition;
+							prev.webkitTransition = this.config.transition;
+							this.config.fn && this.config.fn(tar, tar.previousElementSibling);
+						};
+					};
+					sty.transition = this.config.transition;
+					sty.webkitTransition = this.config.transition;
+				},
+				init(){
+					let tar = document.getElementById(this.config.id);
+					let ele = tar.children, dir = this.config.direction;
+					let fst = this.config.currentPage;
+					for(let i = 0;i < ele.length; i++){
+						ele[i].classList.add('xui_page');
+						ele[i].classList.remove('none');
+						//一些配置项
+						let arr = this.config.colorArr;
+						this.config.isBackground && arr.length && (ele[i].style.background = arr[xui.randomNum(0,arr.length - 1)]);
+						this.config.isShowDot && ele[i].setAttribute('data-page', `${i+1}/${ele.length}`);
+						if (i < fst) {
+							ele[i].style.transform = `translate${dir}(-100%)`;
+						} else if(i == fst){
+							ele[i].style.transform = `translate${dir}(0%)`;
+						} else{
+							ele[i].style.transform = `translate${dir}(100%)`;
+						};
+					};
+					w.onwheel = (e) => {
+						this.event(e);
+					};
+					if (1) {
+						let startX = 0, endX = 0,
+							startY = 0, endY = 0;
+						tar.addEventListener('touchstart',(e)=>{
+							startX = e.touches[0].pageX;
+							startY = e.touches[0].pageY;
+						});
+						tar.addEventListener('touchend',(e)=>{
+							endX = e.changedTouches[0].pageX;
+							endY = e.changedTouches[0].pageY;
+							let diffX = endX - startX,
+								diffY = endY - startY;
+							let dis = this.config.distance;
+							let diff = this.config.direction == 'X' ? diffX : diffY;
+							let dir = 0;
+							if (diff > Math.abs(dis)) {
+								dir = -1;
+								this.move(e, dir);
+							} else if(diff < -dis){
+								dir = 1;
+								this.move(e, dir);
+							};
+						});
+					};
+				},
+			};
+			window.fullPage = full;
+		})(window);
+		function snowFlake(){
+			let args = arguments[0],
+				tar = document.getElementById(args.id);
+			args.direction == 'left' && tar.classList.add('xui_snow_left');
+			tar.classList.add('xui_snow');
+		};
+	</script>
+	<script type="text/javascript">
+		window.onload = function(){
+			fullPage({
+				id: 'fullPage',
+				isBackground: false,
+				isShowDot: false,
+				transition: '0.8s cubic-bezier(0.29, -0.74, 0.25, 1)',
+			});
+			snowFlake({
+			    id: 'winter',
+			});
+		}
+	</script>
+</body>
+</html>
