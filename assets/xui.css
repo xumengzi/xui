@@ -1498,6 +1498,7 @@ button.xui_btn:disabled{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    flex-direction: column;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
@@ -1509,6 +1510,7 @@ button.xui_btn:disabled{
     position: absolute;
     -webkit-transition: 1s ease;
     transition: 1s ease;
+    overflow: hidden;
 }
 .xui_full_page .xui_page::after{
     content: attr(data-page);
