@@ -37,5 +37,111 @@
 				dicimal = document.getElementById('dicimal').value;
 			document.getElementById('show').innerHTML = xui.digConverse(digital, dicimal);
 		}
+
+
+
+class UploadFileEditor extends Editor {
+    constructor(item, elem, doc) {
+        super(item, elem, doc);
+        var property = this._property,
+            inp = property.elem.appendChild(doc.createElement("input"));
+        inp.className = "panel-item-file";
+        $(property.elem).on("change", ".panel-item-file", () => {
+            if (this.checkFileType()) {
+                
+            }
+        });
+    }
+
+    checkFileType(){
+        return true;
+    }
+}
+
+class FormDisplayEditor extends Editor {
+    constructor(item, elem, doc) {
+        super(item, elem, doc);
+        var property = this._property;
+        let formCon = $(this.formHTML());
+        $(property.elem).append(formCon);
+        var options = item[Config.KEY_OPTIONS];
+        if (options.class) {
+            $(property.elem).addClass(options.class);
+        };
+        var that = this;
+        Util.ajax({
+            url: options,
+            type: 'GET',
+            success: function(data) {
+                if (data) {
+                    that.renderHTML(data);
+                };
+            },
+            error: (err) => {
+                let title = "Data request failed, please try again";
+                Util._errorCallback(err, title);
+            }
+        });
+    }
+
+    formHTML() {
+        var form = `
+                <div class="upload_file_box">
+                    <div class="upload_file_content">
+                        <div class="upload_file_head">
+                            <span>Operator</span>
+                            <span>Operating Time</span>
+                            <span>Successful Import</span>
+                            <span>Failed Import</span>
+                            <span>Details</span>
+                        </div>
+                        <div class="upload_file_body">
+                            
+                        </div>
+                    </div>
+                </div>
+            `;
+        return form;
+    }
+
+    renderHTML(list){
+        var lis = '';
+        list.forEach(function(item){
+            lis += `
+                    <div class="upload_file_list">
+                        <div>123@qq.com</div>
+                        <div>17:02 12/7/2018</div>
+                        <div>hello world</div>
+                        <div>fail</div>
+                        <div><button class="upload_file_download"></button></div>
+                    </div>
+                `;
+        });
+        $(this._property.elem).find('.upload_file_body').html(lis);
+    }
+}
+
+content.find('.piece-tips').on('click', function(){
+    new Dialog({
+        className: 'piece-dialog ',
+        template: '',
+        rendered: (elem) => {
+            const cont = elem.find('.content');
+            cont.append(`<div class="map-placeholder"></div><div class="panel-content"></div>`);
+        }
+    });
+})
+
+<div class="piece-name">
+    ${pieceName.toUpperCase()}
+    <div class="piece-tips">Files Requirements</div>
+</div>
+
+.high-light{
+    color: #169BD5;
+}
+
+upload_file: UploadFileEditor,
+form_display: FormDisplayEditor
 	</script>
 </body></html>
