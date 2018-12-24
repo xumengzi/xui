@@ -14,7 +14,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '2.0.8';
+		this.version = '2.1.0';
 		console.log("xui v" + this.version)
 	};
 
@@ -402,6 +402,40 @@ include most functions and styles etc.
 	    		date = date || new Date();
 	    		return +new Date(date);
 	    	};
+	    },
+	    pastTime(time){
+	    	let downTime = null;
+	    	let args = arguments[0];
+	    	if (!(args.pastDate && args.target)) {
+	    		throw new Error('date and target are required');
+	    	};
+	    	args.pastDate = args.pastDate.replace(/\//g,'-');
+	    	clearInterval(downTime);
+	    	downTime = setInterval(()=>{
+	    		let start = this.now(args.pastDate),
+	    		end = this.now();
+				let diff = (end - start) / 1000;
+		    	let day = parseInt((diff / 24 / 3600),10),
+				    hour = parseInt((diff % (24 * 3600) / 3600),10),
+				    minute = parseInt((diff % 3600 / 60),10),
+				    second = parseInt((diff % 60),10);
+				day = this.zeroFill(day);
+				hour = this.zeroFill(hour);
+				minute = this.zeroFill(minute);
+				second = this.zeroFill(second);
+				function addNode(tar, nodeName){
+					return '<'+nodeName + '>' + tar + '</' + nodeName + '>';
+				};
+				if (args.nodeName) {
+					day = addNode(day, args.nodeName);
+					hour = addNode(hour, args.nodeName);
+					minute = addNode(minute, args.nodeName);
+					second = addNode(second, args.nodeName);
+				};
+				document.querySelectorAll('.' + args.target).forEach((item, index)=>{
+					item.innerHTML = day + '天' + hour + '时' + minute + '分' + second + '秒';
+				});
+	    	},1000);
 	    },
 	    queryString(str) {
 	        let url = location.href;
@@ -1273,15 +1307,16 @@ here is a fullPage plugin, just for fun
 			transition: '1s ease',
 			colorArr: [
 				'rgb(200,200,169)',
+				'rgb(203, 12, 249)',
 				'rgb(131,175,155)',
-				'rgb(114,111,128)',
 				'rgb(6,157,128)',
 				'rgb(252,157,154)',
 				'rgb(229,187,129)',
-				'rgb(34,8,7)',
 				'rgb(227,160,93)',
-				'rgb(56,13,49)',
-				'rgb(89,61,67)',
+				'rgba(241, 77, 159, 0.75)',
+				'rgba(228, 101, 243, 0.75)',
+				'rgba(137, 101, 243, 0.6)',
+				'rgba(253, 133, 182, 0.7)',
 			],
 		};
 		this.obj = Object.assign({}, defaults, args);

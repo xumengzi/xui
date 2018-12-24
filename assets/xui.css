@@ -1498,6 +1498,7 @@ button.xui_btn:disabled{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    flex-direction: column;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
@@ -1509,12 +1510,13 @@ button.xui_btn:disabled{
     position: absolute;
     -webkit-transition: 1s ease;
     transition: 1s ease;
+    overflow: hidden;
 }
 .xui_full_page .xui_page::after{
     content: attr(data-page);
     position: absolute;
     right: 10%;
-    top: 50%;
+    top: 40%;
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
     font-size: 14px;
@@ -1531,7 +1533,7 @@ button.xui_btn:disabled{
     display: block;
     position: absolute;
     top: 0;
-    left: -50%;
+    left: -30%;
     width: 150%;
     height: 100%;
     z-index: 1;
