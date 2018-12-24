@@ -1516,7 +1516,7 @@ button.xui_btn:disabled{
     content: attr(data-page);
     position: absolute;
     right: 10%;
-    top: 40%;
+    top: 20%;
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
     font-size: 14px;
