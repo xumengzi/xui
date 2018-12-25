@@ -20,7 +20,13 @@
 			display: none;
 		}
 		#winter{
-			background: linear-gradient(to bottom, #7dbacc, #fafcfd) !important;
+			background: linear-gradient(to bottom, #7dbacc, #fff) !important;
+		}
+		.time{
+			font-size: 14px;
+		}
+		.time b{
+			font-size: 24px;
 		}
 	</style>
 </head>
@@ -72,6 +78,7 @@
 			xui.pastTime({
 				pastDate: '2018/10/25',
     			target: 'time',
+    			nodeName: 'b'
 			})
 		}
 	</script>
