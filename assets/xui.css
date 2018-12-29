@@ -1967,19 +1967,20 @@ button.xui_btn:disabled{
     -webkit-perspective:1000px;
 }
 .xui_book_content .xui_book_box{
-    width: 300px;
-    height: 400px;
-    margin: 40% auto;
+    width: 100%;
+    height: 100%;
     position: relative;
+    background: rgba(0, 0, 0, 0.59);
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
 }
 .xui_book_content .xui_book_box > div{
-    width: 100%;
-    height: 100%;
+    width: 300px;
+    height: 400px;
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%,0);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1992,6 +1993,8 @@ button.xui_btn:disabled{
     transform-origin: 0;
     transition: .8s ease-in-out;
     border: 1px #f1f1f1 solid;
+    border-style: dashed;
+    box-shadow: 2px 3px 2px #f1f1f1;
 }
 .xui_book_content .xui_book_box .see_again{
     position: absolute;

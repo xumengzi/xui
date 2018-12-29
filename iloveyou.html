@@ -13,10 +13,19 @@
 	<!-- <link rel="stylesheet" type="text/css" href="https://xumengzi.github.io/xui/assets/xui.css"> -->
 	<link rel="stylesheet" type="text/css" href="assets/xui.css">
 	<link rel="shortcut icon" type="image/x-icon" href="something/xu_icon_40.ico" media="screen" />
+	<style type="text/css">
+		html, body,.xui_book_content{
+			width: 100%;
+			height: 100%;
+		}
+		.xui_snow::before, .xui_snow::after{
+			z-index: 99;
+		}
+	</style>
 </head>
 <body>
 	<div class="xui_book_content" id="myBook">
-		<div class="xui_book_box">
+		<div class="xui_book_box" id="snow">
 			<div date-page="xumeng" class="xui_book_page">赠小会会</div>				
 			<div date-page="1" class="xui_book_page">
 				昨天已过<br>
@@ -61,7 +70,10 @@
 		window.onload = function(){
 			xui.generateBooks({
 				id: 'myBook'
-			})
+			});
+			xui.snowFlake({
+			    id: 'snow',
+			});
 		}
 	</script>
 </body>
