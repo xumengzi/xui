@@ -1976,7 +1976,7 @@ button.xui_btn:disabled{
 }
 .xui_book_content .xui_book_box > div{
     width: 300px;
-    height: 400px;
+    height: 450px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -1998,18 +1998,6 @@ button.xui_btn:disabled{
     box-shadow: 1px 1px 1px #b39292;
     border-radius: 8px 20px 20px 8px;
 }
-.xui_book_content .xui_book_box .see_again{
-    position: absolute;
-    left: 44%;
-    top: 50%;
-    transform: translate3d(-50%, -50%,0);
-    font-family: consolas;
-    color: #fff;
-    z-index: 900;
-    padding: 4px 10px;
-    border-radius: 22px 41px 16px 32px;
-    animation: fly 1.6s infinite ease-in-out;
-}
 .xui_book_content .xui_book_box > div::before{
     content: attr(date-page);
     font-size: 16px;
@@ -2022,20 +2010,6 @@ button.xui_btn:disabled{
     animation: turn_page .6s 1 ease-in-out;
     -moz-animation: turn_page .6s 1 ease-in-out;
     -webkit-animation: turn_page .8s 1 ease-in-out;
-}
-@keyframes fly{
-    0%{
-        opacity: 1;
-        transform: rotate(0);
-    }
-    50%{
-        opacity: .4;
-        transform: rotate(10deg);
-    }
-    100%{
-        opacity: 1;
-        transform: rotate(0);
-    }
 }
 /*从上往下淡入*/
 @-webkit-keyframes easeIn{

@@ -301,35 +301,46 @@ include most functions and styles etc.
 				'rgb(253, 133, 182)',
 			];
 			var num = 1;
-			var ele = tar.querySelectorAll('.xui_book_page');
-	    	ele.forEach((item, index) => {
-	    		item.style.background = colorArr[xui.randomNum(0,ele.length - 1)];
-	    		item.style.zIndex = 1000 - index;
-	    		item.style.display = 'flex';
-	    	});
+			var isClick = true;
+			function magic(){
+				var ele = tar.querySelectorAll('.xui_book_page');
+		    	ele.forEach((item, index) => {
+		    		item.style.background = colorArr[xui.randomNum(0,ele.length - 1)];
+		    		item.style.zIndex = 1000 - index;
+		    		item.style.display = 'flex';
+		    	});
+			};
+			magic();
 	    	tar.querySelector('.xui_book_box').addEventListener('click', (e) => {
 	    		if (e.target.classList.contains('xui_book_box')) {
 	    			return;
 	    		};
-	    		if (e.target.classList.contains('see_again')) {
+	    		if (e.target.classList.contains('last')) {
 	    			var ele = tar.querySelectorAll('.xui_book_page');
 	    			num = 1;
+	    			isClick = false;
 			    	ele.forEach((item, index) => {
 			    		item.style.background = colorArr[xui.randomNum(0,ele.length - 1)];
-			    		item.style.zIndex = 1000 - index;
 			    		;(function(index){
 			    			setTimeout(() => {
 				    			item.style.transform = `rotateY(0)`;
-				    		}, 500*(index));
+				    			if (index == 9) {
+				    				isClick = true
+				    				magic();
+				    			}
+				    		}, 500 * (index));
 			    		})(index);
 			    	});
 	    			return;
 	    		};
+	    		if (!isClick) {
+	    			return
+	    		}
 	    		num++;
 	    		var rot = 180 - num;
 	    		e.target.style.transform = `rotateY(-${rot}deg)`;
 	    		e.target.style.zIndex = 1010 + num;
-	    	})
+	    	},false);
 	    },
 	    getCookie(name){
 			let myCookie = document.cookie;
