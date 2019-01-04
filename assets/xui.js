@@ -305,6 +305,7 @@ include most functions and styles etc.
 	    	ele.forEach((item, index) => {
 	    		item.style.background = colorArr[xui.randomNum(0,ele.length - 1)];
 	    		item.style.zIndex = 1000 - index;
+	    		item.style.display = 'flex';
 	    	});
 	    	tar.querySelector('.xui_book_box').addEventListener('click', (e) => {
 	    		if (e.target.classList.contains('xui_book_box')) {
@@ -312,6 +313,7 @@ include most functions and styles etc.
 	    		};
 	    		if (e.target.classList.contains('see_again')) {
 	    			var ele = tar.querySelectorAll('.xui_book_page');
+	    			num = 1;
 			    	ele.forEach((item, index) => {
 			    		item.style.background = colorArr[xui.randomNum(0,ele.length - 1)];
 			    		item.style.zIndex = 1000 - index;
@@ -323,8 +325,9 @@ include most functions and styles etc.
 			    	});
 	    			return;
 	    		};
-	    		e.target.style.transform = `rotateY(-180deg)`;
 	    		num++;
+	    		var rot = 180 - num;
+	    		e.target.style.transform = `rotateY(-${rot}deg)`;
 	    		e.target.style.zIndex = 1010 + num;
 	    	})
 	    },

@@ -17,6 +17,7 @@
 		html, body,.xui_book_content{
 			width: 100%;
 			height: 100%;
+			overflow: hidden;
 		}
 		.xui_snow::before, .xui_snow::after{
 			z-index: 99;
@@ -26,43 +27,43 @@
 <body>
 	<div class="xui_book_content" id="myBook">
 		<div class="xui_book_box" id="snow">
-			<div date-page="xumeng" class="xui_book_page">赠小会会</div>				
-			<div date-page="1" class="xui_book_page">
+			<div date-page="xumeng" class="xui_book_page">赠小会会</div>
+			<div date-page="1" class="xui_book_page" style="display: none;">
 				昨天已过<br>
 				明天太远
 			</div>
-			<div date-page="2" class="xui_book_page">
+			<div date-page="2" class="xui_book_page" style="display: none;">
 				选在今日<br/>
 				对你告白
 			</div>
-			<div date-page="3" class="xui_book_page">
+			<div date-page="3" class="xui_book_page" style="display: none;">
 				对你的依赖<br/>
 				如同鱼儿离不开海洋<br/>
 				如同植物离不开阳光
 			</div>
-			<div date-page="4" class="xui_book_page">
+			<div date-page="4" class="xui_book_page" style="display: none;">
 				牵你的手<br/>
 				朝朝暮暮
 			</div>
-			<div date-page="5" class="xui_book_page">
+			<div date-page="5" class="xui_book_page" style="display: none;">
 				牵你的手<br/>
 				等待明天
 			</div>
-			<div date-page="5" class="xui_book_page">
+			<div date-page="5" class="xui_book_page" style="display: none;">
 				牵你的手<br/>
 				走过今生
 			</div>
-			<div date-page="5" class="xui_book_page">
+			<div date-page="5" class="xui_book_page" style="display: none;">
 				牵你的手<br/>
 				生生世世
 			</div>
-			<div date-page="6" class="xui_book_page">
+			<div date-page="6" class="xui_book_page" style="display: none;">
 				做我女朋友吧<br/>
 				爱你哟<br>
 				许孟
 			</div>
-			<div class="xui_book_page">I Love You</div>
-			<span class="see_again">See again</span>
+			<div class="xui_book_page" style="display: none;">I Love You</div>
+			<span class="xui_book_page see_again" style="display: none;">See again</span>
 		</div>
 	</div>
 	<script type="text/javascript" src="assets/xui.js"></script>
