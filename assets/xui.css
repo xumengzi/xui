@@ -1980,7 +1980,7 @@ button.xui_btn:disabled{
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-top: -50%;
+    margin-top: -225px;
     margin-left: -150px;
     display: flex;
     justify-content: center;
