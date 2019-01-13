@@ -10,6 +10,12 @@
 
 >输入`xui.version`获取当前版本号
 
+###v2.1.1  <span style="font-size: 16px;">2018/12/31</span>
+#####add：
+1. 增加`vue`版的框架, 详情请戳<a target="_blank" href="https://xumeng.site/xui-vue/index.html">xui-vue</a>
+
+>是否兼容现有代码：是
+
 ###v2.1.0  <span style="font-size: 16px;">2018/12/09</span>
 #####add：
 1.丰富了倒计时组件, 详见[倒计时 countDown](../plugins/countDown.md)
