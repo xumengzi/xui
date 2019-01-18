@@ -1,6 +1,8 @@
 <link rel="stylesheet" type="text/css" href="./assets/xui.css">
 <script type="text/javascript" src="./assets/xui.js"></script>
 
+![xui](https://img.shields.io/badge/xui-v2.1.1-brightgreen.svg)
+
 # 简介
 
 ## 项目名称: `xui`
