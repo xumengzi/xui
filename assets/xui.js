@@ -14,7 +14,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '2.1.0';
+		this.version = '2.1.2';
 		console.log("xui v" + this.version)
 	};
 
@@ -2024,8 +2024,8 @@ here is a lazyLoad plugin
 				throw new Error("img not found");
 			};
 			const defaults = {
-				loadingImg: 'http://xumengzi.top/images/loading.gif',
-				errorImg: 'http://xumengzi.top/images/error.jpg',
+				loadingImg: 'https://xumeng.site/img/loading.gif',
+				errorImg: 'https://xumeng.site/img/error.jpg',
 				hrefTarget: '',
 			};
 			this.opts = Object.assign({}, defaults, args);

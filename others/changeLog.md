@@ -10,6 +10,13 @@
 
 >输入`xui.version`获取当前版本号
 
+###v2.1.2  <span style="font-size: 16px;">2019/01/05</span>
+#####add：
+1. 完善了`xui`框架, 比如增加了`license`, `issue`等模板
+2. 修复了懒加载的`error`, `loading`图不展示的问题,详见[懒加载插件](../plugins/lazyLoad.md)
+
+>是否兼容现有代码：是
+
 ###v2.1.1  <span style="font-size: 16px;">2018/12/31</span>
 #####add：
 1. 增加`vue`版的框架, 详情请戳<a target="_blank" href="https://xumeng.site/xui-vue/index.html">xui-vue</a>

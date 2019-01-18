@@ -32,7 +32,7 @@
 	}
 </style>
 #### 主色调
-##### 主色调为绿色(原谅绿)`#4eb900`, hover的时候颜色为`#3b8704`
+##### 主色调为绿色`#4eb900`, hover的时候颜色为`#3b8704`
 <div class="color xui_btn xui_btn_default"><span>#4eb900</span><span>#3b8704</span></div>
 
 ##### 用于警告的颜色为橘色`#fd7127`, hover的时候颜色为`#fd7127`

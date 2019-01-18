@@ -27,7 +27,7 @@ new xui.lazyLoad({
 
 ##### 默认是栅栏式
 
-1.先来一个最简单的懒加载, 没有那些花里胡哨的配置, [戳我看看](https://jarveniv.github.io/xui/examples/lazyLoad.html)
+1.先来一个最简单的懒加载, 没有那些花里胡哨的配置, [戳我看看](https://xumengzi.github.io/xui/examples/lazyLoad.html)
 
 ```js
 new xui.lazyLoad({
@@ -42,7 +42,7 @@ new xui.lazyLoad({
 });
 ```
 
-2.我们可以传入有链接的图片以及一些配置等等, [戳我看看](https://jarveniv.github.io/xui/examples/lazyLoad-href.html)
+2.我们可以传入有链接的图片以及一些配置等等, [戳我看看](https://xumengzi.github.io/xui/examples/lazyLoad-href.html)
 
 ```js
 new xui.lazyLoad({
@@ -51,15 +51,15 @@ new xui.lazyLoad({
 	list: 
 	[
 		{
-			href: 'http://xumengzi.top/',
+			href: 'https://xumeng.site/',
 			src: 'http://img.infinitynewtab.com/wallpaper/error.jpg'
 		},
 		{
-			href: 'https://jarveniv.gitbooks.io/xui/content/',
+			href: 'https://xumengzi.gitbooks.io/xui/content/',
 			src: 'http://img.infinitynewtab.com/wallpaper/2.jpg'
 		},
 		{
-			href: 'https://github.com/JarvenIV',
+			href: 'https://github.com/xumengzi',
 			src: 'http://img.infinitynewtab.com/wallpaper/3.jpg'
 		}
 	]

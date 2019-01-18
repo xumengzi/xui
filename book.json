@@ -1,7 +1,7 @@
 {
 	"title" : "XUI文档简介",
 	"author" : "xumeng",
-	"description" : "个人收藏",
+	"description" : "一个原生js的ui框架",
 	"links": {
 	    "sidebar" : {
 	        "GitHub" : "https://github.com/xumengzi"
