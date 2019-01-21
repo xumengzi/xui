@@ -27,7 +27,7 @@ new xui.lazyLoad({
 
 ##### 默认是栅栏式
 
-1.先来一个最简单的懒加载, 没有那些花里胡哨的配置, [戳我看看](https://xumengzi.github.io/xui/examples/lazyLoad.html)
+1.先来一个最简单的懒加载, 没有那些花里胡哨的配置, [戳我看看](https://xumengzi.github.io/xui/others/lazyLoad.html)
 
 ```js
 new xui.lazyLoad({
@@ -42,7 +42,7 @@ new xui.lazyLoad({
 });
 ```
 
-2.我们可以传入有链接的图片以及一些配置等等, [戳我看看](https://xumengzi.github.io/xui/examples/lazyLoad-href.html)
+2.我们可以传入有链接的图片以及一些配置等等, [戳我看看](https://xumengzi.github.io/xui/others/lazyLoad-href.html)
 
 ```js
 new xui.lazyLoad({
