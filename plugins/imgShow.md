@@ -36,10 +36,10 @@ xui.showImg(url); //传入图片url即可预览
 ```
 
 2.可以配置相关操作选项,第二个参数为`string`时,可下载该图片.
->说明: 关于下载图片相关知识, 请戳[a download 属性](http://www.w3school.com.cn/tags/att_a_download.asp)
+>说明: 关于下载图片相关知识, 请戳[a标签属性 mdn](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a)
 
 <div>
-	<div>下面这张图片来自网上,是跨域的图片,你试图修改下载文件名,但是失败了</div>
+	<div>下面这张图片来自网上,是跨域的图片,你试图修改下载文件名,但是失败了. PS: 不同域不会正常下载图片</div>
 	<img id="showImg1" style="width: 300px" src="http://img.infinitynewtab.com/wallpaper/2811.jpg">
 	<div>下面这张图片来自本地,是同域,所以可以更改下载文件名</div>
 	<img id="showImg2" style="width: 300px" src="../img/test.jpg">
