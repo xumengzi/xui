@@ -10,8 +10,14 @@
 
 >输入`xui.version`获取当前版本号
 
+###v2.1.3  <span style="font-size: 16px;">2019/01/12</span>
+#####bugfix：
+1.[图片预览插件](../plugins/imgShow.md)增加了不在同域的情况下下载说明
+
+>是否兼容现有代码：是
+
 ###v2.1.2  <span style="font-size: 16px;">2019/01/05</span>
-#####add：
+#####bugfix：
 1. 完善了`xui`框架, 比如增加了`license`, `issue`等模板
 2. 修复了懒加载的`error`, `loading`图不展示的问题,详见[懒加载插件](../plugins/lazyLoad.md)
 
@@ -24,7 +30,7 @@
 >是否兼容现有代码：是
 
 ###v2.1.0  <span style="font-size: 16px;">2018/12/09</span>
-#####add：
+#####bugfix：
 1.丰富了倒计时组件, 详见[倒计时 countDown](../plugins/countDown.md)
 
 >是否兼容现有代码：是

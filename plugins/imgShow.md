@@ -14,6 +14,8 @@ xui.showImg(src, string);
 * `string`表示图片处在**同域**下时下载的文件名
 * 没有你想要的功能? 快联系我: `me@xumengzi.top`添加吧
 
+>不是**同域**下，不同浏览器有不同的操作, 有的会下载, 有的则会新标签打开查看图片
+
 ### 效果展示
 
 ##### 点击图片即可放大,并支持旋转缩放等等.仅仅传入对应的图片`url`即可.
@@ -54,10 +56,4 @@ document.getElementById('showImg2').onclick = function(e){
 
 ```js
 xui.showImg(url, 'hello'); //传入图片url即可预览, 第二个参数为string可下载图片
-```
-
-3.完整的配置
-```js
-//第一个图片地址参数必传,第二个参数`string`提供下载链接非必传
-xui.showImg(url, string);
 ```

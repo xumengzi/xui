@@ -14,7 +14,7 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '2.1.2';
+		this.version = '2.1.3';
 		console.log("xui v" + this.version)
 	};
 
@@ -578,7 +578,7 @@ include most functions and styles etc.
 	    				<span class="xui_zoomin" xui-type="2"></span>
 	    				<span class="xui_zoomout" xui-type="3"></span>
 	    				<span class="xui_right" xui-type="4"></span>
-	    				${arguments[1] ? `<a class="xui_download" href=${arguments[0]} download=${arguments[1]}></a>` : ''}
+	    				${arguments[1] ? `<a class="xui_download" href=${arguments[0]} target="_blank" download=${arguments[1]}></a>` : ''}
 	    			</div>
 	    		</div>
 	    	`;
@@ -2161,6 +2161,9 @@ here is a pullLoad plugin
 	Object.getPrototypeOf(xui).pullLoad = PullLoad;
 })(window);
 
+/*
+试一试用js实现进制的转换
+*/
 ;(function(w){
 	var arr = [];
 	var sign = 0;
