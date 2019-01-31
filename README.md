@@ -9,7 +9,7 @@
 
 > 传送门: <a target="_blank" href="https://xumeng.site/xui-vue/index.html">xui-vue</a>
 
-> 传送门: <a target="_blank" href="https://xumeng.site/xui-react/index.html">xui-react</a>
+> 传送门: <a target="_blank" href="https://xumeng.site/xui-react/index">xui-react</a>
 
 * 简介: 一个基于原生`JS`,可以提供丰富的方法,组件,插件的组件库.
 
