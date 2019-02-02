@@ -271,9 +271,9 @@
 
 ###v0.0.1  <span style="font-size: 16px;">2017/07/21</span>
 #####init：
-1.[`gitbook`地址](https://legacy.gitbook.com/book/jarveniv/xui/details)
+1.[`gitbook`地址](https://legacy.gitbook.com/book/xumengzi/xui/details)
 
-2.[`github`地址](https://github.com/JarvenIV/xui)
+2.[`github`地址](https://github.com/xumengzi/xui)
 
 
 <script>
