@@ -10,7 +10,7 @@
 	<meta name="description" content="huihui">
 	<meta name="keywords" content="HTML,CSS,love">
 	<meta name="author" content="xumeng">
-	<link rel="shortcut icon" type="image/x-icon" href="http://xumeng.site/others/xu_icon_40.ico" media="screen" />
+	<link rel="shortcut icon" type="image/x-icon" href="https://xumeng.site/others/xu_icon_40.ico" media="screen" />
 	<style type="text/css">
 		body{
 			padding: 0;
@@ -27,6 +27,7 @@
 		    text-align: center;
 		}
 		.introduce > div{
+			position: relative;
 			width: 100%;
 		    height: 100%;
 		    font-size: 20px;
@@ -37,6 +38,16 @@
 		    align-items: center;
 		    justify-content: center;
 		    animation: fadein 3s;
+		}
+		.introduce > div::before{
+			content: '';
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 100%;
+			padding: 50% 0;
+			opacity: .2;
+			background: linear-gradient(to right, red , blue);
 		}
 		.earth{
 		    background: url(imgs/earth.jpeg) fixed 100%;
@@ -78,7 +89,7 @@
 		    background: url(imgs/yousee.jpeg) fixed 100%;
 		    background-size: cover;
 		}
-		@-webkit-keyframes fadein {
+		@keyframes fadein {
 		  from {
 		    opacity: 0;
 		  }
@@ -86,139 +97,60 @@
 		    opacity: 1;
 		  }
 		}
-		.copyright{
-		    color: #999;
-		    font-size: 14px;
-		}
-		.reasons{
-			display: flex;
-		    flex-direction: column;
-		    justify-content: center;
-		    align-items: center;
-		    background-color: #263238;
-		    color: #fff;
-		}
-		.reasons > div{
-			width: 620px;
-		    display: flex;
-		    flex-direction: row;
-		    justify-content: space-around;
-		    align-items: center;
-		    margin: 50px 0;
-		}
-		.reasons p{
-			font-size: 20px;
-		}
-		.who_are_you {
-			height: 80px;
-		    display: flex;
-		    padding: 30px 10px;
-		    flex-direction: column;
-		    justify-content: space-around;
-		    align-items: center;
-		}
-		.who_are_you ul{
-			margin: 0;
-			padding: 0
-		}
-		.who_are_you ul li{
-			list-style: none;
-		    padding-right: 15px;
-		    border-right: 1px solid #d6d6d6;
-		    float: left;
-		    height: 18px;
-		    margin-right: 15px;
-		}
-		.who_are_you ul li:last-child{
-			border: none;
-		}
-		.who_are_you ul li a {
-			position: relative;
-			display: block;
-		    line-height: 18px;
-		    color: #999;
-		    text-decoration: none;
-		}
 	</style>
 </head>
 <body>
-	<div class="content">
-		<div class="introduce">
-			<div class="earth">
-				哎呀呀，要吃土啦！！！<br/>
-				才不会呢<br/>
-				你的小孟哥才不会让你吃土<br/>
-				会带你去七热干面，哈哈哈
-			</div>
-		</div>
-		<div class="introduce">
-			<div class="flowers">
-				即使在凛冽的寒风<br/>
-				也丝毫不会让“我”枯萎
-			</div>
-		</div>
-		<div class="introduce">
-			<div class="lovely">
-				哟哟哟<br/>
-				这位笑靥如花的美女是谁呀<br/>
-				有联系方式吗<br/>
-				别想啦，已经名花有主咯
-			</div>
-		</div>
-		<div class="introduce">
-			<div class="mylove">
-				高冷女神<br/>
-				不需要词藻来堆砌
-			</div>
-		</div>
-		<div class="introduce">
-			<div class="noble">
-				爱笑的女生运气都不错
-			</div>
-		</div>
-		<div class="introduce">
-			<div class="success">
-				这是谁，乱入啦<br/>
-				三连击，biubiubiu<br/>
-				三十年年后我会在某个别墅里打桌球
-			</div>
-		</div>
-		<div class="introduce">
-			<div class="rememberme">
-				我知道这是啥花<br/>
-				勿忘我-不要忘记我
-			</div>
-		</div>
-		<div class="introduce">
-			<div class="yourlove">
-				女生买点口红怎么啦<br/>
-				不就十几支么<br/>
-				买买买<br/>
-				小孟哥给你买
-			</div>
-		</div>
-		<div class="introduce">
-			<div class="yousee">
-				一头乌黑闪亮的头发<br/>
-				好啦，我知道你在秀头发<br/>
-				羡慕ing
-			</div>
-		</div>
-		<section class="who_are_you">
-			<ul>
-				<li>
-					<a href="mailto:me@xumengzi.top" data-title="me@xumengzi.top" target="_blank">contact me</a>
-				</li>
-				<li>
-					<a href="javascript:void(0)" data-title="web front-end developer" target="_blank">about me</a>
-				</li>
-				<li>
-					<a href="https://github.com/xumengzi/selectedJs" data-title="来github提问" target="_blank">bug me</a>
-				</li>
-			</ul>
-			<div class="copyright">
-				Copyright ©许孟 All rights reserverd 版权所有 2019 
-			</div>
-		</section>
-	</div>
+	<div class="content"></div>
+	<script>
+		window.onload = function(){
+			var list = [
+				{
+					style: 'earth',
+					description: '哎呀呀，要吃土啦！！！|才不会呢|你的小孟哥才不会让你吃土|会带你去七热干面，哈哈哈'
+				},
+				{
+					style: 'flowers',
+					description: '即使在凛冽的寒风|也丝毫不会让“我”枯萎'
+				},
+				{
+					style: 'lovely',
+					description: '哟哟哟|这位笑靥如花的美女是谁呀|有联系方式吗|别想啦，已经名花有主咯'
+				},
+				{
+					style: 'mylove',
+					description: '高冷女神|不需要词藻来堆砌'
+				},
+				{
+					style: 'noble',
+					description: '爱笑的女生运气都不错'
+				},
+				{
+					style: 'success',
+					description: '这是谁，乱入啦|三连击，biubiubiu|三十年年后我会在某个别墅里打桌球'
+				},
+				{
+					style: 'rememberme',
+					description: '我知道这是啥花|勿忘我-不要忘记我'
+				},
+				{
+					style: 'yourlove',
+					description: '女生买点口红怎么啦|不就十几支么|买买买|小孟哥给你买'
+				},
+				{
+					style: 'yousee',
+					description: '一头乌黑闪亮的头发|好啦，我知道你在秀头发|羡慕ing'
+				}
+			];
+			let newList = list.sort((a,b)=>{return Math.random() * 2 - 1});
+			newList.map((item, index)=>{
+				let divs = document.createElement('div');
+				divs.className = 'introduce';
+				let childDivs = document.createElement('div');
+				childDivs.className = item.style;
+				childDivs.innerHTML = item.description.replace(/\|/g, '<br/>');
+				divs.appendChild(childDivs);
+				document.querySelector('.content').appendChild(divs);
+			});
+		}
+	</script>
 </html>
