@@ -42,7 +42,7 @@ new xui.lazyLoad({
 });
 ```
 
-2.我们可以传入有链接的图片以及一些配置等等, [戳我看看](https://xumengzi.github.io/xui/others/lazyLoad-href.html)
+2.我们可以传入有链接的图片以及一些配置等等, [戳我看看](https://xumengzi.github.io/xui/others/lazyloadhref.html)
 
 ```js
 new xui.lazyLoad({

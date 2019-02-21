@@ -12,7 +12,7 @@
 
 ###v2.1.3  <span style="font-size: 16px;">2019/01/12</span>
 #####bugfix：
-1.[图片预览插件](../plugins/imgShow.md)增加了不在同域的情况下下载说明
+1.[图片预览插件](../plugins/imgShow.md)增加了不在同域的情况下的下载说明
 
 >是否兼容现有代码：是
 
