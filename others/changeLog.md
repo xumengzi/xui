@@ -10,6 +10,12 @@
 
 >输入`xui.version`获取当前版本号
 
+###v2.2.3  <span style="font-size: 16px;">2019/02/23</span>
+#####add：
+1.[日志收集插件](../collection/logCollection.md)，方便记录各种错误日志信息
+
+>是否兼容现有代码：是
+
 ###v2.1.3  <span style="font-size: 16px;">2019/01/12</span>
 #####bugfix：
 1.[图片预览插件](../plugins/imgShow.md)增加了不在同域的情况下的下载说明
