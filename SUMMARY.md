@@ -34,4 +34,5 @@
     * [3.3.1 下拉加载 pullLoad](plugins/pullLoad.md)
 * [4.收藏 collection](collection/README.md)
     * [4.1.1 算法 algorithm](collection/algorithm.md)
+    * [4.1.2 日志收集 logCollection](collection/logCollection.md)
 * [5.日志 log](others/changeLog.md)
