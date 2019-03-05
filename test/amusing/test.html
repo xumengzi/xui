@@ -41,10 +41,11 @@
 	</style>
 </head>
 <body>
-	<div class="content">
-		<img id="showImg" style="width: 300px" src="./bg.png">
-	</div>
+	
 	<script type="text/javascript" src="../../assets/log.js"></script>
+	<div class="content">
+		<img id="showImg" class="a b c" style="width: 300px" src="./4bg.png">
+	</div>
 	<script type="text/javascript" src="../../assets/xui.js"></script>
 	<script type="text/javascript">
 		document.getElementById('showImg').addEventListener('click', e =>{
@@ -53,20 +54,20 @@
 		});
 		// console.error('wtf');
 
-		var promise = new Promise(function(resolve, reject){
-			reject('nima')
-		}).then(res =>{
-			console.log(res)
-		}).catch(err =>{
-		});
+		// var promise = new Promise(function(resolve, reject){
+		// 	reject('nima')
+		// }).then(res =>{
+		// 	console.log(res)
+		// }).catch(err =>{
+		// });
 
-		var fetch = fetch('https://xumeng.site/gitbook/api/discussions',{
-					        method: 'GET',
-					        mode: 'cors',
-					        cache: 'default'
-					})
-					.then(res =>{ return res.json();})
-					.then(res =>{ console.log(res)})
+		// var fetch = fetch('https://xumeng.site/gitbook/api/discussions',{
+		// 			        method: 'GET',
+		// 			        mode: 'cors',
+		// 			        cache: 'default'
+		// 			})
+		// 			.then(res =>{ return res.json();})
+		// 			.then(res =>{ console.log(res)})
 
 	</script>
 </body>
