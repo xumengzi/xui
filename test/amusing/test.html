@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>test</title>
+	<link rel="stylesheet" type="text/css" href="../../assets/xui.css">
 	<style type="text/css">
 		.fixed-style span{
 			display: none;
@@ -33,193 +34,40 @@
 			height: 100%;
 			display: block;
 		}
-		.show{
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			overflow: hidden;
-		}
-		.show > div{
-			position: absolute;
-			width: 50%;
-			height: 50%;
-			background-image: url(bg.png);
-			opacity: 0;
-			transition: 1s cubic-bezier(0.38, -0.18, 0.6, 1.13);
-		}
-		.show .a{
-			transform: translateY(-100%);
-		}
-		.show .b{
-			transform: scale(.4);
-		}
-		.show .show1{
-			top: 0;
-			left: 0;
-			background-position: 0 0;
-		}
-		.show .show2{
-			top: 0;
-			left: 50%;
-			background-position: 300px 0;
-		}
-		.show .show3{
-			top: 50%;
-			left: 0;
-			background-position: 0 150px;
-		}
-		.show .show4{
-			top: 50%;
-			left: 50%;
-			background-position: 100% 100%;
-		}
-		.show .opacity{
-			opacity: 1;
-		}
-		.show .transform{
-			opacity: 1;
-			transform: translateY(0);
-		}
-		.show .rotate{
-			opacity: 1;
-			transform: rotate(360deg);
-		}
-		.show .scale{
-			opacity: 1;
-			transform: scale(1);
+		.xui_img_con{
+			width: 600px;
+			height: 300px;
 		}
 	</style>
 </head>
 <body>
-	<div>
-		修改前：
-		<div class="obj1">
-			<div class="test" style="color: red;">data-id</div>
-			<input type="text" value="1" name="">
-		</div>
-	</div>
-	<div>
-		修改后：
-		<div class="obj2">
-			<div class="test">data-id</div>
-			<input type="text" value="12" name="">
-		</div>
-	</div>
-	<div>
-		dom对比结果：
-		<span class="diff"></span>
-		<span class="time"></span>
-	</div>
 	<div class="content">
-		<div id="btn">
-			<button class="opacity" data-id=0>demo0</button>
-			<button class="transform" data-id=1>demo1</button>
-			<button class="rotate" data-id=2>demo2</button>
-			<button class="scale" data-id=3>demo3</button>
-		</div>
-		<div class="show">
-			<div class="show1"></div>
-			<div class="show2"></div>
-			<div class="show3"></div>
-			<div class="show4"></div>
-		</div>
-		<div class="show">
-			<div class="a show1"></div>
-			<div class="a show2"></div>
-			<div class="a show3"></div>
-			<div class="a show4"></div>
-		</div>
-		<div class="show">
-			<div class="show1"></div>
-			<div class="show2"></div>
-			<div class="show3"></div>
-			<div class="show4"></div>
-		</div>
-		<div class="show">
-			<div class="b show1"></div>
-			<div class="b show2"></div>
-			<div class="b show3"></div>
-			<div class="b show4"></div>
-		</div>
+		<img id="showImg" style="width: 300px" src="./bg.png">
 	</div>
+	<script type="text/javascript" src="../../assets/log.js"></script>
+	<script type="text/javascript" src="../../assets/xui.js"></script>
 	<script type="text/javascript">
-		document.getElementById('btn').addEventListener('click', (e) =>{
-			if (e.target.nodeName === 'BUTTON') {
-				let inx = e.target.getAttribute('data-id');
-				let tar = document.querySelectorAll('.show')[inx].children;
-				[...tar].forEach((item, index) => {
-					setTimeout(()=>{
-						item.classList += ` ${e.target.className}`;
-					}, index * 500);
-				});
-			};
+		document.getElementById('showImg').addEventListener('click', e =>{
+			return a;
+			// xui.showImg(e.target.src); 
 		});
-		
-	</script>
-	<script type="text/javascript" src="walk.js"></script>
-	<script type="text/javascript" src="diff.js"></script>
-	<script type="text/javascript">
-		var timeStart = +new Date();
-		var obj1 = document.querySelector('.obj1');
-		var obj2 = document.querySelector('.obj2');
-		var a = walk(obj1);
-		var b = walk(obj2);
-		console.log(a);
-		console.log(b)
-		var resultArr = diff(
-			a, 
-			b, 
-			{
-				priority: 'head',
-				changeType: {
-					ADD:    1,
-			        REMOVE: 2,
-			        STYLE:  4,
-			        TEXT:   8
-				}
-			}
-		);
-	</script>
-	<script type="text/javascript">
-		console.log(resultArr);
-		const color = {
-			1: 'rgba(198, 251, 209, 0.7)',
-			2: 'rgba(251, 127, 140, 0.7)',
-			4: 'rgba(182, 10, 253, 0.7)',
-			8: 'rgba(12, 12, 12, 0.3)'
-		};
-		const des = {
-			1: '有新增',
-			2: '有删除',
-			4: '样式修改',
-			8: '文本修改'
-		}
-		resultArr.forEach((item) =>{
-			let ele = item.node;
-			let pos = ele.rect;
+		// console.error('wtf');
 
-			let mask = document.createElement('div');
-			mask.classList += 'fixed-style';
-			mask.style.position = 'fixed';
-			mask.style.left = pos[0] + 'px';
-			mask.style.top = pos[1] + 'px';
-			mask.style.width = pos[2] + 'px';
-			mask.style.height = pos[3] + 'px';
-
-			let sp = document.createElement('span');
-
-			sp.innerHTML = des[item.type];
-			mask.appendChild(sp);
-			if (item.type === 4) {
-				mask.style.border = `1px ${color[item.type]} solid`;
-			} else{
-				mask.style.background = color[item.type];
-			}
-			// document.body.appendChild(mask);
+		var promise = new Promise(function(resolve, reject){
+			reject('nima')
+		}).then(res =>{
+			console.log(res)
+		}).catch(err =>{
 		});
-		var timeEnd = +new Date();
-		document.querySelector('.diff').innerHTML = resultArr.length ? '有差异' : '没有差异';
-		document.querySelector('.time').innerHTML = timeEnd - timeStart + 'ms';
+
+		var fetch = fetch('https://xumeng.site/gitbook/api/discussions',{
+					        method: 'GET',
+					        mode: 'cors',
+					        cache: 'default'
+					})
+					.then(res =>{ return res.json();})
+					.then(res =>{ console.log(res)})
+
 	</script>
 </body>
 </html>

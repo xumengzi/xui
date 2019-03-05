@@ -957,6 +957,61 @@ button.xui_btn:disabled{
     animation: .3s toToDown linear;
     -webkit-animation: .3s toToDown linear;
 }
+.show{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.show > div{
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background-image: url(bg.png);
+    opacity: 0;
+    transition: 3s cubic-bezier(0.38, -0.18, 0.6, 1.13);
+}
+.show .a{
+    transform: translateY(-100%);
+}
+.show .b{
+    transform: scale(.4);
+}
+.show .show1{
+    top: 0;
+    left: 0;
+    background-position: 0 0;
+}
+.show .show2{
+    top: 0;
+    left: 50%;
+    background-position: 300px 0;
+}
+.show .show3{
+    top: 50%;
+    left: 0;
+    background-position: 0 150px;
+}
+.show .show4{
+    top: 50%;
+    left: 50%;
+    background-position: 100% 100%;
+}
+.show .opacity{
+    opacity: 1;
+}
+.show .transform{
+    opacity: 1;
+    transform: translateY(0);
+}
+.show .rotate{
+    opacity: 1;
+    transform: rotate(360deg);
+}
+.show .scale{
+    opacity: 1;
+    transform: scale(1);
+}
 .xui_img_content .xui_img_con .xui_icon{
     position: fixed;
     bottom: 80px;
