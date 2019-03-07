@@ -1,6 +1,15 @@
 ;(function(w){
 	var doc = document;
 	var UPLOAD_URL = 'https://xumeng.site/';
+
+	function isFunction(fn){
+		return typeof fn === 'function';
+	};
+
+	function jsonS(data){
+		return typeof json === 'string' ? JSON.parse(data) : JSON.stringify(data);
+	};
+
 	// w.onerror = function(message, source, lineNo, colNo, error){
 	//     const errorInfo = {
 	//     	message: message,
@@ -29,7 +38,7 @@
 	    	lineNumber: e.colno,
 	    	colNumber: e.lineno,
 			stack: e.error && e.error.stack,
-			target:(tar),
+			target: tar,
 	    	type: e.type
 		};
 	    sendError(errorInfo);
@@ -45,10 +54,6 @@
 	    sendError(errorInfo);
 	    // e.preventDefault();
 	});
-
-	function isFunction(fn){
-		return typeof fn === 'function';
-	};
 
 	w.addEventListener('rejectionhandled', function(event){
 		console.log(event);
@@ -84,17 +89,21 @@
 		return userInfo;
 	};
 
-	function jsonS(data){
-		return typeof json === 'string' ? JSON.parse(data) : JSON.stringify(data);
-	};
-
 	function sendError(info){
 		var mes = new Image();
 		var isQuesMark = UPLOAD_URL.indexOf('?') > -1 ? '&data=' : '?data=';
 		var useInfo = getUserInfo();
 
-		var sendObj = Object.assign({}, info, useInfo);
-		console.log(jsonS(sendObj).length);
-		mes.src = isQuesMark + jsonS(sendObj);
+		var sendObj = {
+			errorInfo: info,
+			useInfo: useInfo
+		};
+		//考虑到IE浏览器对url的长度限制大概为2000，所以这里对超长字符作一下截取
+		if(jsonS(sendObj).length > 2000){
+			delete sendObj.errorInfo;
+			sendObj.maxError = 'The error message has been intercepted due to the maximum limit of url';
+		};
+		sendObj = jsonS(sendObj);
+		mes.src = isQuesMark + sendObj;
 	};
 })(window);

@@ -567,28 +567,12 @@ include most functions and styles etc.
 		},
 		showImg(){
 			let that = this;
-	    	that.deleteEle('xui_img');
+			that.deleteEle('xui_img');
 	    	let tar = document.createElement('div');
-
-	    	let imgs = document.createElement('div');
-	    	let str = '';
-	    	for (let i = 0; i < 4; i++) {
-	    		str += `
-	    				<div class="show${i+1}" 
-	    					style="background-image:url(${arguments[0]});
-	    							opacity:1;
-	    							transition: all 1s;
-	    							"
-	    				>
-	    				</div>
-	    				`
-	    	}
 	    	tar.innerHTML = `
 	    		<span class="xui_close"></span>
 	    		<div class="xui_img_con">
-	    			<div class="show">
-						${str}
-					</div>
+	    			<img class="xui_img" src=${arguments[0]} alt="">
 	    			<div class="xui_icon">
 	    				<span class="xui_left" xui-type="1"></span>
 	    				<span class="xui_zoomin" xui-type="2"></span>
