@@ -1,5 +1,6 @@
 <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 <script type="text/javascript" src="../assets/xui.js"></script>
+<script type="text/javascript" src="../assets/log.js"></script>
 
 # 4.1.2 log collection
 
@@ -8,7 +9,30 @@
 >一直以来，前端开发在本地就可以看到各种日志，但是你有没有想过一种情况，客户的站上出现了错误，但是你缺少足够的信息来定位问题，是不是很烦恼
 
 ##### 使用及参数说明:
-
+```js
+{
+    "errorInfo": {
+        "message": "Uncaught ReferenceError: b is not defined",
+        "fileName": "http://localhost:4000/test/amusing/test.html",
+        "lineNumber": 4,
+        "colNumber": 52,
+        "stack": "ReferenceError: b is not defined\n at a (http://localhost:4000/test/amusing/test.html:52:4)\n at http://localhost:4000/test/amusing/test.html:54:3",
+        "target": {},
+        "type": "error"
+    },
+    "useInfo": {
+        "cookieEnabled": true,
+        "data": "2019-03-08T11:19:36.089Z",
+        "language": "en-US",
+        "location": "http://localhost:4000/test/amusing/test.html",
+        "platform": "MacIntel",
+        "product": "Gecko",
+        "referrer": "",
+        "screen": "1440px",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36"
+    }
+}
+```
 * 引用`log.js`，然后配置好发送错误日志的url即可（不用担心跨域）
 * 由于IE浏览器对url字符长度的限制（2000左右），所以对于超过2000字符长度的情况时会对部分错误日志进行截取
 * 没有你想要的功能? 快联系我: `me@xumengzi.top`添加吧

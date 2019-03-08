@@ -25,12 +25,15 @@
 
 	w.addEventListener('error', function(event){
 		var e = event;
-		console.log(e.target);
-		const tar = {
-			id: e.target.id,
-			class: e.target.classList && [...e.target.classList].join(),
-			text: e.target.innerHTML,
-			node: e.target.nodeName
+		var tarList = 'window';
+		//如果不是特定的元素，e.target就和window相等，所以要排除掉
+		if(e.target !== window){
+			tarList = {
+				id: e.target.id,
+				class: e.target.classList && [...e.target.classList].join(),
+				text: e.target.innerHTML,
+				node: e.target.nodeName
+			};
 		};
 		const errorInfo = {
 	    	message: e.message,
@@ -38,7 +41,7 @@
 	    	lineNumber: e.colno,
 	    	colNumber: e.lineno,
 			stack: e.error && e.error.stack,
-			target: tar,
+			target: tarList,
 	    	type: e.type
 		};
 	    sendError(errorInfo);
