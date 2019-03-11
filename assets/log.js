@@ -28,13 +28,20 @@
 		var tarList = 'window';
 		//如果不是特定的元素，e.target就和window相等，所以要排除掉
 		if(e.target !== window){
+			var path = '';
+			event.path.reverse().map(item =>{
+				item.nodeType < 9 && (path += item.nodeName.toLowerCase() + '>')
+			});
+			path = path.substr(0, path.length -1);
 			tarList = {
+				classList: e.target.classList && [...e.target.classList].join(),
 				id: e.target.id,
-				class: e.target.classList && [...e.target.classList].join(),
-				text: e.target.innerHTML,
-				node: e.target.nodeName
+				path: path,
+				nodeName: e.target.nodeName.toLowerCase(),
+				text: e.target.innerHTML
 			};
 		};
+		
 		const errorInfo = {
 	    	message: e.message,
 	    	fileName: e.filename,

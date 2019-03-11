@@ -10,6 +10,12 @@
 
 >输入`xui.version`获取当前版本号
 
+###v2.2.4  <span style="font-size: 16px;">2019/03/02</span>
+#####bugfix：
+1.完善[日志收集插件](../collection/logCollection.md)，增加了错误的种类，更详细了哦
+
+>是否兼容现有代码：是
+
 ###v2.2.3  <span style="font-size: 16px;">2019/02/23</span>
 #####add：
 1.[日志收集插件](../collection/logCollection.md)，方便记录各种错误日志信息
