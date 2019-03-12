@@ -1,21 +1,43 @@
 ;(function(w, options){
 	var defaultOptions = {
-		isShowError: false
+		isShowError: true,
+		isSubStr: true,
+		collectPercent: 1
 	};
-	var opts = Object.assign({}, defaultOptions, options);
+	var opts = mergeObj({}, defaultOptions, options);
 	var doc = document;
 	var UPLOAD_URL = opts.src;
 
 	if(!UPLOAD_URL){
-		throw new Error('日志上报的src必传');
+		throw new Error("the src is required");
 	};
 
 	function isFunction(fn){
 		return typeof fn === 'function';
 	};
 
-	function toArray(args){
-		return Array.prototype.slice.call(null, args);
+	function mergeObj(){
+		var args = arguments, newObj = args[0];
+		for(var i in args[1]){
+			newObj[i] = args[1][i];
+		};
+		if(arguments.length === 3){
+			for(var j in args[2]){
+				newObj[j] = args[2][j];
+			};
+		};
+		return newObj;
+	};
+
+	function toList(args){
+		var list = '';
+		for(var i in args){
+			if(args.hasOwnProperty(i)){
+				list += args[i] + ',';
+			}
+		};
+		list = list.substr(0, list.length - 1);
+		return list;
 	}
 
 	function jsonS(data){
@@ -46,7 +68,7 @@
 			});
 			path = path.substr(0, path.length -1);
 			tarList = {
-				classList: e.target.classList && toArray(e.target.classList).join(),
+				classList: e.target.classList && toList(e.target.classList),
 				id: e.target.id,
 				path: path,
 				nodeName: e.target.nodeName.toLowerCase(),
@@ -64,7 +86,7 @@
 	    	type: e.type
 		};
 	    sendError(errorInfo);
-	    // e.preventDefault();
+	    !opts.isShowError && e.preventDefault();
 	},true);
 
 	w.addEventListener('unhandledrejection', function(event){
@@ -73,12 +95,8 @@
 	    	type: e.type,
 	    	reason: e.reason.toString()
 	    };
-	    sendError(errorInfo);
-	    // e.preventDefault();
-	});
-
-	w.addEventListener('rejectionhandled', function(event){
-		console.log(event);
+		sendError(errorInfo);
+	    !opts.isShowError && e.preventDefault();
 	});
 
 	Promise.prototype['catch'] = function(onRejected){
@@ -112,32 +130,24 @@
 	};
 
 	function sendError(info){
-		var mes = new Image();
-		var isQuesMark = UPLOAD_URL.indexOf('?') > -1 ? '&data=' : '?data=';
-		var useInfo = getUserInfo();
+		if(Math.random() < opts.collectPercent){
+			var mes = new Image();
+			var isQuesMark = UPLOAD_URL.indexOf('?') > -1 ? '&data=' : '?data=';
+			var useInfo = getUserInfo();
 
-		var sendObj = {
-			errorInfo: info,
-			useInfo: useInfo
+			var sendObj = {
+				errorInfo: info,
+				useInfo: useInfo
+			};
+			//考虑到IE浏览器对url的长度限制大概为2000，所以这里对超长字符作一下截取
+			if(!opts.isSubStr && jsonS(sendObj).length < 2000){
+				delete sendObj.errorInfo;
+				sendObj.maxError = 'The error message has been intercepted due to the maximum limit of url';
+			};
+			sendObj = jsonS(sendObj);
+			mes.src = UPLOAD_URL + isQuesMark + sendObj;
 		};
-		//考虑到IE浏览器对url的长度限制大概为2000，所以这里对超长字符作一下截取
-		if(jsonS(sendObj).length > 2000){
-			delete sendObj.errorInfo;
-			sendObj.maxError = 'The error message has been intercepted due to the maximum limit of url';
-		};
-		sendObj = jsonS(sendObj);
-		mes.src = isQuesMark + sendObj;
 	};
 })(window, {
-	src: 'https://xumeng.site/',
-	isShowError: false,
+	src: 'https://xumeng.site/'
 });
-
-
-
-
-
-
-
-
-

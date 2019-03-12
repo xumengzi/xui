@@ -6,6 +6,23 @@
 
 >一直以来，前端开发在本地就可以看到各种日志，但是你有没有想过一种情况，客户的站上出现了错误，但是你缺少足够的信息来定位问题，是不是很烦恼
 
+##### `log.js`参数说明:
+```js
+;(function(w, options){
+    //日志代码
+})(window, {
+    src: string,
+    isShowError: boolean,
+    isSubStr: boolean,
+    collectPercent: number
+});
+```
+* `src`表示日志上报的链接 **必传**
+* `isShowError`表示是否屏蔽错误信息, 默认值为false, 表示显示错误信息
+* `isSubStr`表示是否截取上报信息的长度, 默认超过2000字符截取
+* `collectPercent`表示日志是否全部上传, 默认全部, 可以配置0-1, 表示只收集部分错误信息
+* `tips` 可以打开控制台,看到目前上报的错误信息日志, 如`https://xumeng.site/?data=xxx`
+
 ##### 日志记录数据说明:
 ```js
 //简略信息，需要注意的是并不是所有错误都会包含下面每一项
@@ -16,7 +33,7 @@
         "lineNumber": 报错js的行数,
         "colNumber": 报错js的列数,
         "stack": 错误堆栈信息,
-        "target": {//错误的目标元素，比如图片未加载出来，这个时候target就会显示当前图片的id，类名等等,
+        "target": {//错误的目标元素，比如图片未加载出来，这个时候target就会显示当前图片的id，类名等等
             "id": 元素的id,
             "classList": 元素的类名,
             "text": 元素的文本,
