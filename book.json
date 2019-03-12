@@ -4,7 +4,9 @@
 	"description" : "一个原生js的ui框架",
 	"links": {
 	    "sidebar" : {
-	        "GitHub" : "https://github.com/xumengzi"
+			"github": "https://github.com/xumengzi/xui",
+			"xui-vue" : "https://xumeng.site/xui-vue/index.html",
+			"xui-react": "https://xumeng.site/xui-react/index"
 	    }
 	}
 }
