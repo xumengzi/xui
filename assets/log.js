@@ -1,10 +1,22 @@
-;(function(w){
+;(function(w, options){
+	var defaultOptions = {
+		isShowError: false
+	};
+	var opts = Object.assign({}, defaultOptions, options);
 	var doc = document;
-	var UPLOAD_URL = 'https://xumeng.site/';
+	var UPLOAD_URL = opts.src;
+
+	if(!UPLOAD_URL){
+		throw new Error('日志上报的src必传');
+	};
 
 	function isFunction(fn){
 		return typeof fn === 'function';
 	};
+
+	function toArray(args){
+		return Array.prototype.slice.call(null, args);
+	}
 
 	function jsonS(data){
 		return typeof json === 'string' ? JSON.parse(data) : JSON.stringify(data);
@@ -34,7 +46,7 @@
 			});
 			path = path.substr(0, path.length -1);
 			tarList = {
-				classList: e.target.classList && [...e.target.classList].join(),
+				classList: e.target.classList && toArray(e.target.classList).join(),
 				id: e.target.id,
 				path: path,
 				nodeName: e.target.nodeName.toLowerCase(),
@@ -116,4 +128,16 @@
 		sendObj = jsonS(sendObj);
 		mes.src = isQuesMark + sendObj;
 	};
-})(window);
+})(window, {
+	src: 'https://xumeng.site/',
+	isShowError: false,
+});
+
+
+
+
+
+
+
+
+
