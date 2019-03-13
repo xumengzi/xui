@@ -1,7 +1,11 @@
 <link rel="stylesheet" type="text/css" href="./assets/xui.css">
 <script type="text/javascript" src="./assets/xui.js"></script>
 
-![xui](https://img.shields.io/badge/xui-v2.1.1-brightgreen.svg)
+<style>
+#book-search-results{
+    position: relative;
+}
+</style>
 
 # 简介
 
@@ -54,3 +58,13 @@ How many codes must a man edit before you call him a master?
 >聊乘化以归尽，乐夫天命复奚疑！
 
 >——节选自陶渊  《归去来兮辞》
+
+<script>
+    var src = 'https://img.shields.io/badge/xui-v' + xui.version + '-brightgreen.svg';
+    var img = new Image(); 
+    img.src = src;
+    var style = "position: absolute;top: 0; left: 0;z-index: 99;";
+    img.style = style;
+    var body = document.querySelector('#book-search-results');
+    body.appendChild(img);
+</script>

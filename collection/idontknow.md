@@ -1,0 +1,72 @@
+<link rel="stylesheet" type="text/css" href="../assets/xui.css">
+<script type="text/javascript" src="../assets/xui.js"></script>
+
+# 4.1.3 i dont know
+
+>路漫漫其修远兮，吾将上下而求索
+
+1.关于`readonly`，很眼熟吧，来看看这种情况
+
+>关键点是给`select`的`readonly`状态下的`option`设置为隐藏状态即可
+
+<style>
+    .xui_select_readonly[readonly] option{
+        display: none;
+    }
+</style>
+
+<div>
+    <div>这里是让我费解的，可以看到<code>select</code>明明设置了<code>readonly</code>属性，但为啥还可以选择某一项呢？</div>
+    切换<code>readonly</code>状态<input id="xui_switch" class="xui_switch" type="checkbox">
+    <label for="xui_switch" class="xui_switch_box"></label>
+    <div class="xui_content">
+        <input type="text" readonly class="xui_input" placeholder="" value="hello world" />
+        <select class="xui_select" readonly>
+            <option value="1">我也设置了readonly属性</option>
+            <option value="2">为啥还能点击，并选择？？</option>
+        </select>
+    </div>
+</div>
+<div>
+    <div>这里是正确的设置方法，可以看到<code>select</code>无法选择里面的选项了</div>
+    切换<code>readonly</code>状态<input id="xui_switch1" class="xui_switch" type="checkbox">
+    <label for="xui_switch1" class="xui_switch_box"></label>
+    <div class="xui_content">
+        <input type="text" readonly class="xui_input xui_input1" placeholder="" value="hello world" />
+        <select class="xui_select xui_select1 xui_select_readonly" readonly>
+            <option value="1">我也设置了readonly属性</option>
+            <option value="2">为啥还能点击，并选择？？</option>
+        </select>
+    </div>
+</div>
+
+<script type="text/javascript">
+var inp = document.querySelector('.xui_input'),
+    inp1 = document.querySelector('.xui_input1'),
+    select  = document.querySelector('.xui_select'),
+    select1  = document.querySelector('.xui_select1');
+document.getElementById('xui_switch').onchange = function(e){
+    if(!e.target.checked){
+        inp.setAttribute('readonly', true);
+        select.setAttribute('readonly', true);
+    }else{
+        inp.removeAttribute('readonly');
+        select.removeAttribute('readonly');
+    };
+};
+document.getElementById('xui_switch1').onchange = function(e){
+    if(!e.target.checked){
+        inp1.setAttribute('readonly', true);
+        select1.setAttribute('readonly', true);
+    }else{
+        inp1.removeAttribute('readonly');
+        select1.removeAttribute('readonly');
+    };
+};
+</script>
+
+```css
+.xui_select_readonly[readonly] option{
+    display: none;
+}
+```

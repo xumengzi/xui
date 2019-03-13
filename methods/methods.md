@@ -47,7 +47,7 @@ xui.recordData({
 		name: 'xui.js',
 		version: xui.version,
 	},
-	url: 'www.example.com?a=1&b=2',
+	url: 'https://xumeng.site/?a=1&b=2',
 });
 </script>
 
@@ -62,13 +62,11 @@ xui.recordData({
 		name: 'xui.js',
 		version: xui.version,
 	},
-	url: 'www.example.com?a=1&b=2',
+	url: 'https://xumeng.site/?a=1&b=2',
 });
 ```
 
 8.有时候我们想操作一下`cookie`,但是原生的操作方法过于繁琐,所以便捷的方法显得格外重要.
-
->提示: 只有火狐支持本地页面保存cookie，建议使用火狐测试。鼠标右键-查看页面信息-安全-查看cookie
 
 ```js
 //`cookie`名和value必传
@@ -82,7 +80,8 @@ xui.removeCookie(name)
 ```
 
 9.这里使用`Promise`封装的一个`ajax`异步请求,使用方法如下
-```//get请求
+```js
+//get请求
 var url = 'https://hq.tigerbrokers.com/fundamental/finance_calendar/getType/2017-02-26/2017-06-10';
 xui.ajax({
     url: url + '?name=vuejs',
@@ -110,7 +109,7 @@ xui.ajax({
 ```
 
 10.我才不会告诉你,使用下面的方法可以快速判断当前环境是否为手机端
-```
+```js
 xui.isMobile()   //返回boolean
 
 //有兴趣查看源码么?
