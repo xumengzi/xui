@@ -60,11 +60,8 @@ How many codes must a man edit before you call him a master?
 >——节选自陶渊  《归去来兮辞》
 
 <script>
-    var src = 'https://img.shields.io/badge/xui-v' + xui.version + '-brightgreen.svg';
     var img = new Image(); 
-    img.src = src;
-    var style = "position: absolute;top: 0; left: 0;z-index: 99;";
-    img.style = style;
-    var body = document.querySelector('#book-search-results');
-    body.appendChild(img);
+    img.src = 'https://img.shields.io/badge/xui-v' + xui.version + '-brightgreen.svg';
+    var target = document.querySelector('#book-search-results');
+    target.insertBefore(img, target.childNodes[0]);
 </script>

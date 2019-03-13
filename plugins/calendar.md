@@ -105,7 +105,7 @@ document.getElementById('test2').onclick = function(){
 	xui.calendar({
 		id: 'test2',
 		startDate: '2017/12/01',
-		endDate: '2018/12/31',
+		endDate: '2020/12/31',
 		isToday: true,
 		isOtherMonths: true,
 		isChinese: true,
@@ -120,7 +120,7 @@ document.getElementById('test2').onclick = function(){
 xui.calendar({
 	id: 'test2',
 	startDate: '2017/12/01',
-	endDate: '2018/12/31',
+	endDate: '2020/12/31',
 	isToday: true,
 	isOtherMonths: true,
 	isChinese: true,
