@@ -7,16 +7,15 @@
 
 1.关于`readonly`，很眼熟吧，来看看这种情况
 
->关键点是给`select`的`readonly`状态下的`option`设置为隐藏状态即可
-
 <style>
     .xui_select_readonly[readonly] option{
         display: none;
     }
 </style>
 
+>这里是让我费解的，可以看到`select`明明设置了`readonly`属性，但为啥还可以选择某一项呢？
+
 <div>
-    <div>这里是让我费解的，可以看到<code>select</code>明明设置了<code>readonly</code>属性，但为啥还可以选择某一项呢？</div>
     切换<code>readonly</code>状态<input id="xui_switch" class="xui_switch" type="checkbox">
     <label for="xui_switch" class="xui_switch_box"></label>
     <div class="xui_content">
@@ -27,8 +26,16 @@
         </select>
     </div>
 </div>
+
+>这里可以看到`select`无法选择里面的选项了，为什么呢？关键点是给`select`的`readonly`状态下的`option`设置为隐藏状态即可
+
+```css
+.xui_select_readonly[readonly] option{
+    display: none;
+}
+```
+
 <div>
-    <div>这里是正确的设置方法，可以看到<code>select</code>无法选择里面的选项了</div>
     切换<code>readonly</code>状态<input id="xui_switch1" class="xui_switch" type="checkbox">
     <label for="xui_switch1" class="xui_switch_box"></label>
     <div class="xui_content">
@@ -64,9 +71,3 @@ document.getElementById('xui_switch1').onchange = function(e){
     };
 };
 </script>
-
-```css
-.xui_select_readonly[readonly] option{
-    display: none;
-}
-```
