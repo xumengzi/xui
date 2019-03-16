@@ -1,8 +1,24 @@
-(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+//这段代码是GA, 可以删掉
+;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NFNL3B9');
+
+//这段代码用来载页面上加tag标识,可以删掉
+;(function(){
+	var img = new Image(); 
+    img.src = 'https://img.shields.io/badge/xui-v2.2.5-brightgreen.svg';
+    var lis = document.createElement('li'),
+        link = document.createElement('a');
+    link.href = 'https://github.com/xumengzi/xui';
+    link.target = '_blank';
+    link.appendChild(img);
+    lis.appendChild(link);
+    var target = document.querySelector('.summary');
+    target.insertBefore(lis, target.childNodes[0]);
+})();
+
 
 /*
  created by xumeng

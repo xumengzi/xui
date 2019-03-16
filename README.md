@@ -58,16 +58,3 @@ How many codes must a man edit before you call him a master?
 >聊乘化以归尽，乐夫天命复奚疑！
 
 >——节选自陶渊  《归去来兮辞》
-
-<script>
-    var img = new Image(); 
-    img.src = 'https://img.shields.io/badge/xui-v' + xui.version + '-brightgreen.svg';
-    var lis = document.createElement('li'),
-        link = document.createElement('a');
-    link.href = 'https://github.com/xumengzi/xui';
-    link.target = '_blank';
-    link.appendChild(img);
-    lis.appendChild(link);
-    var target = document.querySelector('.summary');
-    target.insertBefore(lis, target.childNodes[0]);
-</script>
