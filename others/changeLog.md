@@ -10,7 +10,13 @@
 
 >输入`xui.version`获取当前版本号
 
-###v2.2.5  <span style="font-size: 16px;">2019/03/10</span>
+###v2.3.5  <span style="font-size: 16px;">2019/03/10</span>
+#####add：
+1.新增[数组](../collection/array.md)，实现了一些高级函数
+
+>是否兼容现有代码：是
+
+###v2.2.5  <span style="font-size: 16px;">2019/03/09</span>
 #####add：
 1.新增[我不知道](../collection/idontknow.md)，主要是日常碰到的但是之前不知道的前端知识
 

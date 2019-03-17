@@ -5,17 +5,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NFNL3B9');
 
+var xuiVersion = '2.3.5';
+
 //这段代码用来载页面上加tag标识,可以删掉
 ;(function(){
 	var img = new Image(); 
-    img.src = 'https://img.shields.io/badge/xui-v2.2.5-brightgreen.svg';
+    img.src = 'https://img.shields.io/badge/xui-v'+ xuiVersion +'-brightgreen.svg';
     var lis = document.createElement('li'),
         link = document.createElement('a');
     link.href = 'https://github.com/xumengzi/xui';
     link.target = '_blank';
     link.appendChild(img);
     lis.appendChild(link);
-    var target = document.querySelector('.summary');
+    var target = document.querySelector('.summary') || document.querySelector('body');
     target.insertBefore(lis, target.childNodes[0]);
 })();
 
@@ -30,19 +32,12 @@ include most functions and styles etc.
 */ 
 ;(function(w) {
 	function Xui() {
-		this.version = '2.2.5';
+		this.version = xuiVersion;
 		console.log("xui v" + this.version)
 	};
 
 	Xui.prototype = {
 	    constructor: Xui,
-	    zeroFill(e) {
-	        if (e < 0) {
-				return e = e > -10 ? '-0' + (-e) : e;
-			}else{
-				return e = e < 10 ? '0' + e : e;
-			};
-	    },
 	    ajax(){
     	    let arg = arguments[0];
 		    let url = arg.url,
@@ -162,7 +157,9 @@ include most functions and styles etc.
 	    	if (tar.length) {
 	    		let list = [...tar];
 	    		for(let i in list){
-	    			list[i].remove();
+	    			if(list.hasOwnProperty(i)){
+						list[i].remove();
+					};
 	    		};
 	    	};
 	    },
@@ -217,12 +214,17 @@ include most functions and styles etc.
 	    			document.body.onclick = function(e){
 			    		let tar = e.target.classList;
 			    		if (!(tar.contains('xui_drop_li') || tar.contains('xui_drop_btn') || tar.contains('xui_input_search'))) {
-			    			let newArr = [...(document.querySelectorAll('.xui_drop_list'))];
+							let newArr = [...(document.querySelectorAll('.xui_drop_list'))];
+							if(!newArr.length){
+								return;
+							};
 							for(let i in newArr){
-								newArr[i].classList.add('none');
-								for(let j = 0; j < newArr[i].childNodes.length ; j++){
-									newArr[i].childNodes[j].classList.contains('none') && newArr[i].childNodes[j].classList.remove('none');
-								};
+								if(newArr.hasOwnProperty(i)){
+									newArr[i].classList.add('none');
+									for(let j = 0; j < newArr[i].childNodes.length ; j++){
+										newArr[i].childNodes[j].classList.contains('none') && newArr[i].childNodes[j].classList.remove('none');
+									};
+								}
 							};
 			    		}
 			    	};
@@ -234,11 +236,13 @@ include most functions and styles etc.
 	    				let list = e.target.parentNode.querySelectorAll('li');
 	    				list = that.toArray(list);
 	    				for(let i in list){
-	    					if (val != '' && list[i].innerHTML.indexOf(val) == -1) {
-	    						list[i].classList.add('none');
-	    					}else{
-	    						list[i].classList.remove('none');
-	    					};
+	    					if(list.hasOwnProperty(i)){
+								if (val != '' && list[i].innerHTML.indexOf(val) == -1) {
+									list[i].classList.add('none');
+								}else{
+									list[i].classList.remove('none');
+								};
+							}
 	    				};
 	    			}
 	    		},
@@ -263,14 +267,18 @@ include most functions and styles etc.
     					if (!document.querySelectorAll('.xui_drop_list').length) {return;};
 	    				let newArr = that.toArray(document.querySelectorAll('.xui_drop_list'));
 	    				for(let i in newArr){
-	    					newArr[i].classList.add('none');
-	    					for(let j = 0; j < newArr[i].childNodes.length ; j++){
-	    						newArr[i].childNodes[j].classList.contains('none') && newArr[i].childNodes[j].classList.remove('none');
-	    					};
+	    					if(newArr.hasOwnProperty(i)){
+								newArr[i].classList.add('none');
+								for(let j = 0; j < newArr[i].childNodes.length ; j++){
+									newArr[i].childNodes[j].classList.contains('none') && newArr[i].childNodes[j].classList.remove('none');
+								};
+							}
 	    				};
 	    				let inpArr = that.toArray(document.querySelectorAll('.xui_input_search'));
 	    				for(let i in newArr){
-	    					inpArr[i] && (inpArr[i].value = '');
+	    					if(newArr.hasOwnProperty(i)){
+								inpArr[i] && (inpArr[i].value = '');
+							}
 	    				};
 	    			};
 	    		},
@@ -453,7 +461,7 @@ include most functions and styles etc.
 						    	/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)
 						    	:
 						    	'ontouchstart' in window;
-	    },
+		},
 	    message(){
 	    	//delete already exists
 	    	this.deleteEle('xui_message');
@@ -475,7 +483,23 @@ include most functions and styles etc.
 	    		date = date || new Date();
 	    		return +new Date(date);
 	    	};
-	    },
+		},
+		objCopy(obj, bool){
+			if(typeof obj !== 'object'){
+				throw new Error(obj + ' is\'t an object');
+			};
+			var newObj = obj instanceof Array ? [] : {};
+			for(var i in obj){
+				if(obj.hasOwnProperty(i)){
+					if(bool && typeof obj[i] === 'object'){
+						newObj[i] = deepCopy(obj[i]);
+					} else{
+						newObj[i] = obj[i];
+					};
+				};
+			};
+			return newObj;
+		},
 	    pastTime(time){
 	    	let downTime = null;
 	    	let args = arguments[0];
@@ -529,8 +553,10 @@ include most functions and styles etc.
 	    	let isQuestionMark = url.indexOf('?') > -1 ? '&' : '?';
 	    	let params = '';
 			for(let i in data){
-				let each = data[i];
-				params += '&' + i + '=' + (each ? each : '');
+				if(data.hasOwnProperty(i)){
+					let each = data[i];
+					params += '&' + i + '=' + (each ? each : '');
+				}
 			};
 			params = isQuestionMark + params.substr(1, params.length);
 			(new Image(1, 1)).src = url + params;
@@ -572,15 +598,6 @@ include most functions and styles etc.
 				break;
 			};
 	    },
-	    shallowCopy(obj){
-		  	let newObj = {};
-		  	for(let i in obj){
-			    if(obj.hasOwnProperty(i)){
-			      	newObj[i] = obj[i];
-			    };
-		  	};
-		  	return newObj;
-		},
 		showImg(){
 			let that = this;
 			that.deleteEle('xui_img');
@@ -663,14 +680,16 @@ include most functions and styles etc.
 				throw new Error("tab's number error");
 			};
 			if (typeof args.activeIndex == 'number') {
-				for(let l  in list){
-					if (args.animateType == 'toLeft') {
-						list[l].style.transform = l == args.activeIndex ? 'translate(0%)' : 'translate(-100%)';
-					} else if(args.animateType == 'toRight'){
-						list[l].style.transform = l == args.activeIndex ? 'translate(0%)' : 'translate(100%)';
-					} else{
-						list[l].style.display = l == args.activeIndex ? 'block' : 'none';
-					};
+				for(let l in list){
+					if(list.hasOwnProperty(l)){
+						if (args.animateType == 'toLeft') {
+							list[l].style.transform = l == args.activeIndex ? 'translate(0%)' : 'translate(-100%)';
+						} else if(args.animateType == 'toRight'){
+							list[l].style.transform = l == args.activeIndex ? 'translate(0%)' : 'translate(100%)';
+						} else{
+							list[l].style.display = l == args.activeIndex ? 'block' : 'none';
+						};
+					}
 				};
 			};
 			for(let i=0; i < tab.length; i++){
@@ -678,24 +697,26 @@ include most functions and styles etc.
 				tab[i].onclick = function(e){
 					if (e.currentTarget.className == 'selected') {return;};
 					for(let j in list){
-						if (i == j) {
-							if (args.animateType != 'none') {
-								list[j].style.transform = 'translate(0%)';
+						if(list.hasOwnProperty(j)){
+							if (i == j) {
+								if (args.animateType != 'none') {
+									list[j].style.transform = 'translate(0%)';
+								} else{
+									list[j].style.display = 'block';
+								};
+								tab[j].classList.add('selected');
+								args.fn && args.fn();
 							} else{
-								list[j].style.display = 'block';
+								if (args.animateType == 'toLeft') {
+									list[j].style.transform = 'translate(-100%)';
+								} else if(args.animateType == 'toRight'){
+									list[j].style.transform = 'translate(100%)';
+								} else{
+									list[j].style.display = 'none';
+								};
+								tab[j].classList.remove('selected');
 							};
-							tab[j].classList.add('selected');
-							args.fn && args.fn();
-						} else{
-							if (args.animateType == 'toLeft') {
-								list[j].style.transform = 'translate(-100%)';
-							} else if(args.animateType == 'toRight'){
-								list[j].style.transform = 'translate(100%)';
-							} else{
-								list[j].style.display = 'none';
-							};
-							tab[j].classList.remove('selected');
-						};
+						}
 					};
 				};
 			};
@@ -795,7 +816,14 @@ include most functions and styles etc.
 	    			opts.confirmBtn && opts.confirmBtn.fn && opts.confirmBtn.fn();
 	    		};
 	    	});
-	    },
+		},
+		zeroFill(e) {
+	        if (e < 0) {
+				return e = e > -10 ? '-0' + (-e) : e;
+			}else{
+				return e = e < 10 ? '0' + e : e;
+			};
+	    }
 	};
 
 	w.xui = new Xui;
@@ -1015,7 +1043,9 @@ here is a calendar plugin
 			let calHeadYear = this.config.isChinese ? `年` : `year`;
 			let calHeadMonth = this.config.isChinese ? `月` : `month`;
 			for(let i in calHeadArr){
-				calHeadHtml += `<th class="xui_calendar_th">${calHeadArr[i]}</th>`;
+				if(calHeadArr.hasOwnProperty(i)){
+					calHeadHtml += `<th class="xui_calendar_th">${calHeadArr[i]}</th>`;
+				}
 			};
 			//show today or not
 			let isToday = ``;
@@ -1276,13 +1306,15 @@ here is a slider plugin
 	Slider.prototype.renderHTML = function(){
 		let imgs = this.defaults.imgList, list = '', spans = '';
 		for(let i in imgs){
-			let isSelected = i == 0 ? 'selected' : '';
-			list += `
-				<div><a href=${imgs[i].link} target="_blank"><img src="${imgs[i].img}"></a></div>
-			`;
-			spans += `
-				<span data-index=${i} class="xui_slider_dot ${isSelected}"></span>
-			`;
+			if(imgs.hasOwnProperty(i)){
+				let isSelected = i == 0 ? 'selected' : '';
+				list += `
+					<div><a href=${imgs[i].link} target="_blank"><img src="${imgs[i].img}"></a></div>
+				`;
+				spans += `
+					<span data-index=${i} class="xui_slider_dot ${isSelected}"></span>
+				`;
+			}
 		};
 		let slider = `
 			<div class="xui_slider_content">
@@ -1532,29 +1564,34 @@ here is a cascader plugin
 			secSelect += `<select class="xui_select"><option>choose</option>`;
 			thiSelect += `<select class="xui_select"><option>choose</option>`;
 			for(let i in this.data){
-				//var that ?
-				let f = this.data[i];
-				let a = this.rep.firKey,
-					b = this.rep.firList,
-					c = this.rep.secKey,
-					d = this.rep.secList,
-					e = this.rep.thiKey;
-				(firSelect += `<option value=${f[a]} ${f[a] == chose ? 'selected' : ''}>${f[a]}</option>`);
-				for(let j in f[b]){
-					let s = f[b][j];
-					if (index == 0) {
-						f[a] == chose && (secSelect += `<option value=${s[c]} ${s[c] == chose ? 'selected' : ''}>${s[c]}</option>`);
-					} else if(index == 1){
-						this.val.v0 == f[a] && (secSelect += `<option value=${s[c]} ${s[c] == chose ? 'selected' : ''}>${s[c]}</option>`);
+				if(this.data.hasOwnProperty(i)){
+					let f = this.data[i];
+					let a = this.rep.firKey,
+						b = this.rep.firList,
+						c = this.rep.secKey,
+						d = this.rep.secList,
+						e = this.rep.thiKey;
+					(firSelect += `<option value=${f[a]} ${f[a] == chose ? 'selected' : ''}>${f[a]}</option>`);
+					for(let j in f[b]){
+						if(f[b].hasOwnProperty(j)){
+							let s = f[b][j];
+							if (index == 0) {
+								f[a] == chose && (secSelect += `<option value=${s[c]} ${s[c] == chose ? 'selected' : ''}>${s[c]}</option>`);
+							} else if(index == 1){
+								this.val.v0 == f[a] && (secSelect += `<option value=${s[c]} ${s[c] == chose ? 'selected' : ''}>${s[c]}</option>`);
+							};
+							for(let k in s[d]){
+								if(s[d].hasOwnProperty(k)){
+									let t = s[d][k];
+									if (this.val.v0 == f[a] && this.val.v1 == s[c]) {
+										isEmpty = false;
+										(thiSelect += `<option value=${t[e]} ${t[e] == chose ? 'selected' : ''}>${t[e]}</option>`);
+									};
+								};
+							};
+						}
 					};
-					for(let k in s[d]){
-						let t = s[d][k];
-						if (this.val.v0 == f[a] && this.val.v1 == s[c]) {
-							isEmpty = false;
-							(thiSelect += `<option value=${t[e]} ${t[e] == chose ? 'selected' : ''}>${t[e]}</option>`);
-						};
-					};
-				};
+				}
 			};
 			firSelect += `</select>`;
 			secSelect += `</select>`;
@@ -2073,14 +2110,16 @@ here is a lazyLoad plugin
 			let imgs = ``;
 			const {list, loadingImg, errorImg, hrefTarget} = this.opts;
 			for(let i in list){
-				imgs += `
-					<a href="${list[i].href || 'javascript:void(0)'}" target="${hrefTarget}">
-						<div class="xui_img_box">
-							<span class="xui_img_loading"><img src="${loadingImg}"/></span>
-							<img class="xui_img_load" onerror="this.src='${errorImg}'" data-src="${list[i].src || list[i]}"/>
-						</div>
-					</a>
+				if(list.hasOwnProperty(i)){
+					imgs += `
+						<a href="${list[i].href || 'javascript:void(0)'}" target="${hrefTarget}">
+							<div class="xui_img_box">
+								<span class="xui_img_loading"><img src="${loadingImg}"/></span>
+								<img class="xui_img_load" onerror="this.src='${errorImg}'" data-src="${list[i].src || list[i]}"/>
+							</div>
+						</a>
 					`;
+				}
 			};
 			document.getElementById(this.opts.id).innerHTML = imgs;
 			this.event();
@@ -2197,17 +2236,75 @@ here is a pullLoad plugin
 			sign = 0;
 		};
 	    if(n % b === 0){
-	        arr.push(0);
+	        arr.unshift(0);
 	        n = n / b;
 	    } else{
-	        arr.push(n%b);
+	        arr.unshift(n%b);
 	        n = Math.floor(n / b);
 	    };
 	    if(n === 0){
 	    	sign = 1;
-	        return arr.reverse().join('') - 0;
+	        return arr.join('') - 0;
 	    };
 	    return digConverse(n, b);
     };
     Object.getPrototypeOf(xui).digConverse = digConverse;
+})(window);
+
+/*
+尝试用普通函数写一下map,reduce等高级方法
+*/
+;(function(w){
+	var xArr = ['xmap', 'xfind', 'xreduce'];
+	xArr.forEach(function(item, index){
+		if(typeof Array.prototype[item] === 'function'){
+			console.log(item + ' method already exsits');
+			return;
+		};
+	});
+	//实现map方法
+	Array.prototype.xmap = function(fn, args){
+		var newArr, thisArg, prevArr;
+		prevArr = this;
+		if(Object.prototype.toString.call(prevArr) !== '[object Array]'){
+			throw new Error(prevArr + ' must be a array');
+		}
+		if(args){
+			thisArg = args;
+		};
+		newArr = new Array(prevArr.length);
+		for(var i = 0, len = prevArr.length; i < len; i++){
+			newArr[i] = xui.isFunction(fn) && fn.call(thisArg, prevArr[i], i, prevArr);
+		};
+		return newArr;
+	};
+	//实现find方法
+	Array.prototype.xfind = function(fn, args){
+		var prevArr, thisArg;
+	
+		prevArr = this;
+		if(args){
+			thisArg = args;
+		}
+		var newArr = new Array();
+		for(var i = 0, len = prevArr.length; i < len; i++){
+			fn.call(thisArg, prevArr[i], i , prevArr) && newArr.push(prevArr[i]);
+		};
+		return newArr;
+	};
+	//实现reduce方法
+	Array.prototype.xreduce = function(fn, initVal){
+		var NUM = 0, prevArr, initIndex = 1;
+		//如果提供了默认值, 那么索引值从0开始, 否则从1开始
+		if(initVal){
+			NUM = initVal;
+			initIndex = 0;
+		};
+		prevArr = this;
+		for(var i = 0, len = prevArr.length; i< len; i++){
+			NUM = fn.call(null, NUM, prevArr[i], initIndex, prevArr);
+			initIndex++;
+		};
+		return NUM;
+	};
 })(window);

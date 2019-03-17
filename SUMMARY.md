@@ -36,4 +36,5 @@
     * [4.1.1 算法 algorithm](collection/algorithm.md)
     * [4.1.2 日志收集 logCollection](collection/logCollection.md)
     * [4.1.3 我不知道 idontknow](collection/idontknow.md)
+    * [4.1.4 数组 array](collection/array.md)
 * [5.日志 log](others/changeLog.md)
