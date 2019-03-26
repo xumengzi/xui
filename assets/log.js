@@ -115,7 +115,7 @@
 
 	function getUserInfo(){
 		var n = navigator;
-		const userInfo = {
+		var userInfo = {
 			cookieEnabled: n.cookieEnabled,
 			data: new Date(),
 			language: n.language || n.userLanguage,
@@ -129,15 +129,67 @@
 		return userInfo;
 	};
 
+	function getPageInfomation(){
+		var p = w.performance,
+			comeFrom = ['正常进入的页面', '通过window.location.reload()刷新页面', '通过浏览器前进后退进入的页面'];
+		if(!p){
+			return {
+				error: '浏览器不支持该属性，请检查上报信息里的useInfo来获取更多信息'
+			};
+		};
+		var mem = p.memory,
+			nav = p.navigation,
+			t = p.timing;
+		var pageInfo = {
+			memory: {
+				jsHeapSizeLimit: countSize(mem.jsHeapSizeLimit),
+				totalJSHeapSize: countSize(mem.totalJSHeapSize),
+				usedJSHeapSize: countSize(mem.usedJSHeapSize),
+			},
+			navigation: {
+				redirectCount: nav.redirectCount + ' times',
+				type: comeFrom[nav.type],
+			},
+			timing: {
+				loadPage: countTime(t.loadEventEnd, t.navigationStart),
+				domReady: countTime(t.domComplete, t.responseEnd),
+				redirect: countTime(t.redirectEnd, t.redirectStart),
+				lookupDomain: countTime(t.domainLookupEnd, t.domainLookupStart),
+				ttfb: countTime(t.responseStart, t.navigationStart),
+				request: countTime(t.responseEnd, t.responseStart),
+				loadEvent: countTime(t.loadEventEnd, t.loadEventStart),
+				appcache: countTime(t.domainLookupStart, t.fetchStart),
+				unloadEvent: countTime(t.unloadEventEnd, t.unloadEventStart),
+				connect: countTime(t.connectEnd, t.connectStart),
+			}
+		};
+		return pageInfo;
+	};
+
+	function countSize(num){
+		if(isNaN(num)){
+			return 0;
+		};
+		return (num / 1024 / 1024).toFixed(1) + ' MB';
+	};
+
+	function countTime(left, right){
+		var diff = left - right;
+		diff = diff < 0 ? 0 : diff;
+		return diff + ' ms';
+	};
+
 	function sendError(info){
 		if(Math.random() < opts.collectPercent){
 			var mes = new Image();
 			var isQuesMark = UPLOAD_URL.indexOf('?') > -1 ? '&data=' : '?data=';
-			var useInfo = getUserInfo();
+			var useInfo = getUserInfo(),
+				pageInfo = getPageInfomation();
 
 			var sendObj = {
 				errorInfo: info,
-				useInfo: useInfo
+				useInfo: useInfo,
+				pageInfo: pageInfo,
 			};
 			//考虑到IE浏览器对url的长度限制大概为2000，所以这里对超长字符作一下截取
 			if(!opts.isSubStr && jsonS(sendObj).length < 2000){
