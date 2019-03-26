@@ -23,6 +23,7 @@
 * `isSubStr`表示是否截取上报信息的长度, 默认超过2000字符截取
 * `collectPercent`表示日志是否全部上传, 默认全部, 可以配置0-1, 表示只收集部分错误信息
 * `tips` 可以打开控制台,看到目前上报的错误信息日志, 如`https://xumeng.site/?data=xxx`
+* `TODO`: `window`下面有一个属性[`window.performance`](http://www.alloyteam.com/2015/09/explore-performance/comment-page-1/)，通过这个可以获取到`DNS`解析，`js`内存，请求资源等，也要加在这个`log.js`里面
 
 ##### 日志记录数据说明:
 ```js

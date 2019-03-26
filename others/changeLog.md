@@ -12,7 +12,7 @@
 
 ###v2.3.5  <span style="font-size: 16px;">2019/03/10</span>
 #####add：
-1.新增[数组](../collection/array.md)，实现了一些高级函数
+1.新增[数组](../collection/array.md)，实现了一些高级函数，比如`map`，`find`，`reduce`
 
 >是否兼容现有代码：是
 
