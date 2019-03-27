@@ -23,7 +23,7 @@
 * `isSubStr`表示是否截取上报信息的长度, 默认超过2000字符截取
 * `collectPercent`表示日志是否全部上传, 默认全部, 可以配置0-1, 表示只收集部分错误信息
 * `tips` 可以打开控制台,看到目前上报的错误信息日志, 如`https://xumeng.site/?data=xxx`
-* `TODO`: `window`下面有一个属性[`window.performance`](http://www.alloyteam.com/2015/09/explore-performance/comment-page-1/)，通过这个可以获取到`DNS`解析，`js`内存，请求资源等，也要加在这个`log.js`里面
+* [`window.performance`](http://www.alloyteam.com/2015/09/explore-performance/comment-page-1/)，通过这个可以获取到`DNS`解析，`js`内存，请求资源等（可以知道页面性能）
 
 ##### 日志记录数据说明:
 ```js
@@ -40,9 +40,9 @@
             "classList": 元素的类名,
             "text": 元素的文本,
             "nodeName": 元素的nodeName,
-            "path": 元素的路径，可以用document.querySelector或者$获取到 
+            "path": 元素的路径，可以用document.querySelector或者$获取到,
         },
-        "type": 错误类型
+        "type": 错误类型,
     },
     "useInfo": {
         "cookieEnabled": 浏览器是否支持cookie,
@@ -53,7 +53,30 @@
         "product": 浏览器的生产厂商,
         "referrer": 从何而来，比如你从github里的某个链接点到某个可以记录错误日志的页面，此时referrer就是github那个链接,
         "screen": 屏幕分辨率，比如常见的1440px，1920px等等,
-        "userAgent": 浏览器的具体信息，诸如可以看到是什么内核，浏览器版本
+        "userAgent": 浏览器的具体信息，诸如可以看到是什么内核，浏览器版本,
+    },
+    "pageInfo": {
+        "memory": {
+            "jsHeapSizeLimit": 内存大小限制,
+            "totalJSHeapSize": 可使用的内存大小,
+            "usedJSHeapSize": JS对象占用的内存，一定是小于totalJSHeapSize的,
+        },
+        "navigation": {
+            "redirectCount": 页面的重定向次数（如果有）,
+            "type": 通过什么途径进入的页面，即0-正常进入的页面（非刷新，重定向），1-通过刷新页面，2-通过浏览器前进后退,
+        },
+        "timing": {
+            "loadPage": 页面加载完成的时间，几乎代表了用户看到页面所等待的时间,
+            "domReady": 解析dom树花的时间，Google建议一个页面的dom节点不要超过1500个，嵌套层级也不要超过60个,
+            "redirect": 重定向的时间，所以拒绝重定向,
+            "lookupDomain": DNS解析的时间，DNS预读取做了么,
+            "ttfb": 读取第一个字节的时间，也就是time to first byte，如果这个时间很长就直接去找后端吧,
+            "request": 内容加载完成的时间，资源有做压缩或者别的操作,
+            "loadEvent": 执行onload函数所花费的时间，所以这个函数里面不要写太多,
+            "appcache": DNS缓存时间,
+            "unloadEvent": 卸载页面花费的时间,
+            "connect": TCP建立连接完成握手的时间
+        },
     }
 }
 
@@ -84,6 +107,29 @@
         "referrer": "",
         "screen": "1440px",
         "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36"
+    },
+    "pageInfo": {
+        "memory": {
+            "jsHeapSizeLimit": "2080.0MB",
+            "totalJSHeapSize": "20.1MB",
+            "usedJSHeapSize": "15.9MB"
+        },
+        "navigation": {
+            "redirectCount": "0 times",
+            "type": "通过window.location.reload()刷新页面"
+        },
+        "timing": {
+            "loadPage": "0ms",
+            "domReady": "0ms",
+            "redirect": "0ms",
+            "lookupDomain": "0ms",
+            "ttfb": "10ms",
+            "request": "3ms",
+            "loadEvent": "0ms",
+            "appcache": "0ms",
+            "unloadEvent": "0ms",
+            "connect": "0ms"
+        }
     }
 }
 ```
