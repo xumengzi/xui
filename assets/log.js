@@ -131,7 +131,7 @@
 
 	function getPageInfomation(){
 		var p = w.performance,
-			comeFrom = ['正常进入的页面', '通过window.location.reload()刷新页面', '通过浏览器前进后退进入的页面'];
+			comeFrom = ['正常进入的页面，比如链接跳转，url输入等非刷新，重定向', '通过window.location.reload()刷新页面', '通过浏览器前进后退进入的页面'];
 		if(!p){
 			return {
 				error: '浏览器不支持该属性，请检查上报信息里的useInfo来获取更多信息'
@@ -170,13 +170,13 @@
 		if(isNaN(num)){
 			return 0;
 		};
-		return (num / 1024 / 1024).toFixed(1) + ' MB';
+		return (num / 1024 / 1024).toFixed(1) + 'MB';
 	};
 
 	function countTime(left, right){
 		var diff = left - right;
 		diff = diff < 0 ? 0 : diff;
-		return diff + ' ms';
+		return diff + 'ms';
 	};
 
 	function sendError(info){

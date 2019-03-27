@@ -10,7 +10,7 @@
 
 >输入`xui.version`获取当前版本号
 
-###v2.2.6  <span style="font-size: 16px;">2019/03/12</span>
+###v2.3.6  <span style="font-size: 16px;">2019/03/12</span>
 #####bugfix：
 1.完善[日志收集插件](../collection/logCollection.md)，增加了`DNS`解析，`js`内存，请求资源等的耗时
 
