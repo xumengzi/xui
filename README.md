@@ -1,12 +1,6 @@
 <link rel="stylesheet" type="text/css" href="./assets/xui.css">
 <script type="text/javascript" src="./assets/xui.js"></script>
 
-<style>
-#book-search-results{
-    position: relative;
-}
-</style>
-
 # 简介
 
 ## 项目名称: `xui`
@@ -26,11 +20,13 @@
 >说明: 你可以在`assets`文件夹里找到源代码. ~_~
 
 ##### 本项目包含四个模块:
-1.[样式使用](styles/README.md)
+0.[样式使用](styles/README.md)
 
-2.[方法使用](methods/README.md)
+1.[方法使用](methods/README.md)
 
-3.[组件使用](plugins/README.md)
+2.[组件使用](plugins/README.md)
+
+3.[值得收藏](collection/README.md)
 
 4.[更新日志](others/changeLog.md)
 
@@ -43,7 +39,6 @@
 ```js
 How many codes must a man edit before you call him a master?
 ```
-
 
 >寓形宇内复几时，曷不委心任去留？
 
