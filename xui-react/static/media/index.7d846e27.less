@@ -1,0 +1,37 @@
+.input_content{
+    display: flex;
+    flex-direction: initial;
+    justify-content: flex-start;
+    align-items: center;
+    .input_label{
+        &.input_required{
+            &::before{
+                content: '*';
+                color: red;
+            }
+        }
+    }
+    .input_target{
+        position: relative;
+        width: 200px;
+        box-sizing: border-box;
+        padding: .37em .57em;
+        margin: .57em;
+        border: 1px solid #dbdbdb;
+        border-radius: .28em;
+        font-size: 1em;
+        line-height: 1.4;
+        outline: none;
+        transition: all 0.2s;
+    }
+    .input_target{
+        &.input_noinput{
+            cursor: not-allowed;
+        }
+    }
+    .input_target{
+        &:focus{
+            border-color: #87cba3;
+        }
+    }
+}

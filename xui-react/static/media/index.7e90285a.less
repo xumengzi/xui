@@ -1,0 +1,75 @@
+.xui-react-switch{
+    height: 20px;
+    margin: 2px 4px;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    input{
+        display: none;
+        &:checked{
+            +label{
+                &::after{
+                    content: attr(data-on);
+                    text-align: left;
+                    background: #4eb900;
+                    border-color: #4eb900;
+                    color: #fff;
+                }
+                &::before{
+                    left: 22px;
+                }
+                &.disabled{
+                    &::after{
+                        background: rgba(78, 185, 0, 0.5);
+                        border-color: rgba(78, 185, 0, 0.5);
+                    }
+                }
+            }
+        }
+    }
+    label{
+        position: relative;
+        padding-left: 44px;
+        height: 100%;
+        display: inline-block;
+        text-align: right;
+        font-size: 14px;
+        cursor: pointer;
+        &::before{
+            content: '';
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            border-radius: 50%;
+            background-color: #fff;
+            transition: all .3s ease-in-out;
+            z-index: 2;
+        }
+        &::after{
+            content: attr(data-off);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 100%;
+            color: #8b8c90;
+            font-size: 12px;
+            padding: 0 2px;
+            display: inline-block;
+            text-align: right;
+            box-sizing: border-box;
+            border: 1px #c6c8d1 solid;
+            background-color: #f6f7fb;
+            border-radius: 10px;
+            z-index: 1;
+            box-shadow: inset 0 2px 5px 0 rgba(0, 10, 30, 0.1);
+        }
+        &.disabled{
+            cursor: no-drop;
+            color: #ccc;
+        }
+    }
+}

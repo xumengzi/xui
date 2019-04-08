@@ -4,73 +4,75 @@
 	<title>test</title>
 	<link rel="stylesheet" type="text/css" href="../../assets/xui.css">
 	<style type="text/css">
-		.fixed-style span{
-			display: none;
-			font-size: 12px;
-		}
-		.fixed-style:hover span{
-			display: block;
-		    position: absolute;
-		    top: 0;
-		    right: 0;
-		    background: #000;
-		    border-radius: 4px;
-		    padding: 2px 10px;
-		    color: #fff;
-		    z-index: 9999;
-		    box-shadow: 1px 1px 10px #ccc;
-		}
-		.content,.back_bg{
-			width: 600px;
-			height: 300px;
-			position: relative;
-		}
-		.back_bg{
-			background-image: url(bg.png);
-		    background-size: contain;
-		}
-		.back_bg img{
-			width: 100%;
-			height: 100%;
-			display: block;
-		}
-		.xui_img_con{
-			width: 600px;
-			height: 300px;
-		}
+	body{
+		padding: 20px 50px;
+	}
 	</style>
 </head>
 <body>
-	
-	<script type="text/javascript" src="../../assets/log.js"></script>
 	<div class="content">
-		<!-- <img id="showImg" class="a b c" style="width: 300px" src="./4bg.png"> -->
+		<div class="xui_tree_content">
+			<ul>
+				<li class="xui_tree_item unfold">
+					<span>1</span>
+					<ul>
+						<li class="xui_tree_item unfold">
+							<span>2</span>
+							<ul>
+								<li class="xui_tree_item unfold">
+									<span>3.1</span>
+									<ul>
+										<li class="xui_tree_item unfold disabled">
+											<span>4</span>
+											<ul>
+												<li><span>5</span></li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li><span>3.2</span></li>
+								<li><span>3.3</span></li>
+								<li><span>3.4</span></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
 	</div>
-	<script type="text/javascript" src="../../assets/xui.js"></script>
-	<script type="text/javascript">
-		function a(){
-			return b;
+	<script src="../../assets/xui.js"></script>
+	<script src="../../others/data.js"></script>
+	<script>
+		var lis = '';
+		function renderHTML(list, a){
+			lis += a || '';
+			lis += '<ul>';
+			list.forEach(item => {
+				lis += `<li class="xui_tree_item unfold">
+							<span>${item.name}</span>
+						<li>`;
+				console.log(item.list && item.list.length);
+				if(item.list && item.list.length){
+					// renderHTML(item.list, lis);
+				};
+			});
+			lis += '</ul>';
 		};
-		a();
-		// console.error('wtf');
-
-		// var promise = new Promise(function(resolve, reject){
-		// 	reject('nima')
-		// }).then(res =>{
-		// 	console.log(res)
-		// }).catch(err =>{
-		// 	console.log(err)
-		// });
-
-		// var fetch = fetch('https://xumeng.site/gitbook/api/discussions',{
-		// 			        method: 'GET',
-		// 			        mode: 'cors',
-		// 			        cache: 'default'
-		// 			})
-		// 			.then(res =>{ return res.json();})
-		// 			.then(res =>{ console.log(res)})
-		// 			.catch(err =>{console.log(err);})
-
+		renderHTML(data);
+		// document.querySelector('.xui_tree_content').innerHTML = lis;
+	</script>
+	<script>
+		var tar = document.querySelector('.xui_tree_content');
+		tar.addEventListener('click', function(e){
+			var ele = e.target;
+			if(ele.nodeName === 'SPAN' && !ele.parentElement.classList.contains('disabled')){
+				if(ele.nextElementSibling){
+					var next = ele.nextElementSibling.style.display;
+					ele.nextElementSibling.style.display = next == 'none' ? 'block' : 'none';
+					ele.parentElement.classList.toggle('fold');
+				};
+			};
+		}, false);
 	</script>
 </body>
 </html>
