@@ -34,7 +34,7 @@ myPage.onKeyUp = function(index){
 * `isJumpPage`表示是否显示支持跳转的输入框(纯数字),输入大于分页总数则默认跳至最后一页
 * `onClick`可以获取当前点击分页的数字,可以用`ajax`获取数据,渲染页面
 * `onKeyUp`可以获取当前输入分页的数字,可以用`ajax`获取数据,渲染页面
-* 没有你想要的功能? 快联系我: `me@xumengzi.top`添加吧
+* 没有你想要的功能? 快联系我: `me@xumeng.site`添加吧
 
 ### 效果展示
 

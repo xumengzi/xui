@@ -34,7 +34,7 @@ xui.calendar({
 * `isChinese`表示日历显示的语言,设置为true时显示为中文,默认为英文.
 * `callback`表示选择日期后的回调, 怎么说呢,你不写不会报错,但是你无法获取用户选择的日期了哟!
 * `<span class="xui_close_small" data-date=""></span>`表示鼠标`hover`显示一个清空选择的值,当然不加上去也不会报错
-* 没有你想要的功能? 快联系我: `me@xumengzi.top`添加吧
+* 没有你想要的功能? 快联系我: `me@xumeng.site`添加吧
 
 ### 效果展示
 

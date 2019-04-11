@@ -43,7 +43,7 @@ new xui.slider({
 * `isShowDot`表示是否显示左下角圆点
 * `fn`表示幻灯片更换的回调,会返回当前幻灯片的`index`,非必传
 * **一定要给你的容器一个`width`和`height`**
-* 没有你想要的功能? 快联系我: `me@xumengzi.top`添加吧
+* 没有你想要的功能? 快联系我: `me@xumeng.site`添加吧
 
 ### 效果展示
 

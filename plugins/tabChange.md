@@ -38,7 +38,7 @@ xui.tab({
 * `activeIndex`表示当前显示哪一个`tab`的数据
 * `animateType`表示`tab`切换的动画效果, 默认为`none`,可以配置`toLeft`,`toRight`
 * `fn`表示`tab`切换之后的回调
-* 没有你想要的功能? 快联系我: `me@xumengzi.top`添加吧
+* 没有你想要的功能? 快联系我: `me@xumeng.site`添加吧
 
 ### 效果展示
 
