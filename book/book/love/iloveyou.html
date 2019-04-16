@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="utf-8">
+	<title>我喜欢你-小会会</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<meta name="description" content="我喜欢你-小会会">
+	<meta name="keywords" content="喜欢,love,小会会">
+	<meta name="author" content="xumeng">
+	<!-- <link rel="stylesheet" type="text/css" href="https://xumengzi.github.io/xui/assets/xui.css"> -->
+	<link rel="stylesheet" type="text/css" href="../assets/xui.css?t=20190102">
+	<link rel="shortcut icon" type="image/x-icon" href="../others/xu_icon_40.ico" media="screen" />
+	<style type="text/css">
+		html, body,.xui_book_content{
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		.xui_snow::before, .xui_snow::after{
+			z-index: 99;
+		}
+	</style>
+</head>
+<body>
+	<div class="xui_book_content" id="myBook">
+		<div class="xui_book_box" id="snow">
+			<div date-page="xumeng" style="display: none;" class="xui_book_page">赠小会会</div>
+			<div date-page="1" class="xui_book_page" style="display: none;">
+				昨天已过<br>
+				明天太远
+			</div>
+			<div date-page="2" class="xui_book_page" style="display: none;">
+				选在今日<br/>
+				对你告白
+			</div>
+			<div date-page="3" class="xui_book_page" style="display: none;">
+				对你的依赖<br/>
+				如同鱼儿离不开海洋<br/>
+				如同植物离不开阳光
+			</div>
+			<div date-page="4" class="xui_book_page" style="display: none;">
+				牵你的手<br/>
+				朝朝暮暮
+			</div>
+			<div date-page="5" class="xui_book_page" style="display: none;">
+				牵你的手<br/>
+				等待明天
+			</div>
+			<div date-page="6" class="xui_book_page" style="display: none;">
+				牵你的手<br/>
+				走过今生
+			</div>
+			<div date-page="7" class="xui_book_page" style="display: none;">
+				牵你的手<br/>
+				生生世世
+			</div>
+			<div date-page="8" class="xui_book_page" style="display: none;">
+				做我女朋友吧<br/>
+				爱你哟<br>
+				你的小孟哥
+			</div>
+			<div class="xui_book_page last" style="display: none;">I Love You</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../assets/xui.js?t=20190102"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			xui.generateBooks({
+				id: 'myBook'
+			});
+			xui.snowFlake({
+			    id: 'snow',
+			});
+		}
+	</script>
+</body>
+</html>
