@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>全屏滚动特效</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="https://xumengzi.github.io/xui/assets/xui.css">
+	<style type="text/css">
+		#fullPage{
+			font-size: 40px;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div id="fullPage" class="xui_full_page">
+		<div>人生当如--</div>
+		<div>春之妩媚</div>
+		<div>夏之热情</div>
+		<div>秋之风韵</div>
+		<div>冬之纯洁</div>
+	</div>
+	<script type="text/javascript" src="https://xumengzi.github.io/xui/assets/xui.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			xui.fullPage({
+				id: 'fullPage',
+				direction: 'Y',
+				transition: '0.8s cubic-bezier(0.29, -0.74, 0.25, 1)',
+			});
+		}
+	</script>
+</body></html>
