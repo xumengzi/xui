@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="utf-8">
+	<title>Happy New Year</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<meta name="description" content="huihui">
+	<meta name="keywords" content="HTML,CSS,love">
+	<meta name="author" content="xumeng">
+	<link rel="shortcut icon" type="image/x-icon" href="https://xumeng.site/others/xu_icon_40.ico" media="screen" />
+	<style type="text/css">
+		body{
+			padding: 0;
+			margin: 0;
+		}
+		.content img{
+			border-radius: 10px;
+		}
+		.introduce{
+		    display: flex;
+		    flex-direction: column;
+		    justify-content: center;
+		    align-items: center;
+		    text-align: center;
+		}
+		.introduce > div{
+			position: relative;
+			width: 100%;
+		    height: 100%;
+		    font-size: 20px;
+		    padding: 100% 0;
+		    color: #fff;
+		    display: flex;
+		    flex-direction: column;
+		    align-items: center;
+		    justify-content: center;
+		    animation: fadein 3s;
+		}
+		.introduce > div::before{
+			content: '';
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 100%;
+			padding: 50% 0;
+			opacity: .2;
+			background: linear-gradient(to right, red , blue);
+		}
+		.earth{
+		    background: url(imgs/earth.jpeg) fixed 100%;
+		    background-size: cover;
+		}
+		.flowers{
+		    background: url(imgs/flowers.jpeg) fixed 100%;
+		    background-size: cover;
+		}
+		.lovely{
+		    background: url(imgs/lovely.jpeg) fixed 100%;
+		    background-size: cover;
+		}
+		.mylove{
+		    background: url(imgs/mylove.jpeg) fixed 100%;
+		    background-size: cover;
+		}
+		.noble{
+		    background: url(imgs/noble.jpeg) fixed 100%;
+		    background-size: cover;
+		}
+		.success{
+		    background: url(imgs/success.jpeg) fixed 100%;
+		    background-size: contain;
+		}
+		.rememberme{
+		    background: url(imgs/rememberme.jpeg) fixed 100%;
+		    background-size: cover;
+		}
+		.yourlove{
+		    background: url(imgs/yourlove.jpeg) fixed 100%;
+		    background-size: cover;
+		}
+		.yourlove2{
+		    background: url(imgs/yourlove2.jpeg) fixed 100%;
+		    background-size: cover;
+		}
+		.yousee{
+		    background: url(imgs/yousee.jpeg) fixed 100%;
+		    background-size: cover;
+		}
+		@keyframes fadein {
+		  from {
+		    opacity: 0;
+		  }
+		  to {
+		    opacity: 1;
+		  }
+		}
+	</style>
+</head>
+<body>
+	<div class="content"></div>
+	<script>
+		window.onload = function(){
+			var list = [
+				{
+					style: 'earth',
+					description: '哎呀呀，要吃土啦！！！|才不会呢|你的小孟哥才不会让你吃土|会带你去七热干面，哈哈哈'
+				},
+				{
+					style: 'flowers',
+					description: '即使在凛冽的寒风|也丝毫不会让“我”枯萎'
+				},
+				{
+					style: 'lovely',
+					description: '哟哟哟|这位笑靥如花的美女是谁呀|有联系方式吗|别想啦，已经名花有主咯'
+				},
+				{
+					style: 'mylove',
+					description: '高冷女神|不需要词藻来堆砌'
+				},
+				{
+					style: 'noble',
+					description: '爱笑的女生运气都不错'
+				},
+				{
+					style: 'success',
+					description: '这是谁，乱入啦|三连击，biubiubiu|三十年年后我会在某个别墅里打桌球'
+				},
+				{
+					style: 'rememberme',
+					description: '我知道这是啥花|勿忘我-不要忘记我'
+				},
+				{
+					style: 'yourlove',
+					description: '女生买点口红怎么啦|不就十几支么|买买买|小孟哥给你买'
+				},
+				{
+					style: 'yousee',
+					description: '一头乌黑闪亮的头发|好啦，我知道你在秀头发|羡慕ing'
+				}
+			];
+			let newList = list.sort((a,b)=>{return Math.random() * 2 - 1});
+			newList.map((item, index)=>{
+				let divs = document.createElement('div');
+				divs.className = 'introduce';
+				let childDivs = document.createElement('div');
+				childDivs.className = item.style;
+				childDivs.innerHTML = item.description.replace(/\|/g, '<br/>');
+				divs.appendChild(childDivs);
+				document.querySelector('.content').appendChild(divs);
+			});
+		}
+	</script>
+</html>

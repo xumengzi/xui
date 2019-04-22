@@ -1,3 +1,6 @@
+/*
+	log.js主要是由前端搜集页面上的一些数据，诸如错误信息，页面性能等
+*/
 ;(function(w, options){
 	var defaultOptions = {
 		isShowError: true,
@@ -43,19 +46,6 @@
 	function jsonS(data){
 		return typeof json === 'string' ? JSON.parse(data) : JSON.stringify(data);
 	};
-
-	// w.onerror = function(message, source, lineNo, colNo, error){
-	//     const errorInfo = {
-	//     	message: message,
-	//     	source: source,
-	//     	lineNumber: lineNo,
-	//     	colNumber: colNo,
-	//     	error: error,
-	//     	type: 'Uncaught'
-	// 	};
-	// 	console.log(error);
-	//     sendError(errorInfo);
-	// };
 
 	w.addEventListener('error', function(event){
 		var e = event;
