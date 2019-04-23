@@ -1,5 +1,10 @@
 import './index.scss';
 
+const init = Symbol('init');
+const event = Symbol('event');
+const renderHTML = Symbol('renderHTML');
+const setDistance = Symbol('setDistance');
+
 export default class sliderBar{
     constructor(){
         if (!arguments[0].id) {
@@ -20,37 +25,34 @@ export default class sliderBar{
         this.opts = opts;
         this.currentValue = this.opts.initVal;
         this.id = arguments[0].id;
-        this.init();
+        this[init]();
     };
-    event(){
-        let that = this;
+    [event](){
         let tar = document.getElementById(this.opts.id);
-        let currDis = 0,
-            tarDis = 0,
-            dis = 0;
-        tar.addEventListener('mousedown', dragStart, false);
-        function dragStart(e){
+        let currDis = 0, tarDis = 0, dis = 0;
+        const dragStart = (e)=>{
             e.preventDefault();
             if (e.currentTarget.classList.contains('xui_slider_disabled')) {
                 return;
             };
             currDis = e.clientX || e.pageX;
-            tarDis = that.getPosition(tar, 'left');
+            tarDis = this.getPosition(tar, 'left');
             dis = currDis - tarDis;
-            that.opts.dragStart && that.opts.dragStart(dis);
+            this.opts.dragStart && this.opts.dragStart(dis);
             document.addEventListener('mousemove', dragMove, false);
             document.addEventListener('mouseup', dragEnd, false);
             return false;
         };
-        function dragMove(e){
+        tar.addEventListener('mousedown', dragStart);
+        const dragMove = (e)=>{
             let nowDis = e.clientX || e.pageX;
             dis = nowDis - tarDis;
-            that.opts.dragMove && that.opts.dragMove(dis);
-            that.setDistance(dis);
+            this.opts.dragMove && this.opts.dragMove(dis);
+            this[setDistance](dis);
         };
-        function dragEnd(e, bool){
-            that.setDistance(dis);
-            that.opts.dragEnd && that.opts.dragEnd(that.setDistance(dis));
+        const dragEnd = (e)=>{
+            this[setDistance](dis);
+            this.opts.dragEnd && this.opts.dragEnd(this.setDistance(dis));
             document.removeEventListener('mousemove', dragMove);
             document.removeEventListener('mouseup', dragEnd);
         };
@@ -61,7 +63,7 @@ export default class sliderBar{
     getCurrentvalue(){
         return this.currentValue;
     };
-    setDistance(dis, total){
+    [setDistance](dis, total){
         let tar = document.getElementById(this.opts.id),
             progress = tar.querySelector('.xui_bar_progress'),
             dot = tar.querySelector('.xui_bar_dot');
@@ -90,7 +92,7 @@ export default class sliderBar{
     setCurrentValue(cur, total){
         this.setDistance(cur, total);
     };
-    renderHTML(){
+    [renderHTML](){
         let currentPer,showPer;
         currentPer = this.opts.currentVal * this.opts.max / (this.opts.max / 100);
         currentPer = currentPer.toFixed(this.opts.precision);
@@ -113,9 +115,9 @@ export default class sliderBar{
         };
         tar.setAttribute('data-num', this.opts.initVal);
         tar.innerHTML = dig;
-        this.event();
+        this[event]();
     };
-    init(){
-        this.renderHTML();
+    [init](){
+        this[renderHTML]();
     };
 };
