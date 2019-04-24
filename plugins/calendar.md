@@ -13,7 +13,7 @@
 </div>
 ```
 ```js
-xui.calendar({
+let test = xui.calendar({
 	id: string,
 	startDate: string,
 	endDate: string,
@@ -21,10 +21,12 @@ xui.calendar({
 	isOtherMonths: boolean,
 	isChinese: boolean,
 	fn: function(date){
-		//callback
 		document.getElementById('test').value = date;
 	}
 });
+
+test.getCurrentDate();
+test.setCurrentDate(1556100117317);
 ```
 * 复制好html, 然后给你的日期选择框一个响亮的id, 接下来你就知道怎么做了吧!?
 * `id`表示提示信息的文案 **必传**
@@ -34,12 +36,14 @@ xui.calendar({
 * `isChinese`表示日历显示的语言,设置为true时显示为中文,默认为英文.
 * `callback`表示选择日期后的回调, 怎么说呢,你不写不会报错,但是你无法获取用户选择的日期了哟!
 * `<span class="xui_close_small" data-date=""></span>`表示鼠标`hover`显示一个清空选择的值,当然不加上去也不会报错
+* `getCurrentDate`实例上的方法，用来获取当前选择的日期
+* `setCurrentDate`实例上的方法，用来设置日历的展示值，支持`yyyy-mm-dd`, `yyyy/mm/dd`, `1556100117317`
 * 没有你想要的功能? 快联系我: `me@xumeng.site`添加吧
 
 ### 效果展示
 
 1.如果你仅仅是想用一下日历, 并不要求太多, 那么你可以这么做,代码非常简单
-<div class="xui_date_picker" >
+<div class="xui_date_picker">
 	<input type="text" id="test" placeholder="请选择日期" class="xui_input xui_date_input" />
 	<span class="xui_close_small" data-date=""></span>
 </div>
@@ -47,7 +51,7 @@ xui.calendar({
 <script type="text/javascript">
 document.getElementById('test').onclick = function(){
 	xui.calendar({
-		id: 'test', //输入框的id
+		id: 'test',
 		fn: function(date){
 			document.getElementById('test').value = date;
 		}

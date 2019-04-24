@@ -5,7 +5,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NFNL3B9');
 
-var xuiVersion = '2.4.6';
+var xuiVersion = '2.4.7';
 
 //这段代码用来载页面上加tag标识,可以删掉
 ;(function(){
@@ -1801,83 +1801,86 @@ here is a sliderBar plugin
 				throw new Error("element'id is required");
 			};
 			const defaults = {
-                max: 100,
-                currentVal: .5,
-                unit: '',
-                precision: 0,
-                dragStart: null,
-                dragMove: null,
-                dragEnd: null
+				max: 100,
+				currentVal: .5,
+				unit: '',
+				precision: 0,
+				initVal: 0,
+				disabled: false,
+				dragStart: null,
+				dragMove: null,
+				dragEnd: null
 			};
 			const opts = Object.assign({}, defaults, arguments[0]);
 			this.opts = opts;
+			this.currentValue = this.opts.initVal;
 			this.id = arguments[0].id;
 			this.init();
 		};
 		event(){
-			let that = this;
-			let tar = document.getElementById(this.opts.id),
-                progress = tar.querySelector('.xui_bar_progress'),
-                dot = tar.querySelector('.xui_bar_dot'),
-                percent  = tar.querySelector('.xui_bar_percent');
-            let currDis = 0,
-                tarDis = 0,
-                tarWidth = tar.offsetWidth,
-                dis = 0,
-                laterPercent = 0,
-                showPercent = 0;
-            tar.addEventListener('mousedown', dragStart, false);
-            function dragStart(e){
-            	e.preventDefault();
-            	if (e.currentTarget.classList.contains('xui_slider_disabled')) {
-            		return;
-            	};
-                currDis = e.clientX || e.pageX;
-                tarDis = that.calLeftDis(tar);
-                dis = currDis - tarDis;
-                that.opts.dragStart && that.opts.dragStart(dis);
-                document.addEventListener('mousemove', dragMove, false);
-                document.addEventListener('mouseup', dragEnd, false);
-                return false;
-            };
-            function dragMove(e){
-                let nowDis = e.clientX || e.pageX;
-                dis = nowDis - tarDis;
-                that.opts.dragMove && that.opts.dragMove(dis);
-                setDistance(dis, true);
-            };
-            function dragEnd(e, bool){
-                setDistance(dis);
-                that.opts.dragEnd && that.opts.dragEnd(setDistance(dis));
-                document.removeEventListener('mousemove', dragMove);
-                document.removeEventListener('mouseup', dragEnd);
-            };
-            function setDistance(dis){
-                showPercent = laterPercent = (dis / tarWidth);
-                let prop = that.opts.max / 100;
-                laterPercent *= that.opts.max / prop;
-                showPercent *= that.opts.max;
-                showPercent = showPercent.toFixed(that.opts.precision);
-                laterPercent = laterPercent > 100 ? 100 : laterPercent < 0 ? 0 : laterPercent;
-                showPercent = showPercent > that.opts.max ? that.opts.max : showPercent < 0 ? 0 : showPercent;
-                showPercent += that.opts.unit;
-                laterPercent += '%';
-                dot.style.left = laterPercent;
-                dot.setAttribute('title', showPercent);
-                dot.setAttribute('data-num', showPercent);
-                progress.style.width = laterPercent;
-                return showPercent;
-            }
-		};
-		//count elem' distance
-		calLeftDis(ele){
-			let tmp = ele.offsetLeft,
-			par = ele.offsetParent;
-			while(par != null){
-				tmp += par.offsetLeft;
-				par = par.offsetParent;
+			let tar = document.getElementById(this.opts.id);
+			let currDis = 0, tarDis = 0, dis = 0;
+			const dragStart = (e)=>{
+				e.preventDefault();
+				if (e.currentTarget.classList.contains('xui_slider_disabled')) {
+					return;
+				};
+				currDis = e.clientX || e.pageX;
+				tarDis = this.getPosition(tar, 'left');
+				dis = currDis - tarDis;
+				this.opts.dragStart && this.opts.dragStart(dis);
+				document.addEventListener('mousemove', dragMove, false);
+				document.addEventListener('mouseup', dragEnd, false);
+				return false;
 			};
-			return tmp;
+			tar.addEventListener('mousedown', dragStart);
+			const dragMove = (e)=>{
+				let nowDis = e.clientX || e.pageX;
+				dis = nowDis - tarDis;
+				this.opts.dragMove && this.opts.dragMove(dis);
+				this.setDistance(dis);
+			};
+			const dragEnd = (e)=>{
+				this.setDistance(dis);
+				this.opts.dragEnd && this.opts.dragEnd(this.setDistance(dis));
+				document.removeEventListener('mousemove', dragMove);
+				document.removeEventListener('mouseup', dragEnd);
+			};
+		};
+		getPosition(e, pos = 'left'){
+			return Math.round(e.getBoundingClientRect && e.getBoundingClientRect()[pos]);
+		};
+		getCurrentvalue(){
+			return this.currentValue;
+		};
+		setDistance(dis, total){
+			let tar = document.getElementById(this.opts.id),
+				progress = tar.querySelector('.xui_bar_progress'),
+				dot = tar.querySelector('.xui_bar_dot');
+			let laterPercent = 0,
+				showPercent = 0;
+			if(total){
+				showPercent = laterPercent = (dis / total);
+			}else{
+				showPercent = laterPercent = (dis / tar.offsetWidth);
+			};
+			let prop = this.opts.max / 100;
+			laterPercent *= this.opts.max / prop;
+			showPercent *= this.opts.max;
+			showPercent = showPercent.toFixed(this.opts.precision);
+			laterPercent = laterPercent > 100 ? 100 : laterPercent < 0 ? 0 : laterPercent;
+			showPercent = showPercent > this.opts.max ? this.opts.max : showPercent <= 0 ? 0 : showPercent;
+			showPercent += this.opts.unit;
+			laterPercent += '%';
+			dot.style.left = laterPercent;
+			dot.setAttribute('data-num', showPercent);
+			tar.setAttribute('data-num', showPercent);
+			progress.style.width = laterPercent;
+			this.currentValue = showPercent;
+			return showPercent;
+		};
+		setCurrentValue(cur, total){
+			this.setDistance(cur, total);
 		};
 		renderHTML(){
 			let currentPer,showPer;
@@ -1889,15 +1892,20 @@ here is a sliderBar plugin
 			currentPer += '%';
 			let dig = `
 				<div class="xui_bar">
-	                <div class="xui_bar_progress" style="width: ${currentPer}"></div>
-	                <span class="xui_bar_dot" 
-		                title="${showPer}" 
-		                data-num="${showPer}" 
-		                style="left: ${currentPer}"
-	                ></span>
-	            </div>
+					<div class="xui_bar_progress" style="width: ${currentPer}"></div>
+					<span class="xui_bar_dot" 
+						data-num="${showPer}" 
+						style="left: ${currentPer}"
+					></span>
+				</div>
 			`;
-			document.getElementById(this.id).innerHTML = dig;
+			let tar = document.getElementById(this.id);
+			if(this.opts.disabled){
+				tar.classList.add('xui_slider_disabled');
+			};
+			this.currentValue = showPer;
+			tar.setAttribute('data-num', showPer);
+			tar.innerHTML = dig;
 			this.event();
 		};
 		init(){

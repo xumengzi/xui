@@ -45,7 +45,7 @@ slider.setCurrentValue(cur, total)
 
 ### 效果展示
 
-1. 国际惯例, 最简单的滑块就是这个样子的,代码非常精炼，但是功能却不少
+1.国际惯例, 最简单的滑块就是这个样子的,代码非常精炼，但是功能却不少
 <div id="sliderBar" class="xui_slider_bar"></div>
 <button class="xui_btn xui_btn_default" id="getValue">获取当前值</button>
 <button class="xui_btn xui_btn_default" id="setValue">随机设置当前值</button>
@@ -96,7 +96,7 @@ document.getElementById('setValue').addEventListener('click', function(){
 });
 ```
 
-2. 同样我也提供了一些自定义的配置项，希望可以满足各种需求
+2.同样我也提供了一些自定义的配置项，希望可以满足各种需求
 <div id="sliderBar1" class="xui_slider_bar"></div>
 
 <style type="text/css">

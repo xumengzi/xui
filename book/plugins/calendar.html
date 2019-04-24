@@ -679,7 +679,7 @@
     <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;xui_close_small&quot;</span> <span class="hljs-attr">data-date</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
-<pre><code class="lang-js">xui.calendar({
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> test = xui.calendar({
     id: string,
     startDate: string,
     endDate: string,
@@ -687,10 +687,12 @@
     isOtherMonths: boolean,
     isChinese: boolean,
     fn: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">date</span>)</span>{
-        <span class="hljs-comment">//callback</span>
         <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&apos;test&apos;</span>).value = date;
     }
 });
+
+test.getCurrentDate();
+test.setCurrentDate(<span class="hljs-number">1556100117317</span>);
 </code></pre>
 <ul>
 <li>&#x590D;&#x5236;&#x597D;html, &#x7136;&#x540E;&#x7ED9;&#x4F60;&#x7684;&#x65E5;&#x671F;&#x9009;&#x62E9;&#x6846;&#x4E00;&#x4E2A;&#x54CD;&#x4EAE;&#x7684;id, &#x63A5;&#x4E0B;&#x6765;&#x4F60;&#x5C31;&#x77E5;&#x9053;&#x600E;&#x4E48;&#x505A;&#x4E86;&#x5427;!?</li>
@@ -701,6 +703,8 @@
 <li><code>isChinese</code>&#x8868;&#x793A;&#x65E5;&#x5386;&#x663E;&#x793A;&#x7684;&#x8BED;&#x8A00;,&#x8BBE;&#x7F6E;&#x4E3A;true&#x65F6;&#x663E;&#x793A;&#x4E3A;&#x4E2D;&#x6587;,&#x9ED8;&#x8BA4;&#x4E3A;&#x82F1;&#x6587;.</li>
 <li><code>callback</code>&#x8868;&#x793A;&#x9009;&#x62E9;&#x65E5;&#x671F;&#x540E;&#x7684;&#x56DE;&#x8C03;, &#x600E;&#x4E48;&#x8BF4;&#x5462;,&#x4F60;&#x4E0D;&#x5199;&#x4E0D;&#x4F1A;&#x62A5;&#x9519;,&#x4F46;&#x662F;&#x4F60;&#x65E0;&#x6CD5;&#x83B7;&#x53D6;&#x7528;&#x6237;&#x9009;&#x62E9;&#x7684;&#x65E5;&#x671F;&#x4E86;&#x54DF;!</li>
 <li><code>&lt;span class=&quot;xui_close_small&quot; data-date=&quot;&quot;&gt;&lt;/span&gt;</code>&#x8868;&#x793A;&#x9F20;&#x6807;<code>hover</code>&#x663E;&#x793A;&#x4E00;&#x4E2A;&#x6E05;&#x7A7A;&#x9009;&#x62E9;&#x7684;&#x503C;,&#x5F53;&#x7136;&#x4E0D;&#x52A0;&#x4E0A;&#x53BB;&#x4E5F;&#x4E0D;&#x4F1A;&#x62A5;&#x9519;</li>
+<li><code>getCurrentDate</code>&#x5B9E;&#x4F8B;&#x4E0A;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x7528;&#x6765;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x9009;&#x62E9;&#x7684;&#x65E5;&#x671F;</li>
+<li><code>setCurrentDate</code>&#x5B9E;&#x4F8B;&#x4E0A;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x7528;&#x6765;&#x8BBE;&#x7F6E;&#x65E5;&#x5386;&#x7684;&#x5C55;&#x793A;&#x503C;&#xFF0C;&#x652F;&#x6301;<code>yyyy-mm-dd</code>, <code>yyyy/mm/dd</code>, <code>1556100117317</code></li>
 <li>&#x6CA1;&#x6709;&#x4F60;&#x60F3;&#x8981;&#x7684;&#x529F;&#x80FD;? &#x5FEB;&#x8054;&#x7CFB;&#x6211;: <code>me@xumeng.site</code>&#x6DFB;&#x52A0;&#x5427;</li>
 </ul>
 <h3 id="&#x6548;&#x679C;&#x5C55;&#x793A;">&#x6548;&#x679C;&#x5C55;&#x793A;</h3>
@@ -713,7 +717,7 @@
 <script type="text/javascript">
 document.getElementById('test').onclick = function(){
     xui.calendar({
-        id: 'test', //输入框的id
+        id: 'test',
         fn: function(date){
             document.getElementById('test').value = date;
         }
@@ -833,7 +837,7 @@ document.getElementById('test2').onclick = function(){
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3.1.8 日历 calendar","level":"1.4.8","depth":2,"next":{"title":"3.1.9 分页 pagination","level":"1.4.9","depth":2,"path":"plugins/pagination.md","ref":"plugins/pagination.md","articles":[]},"previous":{"title":"3.1.7 倒计时 countDown","level":"1.4.7","depth":2,"path":"plugins/countDown.md","ref":"plugins/countDown.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"xumeng","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"XUI文档简介","links":{"sidebar":{"xui-vue":"https://xumengzi.github.io/xui/xui-vue/index.html#/","xui-react":"https://xumengzi.github.io/xui/xui-react/index"}},"gitbook":"*","description":"一个原生js的ui框架"},"file":{"path":"plugins/calendar.md","mtime":"2019-04-11T09:55:23.782Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-23T09:20:20.912Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3.1.8 日历 calendar","level":"1.4.8","depth":2,"next":{"title":"3.1.9 分页 pagination","level":"1.4.9","depth":2,"path":"plugins/pagination.md","ref":"plugins/pagination.md","articles":[]},"previous":{"title":"3.1.7 倒计时 countDown","level":"1.4.7","depth":2,"path":"plugins/countDown.md","ref":"plugins/countDown.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"xumeng","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"XUI文档简介","links":{"sidebar":{"xui-vue":"https://xumengzi.github.io/xui/xui-vue/index.html#/","xui-react":"https://xumengzi.github.io/xui/xui-react/index"}},"gitbook":"*","description":"一个原生js的ui框架"},"file":{"path":"plugins/calendar.md","mtime":"2019-04-24T10:03:12.224Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-24T11:07:19.613Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

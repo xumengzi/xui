@@ -10,6 +10,7 @@
 	</style>
 </head>
 <body>
+	<div id="sliderBar" class="xui_slider_bar"></div>
 	<div class="content">
 		<div class="xui_tree_content">
 			<ul>
@@ -42,6 +43,16 @@
 	</div>
 	<script src="../../assets/xui.js"></script>
 	<script src="../../others/data.js"></script>
+	<script>
+		let tt = new xui.sliderBar({
+            id: 'sliderBar',
+            currentVal: 2/12,
+            initVal: 2,
+            max: 12,
+            precision: 0,
+        });
+        console.log(tt);
+	</script>
 	<script>
 		var lis = '';
 		function renderHTML(list, a){

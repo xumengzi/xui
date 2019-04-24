@@ -39,12 +39,14 @@
         border-radius: 50%;
         border: solid 2px #4eb900;
         background-color: #fff;
-        &:focus,&:active{
+        &:focus,
+        &:active{
             box-shadow: 0 0 0 5px rgba(78, 185, 0, 0.2);
         }
     }
     .xui_bar_dot{
-        &:hover::before,&:active::before{
+        &:hover::before,
+        &:active::before{
             content: attr(data-num);
             display: block;
             position: absolute;
@@ -63,7 +65,8 @@
         }
     }
     .xui_bar_dot{
-        &:hover::after,&:active::after{
+        &:hover::after,
+        &:active::after{
             content: '';
             display: block;
             position: absolute;
