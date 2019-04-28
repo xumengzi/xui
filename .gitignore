@@ -11,6 +11,18 @@ node_modules
 # _book
 
 # eBook build output
-*.epub
-*.mobi
-*.pdf
+xui-vue
+xui-react
+assets
+img
+book
+love
+.eslintrc.js
+.github
+.gitignore
+test
+CNAME
+LICENSE
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+PULL_REQUEST_TEMPLATE.md
