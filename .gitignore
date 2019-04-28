@@ -14,7 +14,7 @@ node_modules
 xui-vue
 xui-react
 img
-book
+# book
 love
 .eslintrc.js
 .github
