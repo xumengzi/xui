@@ -13,6 +13,7 @@
 </div>
 ```
 ```js
+1.一种使用方式
 let test = xui.calendar({
 	id: string,
 	startDate: string,
@@ -27,6 +28,23 @@ let test = xui.calendar({
 
 test.getCurrentDate();
 test.setCurrentDate(1556100117317);
+
+2.还可以使用`import`
+import calender from 'packages/calender';
+let test2 = calendar({
+	id: string,
+	startDate: string,
+	endDate: string,
+	isToday: boolean,
+	isOtherMonths: boolean,
+	isChinese: boolean,
+	fn: function(date){
+		document.getElementById('test').value = date;
+	}
+});
+
+test2.getCurrentDate();
+test2.setCurrentDate(1556193739382);
 ```
 * 复制好html, 然后给你的日期选择框一个响亮的id, 接下来你就知道怎么做了吧!?
 * `id`表示提示信息的文案 **必传**

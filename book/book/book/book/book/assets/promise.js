@@ -1,3 +1,6 @@
+/*
+	promise.js主要是自我提升写的mini版本的promise
+*/
 class Xpromise {
     constructor(callback) {
         this.resolve = undefined;

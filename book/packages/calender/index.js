@@ -9,7 +9,7 @@ const removeCal = Symbol('removeCal');
 export default class calendar{
 	constructor(){
 		if (!arguments[0].id) {
-            throw new Error("element'id is required");
+			throw new Error("element'id is required");
 		};
 		let tar = new Date();
 		const t = {
@@ -23,8 +23,8 @@ export default class calendar{
 			month: t.m
 		};
 		this.currentDate = null;
-        const opts = Object.assign({}, defaults, arguments[0]);
-        this.opts = opts;
+		const opts = Object.assign({}, defaults, arguments[0]);
+		this.opts = opts;
 		// isDisabled or not
 		this.ele = document.getElementById(this.opts.id);
 		if (this.ele.getAttribute('disabled')) {
