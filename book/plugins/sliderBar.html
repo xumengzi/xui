@@ -676,7 +676,8 @@
 <h5 id="&#x4F7F;&#x7528;&#x53CA;&#x53C2;&#x6570;&#x8BF4;&#x660E;">&#x4F7F;&#x7528;&#x53CA;&#x53C2;&#x6570;&#x8BF4;&#x660E;:</h5>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;sliderBar&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;xui_slider_bar&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
-<pre><code class="lang-js"><span class="hljs-keyword">let</span> slider = <span class="hljs-keyword">new</span> xui.sliderBar({
+<pre><code class="lang-js"><span class="hljs-number">1.</span>ES5&#x65F6;&#x4EE3;
+<span class="hljs-keyword">let</span> slider = <span class="hljs-keyword">new</span> xui.sliderBar({
     id: string,
     currentVal: number,
     initVal: number,
@@ -692,8 +693,26 @@
     }
 });
 
-slider.getCurrentvalue()
-slider.setCurrentValue(cur, total)
+<span class="hljs-number">2.</span>ES6&#x65F6;&#x4EE3;
+<span class="hljs-keyword">import</span> sliderBar <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../packages/sliderBar&apos;</span>;
+<span class="hljs-keyword">let</span> slider = <span class="hljs-keyword">new</span> sliderBar({
+    id: string,
+    currentVal: number,
+    initVal: number,
+    max: number,
+    unit: string,
+    precision: number,
+    disabled: bool,
+    dragMove(val){
+        <span class="hljs-built_in">console</span>.log(val)
+    },
+    dragEnd(val){
+        <span class="hljs-built_in">console</span>.log(val);
+    }
+});
+
+slider.getCurrentvalue();
+slider.setCurrentValue(cur, total);
 </code></pre>
 <ul>
 <li>&#x590D;&#x5236;&#x597D;<code>html</code>,&#x53D6;&#x4E00;&#x4E2A;<code>id</code>,&#x7136;&#x540E;&#x5728;&#x4F60;&#x9700;&#x8981;&#x7528;&#x6237;&#x53BB;&#x52A0;&#x51CF;&#x7B49;&#x64CD;&#x4F5C;&#x7684;&#x5730;&#x65B9;&#x521D;&#x59CB;&#x5316;&#x5427;</li>
@@ -712,9 +731,11 @@ slider.setCurrentValue(cur, total)
 </ul>
 <h3 id="&#x6548;&#x679C;&#x5C55;&#x793A;">&#x6548;&#x679C;&#x5C55;&#x793A;</h3>
 <p>1.&#x56FD;&#x9645;&#x60EF;&#x4F8B;, &#x6700;&#x7B80;&#x5355;&#x7684;&#x6ED1;&#x5757;&#x5C31;&#x662F;&#x8FD9;&#x4E2A;&#x6837;&#x5B50;&#x7684;,&#x4EE3;&#x7801;&#x975E;&#x5E38;&#x7CBE;&#x70BC;&#xFF0C;&#x4F46;&#x662F;&#x529F;&#x80FD;&#x5374;&#x4E0D;&#x5C11;</p>
-<div id="sliderBar" class="xui_slider_bar"></div>
-<button class="xui_btn xui_btn_default" id="getValue">&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x503C;</button>
-<button class="xui_btn xui_btn_default" id="setValue">&#x968F;&#x673A;&#x8BBE;&#x7F6E;&#x5F53;&#x524D;&#x503C;</button>
+<div>
+    <div id="sliderBar" class="xui_slider_bar"></div>
+    <button class="xui_btn xui_btn_default" id="getValue">&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x503C;</button>
+    <button class="xui_btn xui_btn_default" id="setValue">&#x968F;&#x673A;&#x8BBE;&#x7F6E;&#x5F53;&#x524D;&#x503C;</button>
+</div>
 
 <style type="text/css">
     #sliderBar{
@@ -743,26 +764,24 @@ document.getElementById('setValue').addEventListener('click', function(){
 });
 </script>
 
-```js
-var test = new xui.sliderBar({
-    id: &apos;sliderBar&apos;,
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> test = <span class="hljs-keyword">new</span> xui.sliderBar({
+    id: <span class="hljs-string">&apos;sliderBar&apos;</span>,
     dragMove(val){
-        console.log(val)
+        <span class="hljs-built_in">console</span>.log(val)
     },
     dragEnd(val){
         xui.message(val);
     }
 });
-document.getElementById(&apos;getValue&apos;).addEventListener(&apos;click&apos;, function(){
+<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&apos;getValue&apos;</span>).addEventListener(<span class="hljs-string">&apos;click&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
     xui.message(test.getCurrentvalue());
 });
-document.getElementById(&apos;setValue&apos;).addEventListener(&apos;click&apos;, function(){
-    let ran = Math.round(Math.random() * 100);
-    test.setCurrentValue(ran, 100);
+<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&apos;setValue&apos;</span>).addEventListener(<span class="hljs-string">&apos;click&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">let</span> ran = <span class="hljs-built_in">Math</span>.round(<span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">100</span>);
+    test.setCurrentValue(ran, <span class="hljs-number">100</span>);
 });
-```
-
-2.&#x540C;&#x6837;&#x6211;&#x4E5F;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E9B;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x914D;&#x7F6E;&#x9879;&#xFF0C;&#x5E0C;&#x671B;&#x53EF;&#x4EE5;&#x6EE1;&#x8DB3;&#x5404;&#x79CD;&#x9700;&#x6C42;
+</code></pre>
+<p>2.&#x540C;&#x6837;&#x6211;&#x4E5F;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E9B;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x914D;&#x7F6E;&#x9879;&#xFF0C;&#x5E0C;&#x671B;&#x53EF;&#x4EE5;&#x6EE1;&#x8DB3;&#x5404;&#x79CD;&#x9700;&#x6C42;</p>
 <div id="sliderBar1" class="xui_slider_bar"></div>
 
 <style type="text/css">
@@ -840,7 +859,7 @@ new xui.sliderBar({
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3.2.7 滑动选择框 sliderBar","level":"1.4.17","depth":2,"next":{"title":"3.2.8 复制剪贴板 copyToClipBoard","level":"1.4.18","depth":2,"path":"plugins/copyToClipBoard.md","ref":"plugins/copyToClipBoard.md","articles":[]},"previous":{"title":"3.2.6 数字输入框 digital","level":"1.4.16","depth":2,"path":"plugins/digital.md","ref":"plugins/digital.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"xumeng","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"XUI文档简介","links":{"sidebar":{"xui-vue":"https://xumengzi.github.io/xui/xui-vue/index.html#/","xui-react":"https://xumengzi.github.io/xui/xui-react/index"}},"gitbook":"*","description":"一个原生js的ui框架"},"file":{"path":"plugins/sliderBar.md","mtime":"2019-04-24T10:02:52.341Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-28T12:19:39.967Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3.2.7 滑动选择框 sliderBar","level":"1.4.17","depth":2,"next":{"title":"3.2.8 复制剪贴板 copyToClipBoard","level":"1.4.18","depth":2,"path":"plugins/copyToClipBoard.md","ref":"plugins/copyToClipBoard.md","articles":[]},"previous":{"title":"3.2.6 数字输入框 digital","level":"1.4.16","depth":2,"path":"plugins/digital.md","ref":"plugins/digital.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"xumeng","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"XUI文档简介","links":{"sidebar":{"xui-vue":"https://xumengzi.github.io/xui/xui-vue/index.html#/","xui-react":"https://xumengzi.github.io/xui/xui-react/index"}},"gitbook":"*","description":"一个原生js的ui框架"},"file":{"path":"plugins/sliderBar.md","mtime":"2019-04-29T06:58:39.854Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-29T07:05:40.863Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -10,6 +10,7 @@
 <div id="sliderBar" class="xui_slider_bar"></div>
 ```
 ```js
+1.ES5时代
 let slider = new xui.sliderBar({
     id: string,
     currentVal: number,
@@ -26,8 +27,26 @@ let slider = new xui.sliderBar({
     }
 });
 
-slider.getCurrentvalue()
-slider.setCurrentValue(cur, total)
+2.ES6时代
+import sliderBar from '../packages/sliderBar';
+let slider = new sliderBar({
+    id: string,
+    currentVal: number,
+    initVal: number,
+    max: number,
+    unit: string,
+    precision: number,
+    disabled: bool,
+    dragMove(val){
+        console.log(val)
+    },
+    dragEnd(val){
+        console.log(val);
+    }
+});
+
+slider.getCurrentvalue();
+slider.setCurrentValue(cur, total);
 ```
 * 复制好`html`,取一个`id`,然后在你需要用户去加减等操作的地方初始化吧
 * `id`表示数字框的`id` **必传**
@@ -46,9 +65,11 @@ slider.setCurrentValue(cur, total)
 ### 效果展示
 
 1.国际惯例, 最简单的滑块就是这个样子的,代码非常精炼，但是功能却不少
-<div id="sliderBar" class="xui_slider_bar"></div>
-<button class="xui_btn xui_btn_default" id="getValue">获取当前值</button>
-<button class="xui_btn xui_btn_default" id="setValue">随机设置当前值</button>
+<div>
+    <div id="sliderBar" class="xui_slider_bar"></div>
+    <button class="xui_btn xui_btn_default" id="getValue">获取当前值</button>
+    <button class="xui_btn xui_btn_default" id="setValue">随机设置当前值</button>
+</div>
 
 <style type="text/css">
     #sliderBar{

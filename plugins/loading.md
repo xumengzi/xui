@@ -7,7 +7,12 @@
 
 ##### 使用及参数说明:
 ```js
+1.ES5时代
 xui.loading(boolean, string, string1);
+
+2.ES6时代
+import loading from '../packages/loading';
+loading(boolean, string, string1);
 ```
 * `boolean`表示是否显示`loading`,不传或者传`false`,表示删除`loading` **必传**
 * `string`表示`loading`显示在这个里面, 也不是全屏`loading`, 默认全屏

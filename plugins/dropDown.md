@@ -12,18 +12,27 @@
 </select>
 ```
 ```js
+1.ES5时代
 xui.dropDown({
 	id: string,
 	isSearch: boolean,
 	placeHolder: string,
 });
+
+2.ES6时代
+import dropDown from '../packages/dropDown';
+let tt = new dropDown({
+	id: string,
+	isSearch: boolean,
+	placeHolder: string,
+});
+tt.getCurrentValue();
 ```
 * 复制好`html`,取一个`id`,然后初始化下拉框即可生成一个好看的下拉框, 用设置好的`id`即可获取到选中的值
 * `id`表示下拉框的`id` **必传**
 * `isSearch`表示是否显示模糊搜索框
 * `placeHolder`表示搜索框的`placeholder`文案
 * 没有你想要的功能? 快联系我: `me@xumeng.site`添加吧
-
 
 ### 效果展示
 

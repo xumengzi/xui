@@ -10,7 +10,19 @@
 <div id="pagerId"></div>
 ```
 ```js
-var myPage = new xui.pagination({
+1.ES5时代
+let myPage = new xui.pagination({
+	id: string,
+	index: number,
+	total: number,
+	isShowDot: boolean,
+	isShowNum: boolean,
+	isJumpPage: boolean,
+});
+
+2.ES6时代
+import pagination from '../packages/pagination';
+let myPage = new pagination({
 	id: string,
 	index: number,
 	total: number,

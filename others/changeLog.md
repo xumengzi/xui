@@ -14,11 +14,13 @@
 #####bugfix：
 1. [日历插件](../plugins/calendar.md)增加了一些参数，回调，实例上增加了`getCurrentDate`，`setCurrentDate`方法，快去看看吧
 
+1. [下拉插件](../plugins/dropDown.md)增加了一些参数，回调，实例上增加了`getCurrentValue`方法，快去看看吧
+
 >是否兼容现有代码：是
 
 ###v2.4.7  <span style="font-size: 16px;">2019/04/06</span>
 #####bugfix：
-1. [滑动选择框](../plugins/sliderBar.md)增加了一些参数，回调，实例上增加了`getCurrentvalue`，`setCurrentValue`方法，快去看看吧
+1. [滑动选择框](../plugins/sliderBar.md)增加了一些参数，回调，实例上增加了`getCurrentValue`，`setCurrentValue`方法，快去看看吧
 
 >是否兼容现有代码：是
 

@@ -10,7 +10,20 @@
 <div id="collapse" class="xui_collapse"></div>
 ```
 ```js
+1.ES5时代
 new xui.collapse({
+	id: string,
+	isOneTab: boolean,
+	activeTab: number,
+	list: array,
+	fn: function(a, b){
+		console.log(a, b);
+	}
+});
+
+2.ES6时代
+import collapse from '../packages/collapse';
+new collapse({
 	id: string,
 	isOneTab: boolean,
 	activeTab: number,

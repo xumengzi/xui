@@ -2,10 +2,14 @@ import calender from './calender';
 import sliderBar from './sliderBar';
 import loading from './loading';
 import pagination from './pagination';
+import collapse from './collapse';
+import dropDown from 'dropDown';
 
 export {
     calender,
-    sliderBar,
+    collapse,
+    dropDown,
     loading,
-    pagination
+    pagination,
+    sliderBar,
 }
