@@ -24,7 +24,7 @@ var xuiVersion = '2.4.8';
 
 /*
  created by xumeng
- https://xumeng.site/
+ https://x.xumeng.site/book
 */ 
 
 /*
@@ -2085,8 +2085,8 @@ here is a lazyLoad plugin
 				throw new Error("img not found");
 			};
 			const defaults = {
-				loadingImg: 'https://xumeng.site/img/loading.gif',
-				errorImg: 'https://xumeng.site/img/error.jpg',
+				loadingImg: '../img/loading.gif',
+				errorImg: '../img/error.jpg',
 				hrefTarget: '',
 			};
 			this.opts = Object.assign({}, defaults, args);
