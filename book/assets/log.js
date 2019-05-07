@@ -191,5 +191,5 @@
 		};
 	};
 })(window, {
-	src: 'https://xumeng.site/'
+	src: 'https://example.com/'
 });
