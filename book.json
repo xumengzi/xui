@@ -5,7 +5,7 @@
 	"links": {
 	    "sidebar" : {
 			"xui-vue" : "https://xumengzi.github.io/xui-vue/book/index.html#/",
-			"xui-react": "https://xumengzi.github.io/xui/xui-react/index"
+			"xui-react": "https://xumengzi.github.io/xui-react/build/index"
 	    }
 	}
 }
