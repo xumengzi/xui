@@ -71,3 +71,7 @@ document.getElementById('xui_switch1').onchange = function(e){
     };
 };
 </script>
+
+2.关于`http`缓存的知识，一直是我不太清楚的点，这里我收藏了饿了么前端[关于`http`缓存的文章](https://zhuanlan.zhihu.com/p/29750583)
+
+3.to be continued
