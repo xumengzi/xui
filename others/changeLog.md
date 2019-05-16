@@ -10,6 +10,12 @@
 
 >修订版本号：每周末（看心情）会进行日常`bugfix`更新
 
+###v2.4.9  <span style="font-size: 16px;">2019/04/21</span>
+#####add：
+1. `packages`里增加[气泡确认框]插件，但是文档还木有写，哈哈，to be continued
+
+>是否兼容现有代码：是
+
 ###v2.4.8  <span style="font-size: 16px;">2019/04/07</span>
 #####bugfix：
 1. [日历插件](../plugins/calendar.md)增加了一些参数，回调，实例上增加了`getCurrentDate`，`setCurrentDate`方法，快去看看吧
