@@ -5,7 +5,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NFNL3B9');
 
-var xuiVersion = '2.4.9';
+var xuiVersion = '2.5.0';
 
 //这段代码用来载页面上加tag标识,可以删掉
 ;(function(){
@@ -308,7 +308,31 @@ include most functions and styles etc.
 	            return year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + sec;
 	        };
 	        return year + '-' + month + '-' + day;
-	    },
+		},
+		formatNumber(number){
+			if(!isNaN){
+				throw new Error('Not a number');
+			};
+			var temp = number.toString().split('.');
+			if(temp && temp.length > 2){
+				throw new Error('Illegal number');
+			};
+			var str = temp[0];
+			str = str.split('').reverse().join('');
+			var res = '';
+			for(var i = 0; i < str.length; i++){
+				if(i % 3 == 0 && i / 3 > 0){
+					res += ',' + str[i];
+				}else{
+					res += str[i];
+				};
+			};
+			res = res.split('').reverse().join('');
+			if(temp[1]){
+				res += '.' + temp[1];
+			};
+			return res;
+		},
 	    generateBooks(){
 	    	var tar = document.getElementById('myBook');
 	    	var colorArr = [

@@ -158,9 +158,21 @@ return Math.random() > .5
 xui.twoWayBinding('#demo', '#display');
 ```
 
+12.如何将金额格式化，这是一个问题，比如￥1234567890.12，可以用这个方法展示
+
+<div class="formatMoney"></div>
+
+<script type="text/javascript">
+    document.querySelector('.formatMoney').innerHTML = '￥' + xui.formatNumber(1234567890.12);
+</script>
+
+```js
+document.querySelector('.formatMoney').innerHTML = '￥' + xui.formatNumber(1234567890.12);
+```
+
 * 更多方法详见`xui.js`,可以在控制台打印一下`xui`对象,你就知道所有的方法啦!
 
->说明:点击查看大图哦!还可以像风一样旋转,跳跃,奔跑
+>说明:点击查看大图哦!还可以像风一样旋转,跳跃,奔跑，不定期更新（想起来就更新）
 
 <img id="xui" style="width: 300px" src="../img/xui.png">
 
