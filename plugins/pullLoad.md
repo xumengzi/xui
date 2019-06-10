@@ -45,7 +45,7 @@ var load = new xui.pullLoad({
 	#pullLoad,#pullLoad1{
 		width: 200px;
 		height: 300px;
-		margin-bottom: 100px;
+		margin-bottom: 130px;
 		background: antiquewhite;
 		text-align: center;
 	    color: brown;
@@ -97,8 +97,8 @@ var load = new xui.pullLoad({
 <script type="text/javascript">
 var load1 = new xui.pullLoad({
 	id: 'pullLoad1',
-	loading: '<img src="http://xumeng.site/img/loading.gif" />',
-	maxScrollHeight: 100,
+	loading: '<img src="/img/loading.gif" />',
+	maxScrollHeight: 130,
 	activeScrollHeight: 80,
 	fn: function(){
 		setTimeout(() =>{
@@ -118,8 +118,8 @@ var load1 = new xui.pullLoad({
 ```js
 var load1 = new xui.pullLoad({
 	id: 'pullLoad1',
-	loading: '<img src="http://xumeng.site/img/loading.gif" />',
-	maxScrollHeight: 60,
+	loading: '<img src="/img/loading.gif" />',
+	maxScrollHeight: 130,
 	activeScrollHeight: 50,
 	fn: function(){
 		setTimeout(() =>{
