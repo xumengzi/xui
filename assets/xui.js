@@ -17,7 +17,7 @@ var xuiVersion = '2.5.0';
     link.target = '_blank';
     link.appendChild(img);
     lis.appendChild(link);
-    var target = document.querySelector('.summary') || document.querySelector('body');
+    var target = document.querySelector('.summary');
     target.insertBefore(lis, target.childNodes[0]);
 })();
 
