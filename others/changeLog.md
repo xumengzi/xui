@@ -10,6 +10,12 @@
 
 >修订版本号：每周末（看心情）会进行日常`bugfix`更新
 
+###v2.6.0  <span style="font-size: 16px;">2019/06/19</span>
+#####add：
+1. 新增[数字滚动](../plugins/digitalScroll.md)插件, 可以给数字加动画了
+
+>是否兼容现有代码：是
+
 ###v2.5.0  <span style="font-size: 16px;">2019/05/13</span>
 #####add：
 1. [常用方法](../methods/methods.md)第12条增加了格式化金钱的方法`xui.formatNumber`

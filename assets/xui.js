@@ -5,7 +5,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NFNL3B9');
 
-var xuiVersion = '2.5.0';
+var xuiVersion = '2.6.0';
 
 //这段代码用来载页面上加tag标识,可以删掉
 ;(function(){
@@ -2339,4 +2339,52 @@ here is a pullLoad plugin
 		};
 		return NUM;
 	};
+})(window);
+
+/*
+数字滚动插件 
+*/
+;(function(w){
+	class digitalScroll{
+		constructor(){
+			const args = arguments[0];
+			if (!args.id) {
+				throw new Error("element'id is required");
+			};
+			const defaults = {
+				id: 'digitalScroll',
+				prevVal: 0,
+				desVal: 100,
+				step: 10,
+				interval: 100,
+				fn: null,
+				fnComplete: null,
+			};
+			this.opts = Object.assign({}, defaults, args);
+			this.val = 0;
+			this.tar = document.getElementById(this.opts.id);
+			this.counts = Math.floor(this.opts.desVal / this.opts.step);
+			this.initCount = 0;
+			this.timer = null;
+			this.init();
+		};
+		increase(val){
+			this.val += this.opts.step;
+			this.tar.innerHTML = this.val;
+			this.initCount++;
+			this.opts.fn && this.opts.fn(this.val);
+			if(this.initCount == this.counts){
+				clearInterval(this.timer);
+				this.tar.innerHTML = this.opts.desVal;
+				this.opts.fnComplete && this.opts.fnComplete(this.opts.desVal); 
+			};
+		};
+		init(){
+			let {interval} = this.opts;
+			this.timer = setInterval(e =>{
+				this.increase(this.val);
+			}, interval);
+		};
+	};
+	Object.getPrototypeOf(xui).digitalscroll = digitalScroll;
 })(window);
