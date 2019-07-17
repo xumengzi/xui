@@ -22,11 +22,11 @@ new xui.slider({
 			img: 'http://img.infinitynewtab.com/wallpaper/1111.jpg',
 		},
 		{
-			link: 'https://github.com/JarvenIV/xui',
+			link: 'https://github.com/xumengzi/xui',
 			img: 'http://img.infinitynewtab.com/wallpaper/1234.jpg',
 		},
 		{
-			link: 'https://jarveniv.gitbooks.io/xui/content/',
+			link: 'https://xumengzi.gitbooks.io/xui/content/',
 			img: 'http://img.infinitynewtab.com/wallpaper/2345.jpg',
 		},
 	],
@@ -70,11 +70,11 @@ new xui.slider({
 			img: 'http://img.infinitynewtab.com/wallpaper/1111.jpg',
 		},
 		{
-			link: 'https://github.com/JarvenIV/xui',
+			link: 'https://github.com/xumengzi/xui',
 			img: 'http://img.infinitynewtab.com/wallpaper/1234.jpg',
 		},
 		{
-			link: 'https://jarveniv.gitbooks.io/xui/content/',
+			link: 'https://xumengzi.gitbooks.io/xui/content/',
 			img: 'http://img.infinitynewtab.com/wallpaper/2345.jpg',
 		},
 	],
@@ -97,11 +97,11 @@ new xui.slider({
 			img: 'http://img.infinitynewtab.com/wallpaper/1111.jpg',
 		},
 		{
-			link: 'https://github.com/JarvenIV/xui',
+			link: 'https://github.com/xumengzi/xui',
 			img: 'http://img.infinitynewtab.com/wallpaper/1234.jpg',
 		},
 		{
-			link: 'https://jarveniv.gitbooks.io/xui/content/',
+			link: 'https://xumengzi.gitbooks.io/xui/content/',
 			img: 'http://img.infinitynewtab.com/wallpaper/2345.jpg',
 		},
 	],

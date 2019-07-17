@@ -15,6 +15,7 @@ xui-vue
 xui-react
 love
 .eslintrc.js
+_config.yml
 .github
 .gitignore
 test
