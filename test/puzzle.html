@@ -1,0 +1,133 @@
+<html>
+<head>
+	<title>拼图</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="https://xumengzi.github.io/xui/assets/xui.css">
+	<style type="text/css">
+		.puzzle{
+            width: 300px;
+            height: 300px;
+            font-size: 0;
+        }
+        .puzzle > div{
+            width: 100px;
+            height: 100px;
+            font-size: 14px;
+            vertical-align: bottom;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            font-weight: bold;
+            font-family: consolas;
+        }
+        .puzzle > div:nth-child(1){
+            background-color: antiquewhite;
+        }
+        .puzzle > div:nth-child(2){
+            background-color:aqua;
+        }
+        .puzzle > div:nth-child(3){
+            background-color:indianred;
+        }
+        .puzzle > div:nth-child(4){
+            background-color:blue;
+        }
+        .puzzle > div:nth-child(5){
+            background-color:chartreuse;
+        }
+        .puzzle > div:nth-child(6){
+            background-color:pink ;
+        }
+        .puzzle > div:nth-child(7){
+            background-color:darkmagenta;
+        }
+        .puzzle > div:nth-child(8){
+            background-color:deepskyblue;
+        }
+        .puzzle > div:nth-child(9){
+            background-color:olivedrab;
+        }
+	</style>
+</head>
+<body>
+	<div class="puzzle"></div>
+    <div class="tips"></div>
+    <div class="current">当前步数: <span>0</span>步</div>
+    <div class="score">历史最好成绩: <span>0</span></div>
+    <div class="operate">
+        <button data-type="1">up</button>
+        <button data-type="2">down</button>
+        <button data-type="3">left</button>
+        <button data-type="4">right</button>
+    </div>
+    <script>
+        let oBtn = document.querySelector('.operate');
+        const tips = ['卧槽, 好厉害', '加油!', '别灰心!', '相信自己'];
+        // let initArr = [1, 2, 3, 4, 5, 6, 7, 8, 0].sort((a,b)=>{
+        //     return Math.random() * 2 - 1
+        // });
+        let initArr = [1, 2, 3, 4, 5, 6, 7, 0, 8]
+        const setPuzzle = (arr) =>{
+            let divs = document.querySelector('.puzzle');
+
+            divs.innerHTML = '';
+            for(let i in arr){
+                let temp = document.createElement('div');
+                temp.innerHTML = arr[i] || '';
+                divs.appendChild(temp)
+            }
+            document.querySelector('.current').children[0].innerHTML = NUM
+            bestNUM = NUM
+            NUM+=1
+            if(arr.join('') === '123456780'){
+                document.querySelector('.tips').innerHTML = tips[0]
+                bestNUM = localStorage.getItem('score') > bestNUM ? bestNUM : localStorage.getItem('score');
+                localStorage.setItem('score', bestNUM);
+            }
+        }
+        let NUM = 0;
+        let bestNUM = localStorage.getItem('score') || 0;
+        document.querySelector('.score').children[0].innerHTML = bestNUM
+        oBtn.addEventListener('click', e =>{
+            let ele = e.target;
+            let type = ele.getAttribute('data-type');
+            if(type){
+                let zero = initArr.indexOf(0)
+                let tempArr = [];
+                let target = null;
+                if(type == 1){
+                    if(zero > 6){
+                        return
+                    }
+                    target = zero + 3;
+                }
+                if(type == 2){
+                    if(zero < 3){
+                        return
+                    }
+                    target = zero - 3;
+                }
+                if(type == 3){
+                    if([2,5,8].includes(zero)){
+                        return
+                    }
+                    target = zero + 1;
+                }
+                if(type == 4){
+                    if([0,3,6].includes(zero)){
+                        return
+                    }
+                    target = zero - 1;
+                }
+                tempArr = initArr
+                let a = initArr.splice(target, 1, 0)
+                let b = initArr.splice(zero, 1, a[0])
+                setPuzzle(tempArr)
+            }
+        })
+        setPuzzle(initArr)
+        
+    </script>
+</body>
+</html>
