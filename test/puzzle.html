@@ -2,16 +2,21 @@
 <head>
 	<title>拼图</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="https://xumengzi.github.io/xui/assets/xui.css">
-	<style type="text/css">
+    <link rel="stylesheet" type="text/css" href="../assets/xui.css?t=20190102">
+	<link rel="shortcut icon" type="image/x-icon" href="../others/xu_icon_40.ico" media="screen" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <style type="text/css">
+        body > div{
+            text-align: center;
+        }
 		.puzzle{
-            width: 300px;
-            height: 300px;
+            max-width: 600px;
             font-size: 0;
+            margin: 0 auto;
         }
         .puzzle > div{
-            width: 100px;
-            height: 100px;
+            width: 33.3%;
+            height: 120px;
             font-size: 14px;
             vertical-align: bottom;
             display: inline-flex;
@@ -48,26 +53,64 @@
         .puzzle > div:nth-child(9){
             background-color:olivedrab;
         }
+        .operate{
+            width: 300px;
+            height: 150px;
+            position: relative;
+            margin: 0 auto;
+        }
+        .operate button {
+            position: absolute;
+        }
+        .operate button:nth-child(1) {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .operate button:nth-child(2) {
+            bottom: 0;
+            left: 50%;
+            top: auto;
+            transform: translateX(-50%);
+        }
+        .operate button:nth-child(3) {
+            top: 50%;
+            left: 0;
+            transform: translateY(-75%);
+        }
+        .operate button:nth-child(4) {
+            top: 50%;
+            right: 0;
+            transform: translateY(-75%);
+        }
+        .description{
+            display: flex;
+            max-width: 600px;
+            margin: 10px auto;
+            justify-content: space-around;
+        }
 	</style>
 </head>
 <body>
 	<div class="puzzle"></div>
     <div class="tips"></div>
-    <div class="current">当前步数: <span>0</span>步</div>
-    <div class="score">历史最好成绩: <span>0</span></div>
+    <div class="description">
+        <div class="current">当前步数: <span>0</span>步</div>
+        <div class="score">历史最好成绩: <span>0</span></div>
+    </div>
     <div class="operate">
-        <button data-type="1">up</button>
-        <button data-type="2">down</button>
-        <button data-type="3">left</button>
-        <button data-type="4">right</button>
+        <button class="xui_btn xui_btn_default" data-type="1">up</button>
+        <button class="xui_btn xui_btn_default" data-type="2">down</button>
+        <button class="xui_btn xui_btn_default" data-type="3">left</button>
+        <button class="xui_btn xui_btn_default" data-type="4">right</button>
     </div>
     <script>
         let oBtn = document.querySelector('.operate');
         const tips = ['卧槽, 好厉害', '加油!', '别灰心!', '相信自己'];
-        // let initArr = [1, 2, 3, 4, 5, 6, 7, 8, 0].sort((a,b)=>{
-        //     return Math.random() * 2 - 1
-        // });
-        let initArr = [1, 2, 3, 4, 5, 6, 7, 0, 8]
+        let initArr = [1, 2, 3, 4, 5, 6, 7, 8, 0].sort((a,b)=>{
+            return Math.random() * 2 - 1
+        });
+        // let initArr = [1, 2, 3, 4, 5, 6, 7, 0, 8]
         const setPuzzle = (arr) =>{
             let divs = document.querySelector('.puzzle');
 
@@ -97,7 +140,7 @@
                 let tempArr = [];
                 let target = null;
                 if(type == 1){
-                    if(zero > 6){
+                    if(zero > 5){
                         return
                     }
                     target = zero + 3;
