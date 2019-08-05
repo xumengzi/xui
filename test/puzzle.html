@@ -3,9 +3,13 @@
 	<title>拼图</title>
 	<meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../assets/xui.css?t=20190102">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<link rel="shortcut icon" type="image/x-icon" href="../others/xu_icon_40.ico" media="screen" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <style type="text/css">
+        body{
+            font-size: 14px;
+        }
         body > div{
             text-align: center;
         }
@@ -16,7 +20,7 @@
         }
         .puzzle > div{
             width: 33.3%;
-            height: 120px;
+            height: 110px;
             font-size: 14px;
             vertical-align: bottom;
             display: inline-flex;
@@ -54,13 +58,14 @@
             background-color:olivedrab;
         }
         .operate{
-            width: 300px;
-            height: 150px;
+            width: 200px;
+            height: 100px;
             position: relative;
             margin: 0 auto;
         }
         .operate button {
             position: absolute;
+            margin: 0;
         }
         .operate button:nth-child(1) {
             top: 0;
@@ -76,17 +81,17 @@
         .operate button:nth-child(3) {
             top: 50%;
             left: 0;
-            transform: translateY(-75%);
+            transform: translateY(-50%);
         }
         .operate button:nth-child(4) {
             top: 50%;
             right: 0;
-            transform: translateY(-75%);
+            transform: translateY(-50%);
         }
         .description{
             display: flex;
             max-width: 600px;
-            margin: 10px auto;
+            margin: 8px auto;
             justify-content: space-around;
         }
 	</style>
@@ -99,19 +104,26 @@
         <div class="score">历史最好成绩: <span>0</span></div>
     </div>
     <div class="operate">
-        <button class="xui_btn xui_btn_default" data-type="1">up</button>
-        <button class="xui_btn xui_btn_default" data-type="2">down</button>
-        <button class="xui_btn xui_btn_default" data-type="3">left</button>
-        <button class="xui_btn xui_btn_default" data-type="4">right</button>
+        <button class="xui_btn xui_btn_default" data-type="1">↑</button>
+        <button class="xui_btn xui_btn_default" data-type="2">↓</button>
+        <button class="xui_btn xui_btn_default" data-type="3">←</button>
+        <button class="xui_btn xui_btn_default" data-type="4">→</button>
     </div>
+    <button class="xui_btn xui_btn_cancel reset">重置</button>
+
     <script>
+        let NUM = 0;
+        let bestNUM = localStorage.getItem('score') || 0;
+
+        const noOrder = e =>{
+            return [1, 2, 3, 4, 5, 6, 7, 8, 0].sort((a,b)=>{
+                return Math.random() * 2 - 1
+            });
+        }
         let oBtn = document.querySelector('.operate');
         const tips = ['卧槽, 好厉害', '加油!', '别灰心!', '相信自己'];
-        let initArr = [1, 2, 3, 4, 5, 6, 7, 8, 0].sort((a,b)=>{
-            return Math.random() * 2 - 1
-        });
-        // let initArr = [1, 2, 3, 4, 5, 6, 7, 0, 8]
-        const setPuzzle = (arr) =>{
+        let initArr = noOrder();
+        const render = (arr) =>{
             let divs = document.querySelector('.puzzle');
 
             divs.innerHTML = '';
@@ -121,6 +133,16 @@
                 divs.appendChild(temp)
             }
             document.querySelector('.current').children[0].innerHTML = NUM
+        }
+        
+        document.querySelector('.reset').addEventListener('click', e =>{
+            NUM = 0;
+            document.querySelector('.tips').innerHTML = '';
+            document.querySelector('.score').children[0].innerHTML = localStorage.getItem('score') || 0
+            render(noOrder());
+        })
+        const setPuzzle = (arr) =>{
+            render(arr);
             bestNUM = NUM
             NUM+=1
             if(arr.join('') === '123456780'){
@@ -129,8 +151,7 @@
                 localStorage.setItem('score', bestNUM);
             }
         }
-        let NUM = 0;
-        let bestNUM = localStorage.getItem('score') || 0;
+        
         document.querySelector('.score').children[0].innerHTML = bestNUM
         oBtn.addEventListener('click', e =>{
             let ele = e.target;
