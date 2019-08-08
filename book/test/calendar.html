@@ -1,0 +1,80 @@
+<html><head>
+	<title>测试</title>
+	<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="./assets/xui.css">
+</head>
+<style type="text/css">
+	.done{
+		color: green;
+	}
+</style>
+<body>
+	<ol>
+		<li>hover日期显示删除按钮 <span class="done">√</span></li>
+		<li>上个月和下个月是否显示可以配置 <span class="done">√</span></li>
+		<li>点击别处,日历消失 <span class="done">√</span></li>
+		<li>hover日期显示当前年月日 <span class="done">√</span></li>
+		<li>可以设置开始,结束日期 <span class="done">√</span></li>
+		<li>禁止日期选择框 <span class="done">√</span></li>
+		<li>显示数字优化,补0 <span class="done">√</span></li>
+		<li>撰写文档 <span class="done">√</span></li>
+		<li>支持手动输入正确的日期</li>
+	</ol>
+	<div style="display: flex;">
+		<div class="xui_date_picker" >
+			<input type="text" readonly="readonly" id="test" class="xui_input xui_date_input" />
+			<span class="xui_close_small" data-date=""></span>
+		</div>
+		<div class="xui_date_picker" >
+			<input type="text" readonly="readonly" id="test1" class="xui_input xui_date_input" />
+			<span class="xui_close_small" data-date=""></span>
+		</div>
+		<div class="xui_date_picker" >
+			<input type="text" readonly="readonly" id="test2" class="xui_input xui_date_input" />
+		</div>
+	</div>
+	<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script type="text/javascript" src="./assets/xui.js"></script>
+	<script type="text/javascript">
+		document.getElementById('test').onclick = function(){
+			xui.calendar({
+				id: 'test', //输入框的id
+				// startDate: '2017/12/11', //开始日期
+				// endDate: '2018/02/02',  //结束日期
+				isToday: false, //是否显示快速选择今天的按钮
+				isOtherMonths: false,
+				fn: function(date){
+					console.log(date);
+					document.getElementById('test').value = date;
+				}
+			});
+		};
+
+		document.getElementById('test1').onclick = function(){
+			xui.calendar({
+				id: 'test1', //输入框的id
+				startDate: '2017/11/15', //开始日期
+				endDate: '2018/02/02',  //结束日期
+				isToday: true, //是否显示快速选择今天的按钮
+				isOtherMonths: true,
+				fn: function(date){
+					console.log(date);
+					document.getElementById('test1').value = date;
+				}
+			});
+		};
+
+		document.getElementById('test2').onclick = function(){
+			xui.calendar({
+				id: 'test2', //输入框的id
+				startDate: '2017/12/15', //开始日期
+				isToday: false, //是否显示快速选择今天的按钮
+				isOtherMonths: true,
+				fn: function(date){
+					console.log(date);
+					document.getElementById('test2').value = date;
+				}
+			});
+		};
+	</script>
+</body></html>

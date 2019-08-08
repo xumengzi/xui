@@ -10,6 +10,12 @@
 
 >修订版本号：每周末（看心情）会进行日常`bugfix`更新
 
+###v2.7.1  <span style="font-size: 16px;">2019/07/14</span>
+##### Add:
+1. 增加[趣味游戏](../collection/games.md), 快去看看吧
+
+>是否兼容现有代码：是
+
 ###v2.6.1  <span style="font-size: 16px;">2019/07/01</span>
 ##### Improvements:
 1. 日志信息描述信息修改
