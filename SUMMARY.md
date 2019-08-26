@@ -39,6 +39,6 @@
     * [4.1.3 我不知道 idontknow](collection/idontknow.md)
     * [4.1.4 数组 array](collection/array.md)
     * [4.1.5 游戏 game](collection/games.md)
-      * [4.1.5.1 拼图 puzzle](collection/gameList/puzzle.md)  
-      * [4.1.5.2 俄罗斯方块 tetris](collection/gameList/tetris.md)  
+      * [4.1.5.1 拼图 puzzle](collection/gameList/puzzle.md)
+      * [4.1.5.2 俄罗斯方块 tetris](collection/gameList/tetris.md)
 * [5.日志 log](others/changeLog.md)

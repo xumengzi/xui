@@ -3,7 +3,7 @@
 	<title>拼图</title>
 	<meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../assets/xui.css?t=20190102">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 	<link rel="shortcut icon" type="image/x-icon" href="../others/xu_icon_40.ico" media="screen" />
     <style type="text/css">
         body{
@@ -93,6 +93,30 @@
             margin: 8px auto;
             justify-content: space-around;
         }
+        .biling{
+            position: relative;
+            overflow: hidden;
+        }
+        .biling:hover::after,
+        .biling:active::after
+        {
+            animation: sheen 1s forwards;
+        }
+        .biling::after{
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            bottom: -50%;
+            left: -50%;
+            background: linear-gradient(to bottom, rgba(229, 172, 142, 0), rgba(255,255,255,0.5) 50%, rgba(229, 172, 142, 0));
+            transform: rotateZ(60deg) translate(0em, 4.5em);
+        }
+        @keyframes sheen {
+            100% {
+                transform: rotateZ(60deg) translate(1em, -9em);
+            }
+        }
 	</style>
 </head>
 <body>
@@ -103,12 +127,12 @@
         <div class="score">历史最好成绩: <span>0</span></div>
     </div>
     <div class="operate">
-        <button class="xui_btn xui_btn_default" data-type="1">↑</button>
-        <button class="xui_btn xui_btn_default" data-type="2">↓</button>
-        <button class="xui_btn xui_btn_default" data-type="3">←</button>
-        <button class="xui_btn xui_btn_default" data-type="4">→</button>
+        <button class="xui_btn xui_btn_default biling" data-type="1">↑</button>
+        <button class="xui_btn xui_btn_default biling" data-type="2">↓</button>
+        <button class="xui_btn xui_btn_default biling" data-type="3">←</button>
+        <button class="xui_btn xui_btn_default biling" data-type="4">→</button>
     </div>
-    <button class="xui_btn xui_btn_cancel reset">重置</button>
+    <button class="xui_btn xui_btn_cancel reset biling">重置</button>
 
     <script>
         let NUM = 0;
