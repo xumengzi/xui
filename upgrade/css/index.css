@@ -465,7 +465,7 @@ code {
 }
 
 .progress {
-	width: 25%;
+	width: 50%;
 	margin: 1rem auto;
 }
 
@@ -494,9 +494,10 @@ code {
 	transition: 1s 1s ease-in;
 }
 
-.progress-bar div.progress-color01 {
-	width: 70%;
-	background-color: green;
+.show_animation .progress-bar div.progress-color01{
+  width: 70%;
+  background-color: green;
+  transition: 1s 1s ease-in;
 }
 
 .progress-color02 {
