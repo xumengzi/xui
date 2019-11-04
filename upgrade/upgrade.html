@@ -13,6 +13,7 @@
 	<meta name="author" content="lihuahui">
 	<link rel="stylesheet" type="text/css" href="./css/index.css">
 	<link rel="shortcut icon" type="image/x-icon" href="./images/favicon-icon.ico" media="screen" />
+	<script src="https://cdn.bootcss.com/babel-polyfill/7.6.0/polyfill.min.js"></script>
 </head>
 
 <body>
@@ -20,8 +21,8 @@
 		<div class="first-page">
 			<span class="big-font">述职报告</span>
 			<span class="first-position">岗位：web前端</span>
-      <span class="first-person">汇报人：李化会</span>
-      <span class="first-date">汇报日期：2019-11-04</span>
+			<span class="first-person">汇报人：李化会</span>
+			<span class="first-date">汇报日期：2019-11-04</span>
 		</div>
 		<div class="content">
 			<div class="triangle">
@@ -149,19 +150,19 @@
 			<div class="future">
 				<h3 class="big-font">未来规划</h3>
 				<div class="career-des">
-            <p class="career-tit">前端架构师</p>
-            <p class="career-con">
-              我个人是比较喜欢前端这个职位的, 同时我也制定了个人的发展方向--前端架构师。<br/>
-              我认为架构师需要具备以下能力：知识广度，知识深度, 抽象能力, 学习能力。<br/>
-              当然我也会为了我这个目标而不懈努力
-            </p>
-        </div>
-        <div class="career-list">
-          <div data-attr="知识深度"></div>
-          <div data-attr="知识广度"></div>
-          <div data-attr="抽象能力"></div>
-          <div data-attr="学习能力"></div>
-        </div>
+					<p class="career-tit">前端架构师</p>
+					<p class="career-con">
+						我个人是比较喜欢前端这个职位的, 同时我也制定了个人的发展方向--前端架构师。<br />
+						我认为架构师需要具备以下能力：知识广度，知识深度, 抽象能力, 学习能力。<br />
+						当然我也会为了我这个目标而不懈努力
+					</p>
+				</div>
+				<div class="career-list">
+					<div data-attr="知识深度"></div>
+					<div data-attr="知识广度"></div>
+					<div data-attr="抽象能力"></div>
+					<div data-attr="学习能力"></div>
+				</div>
 			</div>
 		</div>
 		<div>
@@ -181,7 +182,7 @@
 			window.fullPage({
 				id: 'fullPage',
 				isBackground: false,
-				isShowDot: true,
+				isShowDot: false,
 				transition: '0.8s cubic-bezier(0.4, -0.57, 0.57, 1.23)',
 			});
 			document.querySelector('#fullPage').style.display = 'block';
@@ -190,9 +191,12 @@
 				target: 'time',
 				nodeName: 'b'
 			});
-			setTimeout(() => {
+			setTimeout(function () {
 				window.loading(false);
-			}, 1000);
+			}, 1000)
+			// setTimeout(() => {
+			// 	window.loading(false);
+			// }, 1000);
 		};
 	</script>
 </body>
