@@ -37,14 +37,26 @@
 	const page = {
 		config: {},
 		event(e) {
-			if (e.target.classList.contains('xui_page')) {
-				let dir = e.deltaY > 0 ? '1' : '-1';
-				this.move(e, dir);
+      let tar = this.getParentEle(e);
+			if (tar.classList.contains('xui_page')) {
+        let dir = e.deltaY > 0 ? '1' : '-1';
+				this.move(tar, dir);
 			};
-		},
-		move(e, direction) {
-			let tar = e.target,
-				sty = tar.style,
+    },
+    getParentEle(e){
+      let child = e.target;
+      let i = 0;
+      while(!child.classList.contains('xui_page')){
+        i++;
+        child = child.parentElement;
+        if(i++ > 10){
+          return false;
+        }
+      };
+      return child;
+    },
+		move(tar, direction) {
+			let	sty = tar.style,
 				prevEle = tar.previousElementSibling,
 				prev = prevEle && prevEle.style,
 				nextEle = tar.nextElementSibling,
@@ -188,7 +200,7 @@
 					ele[i].style.transform = `translate${dir}(100%)`;
 				};
 			};
-			w.onwheel = (e) => {
+			tar.onwheel = (e) => {
 				this.event(e);
 			};
 			if (this.isMobile()) {
@@ -207,13 +219,14 @@
 						diffY = endY - startY;
 					let dis = this.config.distance;
 					let diff = this.config.direction == 'X' ? diffX : diffY;
-					let dir = 0;
+          let dir = 0;
+          let tar = this.getParentEle(e);
 					if (diff > Math.abs(dis)) {
 						dir = -1;
-						this.move(e, dir);
+						this.move(tar, dir);
 					} else if (diff < -dis) {
 						dir = 1;
-						this.move(e, dir);
+						this.move(tar, dir);
 					};
 				});
 			};
