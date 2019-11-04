@@ -4,9 +4,9 @@
 }
 
 html {
-    background-color: beige;
-    font-size: 16px;
-    font-family: Consolas,"Liberation Mono",Menlo,Courier,monospace;
+	background-color: beige;
+	font-size: 16px;
+	font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
 
 body {
@@ -39,19 +39,19 @@ a {
 	animation: .2s toToDown linear;
 	-webkit-animation: .2s toToDown linear;
 }
-h3{
-  margin: 20px 0;
-  font-size: 40px;
-  font-weight: bold;
+h3 {
+	margin: 20px 0;
+	font-size: 40px;
+	font-weight: bold;
 }
 
-ol li{
-  margin: 6px 0;
-  line-height: 24px;
+ol li {
+	margin: 6px 0;
+	line-height: 24px;
 }
 
-a{
-  color: #fff;
+a {
+	color: #fff;
 }
 
 /* loading */
@@ -374,64 +374,67 @@ a{
 	bottom: 0;
 }
 
-code{
-  padding: .15em;
-  margin: 0;
-  font-size: .85em;
-  background-color: #3474d8;
-  /* background-color: #4eb900; */
-  font-family: Consolas,"Liberation Mono",Menlo,Courier,monospace;
+code {
+	padding: .15em;
+	margin: 0;
+	font-size: .85em;
+	background-color: #3474d8;
+	font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
 
-.worklist{
-  max-width: 1000px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.worklist {
+	max-width: 1000px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }
 
-.worklist > div{
-  width: 45%;
-  margin-bottom: 20px;
+.worklist > div {
+	width: 45%;
+	margin-bottom: 20px;
 }
-.worklist > div label{
-  margin-left: -35px;
-  margin-bottom: 10px;
-  display: inline-block;
-  font-weight: bold;
-  font-size: 24px;
+.worklist > div label {
+	margin-left: -35px;
+	margin-bottom: 10px;
+	display: inline-block;
+	font-weight: bold;
+	font-size: 24px;
+}
+
+.worklist ol {
+	font-size: 1rem;
 }
 
 .item {
-    width: 30rem;
-    height: 5.3rem;
-    line-height: 3.5rem;
-    text-indent: 15rem;
-    color: rgb(136, 133, 133);
-    font-weight: bold;
-    margin: 0 auto;
+	width: 30rem;
+	height: 5.3rem;
+	line-height: 3.5rem;
+	text-indent: 15rem;
+	color: rgb(136, 133, 133);
+	font-weight: bold;
+	margin: 0 auto;
 }
 
 .item.item01 {
-    background: url('../images/item01.png') no-repeat center center;
-    background-size: contain;
+	background: url('../images/item01.png') no-repeat center center;
+	background-size: contain;
 }
 
 .item.item02 {
-    text-indent: 8rem;
-    background: url('../images/item02.png') no-repeat center center;
-    background-size: contain;
+	text-indent: 8rem;
+	background: url('../images/item02.png') no-repeat center center;
+	background-size: contain;
 }
 
 .item.item03 {
-    background: url('../images/item03.png') no-repeat center center;
-    background-size: contain;
+	background: url('../images/item03.png') no-repeat center center;
+	background-size: contain;
 }
 
 .item.item04 {
-    text-indent: 8rem;
-    background: url('../images/item04.png') no-repeat center center;
-    background-size: contain;
+	text-indent: 8rem;
+	background: url('../images/item04.png') no-repeat center center;
+	background-size: contain;
 }
 
 .big-font {
@@ -441,7 +444,7 @@ code{
 }
 
 .progress {
-	width: 30rem;
+	width: 25%;
 	margin: 1rem auto;
 }
 
@@ -522,4 +525,29 @@ code{
 	margin: 0 auto;
 	line-height: 1.5em;
 	text-align: center;
+}
+
+@media screen and (max-width: 750px) {
+	.worklist > div label {
+		margin-left: 5px;
+		margin-bottom: 0px;
+		font-size: 1.2rem;
+	}
+	.worklist ol {
+		font-size: 1rem;
+		padding-left: 2rem;
+	}
+	.progress {
+		width: 80%;
+		margin: .3rem 0;
+	}
+	.progress p {
+		font-size: 1rem;
+		margin: 0;
+	}
+	.tips,
+	.future {
+		width: 80%;
+		font-size: 1rem;
+	}
 }
