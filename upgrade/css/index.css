@@ -483,7 +483,7 @@ code {
 	transition: 1.2s ease-in;
 }
 
-.progress-bar .progress-color01 {
+.progress-bar div.progress-color01 {
 	width: 70%;
 	background-color: green;
 }
