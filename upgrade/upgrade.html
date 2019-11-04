@@ -14,7 +14,6 @@
 	<link rel="stylesheet" type="text/css" href="./css/index.css">
 	<link rel="shortcut icon" type="image/x-icon" href="./images/favicon-icon.ico" media="screen" />
 	<script src="https://cdn.bootcss.com/babel-polyfill/7.6.0/polyfill.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 </head>
 
 <body>
@@ -176,8 +175,8 @@
 		</div>
 
 	</div>
-	<script type="text/babel" src="./js/index.js"></script>
-	<script type="text/babel">
+	<script type="text/javascript" src="./js/index.js"></script>
+	<script type="text/javascript">
 		window.loading(true);
 		window.onload = function () {
 			window.fullPage({
@@ -192,12 +191,9 @@
 				target: 'time',
 				nodeName: 'b'
 			});
-			setTimeout(function () {
+			setTimeout(() => {
 				window.loading(false);
-			}, 1000)
-			// setTimeout(() => {
-			// 	window.loading(false);
-			// }, 1000);
+			}, 1000);
 		};
 	</script>
 </body>
