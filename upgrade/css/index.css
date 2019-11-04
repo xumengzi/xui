@@ -7,6 +7,7 @@ html {
 	background-color: beige;
 	font-size: 16px;
 	font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+	cursor: url('https://xumeng.ink/others/xu_icon_40.ico'), pointer;
 }
 
 body {
@@ -18,7 +19,7 @@ body {
 
 a {
 	color: skyblue;
-	text-decoration: none;
+	/* text-decoration: none; */
 }
 .xui_loading > div {
 	width: 3em;
@@ -50,9 +51,9 @@ ol li {
 	line-height: 24px;
 }
 
-a {
+/* a {
 	color: #fff;
-}
+} */
 
 /* loading */
 .xui_loading {
@@ -438,9 +439,15 @@ code {
 }
 
 .big-font {
-	font-size: 4rem;
+	font-family: Geneva, sans-serif;
+	font-size: 3.5rem;
 	margin: 40px 0;
-	text-shadow: -0.06em 0 red, 0.06em 0 cyan;
+	color: hsla(0, 0%, 0%, 0);
+	perspective: 5rem;
+	outline: none;
+	display: inline-block;
+	text-shadow: #bbb 0 0 1px, #fff 0 -1px 2px, #fff 0 -3px 2px, rgba(0, 0, 0, 0.8) 0 30px 25px;
+	transition: margin-left 0.3s cubic-bezier(0, 1, 0, 1);
 }
 
 .progress {
@@ -526,7 +533,25 @@ code {
 	line-height: 1.5em;
 	text-align: center;
 }
+.amazingfont {
+	width: 8ch;
+	font: 200% monospace;
+	border-right: 0.8rem solid;
+	white-space: nowrap;
+	overflow: hidden;
+	animation: typing 3s steps(4, end) 1s, blink-caret .5s step-end infinite alternate 1s;
+}
 
+@keyframes typing {
+	from {
+		width: 0;
+	}
+}
+@keyframes blink-caret {
+	50% {
+		border-color: transparent;
+	}
+}
 @media screen and (max-width: 750px) {
 	.worklist > div label {
 		margin-left: 5px;
