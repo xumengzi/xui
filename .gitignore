@@ -14,6 +14,7 @@ node_modules
 xui-vue
 xui-react
 love
+upgrade
 .eslintrc.js
 _config.yml
 .github

@@ -10,6 +10,15 @@
 
 >修订版本号：每周末（看心情）会进行日常`bugfix`更新
 
+###v2.7.2  <span style="font-size: 16px;">2019/08/24</span>
+##### Bugfix：
+1. 修复[全屏滚动插件](../plugins/fullPage.md), 鼠标处在特定位置才能滚动的bug, 快去看看吧
+
+##### Improvements:
+1. 格式化`assets`里面的代码, 保证代码风格一致性
+
+>是否兼容现有代码：是
+
 ###v2.7.1  <span style="font-size: 16px;">2019/07/14</span>
 ##### Add:
 1. 增加[趣味游戏](../collection/games.md), 快去看看吧
