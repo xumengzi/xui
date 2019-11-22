@@ -2410,3 +2410,146 @@ here is a pullLoad plugin
   };
   Object.getPrototypeOf(xui).digitalscroll = digitalScroll;
 })(window);
+
+; (function (w) {
+  class selected {
+    constructor() {
+      this.version = '1.1.1';
+      this.args = {
+        searchEngine: ['bing'],
+        newTab: false,
+        background: '#fff',
+        zIndex: 9999,
+      }
+    }
+    event() {
+      var that = this;
+      var args = that.args;
+      var tar = document.querySelectorAll(".selectedSearch");
+      tar = Array.prototype.slice.call(tar);
+      for (var i = 0; i < tar.length; i++) {
+        tar[i].addEventListener("mouseover", function (e, i) {
+          if (e.target.classList[0] == 'selectedSearch') {
+            e.target.style.background = '#f5f5f5';
+          }
+          ;
+        });
+        tar[i].addEventListener("mouseout", function (e) {
+          if (e.target.classList[0] == 'selectedSearch') {
+            e.target.style.background = '#fff';
+          }
+          ;
+        });
+        tar[i].addEventListener("click", function (e) {
+          var o = e.target.attributes, engine = '', txt = '';
+          o = [].slice.call(o);
+          for (var i in o) {
+            if (o[i].name == '_engine') {
+              engine = o[i].value;
+            }
+            ;
+            if (o[i].name == 'title') {
+              txt = o[i].value;
+            }
+            ;
+          }
+          ;
+          var urlArr = that.para;
+          engine = that.searchArr(engine);
+          engine = engine + encodeURI(txt);
+          if (args.newTab) {
+            location.href = engine;
+          }
+          else {
+            window.open(engine);
+          }
+          that.reSet();
+        });
+      }
+      ;
+      window.onscroll = function () {
+        that.reSet();
+      };
+    }
+    searchArr(e) {
+      e = e || event;
+      e = e.toLowerCase();
+      var url = {
+        google: "http://www.google.com/search?hl=zh-CN&q=",
+        baidu: "http://www.baidu.com/s?wd=",
+        bing: "http://cn.bing.com/search?q=",
+        yahoo: "https://us.search.yahoo.com/search?p=",
+        sougou: "http://www.sogou.com/sogou?query="
+      };
+      for (var i in url) {
+        if (url.hasOwnProperty(i) && i == e) {
+          e = url[i];
+        };
+      };
+      return e;
+    }
+    set(args) {
+      if (Object.assign) {
+        this.args = Object.assign({}, this.args, args);
+      }
+      else {
+        this.args = JSON.parse(JSON.stringify(args));
+      }
+      this.mouseUp();
+    }
+    mouseUp() {
+      var that = this;
+      var args = that.args;
+      var target = document.getElementsByTagName("body")[0];
+      target.addEventListener("mouseup", function (e) {
+        var tar = e.target;
+        var text = null;
+        var x = e.pageX;
+        var y = e.pageY;
+        if (window.getSelection()) {
+          text = window.getSelection();
+          if (text.toString().length > 0) {
+            that.reSet();
+            var searchEngine = args.searchEngine, list = "";
+            for (var i in searchEngine) {
+              var s = searchEngine[i];
+              if (searchEngine.hasOwnProperty(i)){
+                (s != "") && (list += "<div class='selectedSearch' _engine=" + s + " title='" + text + "'>使用" + s + "搜索&nbsp;&nbsp;" + (text.toString().substr(0, 10)) + "</div>");
+              }
+            };
+            var selectdiv = document.createElement("div");
+            selectdiv.classList.add('selected_div');
+            selectdiv.innerHTML = list;
+            document.querySelector("body").appendChild(selectdiv);
+            // add styles
+            if (!document.getElementsByClassName("selected_div")) {
+              return;
+            };
+            var ele = document.getElementsByClassName("selected_div")[0];
+            for (var i = 0; i < ele.childNodes.length; i++) {
+              ele.childNodes[i].style.cssText += 'margin: 4px;padding: 4px;cursor: pointer;';
+            };
+            var cssStr = 'position: absolute;left: ' + x + 'px;top: ' + y + 'px;color: ' + args.color + ';background: ' + args.background + ';' +
+              'border: 1px #ccc solid;border-radius: 4px;font-size: 13px;box-shadow: 0 1px 1px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.15), 0 8px 8px rgba(0,0,0,0.15);z-index: ' + args.zIndex + '';
+            ele.style.cssText += cssStr;
+            that.init();
+          }
+          else {
+            if (tar.parentNode.classList[0] !== 'selected_div' && tar.parentNode.classList[0] !== 'selectedSearch') {
+              that.reSet();
+            };
+          };
+        };
+      });
+    }
+    reSet() {
+      var ele = document.getElementsByClassName("selected_div")[0];
+      //remove already exsits
+      ele && document.body.removeChild(ele);
+    }
+    init() {
+      this.event();
+    }
+  };
+  Object.getPrototypeOf(xui).selected = selected;
+})(window);

@@ -1,0 +1,137 @@
+<html>
+  <head>
+    <title>window对象上的属性和值</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../assets/xui.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../others/xu_icon_40.ico" media="screen" />
+    <style>
+        .window{
+          width: 800px;
+          margin: 50px auto;
+          font-family: consolas;
+          font-size: 18px;
+          position: relative;
+        }
+        .window::before,.window::after{
+          display: inline-block;
+          position: absolute;
+          top: -30px;
+          left: 50%;
+          transition: all .3s ease-out;
+        }
+        .window::before{
+          content: attr(data-prev);
+          transform: translateX(-100%);
+        }
+        .window::after{
+          content: attr(data-next);
+          transform: translateX(100%);
+        }
+        .window:hover::before{
+          transform: translateX(-50%);
+        }
+        .window:hover::after{
+          transform: translateX(50%);
+        }
+        .window .window-item{
+          position: relative;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: 6px;
+          padding: 8px;
+          transition: all .4s ease-out;
+          cursor: pointer;
+        }
+        .window .window-item.checked{
+          opacity: .6;
+        }
+        .window .window-item.checked::after{
+          content: '√';
+          position: absolute;
+          top: 50%;
+          right: 1%;
+          transform: translateY(-50%);
+          color: green;
+        }
+        .window .window-item:hover{
+          transform: scale(1.1) translateY(-10px);
+          box-shadow: 0 1px 1px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.15), 0 8px 8px rgba(0,0,0,0.15);
+        }
+        .window-item label{
+          flex: 1;
+        }
+        .window-item span{
+          flex: 1;
+        }
+        .window-item span.xui_checkbox_box{
+          width: 100px;
+          flex: initial;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="window" data-prev="win" data-next="dow"></div>
+    <script type="text/javascript" src="../assets/xui.js"></script>
+    <script>
+      var arr = [];
+      var localArr = localStorage.getItem('localArr').split(',') || [];
+      let res = document.createElement('div');
+      for (let i in window) {
+        if (window.hasOwnProperty(i)) {
+          let z = window[i]
+          let div = document.createElement('div');
+          div.classList.add('window-item');
+          if(localArr.includes(i)){
+            div.classList.add('checked');
+          }
+          div.innerHTML = `
+            <span class="xui_checkbox_box" data-attr="${i}">打卡</span>
+            <label>${i}</label><span>${z}</span>
+          `;
+          res.appendChild(div)
+        };
+        document.querySelector('.window').appendChild(res);
+      };
+      document.querySelector('.window').addEventListener('click', function(e){
+        let tar = e.target;
+        if(tar.className.includes('xui_checkbox_box')){
+          if(tar.parentElement.className.includes('checked')){
+            return;
+          }
+          xui.prompt({
+            tips: 'Title',
+            text: 'some comments',
+            isShowClose: true,
+            confirmBtn: {
+              text: 'ok',
+              fn() {
+                tar.parentElement.classList.add('checked');
+                let attr = tar.getAttribute('data-attr');
+                setData(attr);
+              }
+            },
+            cancelBtn: {
+              text: 'cancel',
+              fn() {
+                xui.message('加油哦!');
+              }
+            },
+          });
+        }
+      })
+      function setData(val){
+        if(!localArr.includes(val)){
+          localArr.push(val);
+          localStorage.setItem('localArr', localArr);
+        }
+      }
+      new xui.selected().set({
+        searchEngine: ['bing', 'google'],
+        newTab: false,
+        background: '#fff',
+        zIndex: 9999,
+      });
+    </script>
+  </body>
+</html>
