@@ -10,6 +10,12 @@
 
 >修订版本号：每周末（看心情）会进行日常`bugfix`更新
 
+###v2.8.2  <span style="font-size: 16px;">2019/09/29</span>
+##### Add:
+1. 增加[window对象](../collection/window.md)描述, 快去看看吧
+
+>是否兼容现有代码：是
+
 ###v2.7.2  <span style="font-size: 16px;">2019/08/24</span>
 ##### Bugfix：
 1. 修复[全屏滚动插件](../plugins/fullPage.md), 鼠标处在特定位置才能滚动的bug, 快去看看吧

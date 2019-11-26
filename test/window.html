@@ -4,14 +4,22 @@
   <title>window对象上的属性和值</title>
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="../assets/xui.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <link rel="shortcut icon" type="image/x-icon" href="../others/xu_icon_40.ico" media="screen" />
   <style>
     .window {
-      width: 800px;
+      max-width: 800px;
       margin: 50px auto;
       font-family: consolas;
       font-size: 18px;
       position: relative;
+    }
+    .window .window-status{
+      margin: 10px 0;
+    }
+    .window .window-status span{
+      font-weight: bold;
+      color: indigo;
     }
 
     .window::before,
@@ -48,12 +56,37 @@
       align-items: center;
       margin: 6px;
       padding: 8px;
+      border: 1px #ccc solid;
+      background-color: #fff;
+      border-radius: 4px;
       transition: all .4s ease-out;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
       cursor: pointer;
+    }
+    .window .window-item::before{
+      content: '';
+      position: absolute;
+      width: 58%;
+      height: 6px;
+      left: 20%;
+      top: -7px;
+      border: 1px #393838 solid;
+      z-index: -1;
+      border-color: transparent #333 transparent #333;
+    }
+    .window .window-item:first-child:before{
+      display: none;
+    }
+    .window .window-item:nth-child(n){
+      transform: skewX(10deg);
+    }
+    .window .window-item:nth-child(2n){
+      transform: skewX(-10deg);
     }
 
     .window .window-item.checked {
-      opacity: .6;
+      opacity: .8;
+      border-color: green;
     }
 
     .window .window-item.checked::after {
@@ -66,8 +99,10 @@
     }
 
     .window .window-item:hover {
-      transform: scale(1.1) translateY(-10px);
-      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 2px 2px rgba(0, 0, 0, 0.15), 0 4px 4px rgba(0, 0, 0, 0.15), 0 8px 8px rgba(0, 0, 0, 0.15);
+      /* transform: scale(1.1) translateY(-10px); */
+      transform: skewX(0);
+      box-shadow: none;
+      /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 2px 2px rgba(0, 0, 0, 0.15), 0 4px 4px rgba(0, 0, 0, 0.15), 0 8px 8px rgba(0, 0, 0, 0.15); */
     }
 
     .window-item label {
@@ -86,31 +121,42 @@
 </head>
 
 <body>
-  <div class="window" data-prev="win" data-next="dow"></div>
+  <div class="window" data-prev="win" data-next="dow">
+    <div class="window-status">
+      window上总共有<span class="allTotal">--</span>个属性(不包括原型),
+      学会了<span class="alreadyCount">--</span>个 (如果有乱七八糟的属性, 那可能是你加的)
+    </div>
+  </div>
   <script type="text/javascript" src="../assets/xui.js"></script>
   <script>
     var arr = [];
     var str = localStorage.getItem('localArr');
-    var localArr = []
+    var localArr = [];
+    var exincludeArr = ['xui', 'arr', 'str', 'localArr', 'setData', 'NUM', 'res', 'exincludeArr', 'xuiVersion', 'dataLayer'];
     if (str) {
       localArr = str.split(',')
     }
 
     let res = document.createElement('div');
+    let NUM = 0;
     for (let i in window) {
-      if (window.hasOwnProperty(i)) {
+      if (window.hasOwnProperty(i) && !exincludeArr.includes(i)) {
         let z = window[i]
         let div = document.createElement('div');
         div.classList.add('window-item');
         if (localArr.includes(i)) {
           div.classList.add('checked');
-        }
+        };
+        NUM++;
+        div.setAttribute('title', '这是啥? 复制了去看看');
         div.innerHTML = `
             <span class="xui_checkbox_box" data-attr="${i}">打卡</span>
             <label>${i}</label><span>${z}</span>
           `;
         res.appendChild(div)
       };
+      document.querySelector('.allTotal').innerHTML = NUM;
+      document.querySelector('.alreadyCount').innerHTML = localArr.length || 0;
       document.querySelector('.window').appendChild(res);
     };
     document.querySelector('.window').addEventListener('click', function (e) {
@@ -120,11 +166,11 @@
           return;
         }
         xui.prompt({
-          tips: 'Title',
-          text: 'some comments',
+          tips: '提示',
+          text: '学会了吗?',
           isShowClose: true,
           confirmBtn: {
-            text: 'ok',
+            text: 'YES',
             fn() {
               tar.parentElement.classList.add('checked');
               let attr = tar.getAttribute('data-attr');
@@ -132,7 +178,7 @@
             }
           },
           cancelBtn: {
-            text: 'cancel',
+            text: 'NO',
             fn() {
               xui.message('加油哦!');
             }
@@ -145,6 +191,7 @@
       if (!localArr.includes(val)) {
         localArr.push(val);
         localStorage.setItem('localArr', localArr);
+        document.querySelector('.alreadyCount').innerHTML = localArr.length || 0;
       }
     }
     new xui.selected().set({
