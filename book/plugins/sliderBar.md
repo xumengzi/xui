@@ -60,7 +60,7 @@ slider.setCurrentValue(cur, total);
 * `dragEnd`表示滑块结束滑动的回调,返回当前选择的数值(包括单位)
 * `getCurrentvalue`实例上的方法，返回当前选择的值
 * `setCurrentValue`实例上的方法, 设置当前滑动选择框的值，需要传入当前设置的值和总值
-* 没有你想要的功能? 快联系我: `me@xumeng.site`添加吧
+* 没有你想要的功能? 快联系我: `xumeng0611@gmail.com`添加吧
 
 ### 效果展示
 

@@ -6,7 +6,7 @@
 
 ##### 个人项目,如有问题还请指出,不胜感激.
 ##### 欢迎不吝赐教
-###### 联系我: *me@xumeng.site*
+###### 联系我: *xumeng0611@gmail.com*
 
 ```js
 How many codes must a man edit before you call him a master?

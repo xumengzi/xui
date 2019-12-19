@@ -11,7 +11,7 @@ xui.copyToClipBoard(string, tips)
 ```
 * `string`表示需要复制的文案,传入文案即可完成复制,**必传**
 * `tips`表示复制成功后显示的文案, 默认提示信息为`复制成功`
-* 没有你想要的功能? 快联系我: `me@xumeng.site`添加吧
+* 没有你想要的功能? 快联系我: `xumeng0611@gmail.com`添加吧
 
 >说明: 复制采用的是`document.execCommand`,对于这个`api`是存在兼容性的. [详情请戳caniuse](https://caniuse.com/#search=execCommand)
 

@@ -28,7 +28,7 @@ new xui.digital({
 * `interval`表示数字改变的间隔,单位ms
 * `fn`表示数字改变的回调,返回当前的数字
 * `fnComplete`表示数字最终值的回调,返回最终值
-* 没有你想要的功能? 快联系我: `me@xumeng.site`添加吧
+* 没有你想要的功能? 快联系我: `xumeng0611@gmail.com`添加吧
 
 ### 效果展示
 

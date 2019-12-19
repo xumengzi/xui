@@ -32,7 +32,7 @@ tt.getCurrentValue();
 * `id`表示下拉框的`id` **必传**
 * `isSearch`表示是否显示模糊搜索框
 * `placeHolder`表示搜索框的`placeholder`文案
-* 没有你想要的功能? 快联系我: `me@xumeng.site`添加吧
+* 没有你想要的功能? 快联系我: `xumeng0611@gmail.com`添加吧
 
 ### 效果展示
 

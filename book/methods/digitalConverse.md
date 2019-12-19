@@ -12,7 +12,7 @@ xui.digConverse(number, dicimal);
 * `number`表示需要进行的数字 **必须**
 * `dicimal`表示需要对数字进行转换的进制, 默认为二进制
 * 目前支持十进制转换为二进制, 八进制, 后续会添加更多功能
-* 没有你想要的功能? 快联系我: `me@xumeng.site`添加吧
+* 没有你想要的功能? 快联系我: `xumeng0611@gmail.com`添加吧
 
 1.试着写写看
 <div class="xui_item">

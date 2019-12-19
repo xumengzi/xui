@@ -17,7 +17,7 @@ loading(boolean, string, string1);
 * `boolean`表示是否显示`loading`,不传或者传`false`,表示删除`loading` **必传**
 * `string`表示`loading`显示在这个里面, 也不是全屏`loading`, 默认全屏
 * `string1`表示`loading`旁边显示的文案
-* 没有你想要的功能? 快联系我: `me@xumeng.site`添加吧
+* 没有你想要的功能? 快联系我: `xumeng0611@gmail.com`添加吧
 
 
 ### 效果展示

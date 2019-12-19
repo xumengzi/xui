@@ -32,7 +32,7 @@ var load = new xui.pullLoad({
 * `maxScrollHeight`表示允许下拉的最大高度
 * `activeScrollHeight`表示触发回调的最大高度, 不大于`maxScrollHeight`
 * `fn`表示回调, 可以在这里去异步请求数据, 然后调用`ished方法`
-* 没有你想要的功能? 快联系我: `me@xumeng.site`添加吧
+* 没有你想要的功能? 快联系我: `xumeng0611@gmail.com`添加吧
 
 ### 效果展示
 

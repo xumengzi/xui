@@ -54,7 +54,7 @@ test.setCurrentDate(1556193739382);
 * `<span class="xui_close_small" data-date=""></span>`表示鼠标`hover`显示一个清空选择的值,当然不加上去也不会报错
 * `getCurrentDate`实例上的方法，用来获取当前选择的日期
 * `setCurrentDate`实例上的方法，用来设置日历的展示值，支持`yyyy-mm-dd`, `yyyy/mm/dd`, `1556100117317`
-* 没有你想要的功能? 快联系我: `me@xumeng.site`添加吧
+* 没有你想要的功能? 快联系我: `xumeng0611@gmail.com`添加吧
 
 ### 效果展示
 
