@@ -7,5 +7,8 @@
 			"xui-vue" : "https://xumengzi.github.io/xui-vue/book/index.html#/",
 			"xui-react": "https://xumengzi.github.io/xui-react/build/index"
 	    }
-	}
+  },
+  "plugins": [
+    "code"
+  ]
 }
