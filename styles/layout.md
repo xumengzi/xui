@@ -57,7 +57,7 @@
 ...
 ```
 
-2.均分布局, 同时需要子元素有一定的间距. PS: 最后一个元素没有边距
+2.均分布局, 同时需要子元素有一定的间距. `PS`: 最后一个元素没有边距
 <div class="content">
 	<div class="xui-flex">
 		<div class="xui-flex xui-col-1">100%</div>
@@ -89,7 +89,7 @@
 ...
 ```
 
-3.均分布局, 子元素至上而下排列,同时需要子元素有一定的间距. PS: 最后一个元素没有边距
+3.均分布局, 子元素至上而下排列,同时需要子元素有一定的间距. `PS`: 最后一个元素没有边距
 <div class="content">
 	<div class="xui-flex">
 		<div class="xui-flex xui-col-1">100%</div>

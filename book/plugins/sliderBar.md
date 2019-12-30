@@ -50,11 +50,11 @@ slider.setCurrentValue(cur, total);
 ```
 * 复制好`html`,取一个`id`,然后在你需要用户去加减等操作的地方初始化吧
 * `id`表示数字框的`id` **必传**
-* `max`表示最大值,默认值为100
-* `currentVal`表示默认显示的数字或进度,范围为0-1,默认值为.5
+* `max`表示最大值,默认值为`100`
+* `currentVal`表示默认显示的数字或进度,范围为`0-1`,默认值为`.5`
 * `initVal`表示默认展示的数字
 * `unit`表示显示的数字单位,默认值为空
-* `precision`表示数字精度,默认值为0
+* `precision`表示数字精度,默认值为`0`
 * `disabled`表示是否禁止掉滑动输入框，禁止的`style`是`xui_slider_disabled`
 * `dragMove`表示滑块滑动的回调,返回当前选择的数值(包括单位)
 * `dragEnd`表示滑块结束滑动的回调,返回当前选择的数值(包括单位)

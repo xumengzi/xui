@@ -16,8 +16,8 @@ new xui.lazyLoad({
 });
 ```
 * `id`表示lazyLoad的容器 **必传**
-* `loadingImg`表示图片加载的loading效果, 传入图片的url即可, 默认值为菊花loading图
-* `errorImg`表示图片加载失败的时候显示的图片, 默认值为一张404图片
+* `loadingImg`表示图片加载的`loading`效果, 传入图片的`url`即可, 默认值为菊花`loading`图
+* `errorImg`表示图片加载失败的时候显示的图片, 默认值为一张`404`图片
 * `hrefTarget`表示点击图片的跳转链接(如果有), 默认值为当前页面
 * `list`表示需要加载的图片资源, 数组格式(支持单纯的数组, 对象形式的数组) **必传**
 * 没有你想要的功能? 快联系我: `xumeng0611@gmail.com`添加吧

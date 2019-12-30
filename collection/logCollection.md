@@ -19,9 +19,9 @@
 });
 ```
 * `src`表示日志上报的链接 **必传**
-* `isShowError`表示是否屏蔽错误信息, 默认值为false, 表示显示错误信息
-* `isSubStr`表示是否截取上报信息的长度, 默认超过2000字符截取
-* `collectPercent`表示日志是否全部上传, 默认全部, 可以配置0-1, 表示只收集部分错误信息
+* `isShowError`表示是否屏蔽错误信息, 默认值为`false`, 表示显示错误信息
+* `isSubStr`表示是否截取上报信息的长度, 默认超过`2000`字符截取
+* `collectPercent`表示日志是否全部上传, 默认全部, 可以配置`0-1`, 表示只收集部分错误信息
 * `tips` 可以打开控制台,看到目前上报的错误信息日志, 如`https://xumeng.site/?data=xxx`
 * [`window.performance`](http://www.alloyteam.com/2015/09/explore-performance/comment-page-1/)，通过这个可以获取到`DNS`解析，`js`内存，请求资源等（可以知道页面性能）
 

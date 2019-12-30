@@ -10,7 +10,7 @@
 xui.message(string, time, callback);
 ```
 * `string`表示提示信息的文案 **必传**
-* `time`表示提示信息显示的时间,默认是1000ms
+* `time`表示提示信息显示的时间,默认是`1000ms`
 * `callback`表示提示信息消失后的回调
 * 没有你想要的功能? 快联系我: `xumeng0611@gmail.com`添加吧
 

@@ -28,7 +28,7 @@ var load = new xui.pullLoad({
 });
 ```
 * `id`表示下拉加载容器,**必传**
-* `loading`表示容器下拉后, loading的文案, 支持文字和图片
+* `loading`表示容器下拉后, `loading`的文案, 支持文字和图片
 * `maxScrollHeight`表示允许下拉的最大高度
 * `activeScrollHeight`表示触发回调的最大高度, 不大于`maxScrollHeight`
 * `fn`表示回调, 可以在这里去异步请求数据, 然后调用`ished方法`
