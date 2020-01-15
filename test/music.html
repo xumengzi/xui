@@ -265,7 +265,7 @@
 			}
 			getLyc();
 
-			source.addEventListener('durationchange', function(){
+			source.addEventListener('loadstart', function(){
 				xui.loading(true, '.content');
 				console.log('loadstart')
 			});
