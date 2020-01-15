@@ -227,7 +227,7 @@
 			let content = document.querySelector('.lyrics');
 			let btn = document.querySelector('.music-btn');
 			let source = document.querySelector('.music-source');
-			source.src = "../resources/dreamItPossible.flac";
+			source.src = "../resources/dreamItPossible.mp3";
 			
 			// 设置下雪效果
 			xui.snowFlake({
@@ -264,21 +264,12 @@
 				});
 			}
 			getLyc();
-			source.addEventListener('loadstart', function(){
+
+			source.addEventListener('durationchange', function(){
 				xui.loading(true, '.content');
 				console.log('loadstart')
 			});
-			source.addEventListener('progress', function () {
-				console.log('progress')
-			});
-			source.addEventListener('error', function () {
-				console.log('error')
-				xui.message('资源加载失败, 请重试!');
-			});
-			// 歌曲加载完毕
-			source.addEventListener('loadeddata ', function(){
-				console.log('loadeddata ')
-				xui.loading(false);
+			source.addEventListener('durationchange', function(){
 				// 加载进度条
 				let totalTime = Math.round(source.duration);
 				let progress = new xui.sliderBar({
@@ -347,6 +338,22 @@
 						par.classList.add('paused');
 					}
 				});
+			});
+			source.addEventListener('progress', function () {
+				console.log('progress')
+			});
+			source.addEventListener('error', function () {
+				console.log('error')
+				xui.message('资源加载失败, 请重试!');
+			});
+			source.addEventListener('loadeddata', function () {
+				console.log('loadeddata')
+				xui.loading(false);
+			});
+			// 歌曲加载完毕
+			source.addEventListener('canplay', function(){
+				console.log('canplay')
+				xui.loading(false);
 			});
 		}
 	</script>
