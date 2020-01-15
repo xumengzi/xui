@@ -225,24 +225,27 @@
 		window.onload = function(){
 			// 获取歌词列表
 			let divs;
+			// 获取资源dom
 			let content = document.querySelector('.lyrics');
-			// 获取资源
 			let btn = document.querySelector('.music-btn');
 			let source = document.querySelector('.music-source');
-			if(!source){
-				xui.message('资源未加载, 请重试!');
-				return;
-			};
+			// 设置下雪效果
+			xui.snowFlake({
+				id: 'snow',
+				direction: 'left',
+			});
+
+			// 获取歌词
 			const getLyc = () => {
 				xui.ajax({
 					url: '../resources/lyc.text',
 					type: 'get',
 				}).then(res => {
 					res = res.split('\n')
-					for(let i in res){
-						if(res.hasOwnProperty(i)){
+					for (let i in res) {
+						if (res.hasOwnProperty(i)) {
 							let z = res[i].split(']');
-							let n = res[i-0+1] ? res[i-0+1].split(']') : [''];
+							let n = res[i - 0 + 1] ? res[i - 0 + 1].split(']') : [''];
 							let ele = document.createElement('div')
 							ele.innerHTML = z[1];
 							let reg = /(\d{2}): (\d{2})\.(\d{2})/;
@@ -262,78 +265,86 @@
 			}
 			getLyc();
 
-			// 设置下雪效果
-			xui.snowFlake({
-				id: 'snow',
-				direction: 'left',
-			})
-
-			// 加载进度条
-			let totalTime = Math.round(source.duration);
-			let progress = new xui.sliderBar({
-				id: 'sliderBar',
-				currentVal: 0,
-				initVal: 0,
-				max: totalTime,
-				dragEnd(val) {
-					setValue(val)
-				}
+			source.addEventListener('loadstart', function(){
+				xui.loading(true, '.content');
 			});
-			// 调整音量
-			let volume = new xui.sliderBar({
-				id: 'sliderBar1',
-				currentVal: 1,
-				initVal: 0,
-				max: 100,
-				dragEnd(val) {
-					val = val / 100;
-					val = val <=0 ? 0 : val;
-					source.volume = val;
-				}
+			source.addEventListener('progress', function () {
 			});
-
-			// 设置播放时间
-			let timer = null;
-			let setValue = (val)=>{
-				let curt = val || source.currentTime
-				// 手动设置时间
-				val && (source.currentTime = val)
-				progress.setCurrentValue(curt, totalTime);
-				// 歌词滚动
-				divs.forEach(item=>{
-					// 减去0.5s好像更精确
-					let curTime = item.getAttribute('data-current')-.5;
-					let nextTime = item.getAttribute('data-next')-.5;
-					item.classList.remove('highlight')
-					//高亮歌词
-					if(curt >= curTime && curt <= nextTime){
-						item.scrollIntoView({behavior: 'smooth'});
-						item.classList.add('highlight');
-					};
+			source.addEventListener('error', function () {
+				xui.message('资源加载失败, 请重试!');
+				return
+			});
+			// 歌曲加载完毕
+			source.addEventListener('loadeddata', function(){
+				xui.loading(false);
+				// 加载进度条
+				let totalTime = Math.round(source.duration);
+				let progress = new xui.sliderBar({
+					id: 'sliderBar',
+					currentVal: 0,
+					initVal: 0,
+					max: totalTime,
+					dragEnd(val) {
+						setValue(val)
+					}
 				});
-				if(curt >= totalTime){
-					clearInterval(timer);
-					btn.parentElement.classList.add('paused');
+				// 调整音量
+				let volume = new xui.sliderBar({
+					id: 'sliderBar1',
+					currentVal: 1,
+					initVal: 0,
+					max: 100,
+					dragEnd(val) {
+						val = val / 100;
+						val = val <= 0 ? 0 : val;
+						source.volume = val;
+					}
+				});
+
+				// 设置播放时间
+				let timer = null;
+				let setValue = (val) => {
+					let curt = val || source.currentTime
+					// 手动设置时间
+					val && (source.currentTime = val)
+					progress.setCurrentValue(curt, totalTime);
+					// 歌词滚动
+					divs.forEach(item => {
+						// 减去0.5s好像更精确
+						let curTime = item.getAttribute('data-current') - .5;
+						let nextTime = item.getAttribute('data-next') - .5;
+						item.classList.remove('highlight')
+						//高亮歌词
+						if (curt >= curTime && curt <= nextTime) {
+							item.scrollIntoView({ behavior: 'smooth' });
+							item.classList.add('highlight');
+						};
+					});
+					if (curt >= totalTime) {
+						clearInterval(timer);
+						btn.parentElement.classList.add('paused');
+					};
 				};
-			};
-			// 设置点击事件等
-			btn.addEventListener('click', function(e){
-				let par = e.target.parentElement;
-				if (!source) {
-					xui.message('资源未加载, 请重试!');
-					return;
-				};
-				if(par.className.includes('paused')){
-					source.play();
-					timer = setInterval(() => {
-						setValue();
-					}, 1000);
-					par.classList.remove('paused');
-				}else{
-					source.pause();
-					clearInterval(timer);
-					par.classList.add('paused');
-				}
+
+				// 设置点击事件等
+				btn.addEventListener('click', function (e) {
+					let par = e.target.parentElement;
+					if (!source) {
+						xui.message('资源未加载, 请重试!');
+						return;
+					};
+					if (par.className.includes('paused')) {
+						source.play();
+						timer = setInterval(() => {
+							setValue();
+						}, 1000);
+						par.classList.remove('paused');
+					} else {
+						source.pause();
+						clearInterval(timer);
+						par.classList.add('paused');
+					}
+				});
 			});
 		}
 	</script>
