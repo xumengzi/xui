@@ -1,0 +1,144 @@
+<html>
+
+<head>
+	<title>tetris</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		.container {
+			position: relative;
+			width: 360px;
+			margin: 0 auto;
+		}
+
+		.content {
+			width: 100%;
+			border: 1px #666 solid;
+		}
+
+		.content>div {
+			display: inline-flex;
+			width: 59px;
+			height: 59px;
+			border-right: 1px #666 solid;
+			border-bottom: 1px #666 solid;
+		}
+
+		.content>div:nth-child(6n) {
+			border-right-color: transparent;
+		}
+
+		.content>div:nth-child(n + 55) {
+			border-bottom-color: transparent;
+		}
+
+		.temp {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 240px;
+			height: 240px;
+			transition: transform .2s ease-in-out;
+		}
+
+		.temp>div {
+			display: inline-flex;
+			width: 60px;
+			height: 60px;
+		}
+
+		.temp>div.high-light {
+			background: #fab;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="content"></div>
+		<div class="temp"></div>
+	</div>
+	<script type="text/javascript">
+		// h-水平方向
+		// v-垂直方向
+		const arrList = {
+			hLong: [
+				[1, 1, 1, 1],
+				[0, 0, 0, 0],
+				[0, 0, 0, 0],
+				[0, 0, 0, 0],
+			],
+			vLong: [
+				[1, 0, 0, 0],
+				[1, 0, 0, 0],
+				[1, 0, 0, 0],
+				[1, 0, 0, 0],
+			],
+			hSmall: [
+				[1, 1, 0, 0],
+				[1, 1, 0, 0],
+				[0, 0, 0, 0],
+				[0, 0, 0, 0],
+			],
+			hTwist: [
+				[1, 1, 0, 0],
+				[0, 1, 1, 0],
+				[0, 0, 0, 0],
+				[0, 0, 0, 0],
+			],
+			vTwist: [
+				[0, 1, 0, 0],
+				[1, 1, 0, 0],
+				[1, 0, 0, 0],
+				[0, 0, 0, 0],
+			],
+			hBend: [
+				[1, 1, 1, 1],
+				[0, 0, 0, 1],
+				[0, 0, 0, 0],
+				[0, 0, 0, 0],
+			],
+			vBend: [
+				[1, 0, 0, 0],
+				[1, 0, 0, 0],
+				[1, 0, 0, 0],
+				[1, 1, 0, 0],
+			],
+		}
+	</script>
+	<script type="text/javascript">
+		const num = 60
+		const renderTable = (e) => {
+			let divs = document.querySelector('.content');
+
+			divs.innerHTML = '';
+			for (let i = 1; i <= num; i++) {
+				let temp = document.createElement('div');
+				divs.appendChild(temp)
+			}
+		};
+		renderTable();
+		const renderTemp = (arr) => {
+			let divs = document.querySelector('.temp');
+			divs.innerHTML = '';
+			arr.forEach(row => {
+				row.forEach(n => {
+					let temp = document.createElement('div');
+					if (n) {
+						temp.classList.add('high-light');
+					}
+					divs.appendChild(temp)
+				})
+			})
+		};
+		const arrs = ['hLong', 'vLong', 'hBend', 'vBend', 'hTwist', 'vTwist', 'hSmall'];
+		renderTemp(arrList['hLong']);
+		let tick = 0;
+		setInterval(e => {
+			tick++;
+			tick = tick > 6 ? 0 : tick;
+			renderTemp(arrList[arrs[tick]]);
+		}, 1000);
+	</script>
+</body>
+
+</html>
