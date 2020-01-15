@@ -276,8 +276,8 @@
 				xui.message('资源加载失败, 请重试!');
 			});
 			// 歌曲加载完毕
-			source.addEventListener('canplay', function(){
-				console.log('canplay')
+			source.addEventListener('loadeddata ', function(){
+				console.log('loadeddata ')
 				xui.loading(false);
 				// 加载进度条
 				let totalTime = Math.round(source.duration);
