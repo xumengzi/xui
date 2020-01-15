@@ -201,9 +201,7 @@
 
 <body>
 	<div class="container">
-		<audio class="music-source" preload="load">
-			<source src="../resources/dreamItPossible.flac" type="audio/flac">
-		</audio>
+		<audio class="music-source" preload="auto"></audio>
 		<div class="content">
 			<div class="description" id="snow">
 				<div class="music-box paused">
@@ -229,6 +227,8 @@
 			let content = document.querySelector('.lyrics');
 			let btn = document.querySelector('.music-btn');
 			let source = document.querySelector('.music-source');
+			source.src = "../resources/dreamItPossible.flac";
+			
 			// 设置下雪效果
 			xui.snowFlake({
 				id: 'snow',
@@ -264,18 +264,20 @@
 				});
 			}
 			getLyc();
-
 			source.addEventListener('loadstart', function(){
 				xui.loading(true, '.content');
+				console.log('loadstart')
 			});
 			source.addEventListener('progress', function () {
+				console.log('progress')
 			});
 			source.addEventListener('error', function () {
+				console.log('error')
 				xui.message('资源加载失败, 请重试!');
-				return
 			});
 			// 歌曲加载完毕
-			source.addEventListener('loadeddata', function(){
+			source.addEventListener('canplay', function(){
+				console.log('canplay')
 				xui.loading(false);
 				// 加载进度条
 				let totalTime = Math.round(source.duration);
