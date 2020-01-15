@@ -18,15 +18,15 @@
 >说明：另外`packages`文件夹里为单个组件，支持`import`，所以更推荐这个
 
 ##### 本项目包含四个模块:
-0.[样式使用](styles/README.md)
+1.[样式使用](styles/README.md)
 
-1.[方法使用](methods/README.md)
+2.[方法使用](methods/README.md)
 
-2.[组件使用](plugins/README.md)
+3.[组件使用](plugins/README.md)
 
-3.[值得收藏](collection/README.md)
+4.[值得收藏](collection/README.md)
 
-4.[更新日志](others/changeLog.md)
+5.[更新日志](others/changeLog.md)
 
 ***
 

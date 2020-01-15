@@ -1770,8 +1770,8 @@ button.xui_btn:disabled{
     content: attr(data-num);
     display: block;
     position: absolute;
-    left: 104%;
-    top: -11px;
+    left: 110%;
+    top: -10px;
     color: #4eb900; 
 }
 .xui_slider_bar .xui_bar {
@@ -1792,7 +1792,7 @@ button.xui_btn:disabled{
 }
 .xui_slider_bar .xui_bar_dot {
     position: absolute;
-    top: 1px;
+    top: 0;
     left: 0;
     transform: translate(-50%, -40%);
     width: 12px;
@@ -1829,7 +1829,7 @@ button.xui_btn:disabled{
     content: '';
     display: block;
     position: absolute;
-    top: -17px;
+    top: -19px;
     left: 1px;
     width: 8px;
     height: 8px;

@@ -8,12 +8,12 @@ import slider from './slider';
 import sliderBar from './sliderBar';
 
 export {
-    calender,
-    collapse,
-    dropDown,
-    lazyLoad,
-    loading,
-    pagination,
-    slider,
-    sliderBar,
+  calender,
+  collapse,
+  dropDown,
+  lazyLoad,
+  loading,
+  pagination,
+  slider,
+  sliderBar,
 }

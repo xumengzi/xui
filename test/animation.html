@@ -6,15 +6,17 @@
   <link rel="stylesheet" type="text/css" href="../assets/xui.css">
 </head>
 <style type="text/css">
-  .container{
+  .container {
     position: relative;
     width: 20px;
     height: 20px;
     overflow: hidden;
   }
-  .container .current_num{
+
+  .container .current_num {
     display: inline-block;
   }
+
   .content {
     position: absolute;
     left: 0;
@@ -25,14 +27,15 @@
     align-items: center;
     transition: transform .3s ease-in-out;
   }
-  .content span{
+
+  .content span {
     display: inline-flex;
     justify-content: center;
     align-items: center;
   }
 </style>
 
-<body>123
+<body>
   <div class="container">
     <span class="current_num"></span>
     <div class="content">
@@ -52,40 +55,20 @@
   <script type="text/javascript" src="../assets/xui.js"></script>
   <script>
     let tar = document.querySelector('.content');
-    let h = tar.offsetHeight;
+    // let h = tar.offsetHeight;
     let NUM = 0;
 
-    const dick = ()=>{
-      // let trs = tar.style.transform;
-      // if(trs){
-      //   NUM = trs.match(/\d+(\.)?\d?/g).join('')-0;
-      //   NUM = 100/11-0 + NUM;
-      //   // console.log(NUM)
-      //   if(NUM > 100){
-      //     NUM = 1;
-      //     tar.style.transform = `translateY(-${0}%)`;
-      //     tar.style.transition = 'none';
-      //   }else{
-      //     tar.style.transform = `translateY(-${NUM}%)`;
-      //     tar.style.transition = 'transform .3s ease-in-out';
-      //   }
-      // }else{
-      //   tar.style.transform = `translateY(-${1*100/10}%)`;
-      //   tar.style.transition = 'transform .3s ease-in-out';
-      // }
-      NUM++;
-      tar.style.transform = `translateY(-${NUM*100/11}%)`;
+    const dick = () => {
+      tar.style.transform = `translateY(-${NUM * 100 / 11}%)`;
       tar.style.transition = 'transform .3s ease-in-out';
-      if(NUM > 9){
-        tar.style.transform = `translateY(-0%)`;
-        tar.style.transition = 'none';
-        NUM = 0;
-      }
     };
+    setTimeout(e => {
+      // dick()
+    }, 0)
     dick();
-    setInterval(() => {
-      dick();
-    }, 500);
+    // setInterval(() => {
+    //   dick();
+    // }, 500);
   </script>
 </body>
 

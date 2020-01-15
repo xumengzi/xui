@@ -8,8 +8,12 @@
 1.关于`readonly`，很眼熟吧，来看看这种情况
 
 <style>
+    .xui_select_readonly[readonly]{
+        pointer-events: none;
+    }
     .xui_select_readonly[readonly] option{
         display: none;
+        outline: none;
     }
 </style>
 
