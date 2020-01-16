@@ -129,6 +129,7 @@
 			height: 300px;
 			margin: 0 auto;
 			padding: 10px;
+			box-sizing: border-box;
 			overflow-y: auto;
 			overflow-x: hidden;
 			transition: all .2s ease-in-out;
@@ -160,10 +161,17 @@
 		@media screen and (max-width: 500px) {
 			.content{
 				width: 100%;
-				height: 95%;
+				height: 100%;
 			}
 			.music-box .music-btn{
 				opacity: 1;
+			}
+			.lyrics{
+				width: 98%;
+				height: 250px;
+			}
+			.lyrics > div.highlight {
+				transform: scale(1.1);
 			}
 		}
 		@keyframes rotate {
@@ -263,7 +271,13 @@
 					console.log(error)
 				});
 			}
-			getLyc();
+			// 本地不去请求歌词
+			const protocol = ['http:', 'https:'];
+			if(protocol.includes(location.protocol)){
+				getLyc();
+			}else{
+				xui.message('本地将不展示歌词!');
+			};
 
 			source.addEventListener('loadstart', function(){
 				xui.loading(true, '.content');
@@ -302,12 +316,12 @@
 					val && (source.currentTime = val)
 					progress.setCurrentValue(curt, totalTime);
 					// 歌词滚动
-					divs.forEach(item => {
+					divs && divs.forEach(item => {
 						// 减去0.5s好像更精确
 						let curTime = item.getAttribute('data-current') - .5;
 						let nextTime = item.getAttribute('data-next') - .5;
 						item.classList.remove('highlight')
-						//高亮歌词
+						//高亮并滚动歌词
 						if (curt >= curTime && curt <= nextTime) {
 							item.scrollIntoView({ behavior: 'smooth' });
 							item.classList.add('highlight');
