@@ -236,6 +236,11 @@
 			let btn = document.querySelector('.music-btn');
 			let source = document.querySelector('.music-source');
 			source.src = "../resources/dreamItPossible.mp3";
+
+			// 设置播放时间
+			let timer = null;
+			// 设置进度条时间
+			let setValue = null;
 			
 			// 设置下雪效果
 			xui.snowFlake({
@@ -278,12 +283,41 @@
 			}else{
 				xui.message('本地将不展示歌词!');
 			};
-
+			/*
+				音频从开始加载到结束, 会依次经历以下事件
+				loadstart- 开始加载音频/视频的时候, 首先发生的事件
+				durationchange-当指定音频/视频的时长数据发生变化时，发生durationchange 事件
+				loadedmetadata-当指定的音频/视频的元数据已加载时，会发生 loadedmetadata 事件
+				loadeddata-当当前帧的数据已加载，但没有足够的数据来播放指定音频/视频的下一帧时，会发生 loadeddata 事件
+				progress-当浏览器正在下载指定的音频/视频时，会发生 progress 事件
+				canplay-当浏览器能够开始播放指定的音频/视频时，发生 canplay 事件
+				canplaythrough-当浏览器预计能够在不停下来进行缓冲的情况下持续播放指定的音频/视频时，会发生 canplaythrough 事件
+				所有的事件均可以写 
+				audio/video.onxx = function(){}
+				audio/video.addEventListener('xx', function(){})
+			*/
 			source.addEventListener('loadstart', function(){
-				xui.loading(true, '.content');
-				console.log('loadstart')
+				console.log('loadstart');
+				xui.loading(true);
 			});
+			// 监听播放事件, 外界可以播放
+			source.addEventListener('playing', function(){
+				console.log('playing');
+				source.play();
+				timer = setInterval(() => {
+					setValue();
+				}, 1000);
+				btn.parentElement.classList.remove('paused');
+			});
+			// 监听暂停事件, 外界可以暂停
+			source.addEventListener('pause', function(){
+				console.log('paused');
+				clearInterval(timer);
+				btn.parentElement.classList.add('paused');
+			});
+			// 当音频/视频加载后，时长将由 "NaN" 变为音频/视频的实际时长。
 			source.addEventListener('durationchange', function(){
+				console.log('durationchange')
 				// 加载进度条
 				let totalTime = Math.round(source.duration);
 				let progress = new xui.sliderBar({
@@ -307,10 +341,8 @@
 						source.volume = val;
 					}
 				});
-
-				// 设置播放时间
-				let timer = null;
-				let setValue = (val) => {
+				
+				setValue = (val) => {
 					let curt = val || source.currentTime
 					// 手动设置时间
 					val && (source.currentTime = val)
@@ -350,26 +382,26 @@
 						source.pause();
 						clearInterval(timer);
 						par.classList.add('paused');
-					}
+					};
 				});
 			});
 			source.addEventListener('progress', function () {
-				console.log('progress')
+				console.log('progress');
 			});
 			source.addEventListener('error', function () {
-				console.log('error')
+				console.log('error');
 				xui.message('资源加载失败, 请重试!');
 			});
 			source.addEventListener('loadeddata', function () {
-				console.log('loadeddata')
+				console.log('loadeddata');
 				xui.loading(false);
 			});
 			// 歌曲加载完毕
 			source.addEventListener('canplay', function(){
-				console.log('canplay')
+				console.log('canplay');
 				xui.loading(false);
 			});
-		}
+		};
 	</script>
 </body>
 </html>

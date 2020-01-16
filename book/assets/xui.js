@@ -1225,8 +1225,7 @@ here is a page plugin
       isShowNumber = `<span class="xui_page_initial">${index}/${this.total}</span>`;
     };
     if (this.isJumpPage) {
-      isJumpPage = `<input type="text" class="xui_input xui_page_go" placeholder="go" />
-	    	`;
+      isJumpPage = `<input type="text" class="xui_input xui_page_go" placeholder="go" />`;
     };
     let isPrevInvalid = '', isLastInvalid = '';
     isPrevInvalid = index == 1 ? 'xui_page_invalid' : 'xui_page_valid';
@@ -1814,18 +1813,18 @@ here is a digitalOperation plugin
     renderHTML() {
       let dig = `
 				<button class="xui_btn xui_btn_default xui_sub" disabled data-type="-1">-</button>
-        		<input type="text" class="xui_input xui_digital_input" 
-	        		maxlength=${this.opts.isLimit}
-	        		value=${
+          <input type="text" class="xui_input xui_digital_input" 
+            maxlength=${this.opts.isLimit}
+            value=${
         (this.opts.step.toString().indexOf('.') > -1)
           ?
           this.opts.min.toFixed(this.opts.precision)
           :
           this.opts.min
         }
-	        		${this.opts.isInput ? '' : 'readonly'}
-        		/>
-        		<button class="xui_btn xui_btn_default xui_add" data-type="1">+</button>
+            ${this.opts.isInput ? '' : 'readonly'}
+          />
+          <button class="xui_btn xui_btn_default xui_add" data-type="1">+</button>
 			`;
       document.getElementById(this.id).innerHTML = dig;
       this.event();
