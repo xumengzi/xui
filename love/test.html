@@ -1,8 +1,8 @@
-﻿<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
 		<title>情人节快乐</title>
+		<meta charset="utf-8"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<meta name="renderer" content="webkit">
@@ -18,6 +18,7 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
+				flex-direction: column;
 				background-color: black;
 			}
 			.content{
@@ -32,26 +33,33 @@
 				height: 5vw;
 				font-size: 12px;
 				color: #fff;
-				/* background-color: rgba(211, 211, 211, 0.29); */
 				overflow: hidden;
-				border-radius: 50%;
 				transition: all .5s linear;
 				box-shadow: none;
 			}
 			.content span.high-light{
 				background-color: chocolate;
-				box-shadow: 1px 1px 10px #f60101;
-				filter: brightness(1.2);
+				box-shadow: 0px -1px 4px white, 0px -2px 10px yellow, 0px -10px 20px #ff8000, 0px -18px 40px red;
 			}
-			#pause{
+			.promise{
 				position: absolute;
-				top: 0;
+    		top: 50px;
+				color: chocolate;
+				text-shadow: 0px -1px 4px white, 0px -2px 10px yellow, 0px -10px 20px #ff8000, 0px -18px 40px red;
+				font-size: 18px;
+			}
+			.tips{
+				color: #808080;
+				position: absolute;
+				bottom: 20px;
+				font-size: 12px;
 			}
 		</style>
 	</head>
 	<body>
-		<!-- <button id="pause">暂停</button> -->
+		<div class="promise"></div>
 		<div class="content"></div>
+		<div class="tips">温馨提示: 请把手机拿远一点再看!</div>
 		<script>
 			var obj = {
 				山: [49, 69, 89, 109, 122, 129, 136, 142, 149, 156, 162, 169, 176, 182, 189, 196, 202, 209, 216, 222, 229, 236, 242, 249, 256, 262, 269, 276, 282, 289, 296, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316],
@@ -70,9 +78,12 @@
 				会: [9,28,47,66,85,104,123,30,142,202,203,214,215,51,72,93,114,135,146,147,148,149,150,204,205,206,207,151,208,209,210,211,212,213,228,247,266,285,304,323,324,325,326,327,328,329,330,331,331,332,333,334,292,313,355],
 				吾: [45, 46, 47, 48, 49, 50, 51, 52, 69, 89, 105, 106, 107, 108, 109, 110, 111, 112, 128, 132, 148, 152, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 244, 253, 264, 273, 284, 293, 304, 313, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333],
 				曰: [83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 103, 116, 123, 136, 143, 156, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 176, 183, 196, 203, 216, 223, 236, 243, 256, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276],
+				许: [33, 43, 52, 64, 71, 85, 90, 109, 110, 111, 112, 113, 114, 115, 116, 117, 121, 122, 123, 124, 125, 126, 128, 133, 146, 153, 166, 173, 185, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 204, 213, 224, 233, 243, 253, 262, 273, 281, 282, 283, 284, 285, 286, 293, 313],
+				孟: [26, 27, 28, 29, 30, 31, 32, 52, 71, 89, 90, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 129, 149, 169, 189, 209, 228, 229, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 283, 286, 291, 295, 303, 306, 311, 315, 323, 326, 331, 335, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357],
 				':': [88, 89, 90, 108, 109, 110, 128, 129, 130, 228, 229, 230, 248, 249, 250, 268, 269, 270],
 				',': [109, 110, 129, 130, 149, 150, 168, 169, 187, 188, 207],
 				'.': [164, 165, 184, 185],
+				':': [108, 109, 128, 129, 208, 209, 228, 229],
 				'..': [164, 165, 168, 169, 184, 185, 188, 189],
 				'...': [164, 165, 168, 169, 172, 173, 184, 185, 188, 189, 192, 193],
 				'!': [69, 70, 89, 90, 109, 110, 129, 130, 149, 150, 169, 170, 189, 190, 209, 210, 229, 230, 249, 250, 309, 310, 329, 330],
@@ -80,7 +91,7 @@
 		</script>
 		<script>
 			window.onload = function(){
-				var list = ['.','..','...','李','化','会',',','山','无','棱','天','地','合','乃','敢','与','君','绝','!'];
+				var list = ['.','..','...','许','孟', ':','李','化','会',',','山','无','棱',',','天','地','合',',','乃','敢','与','君','绝','!'];
 				var target = document.querySelector(".content");
 
 				var renderHTML = function(){
@@ -100,28 +111,34 @@
 					list.forEach(function(item, index){
 						if(obj[word].includes(index)){
 							item.classList.add('high-light');
-							item.innerText = word;
+							// item.innerText = word;
 						}else{
 							item.classList.remove('high-light');
-							item.innerText = '';
+							// item.innerText = '';
 						};
 					});
+					var str = '...';
+					if(!str.includes(word)){
+
+					document.querySelector('.promise').append(word)
+					document.title = document.querySelector('.promise').innerText;
+					}
 				};
 
 				var NUM = 1;
-				var timner = null;
-				highLight(list[0]);
-				timner = setInterval(e=>{
-					highLight(list[NUM]);
-					NUM++;
-					if(NUM == list.length){
-						clearInterval(timner)
-					}
-				},1000);
-
-				// document.getElementById('pause').addEventListener('click', function(){
-				// 	clearInterval(timner)
-				// })
+				var timer = null;
+				var set = function(){
+					clearInterval(timer)
+					highLight(list[0]);
+					timer = setInterval(e=>{
+						highLight(list[NUM]);
+						NUM++;
+						if(NUM == list.length){
+							clearInterval(timer)
+						}
+					},1000);
+				};
+				set()
 			};
 		</script>
 	</body>
