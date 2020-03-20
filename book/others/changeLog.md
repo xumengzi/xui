@@ -10,6 +10,12 @@
 
 >修订版本号：每周末（看心情）会进行日常`bugfix`更新
 
+###v2.9.4  <span style="font-size: 16px;">2020/02/24</span>
+##### Add:
+1. 新增[图片放大动画](../plugins/animateImgShow.md)插件, 快去看看吧
+
+>是否兼容现有代码：是
+
 ###v2.8.4  <span style="font-size: 16px;">2019/12/31</span>
 ##### Add:
 1. 写了一个音乐播放器, [快去点点看吧](https://xumengzi.github.io/xui/test/music.html)

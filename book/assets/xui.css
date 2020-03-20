@@ -1072,6 +1072,91 @@ button.xui_btn:disabled{
 }
 
 
+/* 带有动画的图片放大插件 */
+.xui_img_slider{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.54);
+    z-index: 9999;
+}
+.xui_img_slider .xui_img_con{
+    position: relative;
+    width: 640px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.xui_img_slider .xui_close{
+    position: absolute;
+    right: 6%;
+    top: 6%;
+    width: 50px;
+    height: 50px;
+    -webkit-transition: .4s ease-out;
+    transition: .4s ease-out;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAgMAAAAOFJJnAAAADFBMVEUAAAD///////////84wDuoAAAAA3RSTlMAoGAZwxlvAAAAVklEQVQY02MgCkwAEWxAXAJiyIIxlMfuwMDAeIEBRIA4YGGINJAEs8GKQLJgRRAlQAmgJERRCZTBfgHOQEjBFcO1ww1EWAG3FO4MuMMQTkU4HuEdwgAAWN8SZ2r81qsAAAAASUVORK5CYII=) no-repeat center center;
+    background-size: initial;
+    cursor: pointer;
+    z-index: 9999;
+}
+@keyframes imgUpDown {
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(10px) scale(.9);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
+@keyframes imgRotate {
+    0%{
+        transform: rotate(0);
+    }
+    50%{
+        transform: rotate(90deg) scale(.9);
+    }
+    100%{
+        transform: rotate(0);
+    }
+}
+@keyframes imgSkew {
+    0%{
+        transform: skew(0);
+    }
+    50%{
+        transform: skew(10deg, 10deg) scale(.9);
+    }
+    100%{
+        transform: skew(0);
+    }
+}
+@keyframes imgScale {
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(.8);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
 .xui_tab ul.xui_tab_head{
     display: -webkit-box;
     display: -ms-flexbox;

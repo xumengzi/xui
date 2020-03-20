@@ -33,6 +33,7 @@
     * [3.3.0 懒加载 lazyLoad](plugins/lazyLoad.md)
     * [3.3.1 下拉加载 pullLoad](plugins/pullLoad.md)
     * [3.3.2 数字动画 digitalScroll](plugins/digitalScroll.md)
+    * [3.3.3 图片动画 animateImgShow](plugins/animateImgShow.md)
 * [4.收藏 collection](collection/README.md)
     * [4.1.1 算法 algorithm](collection/algorithm.md)
     * [4.1.2 日志收集 logCollection](collection/logCollection.md)

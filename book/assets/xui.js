@@ -8,7 +8,7 @@
       'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-NFNL3B9');
 
-var xuiVersion = '2.8.4';
+var xuiVersion = '2.9.4';
 
 //这段代码用来载页面上加tag标识,可以删掉
 ; (function () {
@@ -252,20 +252,18 @@ include most functions and styles etc.
         choose(e) {
           let tar = e.target.classList;
           if (tar.contains('xui_drop_btn')) {
-            // e.target.nextSibling.classList.remove('none');
             e.target.nextSibling.classList.toggle('none');
-            // if ((e.target.nextSibling.classList.contains('none'))) {
-            // 	console.log('3');
-            // 	e.target.nextSibling.classList.remove('none');
-            // } else{
-            // 	e.target.nextSibling.classList.add('none');
-            // };
           } else if (e.target.parentNode.classList.contains('xui_drop_list')) {
             if (e.target.nodeName == 'INPUT') { return };
-            document.getElementById(args.id).value = e.target.getAttribute('value');
-            e.target.parentNode.previousSibling.value = e.target.getAttribute('value');
+            const data = {
+              value: e.target.getAttribute('value'),
+              label: e.target.innerHTML
+            }
+            document.getElementById(args.id).value = data.value;
+            e.target.parentNode.previousSibling.value = data.value;
             e.target.parentNode.previousSibling.innerHTML = e.target.innerHTML;
             e.target.parentNode.classList.add('none');
+            args.getValue && args.getValue(data);
           } else {
             if (!document.querySelectorAll('.xui_drop_list').length) { return; };
             let newArr = that.toArray(document.querySelectorAll('.xui_drop_list'));
@@ -682,6 +680,77 @@ include most functions and styles etc.
             default:
               break;
           };
+        };
+      };
+      document.body.addEventListener('click', showImgPic, false);
+    },
+    showAnimatedImg(opts){
+      let defaultOpts = {
+        img: '444',
+        divide: 4,
+        delay: .1,
+        animatedStyle: 'scale',
+      };
+      let styleObj = {
+        translate: 'imgUpDown',
+        rotate: 'imgRotate',
+        skew: 'imgSkew',
+        scale: 'imgScale',
+      }
+      opts = Object.assign(defaultOpts, opts);
+      const { img, divide, delay, animatedStyle } = opts;
+      let that = this;
+      that.deleteEle('xui_img_slider');
+      let sqrt = Math.sqrt(divide);
+      let div = document.createElement('div');
+      div.classList.add('xui_img_slider');
+      let Width = img.naturalWidth;
+      let Height = img.naturalHeight;
+      let temp = `
+        <span class="xui_close"></span>
+        <div class="xui_img_con" 
+          style="
+            width: ${Width / 2}px;
+            height: ${Height / 2}px
+          ">
+        `;
+      let w = 100 / sqrt + '%';
+      let s = 100 * sqrt + '%';
+      let x = 0;
+      let y = 0;
+      let initTime = 0;
+      let four = [
+        [0, 0], [100, 0],
+        [0, 100], [100, 100]
+      ];
+      let nine = [
+        [0, 0], [50, 0], [100 ,0],
+        [0, 50], [50, 50], [100, 50],
+        [0, 100],[50, 100], [100, 100]
+      ];
+      let counts = divide == 4 ? four : nine;
+      for(let i = 0; i < divide; i++){
+        x = counts[i][0];
+        y = counts[i][1];
+        initTime += Number(delay);
+        temp += `
+                <div style="
+                  background-image: url(${img.src});
+                  width: ${w};
+                  height: ${w};
+                  background-position: ${x}% ${y}%;
+                  background-size: ${s} ${s};
+                  animation: .5s ${styleObj[animatedStyle]} 1 ease-in-out;
+                  animation-delay: ${initTime}s;
+              "></div>`;
+      };
+      temp += '</div>';
+      div.innerHTML = temp;
+      document.body.append(div);
+      function showImgPic(e) {
+        if (e.target.className == 'xui_close') {
+          that.deleteEle('.xui_img_slider');
+          document.body.removeEventListener('click', showImgPic, false);
         };
       };
       document.body.addEventListener('click', showImgPic, false);
