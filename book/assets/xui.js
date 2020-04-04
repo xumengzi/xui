@@ -8,7 +8,7 @@
       'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-NFNL3B9');
 
-var xuiVersion = '2.9.4';
+var xuiVersion = '2.9.5';
 
 //这段代码用来载页面上加tag标识,可以删掉
 ; (function () {
@@ -24,6 +24,23 @@ var xuiVersion = '2.9.4';
   target && target.insertBefore(lis, target.childNodes[0]);
 })();
 
+;(function(){
+  /*
+    哀悼日纪念
+    2020年4月4日, 哀悼抗击新冠肺炎疫情斗争牺牲的烈士和逝世同胞
+    5月12日则是汶川地震发生时间
+    12月13日是南京大屠杀纪念日
+    待续...
+  */
+  const date = ['4.4', '5.12', '12.13'];
+  let d = new Date();
+  let mm = d.getMonth() + 1;
+  let dd = d.getDate();
+  if(date.includes(`${mm}.${dd}`)){
+    document.getElementsByTagName('html')[0].style.filter = 'grayscale(1)';
+    document.body.style.filter = 'grayscale(1)';
+  };
+})();
 
 /*
  created by xumeng
@@ -684,7 +701,7 @@ include most functions and styles etc.
       };
       document.body.addEventListener('click', showImgPic, false);
     },
-    showAnimatedImg(opts){
+    showAnimatedImg(opts) {
       let defaultOpts = {
         img: '444',
         divide: 4,
@@ -724,12 +741,12 @@ include most functions and styles etc.
         [0, 100], [100, 100]
       ];
       let nine = [
-        [0, 0], [50, 0], [100 ,0],
+        [0, 0], [50, 0], [100, 0],
         [0, 50], [50, 50], [100, 50],
-        [0, 100],[50, 100], [100, 100]
+        [0, 100], [50, 100], [100, 100]
       ];
       let counts = divide == 4 ? four : nine;
-      for(let i = 0; i < divide; i++){
+      for (let i = 0; i < divide; i++) {
         x = counts[i][0];
         y = counts[i][1];
         initTime += Number(delay);
@@ -2581,7 +2598,7 @@ here is a pullLoad plugin
             var searchEngine = args.searchEngine, list = "";
             for (var i in searchEngine) {
               var s = searchEngine[i];
-              if (searchEngine.hasOwnProperty(i)){
+              if (searchEngine.hasOwnProperty(i)) {
                 (s != "") && (list += "<div class='selectedSearch' _engine=" + s + " title='" + text + "'>使用" + s + "搜索&nbsp;&nbsp;" + (text.toString().substr(0, 10)) + "</div>");
               }
             };
@@ -2597,8 +2614,11 @@ here is a pullLoad plugin
             for (var i = 0; i < ele.childNodes.length; i++) {
               ele.childNodes[i].style.cssText += 'margin: 4px;padding: 4px;cursor: pointer;';
             };
-            var cssStr = 'position: absolute;left: ' + x + 'px;top: ' + y + 'px;color: ' + args.color + ';background: ' + args.background + ';' +
-              'border: 1px #ccc solid;border-radius: 4px;font-size: 13px;box-shadow: 0 1px 1px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.15), 0 8px 8px rgba(0,0,0,0.15);z-index: ' + args.zIndex + '';
+            var cssStr = `
+                        position: absolute;left:${x}px;top:${y}px;color:${args.color};background:${args.background};
+                        border: 1px #ccc solid;border-radius: 4px;font-size: 13px;z-index:${args.zIndex};
+                        box-shadow: 0 1px 1px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.15), 0 8px 8px rgba(0,0,0,0.15);
+                      `;
             ele.style.cssText += cssStr;
             that.init();
           }

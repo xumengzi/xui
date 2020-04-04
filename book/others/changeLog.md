@@ -10,6 +10,12 @@
 
 >修订版本号：每周末（看心情）会进行日常`bugfix`更新
 
+###v2.9.5  <span style="font-size: 16px;">2020/04/04</span>
+##### Add:
+1. 新增哀悼纪念日, 逢中国历史上一些大灾难, 本站点会置灰
+
+>是否兼容现有代码：是
+
 ###v2.9.4  <span style="font-size: 16px;">2020/02/24</span>
 ##### Add:
 1. 新增[图片放大动画](../plugins/animateImgShow.md)插件, 快去看看吧
