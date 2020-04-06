@@ -8,7 +8,7 @@
       'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-NFNL3B9');
 
-var xuiVersion = '2.9.5';
+var xuiVersion = '3.0.5';
 
 //这段代码用来载页面上加tag标识,可以删掉
 ; (function () {
@@ -2496,6 +2496,9 @@ here is a pullLoad plugin
   Object.getPrototypeOf(xui).digitalscroll = digitalScroll;
 })(window);
 
+/*
+便捷复制菜单 
+*/
 ; (function (w) {
   class selected {
     constructor() {
@@ -2640,4 +2643,93 @@ here is a pullLoad plugin
     }
   };
   Object.getPrototypeOf(xui).selected = selected;
+})(window);
+
+/*
+返回顶部组件
+*/
+;(function (w){
+  class backToTop {
+    constructor() {
+      const args = arguments[0];
+      const defaults = {
+        id: '',
+        target: '',
+        title: '返回顶部',
+        cusClass: '',
+        right: '10%',
+        bottom: '10%',
+        step: 100,
+        timer: null,
+        fn: null,
+      };
+      this.opts = Object.assign({}, defaults, args);
+      this.renderHTML();
+    };
+    renderHTML() {
+      const { id, title, cusClass, right, bottom } = this.opts;
+      let top = document.createElement('div');
+      top.id = id;
+      top.classList.add('xui_backtotop');
+      cusClass && top.classList.add(cusClass);
+      top.style.right = right;
+      top.style.bottom = bottom;
+      top.innerHTML = title;
+      document.body.append(top);
+      this.event(top);
+    };
+    scroll(){
+      const { step, fn, timer, target } = this.opts;
+      let scrollHeight = document.documentElement.scrollTop || document.body.scrollTop;
+      if(target){
+        if(xui.isArray){
+          let arrs = [];
+          target.forEach(item=>{
+            let ele = document.querySelector(`.${item}`);
+            ele && arrs.push(ele.scrollTop);
+          });
+          scrollHeight = arrs.sort()[arrs.length-1];
+        }else{
+          scrollHeight = document.querySelector(`.${target}`).scrollTop;
+        }
+      }
+      scrollHeight -= step;
+      if(target){
+        if(xui.isArray){
+          target.forEach(item=>{
+            let ele = document.querySelector(`.${item}`);
+            ele && ele.scrollTo(0, scrollHeight);
+          });
+        }else{
+          document.querySelector(`.${target}`).scrollTo(0, scrollHeight);
+        }
+      }else{
+        window.scrollTo(0, scrollHeight);
+      }
+      if(window.requestAnimationFrame){
+        if(scrollHeight <= 0){
+          cancelAnimationFrame(this.scroll.bind(this));
+          fn && fn();
+        }else{
+          requestAnimationFrame(this.scroll.bind(this));
+        };
+      }else{
+        if(scrollHeight <= 0){
+          clearInterval(timer);
+          fn && fn();
+        };
+      };
+    };
+    event(top) {
+      top.addEventListener('click', (e)=>{
+        if(window.requestAnimationFrame){
+          requestAnimationFrame(this.scroll.bind(this));
+        }else{
+          this.opts.timer = setInterval(this.scroll.bind(this), 16.7);
+        }
+      });
+    };
+  };
+  Object.getPrototypeOf(xui).backToTop = backToTop;
+
 })(window);

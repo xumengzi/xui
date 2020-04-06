@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>3.插件 plugins · XUI文档简介</title>
+        <title>3.3.4 返回顶部 backToTop · XUI文档简介</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="loading.html" />
+    <link rel="next" href="../collection/" />
     
     
-    <link rel="prev" href="../methods/digitalConverse.html" />
+    <link rel="prev" href="animateImgShow.html" />
     
 
     </head>
@@ -249,7 +249,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.4" data-path="./">
+        <li class="chapter " data-level="1.4" data-path="./">
             
                 <a href="./">
             
@@ -562,7 +562,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.24" data-path="backToTop.html">
+        <li class="chapter active" data-level="1.4.24" data-path="backToTop.html">
             
                 <a href="backToTop.html">
             
@@ -752,7 +752,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >3.插件 plugins</a>
+        <a href=".." >3.3.4 返回顶部 backToTop</a>
     </h1>
 </div>
 
@@ -770,18 +770,86 @@
                                 <p><link rel="stylesheet" type="text/css" href="../assets/xui.css"></p>
 <script type="text/javascript" src="../assets/xui.js"></script>
 
-<h1 id="&#x63D2;&#x4EF6;">&#x63D2;&#x4EF6;</h1>
+<h1 id="334-backtotop">3.3.4 backToTop</h1>
 <blockquote>
-<p>&#x6709;&#x4EBA;&#x8BF4;,&#x5982;&#x679C;&#x6709;&#x73B0;&#x6210;&#x7684;&#x8F6E;&#x5B50;,&#x90A3;&#x5C31;&#x6CA1;&#x5FC5;&#x8981;&#x82B1;&#x65F6;&#x95F4;&#x518D;&#x53BB;&#x9020;&#x4E00;&#x4E2A;&#x3002;</p>
-<p>&#x4E07;&#x4E00;&#x6709;&#x573A;&#x666F;&#x4E0D;&#x9002;&#x5408;&#x5462;&#xFF0C;&#x90A3;&#x4E0D;GG&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x5199;&#x4E00;&#x5199;&#x4E5F;&#x662F;&#x6781;&#x597D;&#x7684;</p>
+<p>&#x8BF4;&#x660E;: &#x7ED9;&#x7528;&#x6237;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x5FEB;&#x901F;&#x8FD4;&#x56DE;&#x9876;&#x90E8;&#x7684;&#x4FBF;&#x6377;&#x901A;&#x9053;</p>
 </blockquote>
-<h5 id="&#x5BF9;&#x6211;&#x6765;&#x8BF4;&#x6709;&#x65F6;&#x5019;&#x9020;&#x8F6E;&#x5B50;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#x5883;&#x754C;&#x56E0;&#x4E3A;&#x5F53;&#x6211;&#x5728;&#x9020;&#x8F6E;&#x5B50;&#x7684;&#x65F6;&#x5019;&#x6211;&#x4F1A;&#x60F3;&#x522B;&#x4EBA;&#x5230;&#x5E95;&#x9700;&#x8981;&#x4EC0;&#x4E48;&#x6837;&#x7684;&#x8F6E;&#x5B50;&#x5462;">&#x5BF9;&#x6211;&#x6765;&#x8BF4;,&#x6709;&#x65F6;&#x5019;&#x9020;&#x8F6E;&#x5B50;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#x5883;&#x754C;.&#x56E0;&#x4E3A;&#x5F53;&#x6211;&#x5728;&#x9020;&#x8F6E;&#x5B50;&#x7684;&#x65F6;&#x5019;&#x6211;&#x4F1A;&#x60F3;:&#x522B;&#x4EBA;&#x5230;&#x5E95;&#x9700;&#x8981;&#x4EC0;&#x4E48;&#x6837;&#x7684;&#x8F6E;&#x5B50;&#x5462;?</h5>
-<h5 id="&#x6211;&#x4E00;&#x76F4;&#x5728;&#x601D;&#x8003;&#x8F6E;&#x5B50;&#x7684;api&#x662F;&#x5426;&#x53CB;&#x597D;&#x662F;&#x5426;&#x5BB9;&#x6613;&#x6269;&#x5C55;&#x662F;&#x5426;&#x80FD;&#x591F;&#x505A;&#x5230;0bug&#x9AD8;&#x517C;&#x5BB9;&#x6027;&#x5462;">&#x6211;&#x4E00;&#x76F4;&#x5728;&#x601D;&#x8003;&#x8F6E;&#x5B50;&#x7684;<code>API</code>&#x662F;&#x5426;&#x53CB;&#x597D;,&#x662F;&#x5426;&#x5BB9;&#x6613;&#x6269;&#x5C55;,&#x662F;&#x5426;&#x80FD;&#x591F;&#x505A;&#x5230;<code>0bug</code>,&#x9AD8;&#x517C;&#x5BB9;&#x6027;&#x5462;?</h5>
-<h5 id="&#x5F53;&#x6211;&#x771F;&#x6B63;&#x7684;&#x53BB;&#x9020;&#x4E00;&#x4E2A;&#x8F6E;&#x5B50;&#x7684;&#x65F6;&#x5019;&#x6211;&#x53D1;&#x73B0;&#x5176;&#x5B9E;&#x8FD8;&#x662F;&#x86EE;&#x96BE;&#x7684;&#x53EF;&#x8C13;&#x4F17;&#x53E3;&#x96BE;&#x8C03;&#x4E0D;&#x8FC7;&#x53C8;&#x8BF4;&#x56DE;&#x6765;&#x9020;&#x4E86;&#x4E00;&#x4E2A;&#x5927;&#x5BB6;&#x90FD;&#x559C;&#x6B22;&#x7684;&#x8F6E;&#x5B50;&#x96BE;&#x9053;&#x4F60;&#x5C31;&#x6CA1;&#x6709;&#x6210;&#x5C31;&#x611F;&#x5417;-&#x54C8;&#x54C8;">&#x5F53;&#x6211;&#x771F;&#x6B63;&#x7684;&#x53BB;&#x9020;&#x4E00;&#x4E2A;&#x8F6E;&#x5B50;&#x7684;&#x65F6;&#x5019;,&#x6211;&#x53D1;&#x73B0;&#x5176;&#x5B9E;&#x8FD8;&#x662F;&#x86EE;&#x96BE;&#x7684;,&#x53EF;&#x8C13;&#x4F17;&#x53E3;&#x96BE;&#x8C03;.&#x4E0D;&#x8FC7;&#x53C8;&#x8BF4;&#x56DE;&#x6765;,&#x9020;&#x4E86;&#x4E00;&#x4E2A;&#x5927;&#x5BB6;&#x90FD;&#x559C;&#x6B22;&#x7684;&#x8F6E;&#x5B50;,&#x96BE;&#x9053;&#x4F60;&#x5C31;&#x6CA1;&#x6709;&#x6210;&#x5C31;&#x611F;&#x5417;? &#x54C8;&#x54C8;!</h5>
-<p>1.&#x8FD9;&#x91CC;&#x6211;&#x5C1D;&#x8BD5;&#x5199;&#x4E86;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;,&#x4E3B;&#x8981;&#x662F;&#x7528;&#x5728;&#x8BF8;&#x5982;&#x5F02;&#x6B65;&#x8BF7;&#x6C42;,&#x63D0;&#x4EA4;&#x8868;&#x5355;&#x65F6;&#x7684;loading&#x6548;&#x679C;.</p>
-<pre><code class="lang-js">xui.loading(<span class="hljs-literal">true</span>); <span class="hljs-comment">//loading</span>
-xui.loading(<span class="hljs-literal">false</span>); <span class="hljs-comment">//loading&#x5173;&#x95ED;</span>
+<h5 id="&#x4F7F;&#x7528;&#x53CA;&#x53C2;&#x6570;&#x8BF4;&#x660E;">&#x4F7F;&#x7528;&#x53CA;&#x53C2;&#x6570;&#x8BF4;&#x660E;:</h5>
+<pre><code class="lang-js">xui.backToTop({
+    id: string,
+    target: string || array,
+    cusClass: string,
+    title: string,
+    step: number,
+    right: string,
+    bottom: string,
+    fn: callback,
+});
 </code></pre>
+<ul>
+<li>&#x4F20;&#x5165;&#x76F8;&#x5173;&#x53C2;&#x6570;, &#x521D;&#x59CB;&#x5316;&#x5373;&#x53EF;&#x4F7F;&#x7528;</li>
+<li><code>id</code>&#x8868;&#x793A;&#x8FD4;&#x56DE;&#x9876;&#x90E8;&#x7EC4;&#x4EF6;&#x7684;<code>id</code></li>
+<li><code>target</code>&#x8868;&#x793A;&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x9876;&#x90E8;&#x7684;&#x76EE;&#x6807;&#x5143;&#x7D20;, &#x9ED8;&#x8BA4;&#x4E3A;<code>body</code>, &#x5982;&#x679C;&#x6EDA;&#x52A8;&#x6761;&#x4E0D;&#x5728;<code>body</code>&#x4E0A;&#x5C31;&#x8BBE;&#x7F6E;, &#x5982;&#x679C;&#x6709;&#x591A;&#x4E2A;&#x7528;&#x6570;&#x7EC4;&#x5C55;&#x793A;(&#x54CD;&#x5E94;&#x5F0F;&#x5E03;&#x5C40;&#x91CC;&#x4F1A;&#x51FA;&#x73B0;)</li>
+<li><code>cusClass</code>&#x8868;&#x793A;&#x8FD4;&#x56DE;&#x9876;&#x90E8;&#x7EC4;&#x4EF6;&#x7684;&#x6837;&#x5F0F;&#x540D;</li>
+<li><code>title</code>&#x8868;&#x793A;&#x8FD4;&#x56DE;&#x9876;&#x90E8;&#x7684;&#x6587;&#x6848;&#x5C55;&#x793A;, &#x652F;&#x6301;&#x4F20;&#x6807;&#x7B7E;, &#x9ED8;&#x8BA4;&#x4E3A;<code>&#x8FD4;&#x56DE;&#x9876;&#x90E8;</code>&#x6587;&#x6848;</li>
+<li><code>right</code>&#x8868;&#x793A;&#x8FD4;&#x56DE;&#x9876;&#x90E8;&#x7684;&#x4F4D;&#x7F6E;, &#x652F;&#x6301;<code>%</code>, <code>px</code></li>
+<li><code>bottom</code>&#x8868;&#x793A;&#x8FD4;&#x56DE;&#x9876;&#x90E8;&#x7684;&#x4F4D;&#x7F6E;, &#x652F;&#x6301;<code>%</code>, <code>px</code></li>
+<li><code>step</code>&#x8868;&#x793A;&#x8FD4;&#x56DE;&#x9876;&#x90E8;&#x7684;&#x901F;&#x5EA6;, &#x6570;&#x503C;&#x8D8A;&#x5927;&#x8FD4;&#x56DE;&#x8D8A;&#x5FEB;, &#x9ED8;&#x8BA4;&#x503C;<code>100</code></li>
+<li><code>fn</code>&#x8868;&#x793A;&#x8FD4;&#x56DE;&#x9876;&#x90E8;&#x7684;&#x56DE;&#x8C03;, &#x8FD4;&#x56DE;&#x5230;&#x4E86;&#x9876;&#x90E8;&#x65F6;&#x89E6;&#x53D1;</li>
+<li>&#x6CA1;&#x6709;&#x4F60;&#x60F3;&#x8981;&#x7684;&#x529F;&#x80FD;? &#x5FEB;&#x8054;&#x7CFB;&#x6211;: <code>xumeng0611@gmail.com</code>&#x6DFB;&#x52A0;&#x5427;</li>
+</ul>
+<h3 id="&#x6548;&#x679C;&#x5C55;&#x793A;">&#x6548;&#x679C;&#x5C55;&#x793A;</h3>
+<p>1.&#x770B;&#x4E00;&#x770B;&#x6700;&#x7B80;&#x5355;&#x7684;&#x914D;&#x7F6E;, &#x521D;&#x59CB;&#x5316;&#x5373;&#x53EF;</p>
+<script type="text/javascript">
+// gitbook 滚动条在不同的位置,坑爹
+new xui.backToTop({
+    target: ['book-body', 'body-inner'],
+});
+</script>
+
+<pre><code class="lang-js"><span class="hljs-keyword">new</span> xui.backToTop({
+    target: [<span class="hljs-string">&apos;book-body&apos;</span>, <span class="hljs-string">&apos;body-inner&apos;</span>],
+});
+</code></pre>
+<p>2.&#x6211;&#x4EEC;&#x63D0;&#x4F9B;&#x4E86;&#x4E30;&#x5BCC;&#x7684;&#x914D;&#x7F6E;, &#x53EF;&#x4EE5;&#x6328;&#x4E2A;&#x8BD5;&#x8BD5;</p>
+<script type="text/javascript">
+new xui.backToTop({
+    id: 'xumeng',
+    target: ['book-body', 'body-inner'],
+    cusClass: "custom-class",
+    right: '50px',
+    title: '<span style="color: red">返<br/>回<br/>顶<br/>部</span>',
+    step: 50,
+    bottom: '200px',
+    fn(){
+        xui.message('finished');
+    }
+});
+</script>
+
+<pre><code class="lang-js"><span class="hljs-keyword">new</span> xui.backToTop({
+    id: <span class="hljs-string">&apos;xumeng&apos;</span>,
+    target: [<span class="hljs-string">&apos;book-body&apos;</span>, <span class="hljs-string">&apos;body-inner&apos;</span>],
+    cusClass: <span class="hljs-string">&quot;custom-class&quot;</span>,
+    right: <span class="hljs-string">&apos;50px&apos;</span>,
+    title: <span class="hljs-string">&apos;&lt;span style=&quot;color: red&quot;&gt;&#x8FD4;&lt;br/&gt;&#x56DE;&lt;br/&gt;&#x9876;&lt;br/&gt;&#x90E8;&lt;/span&gt;&apos;</span>,
+    step: <span class="hljs-number">50</span>,
+    bottom: <span class="hljs-string">&apos;200px&apos;</span>,
+    fn(){
+        xui.message(<span class="hljs-string">&apos;finished&apos;</span>);
+    }
+});
+</code></pre>
+<p><em>&#x4E3A;&#x4E86;&#x9875;&#x9762;&#x6709;&#x6EDA;&#x52A8;&#x6761;,&#x7279;&#x5730;&#x6458;&#x5F55;&#x4E86;&#x4E00;&#x6BB5;&#x8BDD;</em></p>
+<blockquote>
+<p>&#x5BD3;&#x5F62;&#x5B87;&#x5185;&#x590D;&#x51E0;&#x65F6;&#xFF0C;&#x66F7;&#x4E0D;&#x59D4;&#x5FC3;&#x4EFB;&#x53BB;&#x7559;&#xFF1F;</p>
+<p>&#x80E1;&#x4E3A;&#x4E4E;&#x9051;&#x9051;&#x6B32;&#x4F55;&#x4E4B;&#xFF1F;</p>
+<p>&#x5BCC;&#x8D35;&#x975E;&#x543E;&#x613F;&#xFF0C;&#x5E1D;&#x4E61;&#x4E0D;&#x53EF;&#x671F;&#x3002;</p>
+<p>&#x6000;&#x826F;&#x8FB0;&#x4EE5;&#x5B64;&#x5F80;&#xFF0C;&#x6216;&#x690D;&#x6756;&#x800C;&#x8018;&#x8014;&#x3002;</p>
+<p>&#x767B;&#x4E1C;&#x768B;&#x4EE5;&#x8212;&#x5578;&#xFF0C;&#x4E34;&#x6E05;&#x6D41;&#x800C;&#x8D4B;&#x8BD7;&#x3002;</p>
+<p>&#x804A;&#x4E58;&#x5316;&#x4EE5;&#x5F52;&#x5C3D;&#xFF0C;&#x4E50;&#x592B;&#x5929;&#x547D;&#x590D;&#x595A;&#x7591;&#xFF01;</p>
+<p>&#x2014;&#x2014;&#x8282;&#x9009;&#x81EA;&#x9676;&#x6E0A;  &#x300A;&#x5F52;&#x53BB;&#x6765;&#x516E;&#x8F9E;&#x300B;</p>
+</blockquote>
 
                                 
                                 </section>
@@ -809,12 +877,12 @@ xui.loading(<span class="hljs-literal">false</span>); <span class="hljs-comment"
 
             
                 
-                <a href="../methods/digitalConverse.html" class="navigation navigation-prev " aria-label="Previous page: 2.1.4 进制转换 digital converse">
+                <a href="animateImgShow.html" class="navigation navigation-prev " aria-label="Previous page: 3.3.3 图片动画 animateImgShow">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="loading.html" class="navigation navigation-next " aria-label="Next page: 3.1.1 加载效果 loading">
+                <a href="../collection/" class="navigation navigation-next " aria-label="Next page: 4.收藏 collection">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -825,7 +893,7 @@ xui.loading(<span class="hljs-literal">false</span>); <span class="hljs-comment"
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3.插件 plugins","level":"1.4","depth":1,"next":{"title":"3.1.1 加载效果 loading","level":"1.4.1","depth":2,"path":"plugins/loading.md","ref":"plugins/loading.md","articles":[]},"previous":{"title":"2.1.4 进制转换 digital converse","level":"1.3.4","depth":2,"path":"methods/digitalConverse.md","ref":"methods/digitalConverse.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"code":{"copyButtons":true},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"xumeng","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"XUI文档简介","links":{"sidebar":{"xui-vue":"https://xumengzi.github.io/xui-vue/book/index.html#/","xui-react":"https://xumengzi.github.io/xui-react/build/index"}},"gitbook":"*","description":"一个原生js的ui框架"},"file":{"path":"plugins/README.md","mtime":"2020-04-04T03:56:01.708Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-06T08:00:04.734Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3.3.4 返回顶部 backToTop","level":"1.4.24","depth":2,"next":{"title":"4.收藏 collection","level":"1.5","depth":1,"path":"collection/README.md","ref":"collection/README.md","articles":[{"title":"4.1.1 算法 algorithm","level":"1.5.1","depth":2,"path":"collection/algorithm.md","ref":"collection/algorithm.md","articles":[]},{"title":"4.1.2 日志收集 logCollection","level":"1.5.2","depth":2,"path":"collection/logCollection.md","ref":"collection/logCollection.md","articles":[]},{"title":"4.1.3 我不知道 idontknow","level":"1.5.3","depth":2,"path":"collection/idontknow.md","ref":"collection/idontknow.md","articles":[]},{"title":"4.1.4 数组 array","level":"1.5.4","depth":2,"path":"collection/array.md","ref":"collection/array.md","articles":[]},{"title":"4.1.5 游戏 game","level":"1.5.5","depth":2,"path":"collection/games.md","ref":"collection/games.md","articles":[{"title":"4.1.5.1 拼图 puzzle","level":"1.5.5.1","depth":3,"path":"collection/gameList/puzzle.md","ref":"collection/gameList/puzzle.md","articles":[]},{"title":"4.1.5.2 俄罗斯方块 tetris","level":"1.5.5.2","depth":3,"path":"collection/gameList/tetris.md","ref":"collection/gameList/tetris.md","articles":[]}]},{"title":"4.1.6 浏览器 window","level":"1.5.6","depth":2,"path":"collection/window.md","ref":"collection/window.md","articles":[]}]},"previous":{"title":"3.3.3 图片动画 animateImgShow","level":"1.4.23","depth":2,"path":"plugins/animateImgShow.md","ref":"plugins/animateImgShow.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"code":{"copyButtons":true},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"xumeng","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"XUI文档简介","links":{"sidebar":{"xui-vue":"https://xumengzi.github.io/xui-vue/book/index.html#/","xui-react":"https://xumengzi.github.io/xui-react/build/index"}},"gitbook":"*","description":"一个原生js的ui框架"},"file":{"path":"plugins/backToTop.md","mtime":"2020-04-06T07:59:19.643Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-06T08:00:04.734Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

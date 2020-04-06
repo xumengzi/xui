@@ -2254,6 +2254,16 @@ button.xui_btn:disabled{
 }
 
 
+/* 返回顶部组件 */
+.xui_backtotop{
+    position: fixed;
+    right: 10%;
+    bottom: 10%;
+    padding: 2px 4px;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
 
 /*从上往下淡入*/
 @-webkit-keyframes easeIn{
