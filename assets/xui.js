@@ -8,7 +8,7 @@
       'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-NFNL3B9');
 
-var xuiVersion = '3.0.5';
+var xuiVersion = '3.0.6';
 
 //这段代码用来载页面上加tag标识,可以删掉
 ; (function () {
@@ -2659,6 +2659,7 @@ here is a pullLoad plugin
         cusClass: '',
         right: '10%',
         bottom: '10%',
+        isAnimated: true,
         step: 100,
         timer: null,
         fn: null,
@@ -2667,13 +2668,14 @@ here is a pullLoad plugin
       this.renderHTML();
     };
     renderHTML() {
-      const { id, title, cusClass, right, bottom } = this.opts;
+      const { id, title, cusClass, right, bottom, isAnimated } = this.opts;
       let top = document.createElement('div');
       top.id = id;
       top.classList.add('xui_backtotop');
       cusClass && top.classList.add(cusClass);
       top.style.right = right;
       top.style.bottom = bottom;
+      isAnimated && top.classList.add('isAnimated')
       top.innerHTML = title;
       document.body.append(top);
       this.event(top);
@@ -2682,7 +2684,7 @@ here is a pullLoad plugin
       const { step, fn, timer, target } = this.opts;
       let scrollHeight = document.documentElement.scrollTop || document.body.scrollTop;
       if(target){
-        if(xui.isArray){
+        if(xui.isArray(target)){
           let arrs = [];
           target.forEach(item=>{
             let ele = document.querySelector(`.${item}`);
@@ -2695,7 +2697,7 @@ here is a pullLoad plugin
       }
       scrollHeight -= step;
       if(target){
-        if(xui.isArray){
+        if(xui.isArray(target)){
           target.forEach(item=>{
             let ele = document.querySelector(`.${item}`);
             ele && ele.scrollTo(0, scrollHeight);

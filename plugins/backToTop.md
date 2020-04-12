@@ -15,6 +15,7 @@ xui.backToTop({
 	step: number,
 	right: string,
 	bottom: string,
+	isAnimated: boolean,
 	fn: callback,
 });
 ```
@@ -25,6 +26,7 @@ xui.backToTop({
 * `title`表示返回顶部的文案展示, 支持传标签, 默认为`返回顶部`文案
 * `right`表示返回顶部的位置, 支持`%`, `px`
 * `bottom`表示返回顶部的位置, 支持`%`, `px`
+* `isAnimated`表示返回顶部是否带有阴影动画, 默认为`true`
 * `step`表示返回顶部的速度, 数值越大返回越快, 默认值`100`
 * `fn`表示返回顶部的回调, 返回到了顶部时触发
 * 没有你想要的功能? 快联系我: `xumeng0611@gmail.com`添加吧
@@ -56,6 +58,7 @@ new xui.backToTop({
 	right: '50px',
 	title: '<span style="color: red">返<br/>回<br/>顶<br/>部</span>',
 	step: 50,
+	isAnimated: false,
 	bottom: '200px',
 	fn(){
 		xui.message('finished');

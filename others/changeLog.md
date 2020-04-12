@@ -10,6 +10,13 @@
 
 >修订版本号：每周末（看心情）会进行日常`bugfix`更新
 
+###v3.0.6  <span style="font-size: 16px;">2020/04/12</span>
+##### Add:
+1. 修复[返回顶部](../plugins/backToTop.md)插件设置目标元素不滚动的bug
+2. 组件其它样式优化和动画添加
+
+>是否兼容现有代码：是
+
 ###v3.0.5  <span style="font-size: 16px;">2020/04/06</span>
 ##### Add:
 1. 新增[返回顶部](../plugins/backToTop.md)插件, 快去看看吧
