@@ -2663,6 +2663,7 @@ here is a pullLoad plugin
         step: 100,
         timer: null,
         fn: null,
+        isScroll: true,
       };
       this.opts = Object.assign({}, defaults, args);
       this.renderHTML();
@@ -2711,6 +2712,7 @@ here is a pullLoad plugin
       if(window.requestAnimationFrame){
         if(scrollHeight <= 0){
           cancelAnimationFrame(this.scroll.bind(this));
+          this.opts.isScroll = true;
           fn && fn();
         }else{
           requestAnimationFrame(this.scroll.bind(this));
@@ -2718,17 +2720,20 @@ here is a pullLoad plugin
       }else{
         if(scrollHeight <= 0){
           clearInterval(timer);
+          this.opts.isScroll = true;
           fn && fn();
         };
       };
     };
     event(top) {
       top.addEventListener('click', (e)=>{
+        if(!this.opts.isScroll){return}
         if(window.requestAnimationFrame){
           requestAnimationFrame(this.scroll.bind(this));
         }else{
           this.opts.timer = setInterval(this.scroll.bind(this), 16.7);
-        }
+        };
+        this.opts.isScroll = false;
       });
     };
   };
