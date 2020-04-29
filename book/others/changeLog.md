@@ -10,6 +10,12 @@
 
 >修订版本号：每周末（看心情）会进行日常`bugfix`更新
 
+###v3.0.7  <span style="font-size: 16px;">2020/04/29</span>
+##### Add:
+1. 给项目添加了一个水印. 版权意识,从我做起!
+
+>是否兼容现有代码：是
+
 ###v3.0.6  <span style="font-size: 16px;">2020/04/12</span>
 ##### Add:
 1. 修复[返回顶部](../plugins/backToTop.md)插件设置目标元素不滚动的bug
