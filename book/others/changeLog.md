@@ -10,6 +10,37 @@
 
 >修订版本号：每周末（看心情）会进行日常`bugfix`更新
 
+###v3.0.7  <span style="font-size: 16px;">2020/04/29</span>
+##### Add:
+1. 给项目添加了一个水印. 版权意识,从我做起!
+
+>是否兼容现有代码：是
+
+###v3.0.6  <span style="font-size: 16px;">2020/04/12</span>
+##### Add:
+1. 修复[返回顶部](../plugins/backToTop.md)插件设置目标元素不滚动的bug
+2. 组件其它样式优化和动画添加
+
+>是否兼容现有代码：是
+
+###v3.0.5  <span style="font-size: 16px;">2020/04/06</span>
+##### Add:
+1. 新增[返回顶部](../plugins/backToTop.md)插件, 快去看看吧
+
+>是否兼容现有代码：是
+
+###v2.9.5  <span style="font-size: 16px;">2020/04/04</span>
+##### Add:
+1. 新增哀悼纪念日, 逢中国历史上一些大灾难, 本站点会置灰
+
+>是否兼容现有代码：是
+
+###v2.9.4  <span style="font-size: 16px;">2020/02/24</span>
+##### Add:
+1. 新增[图片放大动画](../plugins/animateImgShow.md)插件, 快去看看吧
+
+>是否兼容现有代码：是
+
 ###v2.8.4  <span style="font-size: 16px;">2019/12/31</span>
 ##### Add:
 1. 写了一个音乐播放器, [快去点点看吧](https://xumengzi.github.io/xui/test/music.html)

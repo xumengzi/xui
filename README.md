@@ -51,3 +51,7 @@ How many codes must a man edit before you call him a master?
 >聊乘化以归尽，乐夫天命复奚疑！
 
 >——节选自陶渊  《归去来兮辞》
+
+***
+*逢中国历史上一些大灾难, 本站点会置灰*
+***

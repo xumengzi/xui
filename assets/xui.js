@@ -8,7 +8,7 @@
       'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-NFNL3B9');
 
-var xuiVersion = '2.8.4';
+var xuiVersion = '3.0.7';
 
 //这段代码用来载页面上加tag标识,可以删掉
 ; (function () {
@@ -24,6 +24,23 @@ var xuiVersion = '2.8.4';
   target && target.insertBefore(lis, target.childNodes[0]);
 })();
 
+;(function(){
+  /*
+    哀悼日纪念
+    2020年4月4日, 哀悼抗击新冠肺炎疫情斗争牺牲的烈士和逝世同胞
+    5月12日则是汶川地震发生时间
+    12月13日是南京大屠杀纪念日
+    待续...
+  */
+  const date = ['4.4', '5.12', '12.13'];
+  let d = new Date();
+  let mm = d.getMonth() + 1;
+  let dd = d.getDate();
+  if(date.includes(`${mm}.${dd}`)){
+    document.getElementsByTagName('html')[0].style.filter = 'grayscale(1)';
+    document.body.style.filter = 'grayscale(1)';
+  };
+})();
 
 /*
  created by xumeng
@@ -252,20 +269,18 @@ include most functions and styles etc.
         choose(e) {
           let tar = e.target.classList;
           if (tar.contains('xui_drop_btn')) {
-            // e.target.nextSibling.classList.remove('none');
             e.target.nextSibling.classList.toggle('none');
-            // if ((e.target.nextSibling.classList.contains('none'))) {
-            // 	console.log('3');
-            // 	e.target.nextSibling.classList.remove('none');
-            // } else{
-            // 	e.target.nextSibling.classList.add('none');
-            // };
           } else if (e.target.parentNode.classList.contains('xui_drop_list')) {
             if (e.target.nodeName == 'INPUT') { return };
-            document.getElementById(args.id).value = e.target.getAttribute('value');
-            e.target.parentNode.previousSibling.value = e.target.getAttribute('value');
+            const data = {
+              value: e.target.getAttribute('value'),
+              label: e.target.innerHTML
+            }
+            document.getElementById(args.id).value = data.value;
+            e.target.parentNode.previousSibling.value = data.value;
             e.target.parentNode.previousSibling.innerHTML = e.target.innerHTML;
             e.target.parentNode.classList.add('none');
+            args.getValue && args.getValue(data);
           } else {
             if (!document.querySelectorAll('.xui_drop_list').length) { return; };
             let newArr = that.toArray(document.querySelectorAll('.xui_drop_list'));
@@ -682,6 +697,77 @@ include most functions and styles etc.
             default:
               break;
           };
+        };
+      };
+      document.body.addEventListener('click', showImgPic, false);
+    },
+    showAnimatedImg(opts) {
+      let defaultOpts = {
+        img: '444',
+        divide: 4,
+        delay: .1,
+        animatedStyle: 'scale',
+      };
+      let styleObj = {
+        translate: 'imgUpDown',
+        rotate: 'imgRotate',
+        skew: 'imgSkew',
+        scale: 'imgScale',
+      }
+      opts = Object.assign(defaultOpts, opts);
+      const { img, divide, delay, animatedStyle } = opts;
+      let that = this;
+      that.deleteEle('xui_img_slider');
+      let sqrt = Math.sqrt(divide);
+      let div = document.createElement('div');
+      div.classList.add('xui_img_slider');
+      let Width = img.naturalWidth;
+      let Height = img.naturalHeight;
+      let temp = `
+        <span class="xui_close"></span>
+        <div class="xui_img_con" 
+          style="
+            width: ${Width / 2}px;
+            height: ${Height / 2}px
+          ">
+        `;
+      let w = 100 / sqrt + '%';
+      let s = 100 * sqrt + '%';
+      let x = 0;
+      let y = 0;
+      let initTime = 0;
+      let four = [
+        [0, 0], [100, 0],
+        [0, 100], [100, 100]
+      ];
+      let nine = [
+        [0, 0], [50, 0], [100, 0],
+        [0, 50], [50, 50], [100, 50],
+        [0, 100], [50, 100], [100, 100]
+      ];
+      let counts = divide == 4 ? four : nine;
+      for (let i = 0; i < divide; i++) {
+        x = counts[i][0];
+        y = counts[i][1];
+        initTime += Number(delay);
+        temp += `
+                <div style="
+                  background-image: url(${img.src});
+                  width: ${w};
+                  height: ${w};
+                  background-position: ${x}% ${y}%;
+                  background-size: ${s} ${s};
+                  animation: .5s ${styleObj[animatedStyle]} 1 ease-in-out;
+                  animation-delay: ${initTime}s;
+              "></div>`;
+      };
+      temp += '</div>';
+      div.innerHTML = temp;
+      document.body.append(div);
+      function showImgPic(e) {
+        if (e.target.className == 'xui_close') {
+          that.deleteEle('.xui_img_slider');
+          document.body.removeEventListener('click', showImgPic, false);
         };
       };
       document.body.addEventListener('click', showImgPic, false);
@@ -2410,6 +2496,9 @@ here is a pullLoad plugin
   Object.getPrototypeOf(xui).digitalscroll = digitalScroll;
 })(window);
 
+/*
+便捷复制菜单 
+*/
 ; (function (w) {
   class selected {
     constructor() {
@@ -2512,7 +2601,7 @@ here is a pullLoad plugin
             var searchEngine = args.searchEngine, list = "";
             for (var i in searchEngine) {
               var s = searchEngine[i];
-              if (searchEngine.hasOwnProperty(i)){
+              if (searchEngine.hasOwnProperty(i)) {
                 (s != "") && (list += "<div class='selectedSearch' _engine=" + s + " title='" + text + "'>使用" + s + "搜索&nbsp;&nbsp;" + (text.toString().substr(0, 10)) + "</div>");
               }
             };
@@ -2528,8 +2617,11 @@ here is a pullLoad plugin
             for (var i = 0; i < ele.childNodes.length; i++) {
               ele.childNodes[i].style.cssText += 'margin: 4px;padding: 4px;cursor: pointer;';
             };
-            var cssStr = 'position: absolute;left: ' + x + 'px;top: ' + y + 'px;color: ' + args.color + ';background: ' + args.background + ';' +
-              'border: 1px #ccc solid;border-radius: 4px;font-size: 13px;box-shadow: 0 1px 1px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.15), 0 8px 8px rgba(0,0,0,0.15);z-index: ' + args.zIndex + '';
+            var cssStr = `
+                        position: absolute;left:${x}px;top:${y}px;color:${args.color};background:${args.background};
+                        border: 1px #ccc solid;border-radius: 4px;font-size: 13px;z-index:${args.zIndex};
+                        box-shadow: 0 1px 1px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.15), 0 8px 8px rgba(0,0,0,0.15);
+                      `;
             ele.style.cssText += cssStr;
             that.init();
           }
@@ -2552,3 +2644,169 @@ here is a pullLoad plugin
   };
   Object.getPrototypeOf(xui).selected = selected;
 })(window);
+
+/*
+返回顶部组件
+*/
+;(function (w){
+  class backToTop {
+    constructor() {
+      const args = arguments[0];
+      const defaults = {
+        id: '',
+        target: '',
+        title: '返回顶部',
+        cusClass: '',
+        right: '10%',
+        bottom: '10%',
+        isAnimated: true,
+        step: 100,
+        timer: null,
+        fn: null,
+        isScroll: true,
+      };
+      this.opts = Object.assign({}, defaults, args);
+      this.renderHTML();
+    };
+    renderHTML() {
+      const { id, title, cusClass, right, bottom, isAnimated } = this.opts;
+      let top = document.createElement('div');
+      top.id = id;
+      top.classList.add('xui_backtotop');
+      cusClass && top.classList.add(cusClass);
+      top.style.right = right;
+      top.style.bottom = bottom;
+      isAnimated && top.classList.add('isAnimated')
+      top.innerHTML = title;
+      document.body.append(top);
+      this.event(top);
+    };
+    scroll(){
+      const { step, fn, timer, target } = this.opts;
+      let scrollHeight = document.documentElement.scrollTop || document.body.scrollTop;
+      if(target){
+        if(xui.isArray(target)){
+          let arrs = [];
+          target.forEach(item=>{
+            let ele = document.querySelector(`.${item}`);
+            ele && arrs.push(ele.scrollTop);
+          });
+          scrollHeight = arrs.sort()[arrs.length-1];
+        }else{
+          scrollHeight = document.querySelector(`.${target}`).scrollTop;
+        }
+      }
+      scrollHeight -= step;
+      if(target){
+        if(xui.isArray(target)){
+          target.forEach(item=>{
+            let ele = document.querySelector(`.${item}`);
+            ele && ele.scrollTo(0, scrollHeight);
+          });
+        }else{
+          document.querySelector(`.${target}`).scrollTo(0, scrollHeight);
+        }
+      }else{
+        window.scrollTo(0, scrollHeight);
+      }
+      if(window.requestAnimationFrame){
+        if(scrollHeight <= 0){
+          cancelAnimationFrame(this.scroll.bind(this));
+          this.opts.isScroll = true;
+          fn && fn();
+        }else{
+          requestAnimationFrame(this.scroll.bind(this));
+        };
+      }else{
+        if(scrollHeight <= 0){
+          clearInterval(timer);
+          this.opts.isScroll = true;
+          fn && fn();
+        };
+      };
+    };
+    event(top) {
+      top.addEventListener('click', (e)=>{
+        if(!this.opts.isScroll){return}
+        if(window.requestAnimationFrame){
+          requestAnimationFrame(this.scroll.bind(this));
+        }else{
+          this.opts.timer = setInterval(this.scroll.bind(this), 16.7);
+        };
+        this.opts.isScroll = false;
+      });
+    };
+  };
+  Object.getPrototypeOf(xui).backToTop = backToTop;
+
+})(window);
+
+
+class waterMark {
+    constructor(options){
+        let defauleOpts = {
+            title: '水印',
+            color: '#ccc',
+            fontSize: 14,
+            rotate: '-20',
+            width: 200,
+            height: 200,
+        };
+        this.opts = Object.assign({}, defauleOpts, options);
+        this.renderHtml();
+        this.event();
+    }
+    event(){
+        window.onresize = ()=>{
+            this.renderHtml();
+        }
+    }
+    renderHtml(){
+        document.querySelector('.water-mark-content') && document.querySelector('.water-mark-content').remove();
+        const { title, color, fontSize , rotate, width, height} = this.opts;
+        let w = document.body.offsetWidth;
+        let h = document.body.offsetHeight;
+        let spans = '';
+        let counts = Math.round(w * h / (width * height));
+        console.log(counts);
+        for(let i = 0; i < counts; i++){
+            spans += `
+                <span style="
+                        color: ${color}; 
+                        width: ${width}px;
+                        height: ${height}px;
+                        font-size: ${fontSize}px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        transform: rotate(${rotate}deg)
+                    ">
+                    ${title}
+                </span>`;
+        };
+        let con = document.createElement('div');
+        con.innerHTML = spans;
+        con.classList.add('water-mark-content');
+        con.style = `
+                    position: fixed;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    padding: 20px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    z-index: 9999;
+                    pointer-events: none;
+                    `;
+        
+        document.body.append(con);
+    }
+}
+
+new waterMark({
+    title: `xui v${xuiVersion}`,
+    color: '#e0e0e0',
+})
