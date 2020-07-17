@@ -8,7 +8,7 @@
       'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-NFNL3B9');
 
-var xuiVersion = '3.0.7';
+var xuiVersion = '3.0.8';
 
 //这段代码用来载页面上加tag标识,可以删掉
 ; (function () {
@@ -24,7 +24,7 @@ var xuiVersion = '3.0.7';
   target && target.insertBefore(lis, target.childNodes[0]);
 })();
 
-;(function(){
+; (function () {
   /*
     哀悼日纪念
     2020年4月4日, 哀悼抗击新冠肺炎疫情斗争牺牲的烈士和逝世同胞
@@ -36,15 +36,15 @@ var xuiVersion = '3.0.7';
   let d = new Date();
   let mm = d.getMonth() + 1;
   let dd = d.getDate();
-  if(date.includes(`${mm}.${dd}`)){
+  if (date.includes(`${mm}.${dd}`)) {
     document.getElementsByTagName('html')[0].style.filter = 'grayscale(1)';
     document.body.style.filter = 'grayscale(1)';
   };
 })();
 
 /*
- created by xumeng
- https://x.xumeng.site/book
+  created by xumeng
+  https://x.xumeng.site/book
 */
 
 /*
@@ -432,8 +432,8 @@ include most functions and styles etc.
       type = undefined;
       if (type == 1) {
         tar.innerHTML = `
-	    			<div>
-			    		<div class="dot circle1"></div>
+          <div>
+            <div class="dot circle1"></div>
 						<div class="dot circle2"></div>
 						<div class="dot circle3"></div>
 						<div class="dot circle4"></div>
@@ -446,27 +446,27 @@ include most functions and styles etc.
 						<div class="dot circle11"></div>
 						<div class="dot circle12"></div>
 					</div>
-		    	`;
+          `;
       } else if (type == 2) {
         tar.innerHTML = `
-	    			<div>
-			    		<div class="dott dot1"></div>
-						<div class="dott dot2"></div>
-						<div class="dott dot3"></div>
-					</div>
-		    	`;
+              <div>
+                <div class="dott dot1"></div>
+                <div class="dott dot2"></div>
+                <div class="dott dot3"></div>
+              </div>
+            `;
       } else {
         tar.innerHTML = `
-	    			<div>
-			    		<div class="fence fence1"></div>
-			    		<div class="fence fence2"></div>
-			    		<div class="fence fence3"></div>
-			    		<div class="fence fence4"></div>
-			    		<div class="fence fence5"></div>
-			    		<div class="fence fence6"></div>
-		    		</div>
-		    		${string ? `<div>${string}</div>` : ``}
-		    	`;
+              <div>
+                <div class="fence fence1"></div>
+                <div class="fence fence2"></div>
+                <div class="fence fence3"></div>
+                <div class="fence fence4"></div>
+                <div class="fence fence5"></div>
+                <div class="fence fence6"></div>
+              </div>
+              ${string ? `<div>${string}</div>` : ``}
+            `;
       }
       tar.classList.add('xui_loading');
       if (typeof ele == 'string') {
@@ -509,8 +509,8 @@ include most functions and styles etc.
       this.deleteEle('xui_message');
       let tar = document.createElement('div');
       tar.innerHTML = `
-	    		<span>${arguments[0]}</span>
-	    	`;
+            <span>${arguments[0]}</span>
+          `;
       tar.classList.add('xui_message');
       document.body.appendChild(tar);
       setTimeout(() => {
@@ -645,18 +645,18 @@ include most functions and styles etc.
       that.deleteEle('xui_img');
       let tar = document.createElement('div');
       tar.innerHTML = `
-	    		<span class="xui_close"></span>
-	    		<div class="xui_img_con">
-	    			<img class="xui_img" src=${arguments[0]} alt="">
-	    			<div class="xui_icon">
-	    				<span class="xui_left" xui-type="1"></span>
-	    				<span class="xui_zoomin" xui-type="2"></span>
-	    				<span class="xui_zoomout" xui-type="3"></span>
-	    				<span class="xui_right" xui-type="4"></span>
-	    				${arguments[1] ? `<a class="xui_download" href=${arguments[0]} target="_blank" download=${arguments[1]}></a>` : ''}
-	    			</div>
-	    		</div>
-	    	`;
+            <span class="xui_close"></span>
+            <div class="xui_img_con">
+              <img class="xui_img" src=${arguments[0]} alt="">
+              <div class="xui_icon">
+                <span class="xui_left" xui-type="1"></span>
+                <span class="xui_zoomin" xui-type="2"></span>
+                <span class="xui_zoomout" xui-type="3"></span>
+                <span class="xui_right" xui-type="4"></span>
+                ${arguments[1] ? `<a class="xui_download" href=${arguments[0]} target="_blank" download=${arguments[1]}></a>` : ''}
+              </div>
+            </div>
+          `;
       tar.classList.add('xui_img_content');
       document.body.appendChild(tar);
       function showImgPic(e) {
@@ -903,18 +903,18 @@ include most functions and styles etc.
       const opts = Object.assign({}, defaults, arguments[0]);
       let tar = document.createElement('div');
       tar.innerHTML = `
-	    		<div class="xui_content">
-	    			${opts.isShowClose ? `<span class="xui_close"></span>` : ``}
-			    	<div class="xui_text">
-			    		<div class="xui_title"><span>${opts.tips}</span></div>
-			    		<div class="tips">${opts.text}</div>
-			    	</div>
-			    	<div class="xui_btn_box">
-				    	${opts.cancelBtn ? '<button class="xui_btn xui_btn_cancel xui_cancel">' + opts.cancelBtn.text + '</button>' : ''}
-				    	${opts.confirmBtn ? '<button class="xui_btn xui_btn_default xui_confirm">' + opts.confirmBtn.text + '</button>' : ''}
-			    	</div>
-			    </div>
-	    	`;
+            <div class="xui_content">
+              ${opts.isShowClose ? `<span class="xui_close"></span>` : ``}
+              <div class="xui_text">
+                <div class="xui_title"><span>${opts.tips}</span></div>
+                <div class="tips">${opts.text}</div>
+              </div>
+              <div class="xui_btn_box">
+                ${opts.cancelBtn ? '<button class="xui_btn xui_btn_cancel xui_cancel">' + opts.cancelBtn.text + '</button>' : ''}
+                ${opts.confirmBtn ? '<button class="xui_btn xui_btn_default xui_confirm">' + opts.confirmBtn.text + '</button>' : ''}
+              </div>
+            </div>
+          `;
       tar.classList.add('xui_prompt');
       document.body.appendChild(tar);
       //callback
@@ -2648,7 +2648,7 @@ here is a pullLoad plugin
 /*
 返回顶部组件
 */
-;(function (w){
+; (function (w) {
   class backToTop {
     constructor() {
       const args = arguments[0];
@@ -2681,44 +2681,44 @@ here is a pullLoad plugin
       document.body.append(top);
       this.event(top);
     };
-    scroll(){
+    scroll() {
       const { step, fn, timer, target } = this.opts;
       let scrollHeight = document.documentElement.scrollTop || document.body.scrollTop;
-      if(target){
-        if(xui.isArray(target)){
+      if (target) {
+        if (xui.isArray(target)) {
           let arrs = [];
-          target.forEach(item=>{
+          target.forEach(item => {
             let ele = document.querySelector(`.${item}`);
             ele && arrs.push(ele.scrollTop);
           });
-          scrollHeight = arrs.sort()[arrs.length-1];
-        }else{
+          scrollHeight = arrs.sort()[arrs.length - 1];
+        } else {
           scrollHeight = document.querySelector(`.${target}`).scrollTop;
         }
       }
       scrollHeight -= step;
-      if(target){
-        if(xui.isArray(target)){
-          target.forEach(item=>{
+      if (target) {
+        if (xui.isArray(target)) {
+          target.forEach(item => {
             let ele = document.querySelector(`.${item}`);
             ele && ele.scrollTo(0, scrollHeight);
           });
-        }else{
+        } else {
           document.querySelector(`.${target}`).scrollTo(0, scrollHeight);
         }
-      }else{
+      } else {
         window.scrollTo(0, scrollHeight);
       }
-      if(window.requestAnimationFrame){
-        if(scrollHeight <= 0){
+      if (window.requestAnimationFrame) {
+        if (scrollHeight <= 0) {
           cancelAnimationFrame(this.scroll.bind(this));
           this.opts.isScroll = true;
           fn && fn();
-        }else{
+        } else {
           requestAnimationFrame(this.scroll.bind(this));
         };
-      }else{
-        if(scrollHeight <= 0){
+      } else {
+        if (scrollHeight <= 0) {
           clearInterval(timer);
           this.opts.isScroll = true;
           fn && fn();
@@ -2726,11 +2726,11 @@ here is a pullLoad plugin
       };
     };
     event(top) {
-      top.addEventListener('click', (e)=>{
-        if(!this.opts.isScroll){return}
-        if(window.requestAnimationFrame){
+      top.addEventListener('click', (e) => {
+        if (!this.opts.isScroll) { return }
+        if (window.requestAnimationFrame) {
           requestAnimationFrame(this.scroll.bind(this));
-        }else{
+        } else {
           this.opts.timer = setInterval(this.scroll.bind(this), 16.7);
         };
         this.opts.isScroll = false;
@@ -2743,34 +2743,34 @@ here is a pullLoad plugin
 
 
 class waterMark {
-    constructor(options){
-        let defauleOpts = {
-            title: '水印',
-            color: '#ccc',
-            fontSize: 14,
-            rotate: '-20',
-            width: 200,
-            height: 200,
-        };
-        this.opts = Object.assign({}, defauleOpts, options);
-        this.renderHtml();
-        this.event();
+  constructor(options) {
+    let defauleOpts = {
+      title: '水印',
+      color: '#ccc',
+      fontSize: 14,
+      rotate: '-20',
+      width: 200,
+      height: 200,
+    };
+    this.opts = Object.assign({}, defauleOpts, options);
+    this.renderHtml();
+    this.event();
+  }
+  event() {
+    window.onresize = () => {
+      this.renderHtml();
     }
-    event(){
-        window.onresize = ()=>{
-            this.renderHtml();
-        }
-    }
-    renderHtml(){
-        document.querySelector('.water-mark-content') && document.querySelector('.water-mark-content').remove();
-        const { title, color, fontSize , rotate, width, height} = this.opts;
-        let w = document.body.offsetWidth;
-        let h = document.body.offsetHeight;
-        let spans = '';
-        let counts = Math.round(w * h / (width * height));
-        console.log(counts);
-        for(let i = 0; i < counts; i++){
-            spans += `
+  }
+  renderHtml() {
+    document.querySelector('.water-mark-content') && document.querySelector('.water-mark-content').remove();
+    const { title, color, fontSize, rotate, width, height } = this.opts;
+    let w = document.body.offsetWidth;
+    let h = document.body.offsetHeight;
+    let spans = '';
+    let counts = Math.round(w * h / (width * height));
+    console.log(counts);
+    for (let i = 0; i < counts; i++) {
+      spans += `
                 <span style="
                         color: ${color}; 
                         width: ${width}px;
@@ -2783,11 +2783,11 @@ class waterMark {
                     ">
                     ${title}
                 </span>`;
-        };
-        let con = document.createElement('div');
-        con.innerHTML = spans;
-        con.classList.add('water-mark-content');
-        con.style = `
+    };
+    let con = document.createElement('div');
+    con.innerHTML = spans;
+    con.classList.add('water-mark-content');
+    con.style = `
                     position: fixed;
                     left: 0;
                     right: 0;
@@ -2801,12 +2801,12 @@ class waterMark {
                     z-index: 9999;
                     pointer-events: none;
                     `;
-        
-        document.body.append(con);
-    }
+
+    document.body.append(con);
+  }
 }
 
 new waterMark({
-    title: `xui v${xuiVersion}`,
-    color: '#e0e0e0',
+  title: `xui v${xuiVersion}`,
+  color: '#e0e0e0',
 })

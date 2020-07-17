@@ -10,6 +10,12 @@
 
 >修订版本号：每周末（看心情）会进行日常`bugfix`更新
 
+###v3.0.8  <span style="font-size: 16px;">2020/06/9</span>
+##### Improvements:
+1. `css`和`js`稍微格式化了一下
+
+>是否兼容现有代码：是
+
 ###v3.0.7  <span style="font-size: 16px;">2020/04/29</span>
 ##### Add:
 1. 给项目添加了一个水印. 版权意识,从我做起!
