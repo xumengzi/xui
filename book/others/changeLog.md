@@ -10,7 +10,13 @@
 
 >修订版本号：每周末（看心情）会进行日常`bugfix`更新
 
-###v3.0.8  <span style="font-size: 16px;">2020/06/9</span>
+###v3.0.9  <span style="font-size: 16px;">2020/06/29</span>
+##### Improvements:
+1. 修改`xui.js`里的防抖, 节流函数的参数名称
+
+>是否兼容现有代码：是
+
+###v3.0.8  <span style="font-size: 16px;">2020/06/09</span>
 ##### Improvements:
 1. `css`和`js`稍微格式化了一下
 

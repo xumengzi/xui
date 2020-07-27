@@ -8,7 +8,7 @@
       'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-NFNL3B9');
 
-var xuiVersion = '3.0.8';
+var xuiVersion = '3.0.9';
 
 //这段代码用来载页面上加tag标识,可以删掉
 ; (function () {
@@ -157,7 +157,7 @@ include most functions and styles etc.
         });
       }, 1000);
     },
-    debounce(fn, await = 300) {
+    debounce(fn, wait = 300) {
       let context, args;
       let timeout;
       return function () {
@@ -166,7 +166,7 @@ include most functions and styles etc.
         args = arguments;
         timeout = setTimeout(() => {
           xui.isFunction(fn) && fn.apply(context, args);
-        }, await);
+        }, wait);
       };
     },
     decodeStr(str) {
@@ -805,11 +805,11 @@ include most functions and styles etc.
           }
         };
       };
-      for (let i = 0; i < tab.length; i++) {
+      for (var i = 0; i < tab.length; i++) {
         i == args.activeIndex && tab[i].classList.add('selected');
         tab[i].onclick = function (e) {
           if (e.currentTarget.className == 'selected') { return; };
-          for (let j in list) {
+          for (var j in list) {
             if (list.hasOwnProperty(j)) {
               if (i == j) {
                 if (args.animateType != 'none') {
@@ -834,8 +834,8 @@ include most functions and styles etc.
         };
       };
     },
-    throttle(fn, await, leading) {
-      await = await || 300;
+    throttle(fn, wait, leading) {
+      wait = wait || 300;
       let context, args;
       let previous = 0,
         timeout = null;
@@ -847,7 +847,7 @@ include most functions and styles etc.
             timeout = setTimeout(() => {
               timeout = null;
               xui.isFunction(fn) && fn.apply(context, args);
-            }, await);
+            }, wait);
           };
         };
       } else {
@@ -855,7 +855,7 @@ include most functions and styles etc.
           context = this;
           args = arguments;
           let now = +new Date();
-          if (now - previous > await) {
+          if (now - previous > wait) {
             previous = now;
             xui.isFunction(fn) && fn.apply(context, args);
           };
@@ -1675,7 +1675,7 @@ here is a cascader plugin
     event() {
       let ele = document.getElementById(this.id),
         tar = ele.querySelectorAll('.xui_select');
-      for (let i = 0; i < tar.length; i++) {
+      for (var i = 0; i < tar.length; i++) {
         tar[i].onchange = (e) => {
           let val = e.target.value;
           i == 0 && (this.val.v0 = val);
