@@ -1,7 +1,7 @@
 <html><head>
 	<title>测试</title>
 	<meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="./assets/xui.css">
+<link rel="stylesheet" type="text/css" href="../assets/xui.css">
 </head>
 <style type="text/css">
 	.done{
@@ -9,6 +9,18 @@
 	}
 </style>
 <body>
+	<div class="xui_tab" id="normalTest">
+		<ul class="xui_tab_head">
+			<li>tab1</li>
+			<li>tab2</li>
+			<li>tab3</li>
+		</ul>
+		<div class="xui_tab_body">
+			<div>内容1</div>
+			<div>内容2</div>
+			<div>内容3</div>
+		</div>
+	</div>
 	<ol>
 		<li>hover日期显示删除按钮 <span class="done">√</span></li>
 		<li>上个月和下个月是否显示可以配置 <span class="done">√</span></li>
@@ -34,8 +46,13 @@
 		</div>
 	</div>
 	<script async="" src="https://www.google-analytics.com/analytics.js"></script>
-	<script type="text/javascript" src="./assets/xui.js"></script>
+	<script type="text/javascript" src="../assets/xui.js"></script>
 	<script type="text/javascript">
+		xui.tab({
+				id: 'normalTest',
+				activeIndex: 1,
+				animateType: 'toLeft',
+			});
 		document.getElementById('test').onclick = function(){
 			xui.calendar({
 				id: 'test', //输入框的id
