@@ -10,6 +10,18 @@
 
 >修订版本号：每周末（看心情）会进行日常`bugfix`更新
 
+###v3.0.11  <span style="font-size: 16px;">2020/08/20</span>
+##### Improvements:
+1. 修复深拷贝`objCopy`函数的传值问题, 使用方法如下:
+```
+// 浅拷贝
+xui.objCopy(obj)
+// 深拷贝
+xui.objCopy(obj, true)
+```
+
+>是否兼容现有代码：是
+
 ###v3.0.10  <span style="font-size: 16px;">2020/07/19</span>
 ##### Improvements:
 1. 修改`tab`切换的`bug`
