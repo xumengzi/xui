@@ -8,7 +8,7 @@
       'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-NFNL3B9');
 
-var xuiVersion = '3.0.11';
+var xuiVersion = '3.0.12';
 
 //这段代码用来载页面上加tag标识,可以删掉
 ; (function () {

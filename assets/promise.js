@@ -1,5 +1,5 @@
 /*
-	promise.js主要是自我提升写的mini版本的promise
+  promise.js主要是自我提升写的mini版本的promise
 */
 class Xpromise {
   constructor(callback) {
@@ -9,7 +9,6 @@ class Xpromise {
 
     this.onResolvedCallbacks = [];
     this.onRejectedCallbacks = [];
-
     const resolve = (val) => {
       if (this.status === 'pending') {
         this.status = 'resolved';
@@ -19,9 +18,8 @@ class Xpromise {
         });
       };
     };
-
     const reject = (err) => {
-      if (this.status === 'reject') {
+      if (this.status === 'pending') {
         this.status = 'rejected';
         this.error = err;
         this.onRejectedCallbacks.forEach(fn => {
@@ -29,8 +27,7 @@ class Xpromise {
         });
       };
     };
-
-    this.isFunction(callback) && callback(resolve);
+    this.isFunction(callback) && callback(resolve, reject);
   }
   isFunction(fn) {
     return typeof fn === 'function';
@@ -50,7 +47,6 @@ class Xpromise {
       this.onRejectedCallbacks.push(() => {
         onrejected(this.error);
       });
-
     };
   }
 };
@@ -60,8 +56,9 @@ const promise = new Xpromise((resolve, reject) => {
     resolve('success');
   }, 1000);
 });
-promise.then(resolve => {
-  console.log(resolve);
+
+promise.then(res => {
+  console.log('res', res);
 }, err => {
-  console.log(err);
+  console.log('err', err);
 });
