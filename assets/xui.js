@@ -44,7 +44,7 @@ var xuiVersion = '3.0.12';
 
 /*
   created by xumeng
-  https://x.xumeng.site/book
+  https://www.xumeng.ink/book/
 */
 
 /*
@@ -1225,7 +1225,7 @@ here is a calendar plugin
 })(window);
 
 /*
-here is a page plugin
+here is a pagination plugin
 */
 ; (function (w) {
   function Page() {
