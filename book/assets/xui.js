@@ -44,7 +44,7 @@ var xuiVersion = '3.0.12';
 
 /*
   created by xumeng
-  https://www.xumeng.ink/book/
+  https://docs.xumeng.ink/book/
 */
 
 /*
