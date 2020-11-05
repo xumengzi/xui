@@ -11,6 +11,8 @@ node_modules
 # _book
 
 # eBook build output
+.vscode
+.prettierrc
 love
 upgrade
 .eslintrc.js

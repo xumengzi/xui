@@ -10,6 +10,13 @@
 
 >修订版本号：每周末（看心情）会进行日常`bugfix`更新
 
+###v3.0.13  <span style="font-size: 16px;">2020/10/30</span>
+##### Improvements:
+1. 完善`.gitignore`文件
+2. [常用方法](../methods/methods.md)增加`xui.js`的图片描述
+
+>是否兼容现有代码：是
+
 ###v3.0.12  <span style="font-size: 16px;">2020/08/30</span>
 ##### Improvements:
 1. 优化自定义`promise.js`
