@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+<body>
+  <script>
+    window.onload = function(){
+      function showMsg(msg){
+        var dom = document.createElement('p');
+        dom.innerHTML = msg;
+        document.body.appendChild(dom);
+        document.title = msg;
+      }
+      function check() {
+        var app = navigator.appVersion;
+        var version;
+        var msg = '客服系统目前只支持谷歌浏览器, 且版本必须大于<b style="color:red">65</b>!详情请咨询客服管理高级专员<b style="color:red">王昭昭</b>';
+        if (app) {
+          var str = app.match(/Chrome\/\d{2}/);
+          if (str) {
+            version = str[0].split('/')[1];
+            if (version >= 65) {
+              msg = '您的浏览器版本为: ' + version;
+            }
+          }
+        }
+        showMsg(msg)
+      };
+      check();
+    }
+  </script>
+</body>
+</html>
