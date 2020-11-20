@@ -278,9 +278,13 @@ button.xui_btn:disabled {
   background: #4eb900;
 }
 
-.xui_radio:disabled+.xui_radio_box, .xui_radio:checked+.xui_radio_box::before {
+.xui_radio:disabled+.xui_radio_box {
   color: #ccc;
   cursor: not-allowed;
+}
+
+.xui_radio:checked+.xui_radio_box::before {
+  color: #ccc;
 }
 
 .xui_checkbox_box {
