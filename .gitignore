@@ -28,3 +28,5 @@ CODE_OF_CONDUCT.md
 CONTRIBUTING.md
 PULL_REQUEST_TEMPLATE.md
 index
+build.sh
+serve.sh
