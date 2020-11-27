@@ -10,6 +10,12 @@
 
 >修订版本号：每周末（看心情）会进行日常`bugfix`更新
 
+###v3.1.14  <span style="font-size: 16px;">2020/11/27</span>
+##### Add:
+1. 增加开发, 部署`shell`命令
+
+>是否兼容现有代码：是
+
 ###v3.0.14  <span style="font-size: 16px;">2020/11/13</span>
 ##### Improvements:
 1. 修复单选框鼠标的状态,`not-allowed` => `pointer`
