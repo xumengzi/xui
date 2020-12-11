@@ -1,7 +1,6 @@
 <html>
-
 <head>
-	<title>music</title>
+	<title>与君共勉</title>
 	<meta charset="utf-8">
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 	<link rel="shortcut icon" type="image/x-icon" href="../others/xu_icon_40.ico" media="screen" />
@@ -18,6 +17,16 @@
 			justify-content: center;
 			align-items: center;
 		}
+		.fixed{
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-image: url(../resources/bg.jpg);
+			background-size: 100% 100%;
+			filter: blur(40px);
+		}
 		.content{
 			width: 100%;
 			height: 100%;
@@ -27,7 +36,6 @@
 			width: 100%;
 			padding: 20px 20px 0 20px;
 			box-sizing: border-box;
-			background: linear-gradient(to bottom, #000, #fafcfd);
 		}
 		.music-box{
 			position: relative;
@@ -36,9 +44,6 @@
 			margin: 0 auto;
 			border-radius: 50%;
 			box-sizing: border-box;
-			/* box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.12), 
-            0 4px 4px rgba(0,0,0,0.12), 0 8px 8px rgba(0,0,0,0.12), 
-            0 16px 16px rgba(0,0,0,0.12); */
 			animation: rotate 8s infinite linear;
 			transition: box-shadow .2s ease-in;
 			z-index: 2;
@@ -101,6 +106,14 @@
 			width: 80%;
 			margin: 20px auto;
 			justify-content: center;
+			opacity: .3;
+			position: relative;
+			border-radius: 4px;
+			transition: opacity .3s ease-in-out;
+		}
+		.setBtn:hover{
+			opacity: 1;
+			background: rgb(0, 0, 0,.3);
 		}
 		.setBtn .xui_slider_bar{
 			width: 80%;
@@ -133,8 +146,7 @@
 			overflow-y: auto;
 			overflow-x: hidden;
 			transition: all .2s ease-in-out;
-			/* background-color: cornsilk; */
-			color: #333;
+			color: #fff;
 			pointer-events: none;
 			font-family: consolas;
 			font-weight: bold;
@@ -147,7 +159,6 @@
 			display: block;
 			width: 100%;
 			height: 200px;
-			background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
 		}
 		.lyrics > div{
 			text-align: center;
@@ -184,38 +195,22 @@
 		}
 		::-webkit-scrollbar
 		{
-				width: 2px;
-				height: 2px;
-		}
-		::-webkit-scrollbar-track-piece
-		{
-				background-color: #ccc;
-				border-radius: 2px;
-		}
-		::-webkit-scrollbar-thumb:vertical
-		{
-				height: 2px;
-				background-color: #999;
-				border-radius: 2px;
-		}
-		::-webkit-scrollbar-thumb:horizontal
-		{
-				width: 2px;
-				background-color: #999;
-				border-radius: 2px;
+				width: 0;
+				height: 0;
 		}
 	</style>
 </head>
 
 <body>
 	<div class="container">
+		<div class="fixed"></div>
 		<audio class="music-source" preload="auto"></audio>
 		<div class="content">
 			<div class="description" id="snow">
 				<div class="music-box paused">
 					<div class="round-1"></div>
 					<div class="round-2"></div>
-					<div class="round-3"></div>
+					<div class="round-3"><img style="display: none;" src="../resources/bg.jpg"/></div>
 					<div class="music-btn"></div>
 				</div>
 			</div>
@@ -234,6 +229,7 @@
 			// 获取资源dom
 			let content = document.querySelector('.lyrics');
 			let btn = document.querySelector('.music-btn');
+			let bg = document.querySelector('.round-3');
 			let source = document.querySelector('.music-source');
 			source.src = "../resources/dreamItPossible.mp3";
 
@@ -245,7 +241,6 @@
 			// 设置下雪效果
 			xui.snowFlake({
 				id: 'snow',
-				direction: 'left',
 			});
 
 			// 获取歌词
@@ -384,6 +379,14 @@
 						par.classList.add('paused');
 					};
 				});
+				bg.addEventListener('click', function (e) {
+					xui.showAnimatedImg({
+						img: e.target.querySelector('img'),
+						divide: Math.random() > .5 ? 4 : 9,
+						delay: .2,
+						animatedStyle: 'scale',
+					});
+				})
 			});
 			source.addEventListener('progress', function () {
 				console.log('progress');

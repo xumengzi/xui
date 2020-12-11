@@ -8,7 +8,7 @@
       'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-NFNL3B9');
 
-var xuiVersion = '3.0.15';
+var xuiVersion = '3.2.15';
 
 //这段代码用来载页面上加tag标识,可以删掉
 ; (function () {
@@ -2808,5 +2808,5 @@ class waterMark {
 
 new waterMark({
   title: `xui v${xuiVersion}`,
-  color: '#e0e0e0',
+  color: 'rgba(255,255,255, .2)',
 })

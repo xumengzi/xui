@@ -1,0 +1,410 @@
+<html>
+<head>
+	<title>与君共勉</title>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<link rel="shortcut icon" type="image/x-icon" href="../others/xu_icon_40.ico" media="screen" />
+	<link rel="stylesheet" type="text/css" href="../assets/xui.css">
+	<style>
+		body{
+			padding: 0;
+			margin: 0;
+		}
+		.container{
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.fixed{
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-image: url(../resources/bg.jpg);
+			background-size: 100% 100%;
+			filter: blur(40px);
+		}
+		.content{
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		.description{
+			width: 100%;
+			padding: 20px 20px 0 20px;
+			box-sizing: border-box;
+		}
+		.music-box{
+			position: relative;
+			width: 280px;
+			height: 280px;
+			margin: 0 auto;
+			border-radius: 50%;
+			box-sizing: border-box;
+			animation: rotate 8s infinite linear;
+			transition: box-shadow .2s ease-in;
+			z-index: 2;
+		}
+		.paused{
+			animation-play-state: paused;
+			box-shadow: none;
+		}
+		.music-box > div{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate3d(-50%, -50%, 0);
+			border-radius: 50%;
+		}
+		.music-box .round-1{
+			width: 100%;
+			height: 100%;
+			background-color: #727574;
+		}
+		.music-box .round-2{
+			width: 95%;
+			height: 95%;
+			background-color: #000;
+		}
+		.music-box .round-3{
+			width: 67%;
+			height: 67%;
+			background-color: rgb(213, 180, 243);
+			background-image: url(../resources/bg.jpg);
+			background-size: 100% 100%;
+		}
+		.music-box .music-btn{
+			width: 30px;
+			height: 30px;
+			line-height: 30px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #fff;
+			font-weight: bold;
+			opacity: 0;
+			transition: all .2s ease-in;
+			user-select: none;
+			background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAZlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+Vn2moAAAAIXRSTlMAQPGA67tO48OWhGQpDd6pOC6/9c6unXRvSUYjFwbUjF1LozhlAAAA1klEQVQ4y4WT2RKCMAxF09qyKYK4757//0nRASlIJ/ch00zOTLNKoPp0yJzLDqeNzGiVp/yU5qtpvLBg/fFyu12O+8+7GMcr8Mm99+6JhyyMr2EpIy3BDZ6Dv7zOsO7fGciMoOryg/McsIHiW58d/p/mYT/V5niJyJOLlI6k8xdNI2Ka1nZKsGVrHtID0AJAUP5LKhZx4MledtRxoGYnKdc4cCWVLWUcKNmqgPqFmqRapt6ovtUhELY6HJYx5mtMMCx13NrCaCunLa2+9vrh6KenH696/m8lqx3DBtyLgQAAAABJRU5ErkJggg==);
+			cursor: pointer;
+		}
+		.paused.music-box .music-btn{
+			background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAflBMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////vroaSAAAAKXRSTlMAQDOAjPllzSYc3theHQ0GqoZ0yJw8F7+2VvLk1Zh8bNqtqU1ENyokDnpo12EAAAECSURBVDjLrVPZcoMwDPR9giEGCuRoerf6/x/sBIwhieOn7Ivl0TJaLWv0ZFQlIS8Pu8T3MKEWqbZm3DKs3N/PWAO97xdGitxwCnVWXAc029d2h7JgcplUpPfjQR8GaDc20FgYtBCKw9sYCXAORdNGAvr9gNNCaIbgL+CVgNB5f/wK0mA+S1BbAiIDzEuNMAsi4FbChFfOpu2BPCT4y+GAJEd8D8FXBWVKpN/LbrlWc9GzlaDeIdrO+lB4GwnicPyMRlmfsPq0Wi04yf8syWKpTSIutdGbwAG9z1hxfb2JzO72k85uQyuk7RKxNy1WzincGs50Kli0gQkNJbmnV1boufgH3F4RBPMreY0AAAAASUVORK5CYII=);
+		}
+		.music-box:hover .music-btn{
+			opacity: 1;
+		}
+		.music-box:active .music-btn{
+			filter: brightness(1.2);
+			transform: translate3d(-50%, -50%, 0) scale(1.1);
+		}
+		.setBtn{
+			display: flex;
+			width: 80%;
+			margin: 20px auto;
+			justify-content: center;
+			opacity: .3;
+			position: relative;
+			border-radius: 4px;
+			transition: opacity .3s ease-in-out;
+		}
+		.setBtn:hover{
+			opacity: 1;
+			background: rgb(0, 0, 0,.3);
+		}
+		.setBtn .xui_slider_bar{
+			width: 80%;
+			max-width: 300px;
+			margin: 20px 0;
+		}
+		.setBtn .xui_slider_bar.volume{
+			width: 100px;
+			margin-left: 100px;
+		}
+		.setBtn .xui_slider_bar.volume::before{
+			content: '';
+			position: absolute;
+			left: -33px;
+			top: -11px;
+			width: 24px;
+			height: 24px;
+			background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAflBMVEUAAABOtwBNugBOuwBNuQBOuQBNugBPuABOuQBOuQBOuQBOuQBNuQBOvABOuQBOuQBNuQBNuQBOugBNugBNugBPuABOuQBOugBOuABOugBNuQBOuQBNuQBOuQBNugBNuQBQuwBNugBVzABOugBOuQBPugBOuQBPuQBSuABOuQAGQ0DFAAAAKXRSTlMAgEoOwJ9yMOba1IxoKaqShmNVTzwg+PLuxrWxpph5QjgdB87MuVtXGcAJa+4AAADmSURBVDjL1ZDZboMwEEWvbbYAIQTIvqfr+f8fLEGIUCr3uT0PV9bMscca/UOWr4mRn8seoJaH1QLeGkP/RFVN+lHCNpIGAT6Gq7mVQihuGgklSdwLEOjKrJbGgo4s+p9T2K7+FGzgpJjtbShNhJBM0onIJzRrLlJN4BMUcZIc3H1CzK7NhJVPuLNpc8fVJ3wyazNl7hMajm2ucT5h/8iYmTyC6VpRv8p3CmMCwpGQPYa7FKsOOg7jEa47HdSTG1OGzlC60SwLVt8w8FI9hZSzJtgAwoClOrJMPzlvIJ3rF+I8n+vP8QUFWRajz8cbegAAAABJRU5ErkJggg==);
+			background-position: 100% 100%;
+			background-size: contain;
+		}
+		.lyrics{
+			position: relative;
+			width: 95%;
+			max-width: 700px;
+			height: 300px;
+			margin: 0 auto;
+			padding: 10px;
+			box-sizing: border-box;
+			overflow-y: auto;
+			overflow-x: hidden;
+			transition: all .2s ease-in-out;
+			color: #fff;
+			pointer-events: none;
+			font-family: consolas;
+			font-weight: bold;
+			font-size: 18px;
+		}
+		.lyrics::after{
+			content: '';
+			position: sticky;
+			bottom: -20px;
+			display: block;
+			width: 100%;
+			height: 200px;
+		}
+		.lyrics > div{
+			text-align: center;
+			min-height: 21px;
+			margin: 10px 0;
+		}
+		.lyrics > div.highlight{
+			color: rgba(241, 0, 0, 0.9);
+			transform: scale(1.2);
+		}
+		@media screen and (max-width: 500px) {
+			.content{
+				width: 100%;
+				height: 100%;
+			}
+			.music-box .music-btn{
+				opacity: 1;
+			}
+			.lyrics{
+				width: 98%;
+				height: 250px;
+			}
+			.lyrics > div.highlight {
+				transform: scale(1.1);
+			}
+		}
+		@keyframes rotate {
+			0%{
+				transform: rotate(0);
+			}
+			100%{
+				transform: rotate(360deg);
+			}
+		}
+		::-webkit-scrollbar
+		{
+				width: 0;
+				height: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="fixed"></div>
+		<audio class="music-source" preload="auto"></audio>
+		<div class="content">
+			<div class="description" id="snow">
+				<div class="music-box paused">
+					<div class="round-1"></div>
+					<div class="round-2"></div>
+					<div class="round-3"><img style="display: none;" src="../resources/bg.jpg"/></div>
+					<div class="music-btn"></div>
+				</div>
+			</div>
+			<div class="setBtn">
+				<div id="sliderBar" class="xui_slider_bar"></div>
+				<div id="sliderBar1" class="xui_slider_bar volume"></div>
+			</div>
+			<div class="lyrics"></div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../assets/xui.js"></script>
+	<script>
+		window.onload = function(){
+			// 获取歌词列表
+			let divs;
+			// 获取资源dom
+			let content = document.querySelector('.lyrics');
+			let btn = document.querySelector('.music-btn');
+			let bg = document.querySelector('.round-3');
+			let source = document.querySelector('.music-source');
+			source.src = "../resources/dreamItPossible.mp3";
+
+			// 设置播放时间
+			let timer = null;
+			// 设置进度条时间
+			let setValue = null;
+			
+			// 设置下雪效果
+			xui.snowFlake({
+				id: 'snow',
+			});
+
+			// 获取歌词
+			const getLyc = () => {
+				xui.ajax({
+					url: '../resources/lyc.text',
+					type: 'get',
+				}).then(res => {
+					res = res.split('\n')
+					for (let i in res) {
+						if (res.hasOwnProperty(i)) {
+							let z = res[i].split(']');
+							let n = res[i - 0 + 1] ? res[i - 0 + 1].split(']') : [''];
+							let ele = document.createElement('div')
+							ele.innerHTML = z[1];
+							let reg = /(\d{2}): (\d{2})\.(\d{2})/;
+							let zt = z[0].match(reg);
+							let nt = n[0].match(reg);
+							let startTemp = zt ? zt[1] * 60 + zt[2] * 1 + zt[3] / 100 : '';
+							let endTemp = nt ? nt[1] * 60 + nt[2] * 1 + nt[3] / 100 : '';
+							ele.setAttribute('data-current', startTemp);
+							ele.setAttribute('data-next', endTemp);
+							content.appendChild(ele);
+						}
+					};
+					divs = content.querySelectorAll('div');
+				}, error => {
+					console.log(error)
+				});
+			}
+			// 本地不去请求歌词
+			const protocol = ['http:', 'https:'];
+			if(protocol.includes(location.protocol)){
+				getLyc();
+			}else{
+				xui.message('本地将不展示歌词!');
+			};
+			/*
+				音频从开始加载到结束, 会依次经历以下事件
+				loadstart- 开始加载音频/视频的时候, 首先发生的事件
+				durationchange-当指定音频/视频的时长数据发生变化时，发生durationchange 事件
+				loadedmetadata-当指定的音频/视频的元数据已加载时，会发生 loadedmetadata 事件
+				loadeddata-当当前帧的数据已加载，但没有足够的数据来播放指定音频/视频的下一帧时，会发生 loadeddata 事件
+				progress-当浏览器正在下载指定的音频/视频时，会发生 progress 事件
+				canplay-当浏览器能够开始播放指定的音频/视频时，发生 canplay 事件
+				canplaythrough-当浏览器预计能够在不停下来进行缓冲的情况下持续播放指定的音频/视频时，会发生 canplaythrough 事件
+				所有的事件均可以写 
+				audio/video.onxx = function(){}
+				audio/video.addEventListener('xx', function(){})
+			*/
+			source.addEventListener('loadstart', function(){
+				console.log('loadstart');
+				xui.loading(true);
+			});
+			// 监听播放事件, 外界可以播放
+			source.addEventListener('playing', function(){
+				console.log('playing');
+				source.play();
+				timer = setInterval(() => {
+					setValue();
+				}, 1000);
+				btn.parentElement.classList.remove('paused');
+			});
+			// 监听暂停事件, 外界可以暂停
+			source.addEventListener('pause', function(){
+				console.log('paused');
+				clearInterval(timer);
+				btn.parentElement.classList.add('paused');
+			});
+			// 当音频/视频加载后，时长将由 "NaN" 变为音频/视频的实际时长。
+			source.addEventListener('durationchange', function(){
+				console.log('durationchange')
+				// 加载进度条
+				let totalTime = Math.round(source.duration);
+				let progress = new xui.sliderBar({
+					id: 'sliderBar',
+					currentVal: 0,
+					initVal: 0,
+					max: totalTime,
+					dragEnd(val) {
+						setValue(val)
+					}
+				});
+				// 调整音量
+				let volume = new xui.sliderBar({
+					id: 'sliderBar1',
+					currentVal: 1,
+					initVal: 0,
+					max: 100,
+					dragEnd(val) {
+						val = val / 100;
+						val = val <= 0 ? 0 : val;
+						source.volume = val;
+					}
+				});
+				
+				setValue = (val) => {
+					let curt = val || source.currentTime
+					// 手动设置时间
+					val && (source.currentTime = val)
+					progress.setCurrentValue(curt, totalTime);
+					// 歌词滚动
+					divs && divs.forEach(item => {
+						// 减去0.5s好像更精确
+						let curTime = item.getAttribute('data-current') - .5;
+						let nextTime = item.getAttribute('data-next') - .5;
+						item.classList.remove('highlight')
+						//高亮并滚动歌词
+						if (curt >= curTime && curt <= nextTime) {
+							item.scrollIntoView({ behavior: 'smooth' });
+							item.classList.add('highlight');
+						};
+					});
+					if (curt >= totalTime) {
+						clearInterval(timer);
+						btn.parentElement.classList.add('paused');
+					};
+				};
+
+				// 设置点击事件等
+				btn.addEventListener('click', function (e) {
+					let par = e.target.parentElement;
+					if (!source) {
+						xui.message('资源未加载, 请重试!');
+						return;
+					};
+					if (par.className.includes('paused')) {
+						source.play();
+						timer = setInterval(() => {
+							setValue();
+						}, 1000);
+						par.classList.remove('paused');
+					} else {
+						source.pause();
+						clearInterval(timer);
+						par.classList.add('paused');
+					};
+				});
+				bg.addEventListener('click', function (e) {
+					xui.showAnimatedImg({
+						img: e.target.querySelector('img'),
+						divide: Math.random() > .5 ? 4 : 9,
+						delay: .2,
+						animatedStyle: 'scale',
+					});
+				})
+			});
+			source.addEventListener('progress', function () {
+				console.log('progress');
+			});
+			source.addEventListener('error', function () {
+				console.log('error');
+				xui.message('资源加载失败, 请重试!');
+			});
+			source.addEventListener('loadeddata', function () {
+				console.log('loadeddata');
+				xui.loading(false);
+			});
+			// 歌曲加载完毕
+			source.addEventListener('canplay', function(){
+				console.log('canplay');
+				xui.loading(false);
+			});
+		};
+	</script>
+</body>
+</html>

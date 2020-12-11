@@ -1,0 +1,31 @@
+<html>
+
+<head>
+  <title>music</title>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover"
+    name="viewport" />
+  <link rel="shortcut icon" type="image/x-icon" href="../others/xu_icon_40.ico" media="screen" />
+  <link rel="stylesheet" type="text/css" href="../assets/xui.css">
+  <style>
+    p {
+      border: 2px solid red;
+      box-sizing: border-box;
+      padding:
+        env(SAFE-AREA-INSET-TOP, 50px) env(safe-area-inset-right, 50px) env(safe-area-inset-bottom, 50px) env(SAFE-AREA-INSET-LEFT, 50px);
+    }
+  </style>
+</head>
+
+<body>
+  <p>
+    If the <code>env()</code> function is supported in your browser,
+    this paragraph’s text will have 50px of padding between it and
+    the left border — but not the top, right and bottom.
+    This is because the accompanying CSS is the equivalent of
+    <code>padding: 0 0 0 50px</code>, because, unlike other CSS
+    properties, user agent property names are case-sensitive.
+  </p>
+</body>
+
+</html>
