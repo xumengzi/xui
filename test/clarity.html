@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <title>测试</title>
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover"
+      name="viewport"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../others/xu_icon_40.ico"
+      media="screen"
+    />
+    <link rel="stylesheet" type="text/css" href="../assets/xui.css" />
+    <script type="text/javascript">
+      ;(function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            ;(c[a].q = c[a].q || []).push(arguments)
+          }
+        t = l.createElement(r)
+        t.async = 1
+        t.src = 'https://www.clarity.ms/tag/' + i
+        y = l.getElementsByTagName(r)[0]
+        y.parentNode.insertBefore(t, y)
+      })(window, document, 'clarity', 'script', '98iu0cm591')
+    </script>
+    <style>
+      .content {
+        display: flex;
+      }
+
+      .content > div {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: 600px;
+        border: 1px#ccc solid;
+        padding: 10px;
+        margin: 10px;
+      }
+      .content iframe{
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p>
+      这是测试
+      <a href="https://github.com/microsoft/clarity" target="_blank">clarity</a>
+      功能的页面
+    </p>
+    <div class="content">
+      <div>这里是正常的文本</div>
+      <div>
+        这里是同域的iframe
+        <iframe src="img.html" frameborder="0"></iframe>
+      </div>
+      <div>
+        这里是跨域的iframe
+        <iframe src="https://bj.meituan.com/" frameborder="0"></iframe>
+      </div>
+    </div>
+  </body>
+</html>
