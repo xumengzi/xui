@@ -1,0 +1,26 @@
+.xui_lazyload{
+    .xui_img_box{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        img.xui_img_load{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .xui_img_loading{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate3d(-50%,-50%,0);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff;
+            z-index: 1;
+        }
+    }
+}

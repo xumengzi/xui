@@ -1,0 +1,150 @@
+<html>
+<head>
+	<title>回顾2020</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../assets/xui.css">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<link rel="shortcut icon" type="image/x-icon" href="../others/xu_icon_40.ico" media="screen" />
+	<style type="text/css">
+		#fullPage{
+			color: #fff;
+		}
+		#fullPage > div{
+			animation: show .8s 1;
+			animation-delay: 0;
+		}
+		#fullPage img{
+			width: 100%;
+		}
+		@keyframes show {
+			0%{
+				opacity: 0;
+			}
+			100%{
+				opacity: .4;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="fullPage" class="xui_full_page">
+		<div>
+			<p>回顾2020年</p>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<div>
+				<p>2020/12/31</p>
+				<p>许孟 in 北京</p>
+			</div>
+		</div>
+		<div>
+			<p>1月</p>
+			<p>武汉疫情, 没有什么好说的</p>
+			<p>一方有难八方支援</p>
+			<p>过...</p>
+		</div>
+		<div>
+			<p>2月</p>
+			<p>老家过年, 日常聊天也都和疫情相关</p>
+		</div>
+		<div>
+			<p>3月</p>
+			<p>在家办公, 日常摸鱼划水</p>
+			<p>也跟着用RN写APP了, 为后续跳槽做准备</p>
+		</div>
+		<div>
+			<p>4月</p>
+			<p>和李化会同学回武汉上班</p>
+			<p>白天在家办公划水, 5点准时去买菜</p>
+			<p>黄焖鸡, 口水鸡, 排骨汤, 可乐鸡翅什么的</p>
+			<p>全部招呼上, 哈哈哈, 隔...</p>
+		</div>
+		<div>
+			<p>5月</p>
+			<p>终于去公司上班了</p>
+			<p>戴着口罩上班, 真难受</p>
+		</div>
+		<div>
+			<p>6, 7, 8月</p>
+			<p>依旧去公司上班</p>
+			<p>依旧戴着口罩上班, 难受</p>
+			<p>开心的事就是和会会骑车去看房子</p>
+		</div>
+		<div>
+			<p>7月</p>
+			<img src="../img/7.jpg"/>
+		</div>
+		<div>
+			<p>9月</p>
+			<img src="../img/9.jpg"/>
+		</div>
+		<div>
+			<p>9月</p>
+			<p>开始复习, 准备面试, 去大厂</p>
+			<p>
+				复习内容有
+				<ul>
+					<li><a href="https://github.com/xumengzi/xui">xui库</a></li>
+					<li><a href="https://github.com/xumengzi/xui-vue">xui-vue组件库</a></li>
+					<li><a href="https://github.com/xumengzi/xui-webpack">迷你版webpack</a></li>
+					<li>前端相关知识点, 包括html, css, js, 以及框架类</li>
+					<li>前端安全, http/http2/https等</li>
+					<li>......</li>
+				</ul>
+			</p>
+		</div>
+		<div>
+			<p>10月</p>
+			<p>信心满满的去面试</p>
+			<p>一路坎坷.</p>
+			<p>有一阵打击, 一脸头大</p>
+			<p>有感觉还行, 没有下文</p>
+			<p>也有面试顺利</p>
+			<p>真正的发现, 在职面试真的累.</p>
+			<p>日常的需求开发上线, 还得准备面试</p>
+			<p>最担心的是怕被领导发现</p>
+			<p>......</p>
+		</div>
+		<div>
+			<p>11月</p>
+			<p>最终拿到了美团的offer</p>
+			<p>希望这是一个跳板</p>
+			<p>后面回武汉能有更好的发展</p>
+		</div>
+		<div>
+			<p>12月</p>
+			<p>朝着梦想进发-北京</p>
+			<p>另外开发了一个前端考试系统</p>
+			<p>预计21年和会会一起学习进步</p>
+			<p>让她也能在北京找一个较满意的工作</p>
+		</div>
+		<div>
+			<p>感谢会会的支持和陪伴</p>
+			<p>许孟&李化会</p>
+			<p>未来要一起加油!</p>
+			<br>
+			<br>
+			<br>
+			<p>完</p>
+		</div>
+	</div>
+	<script type="text/javascript" src="../assets/xui.js"></script>
+	<script type="text/javascript">
+		xui.loading(true)
+		window.onload = function(){
+			xui.fullPage({
+				id: 'fullPage',
+				direction: 'X',
+				transition: '0.8s cubic-bezier(0.29, -0.74, 0.25, 1)',
+			});
+			setTimeout(() => {
+				xui.loading(false);
+			}, 600);
+		}
+	</script>
+</body></html>
