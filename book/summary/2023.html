@@ -1,0 +1,333 @@
+<html>
+
+<head>
+	<title>回顾2020-2023</title>
+	<meta charset="utf-8" />
+	<!-- <link rel="stylesheet" type="text/css" href="../assets/xui.css"> -->
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<link rel="shortcut icon" type="image/x-icon" href="../others/xu_icon_40.ico" media="screen" />
+	<style type="text/css">
+		body {
+			padding: 0;
+			margin: 0;
+		}
+
+		.content {}
+
+		.content>section {
+			/*min-width: 1200px;*/
+		}
+
+		.content>section>div {}
+
+		.content img {
+			border-radius: 10px;
+		}
+
+		.introduce {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+		}
+
+		.selected,
+		.download {
+			width: 100%;
+			height: 950px;
+			font-size: 300%;
+			color: #fff;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			-webkit-animation: fadein 3s;
+			-moz-animation: fadein 3s;
+			-ms-animation: fadein 3s;
+			-o-animation: fadein 3s;
+			animation: fadein 3s;
+		}
+
+		.selected {
+			background: url(./imgs/1.jpg) fixed 100%;
+			background-size: cover;
+		}
+
+		.download {
+			flex-direction: row;
+			color: #000;
+			background: url(./imgs/2.jpg) fixed 100%;
+			background-size: cover;
+		}
+
+		.download a {
+			margin: 10px;
+		}
+
+		@-webkit-keyframes fadein {
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+
+		@-moz-keyframes fadein {
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+
+		@keyframes fadein {
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+
+		.reasons {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			background-color: #263238;
+			color: #fff;
+		}
+
+		.reasons>div {
+			width: 620px;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			align-items: center;
+			margin: 50px 0;
+		}
+
+		.reasons p {
+			font-size: 24px;
+		}
+
+		.who_are_you {
+			height: 80px;
+			display: flex;
+			padding: 30px 10px;
+			flex-direction: column;
+			justify-content: space-around;
+			align-items: center;
+		}
+
+		.who_are_you ul {
+			margin: 0;
+			padding: 0;
+		}
+
+		.who_are_you ul li {
+			list-style: none;
+			padding-right: 15px;
+			border-right: 1px solid #d6d6d6;
+			float: left;
+			height: 18px;
+			margin-right: 15px;
+		}
+
+		.who_are_you ul li:last-child {
+			border: none;
+		}
+
+		.who_are_you ul li a {
+			position: relative;
+			display: block;
+			line-height: 18px;
+			color: #999;
+			text-decoration: none;
+		}
+
+		.who_are_you ul li a:hover::before {
+			content: attr(data-title);
+			height: 30px;
+			position: absolute;
+			top: -40px;
+			left: -30px;
+			line-height: 30px;
+			color: #000;
+			padding: 0 10px;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+			border: 1px #ccc solid;
+			background: #fff;
+			border-radius: 4px;
+			box-shadow: 2px -1px 10px #ccc;
+			z-index: 999;
+		}
+
+		.who_are_you ul li a:hover::after {
+			content: '';
+			width: 10px;
+			height: 10px;
+			position: absolute;
+			top: -15px;
+			left: 30px;
+			border: 1px solid;
+			background: #fff;
+			border-color: #ccc #ccc transparent transparent;
+			transform: rotate(135deg);
+			-webkit-transform: rotate(135deg);
+			-moz-transform: rotate(135deg);
+			z-index: 999;
+		}
+
+		@media screen and (max-width: 1200px) {
+
+			.selected,
+			.download {
+				width: 100%;
+				height: 400px;
+				font-size: 220%;
+			}
+
+			.selected {
+				background: url(../imgs/bg.jpg) bottom center no-repeat;
+				background-size: cover;
+			}
+
+			.download {
+				background: url(../imgs/2.jpg) center center no-repeat;
+				background-size: cover;
+			}
+		}
+
+		@media screen and (max-width: 800px) {
+
+			.selected,
+			.download {
+				width: 100%;
+				height: 200px;
+				font-size: 130%;
+			}
+
+			.selected {
+				background: green;
+			}
+
+			.download {
+				background: #fff;
+			}
+
+			.content img {
+				display: none;
+			}
+
+			.reasons>div {
+				width: auto;
+			}
+
+			.download a {
+				margin: 6px;
+			}
+		}
+
+		::-webkit-scrollbar {
+			width: 6px;
+			height: 6px;
+		}
+
+		::-webkit-scrollbar-track-piece {
+			background-color: #cccccc;
+			-webkit-border-radius: 6px;
+		}
+
+		::-webkit-scrollbar-thumb:vertical {
+			height: 5px;
+			background-color: #999999;
+			-webkit-border-radius: 6px;
+		}
+
+		::-webkit-scrollbar-thumb:horizontal {
+			width: 5px;
+			background-color: #cccccc;
+			-webkit-border-radius: 6px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="content">
+		<section class="what_is_it">
+			<div class="introduce">
+				<div class="selected"></div>
+			</div>
+		</section>
+		<section class="what_is_it">
+			<div class="introduce">
+				<div class="download">
+					selected.js:
+					<a download href="js/selected.js">未压缩版</a>
+					<a download href="js/selected.min.1.0.1.js">压缩版</a>
+					<a href="https://github.com/xumengzi/selectedJs" target="_blank">github</a>
+				</div>
+			</div>
+		</section>
+		<section class="why_choose_it">
+			<div class="reasons">
+				<div>
+					<img src="imgs/pure.jpg" />
+					<div>
+						<p>不依赖任何框架</p>
+						<span>原生JS编写</span>
+					</div>
+				</div>
+				<div>
+					<div>
+						<p>兼容性好</p>
+						<span>IE9及以上的高级浏览器</span>
+					</div>
+					<img src="imgs/compatibility.png" />
+				</div>
+				<div>
+					<img src="imgs/light.jpg" />
+					<div>
+						<p>轻量级</p>
+						<span>压缩后仅3KB,加载方便快捷</span>
+					</div>
+				</div>
+				<div>
+					<div>
+						<p>配置简单</p>
+						<span>自由配置，随心使用</span>
+					</div>
+					<img src="imgs/config.jpg" />
+				</div>
+			</div>
+		</section>
+		<section class="who_are_you">
+			<ul>
+				<li>
+					<a href="mailto:me@xumeng.ink" data-title="me@xumeng.ink" target="_blank">contact me</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" data-title="web front-end developer" target="_blank">about me</a>
+				</li>
+				<li>
+					<a href="https://github.com/xumengzi/selectedJs" data-title="来github提问" target="_blank">bug me</a>
+				</li>
+			</ul>
+			<div>
+				Copyright ©许孟 All rights reserverd 版权所有 2023
+				<a href="http://www.miitbeian.gov.cn/" target="_blank">鄂ICP备16011336号</a>
+			</div>
+		</section>
+	</div>
+</body>
+
+</html>

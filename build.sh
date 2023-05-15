@@ -4,7 +4,7 @@ echo '删除无关文件_book/book'
 rm -fr _book && rm -fr book
 
 echo 'build'
-gitbook build
+nvm use v10.24.0 && gitbook build
 
 echo '改名'
 mv _book book

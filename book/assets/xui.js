@@ -8,21 +8,7 @@
       'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-NFNL3B9');
 
-var xuiVersion = '3.2.15';
-
-//这段代码用来载页面上加tag标识,可以删掉
-; (function () {
-  var img = new Image();
-  img.src = 'https://img.shields.io/badge/xui-v' + xuiVersion + '-brightgreen.svg';
-  var lis = document.createElement('li'),
-    link = document.createElement('a');
-  link.href = 'https://github.com/xumengzi/xui';
-  link.target = '_blank';
-  link.appendChild(img);
-  lis.appendChild(link);
-  var target = document.querySelector('.summary');
-  target && target.insertBefore(lis, target.childNodes[0]);
-})();
+var xuiVersion = '3.2.16';
 
 ; (function () {
   /*
@@ -38,7 +24,6 @@ var xuiVersion = '3.2.15';
   let dd = d.getDate();
   if (date.includes(`${mm}.${dd}`)) {
     document.getElementsByTagName('html')[0].style.filter = 'grayscale(1)';
-    document.body.style.filter = 'grayscale(1)';
   };
 })();
 
