@@ -190,7 +190,13 @@
 				i === 0 && ele[0].classList.add('show_animation');
 				//some options
 				let arr = this.config.colorArr;
-				this.config.isBackground && arr.length && (ele[i].style.background = arr[this.randomNum(0, arr.length - 1)]);
+				if (this.config.isBackground && arr.length) {
+					// (ele[i].style.background = arr[this.randomNum(0, arr.length - 1)]);
+					const pColor = arr[this.randomNum(0, arr.length - 1)];
+					const nColor = arr[this.randomNum(0, arr.length - 1)];
+					const angle = Math.random() * 360 + 1 + 'deg';
+					ele[i].style.backgroundImage = `linear-gradient(${angle}, ${pColor}, ${nColor})`;
+				}
 				this.config.isShowDot && ele[i].setAttribute('data-page', `${i+1}/${ele.length}`);
 				if (i < fst) {
 					ele[i].style.transform = `translate${dir}(-100%)`;

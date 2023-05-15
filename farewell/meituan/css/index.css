@@ -275,21 +275,27 @@ ol li {
   transition: 1s ease;
   overflow: hidden;
 }
-.li_full_page div.first-page{
-  background: url('../images/bg.png');
-}
 .li_full_page .li_page::after {
   content: attr(data-page);
-  position: absolute;
-  right: 10%;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
   font-size: 20px;
-  border-radius: 50%;
-  padding: 0.2em;
+  display: inline-block;
+  text-align: center;
+  width: 200px;
+  height: 32px;
+  line-height: 32px;
+  position: absolute;
+  top: 30px;
+  right: -50px;
+  z-index: 2;
+  overflow: hidden;
+  transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  border: 1px dashed;
+  box-shadow: 0 0 0 3px #57DD43, 0px 21px 5px -18px rgba(0,0,0,0.6);
+  background: #57DD43;
 }
 .first-page .first-position {
   position: absolute;
@@ -332,6 +338,7 @@ ol li {
 }
 .triangle .catalog {
   font-size: 2rem;
+  color: #fff;
   font-weight: bold;
   text-align: center;
   line-height: 10rem;
@@ -672,6 +679,10 @@ code {
     width: 80%;
     height: 80%;
     font-size: 1rem;
+  }
+  .future{
+    top: 0;
+    position: absolute;
   }
   .dida{
     animation: none;
