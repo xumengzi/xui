@@ -15,58 +15,23 @@
 
 <body>
 	<div class="container">
-		<img class="example" src="../img/test.jpg" />
 		<img class="example1" src="../img/xui.png" />
-		<button id="btn">click</button>
-		<button id="btn1">click1</button>
 		<button id="btn2">click2</button>
-		<select class="xui_select" id="style">
-			<option value="translate">translate 1</option>
-			<option value="rotate">rotate 2</option>
-			<option value="skew">skew 3</option>
-			<option value="scale">scale 4</option>
-		</select>
 	</div>
 	<script type="text/javascript" src="../assets/xui.js"></script>
 	<script>
 		window.onload = function(){
-			let btn = document.getElementById('btn');
-			let btn1 = document.getElementById('btn1');
 			let btn2 = document.getElementById('btn2');
-			let imgSrc = document.querySelector('.example');
 			let imgSrc1 = document.querySelector('.example1');
-
-			btn1.addEventListener('click', function(){
-				xui.showImg(img.src);
-			})
-
-			let divide = 9;
-			btn.addEventListener('click', function(){
-				xui.showAnimatedImg({
-					img: imgSrc,
-					divide: 4,
-					delay: .1,
-					animatedStyle: 'rotate',
-				})
-			});
-
-			let test = xui.dropDown({
-				id: 'style',
-				getValue(data){
-					console.log(data);
-				}
-			});
 
 			btn2.addEventListener('click', function(){
 				xui.showAnimatedImg({
 					img: imgSrc1,
-					divide: 9,
-					delay: .1,
-					animatedStyle: 'scale',
+					number: 5,
+					delay: 0.1,
+					animatedStyle: 'translate',
 				});
 			});
-
-			
 		}
 	</script>
 </body>

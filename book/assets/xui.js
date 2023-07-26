@@ -8,7 +8,7 @@
       'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer', 'GTM-NFNL3B9');
 
-var xuiVersion = '3.2.16';
+var xuiVersion = '3.3.16';
 
 ; (function () {
   /*
@@ -689,7 +689,7 @@ include most functions and styles etc.
     showAnimatedImg(opts) {
       let defaultOpts = {
         img: '444',
-        divide: 4,
+        number: 4,
         delay: .1,
         animatedStyle: 'scale',
       };
@@ -700,10 +700,10 @@ include most functions and styles etc.
         scale: 'imgScale',
       }
       opts = Object.assign(defaultOpts, opts);
-      const { img, divide, delay, animatedStyle } = opts;
+      const { img, delay, animatedStyle, number } = opts;
       let that = this;
       that.deleteEle('xui_img_slider');
-      let sqrt = Math.sqrt(divide);
+      let sqrt = number;
       let div = document.createElement('div');
       div.classList.add('xui_img_slider');
       let Width = img.naturalWidth;
@@ -713,30 +713,19 @@ include most functions and styles etc.
         <div class="xui_img_con" 
           style="
             width: ${Width / 2}px;
-            height: ${Height / 2}px
-          ">
-        `;
+            height: ${Height / 2}px;
+            opacity: 0;
+          ">`;
       let w = 100 / sqrt + '%';
       let s = 100 * sqrt + '%';
       let x = 0;
       let y = 0;
       let initTime = 0;
-      let four = [
-        [0, 0], [100, 0],
-        [0, 100], [100, 100]
-      ];
-      let nine = [
-        [0, 0], [50, 0], [100, 0],
-        [0, 50], [50, 50], [100, 50],
-        [0, 100], [50, 100], [100, 100]
-      ];
-      let counts = divide == 4 ? four : nine;
-      for (let i = 0; i < divide; i++) {
+      let counts = this.genrateArr(number - 0);
+      for (let i = 0; i < Math.pow(sqrt, 2); i++) {
         x = counts[i][0];
         y = counts[i][1];
-        initTime += Number(delay);
-        temp += `
-                <div style="
+        temp += `<div style="
                   background-image: url(${img.src});
                   width: ${w};
                   height: ${w};
@@ -744,11 +733,16 @@ include most functions and styles etc.
                   background-size: ${s} ${s};
                   animation: .5s ${styleObj[animatedStyle]} 1 ease-in-out;
                   animation-delay: ${initTime}s;
-              "></div>`;
+        "></div>`;
+
+        initTime += Number(delay);
       };
       temp += '</div>';
       div.innerHTML = temp;
       document.body.append(div);
+      setTimeout(() => {
+        document.querySelector('.xui_img_con').style.opacity = 1;
+      }, 100)
       function showImgPic(e) {
         if (e.target.className == 'xui_close') {
           that.deleteEle('.xui_img_slider');
@@ -756,6 +750,24 @@ include most functions and styles etc.
         };
       };
       document.body.addEventListener('click', showImgPic, false);
+    },
+    genrateArr(number) {
+      if (number <= 0 || !Number.isInteger(number)) {
+          throw new Error('请输入合法的数字');
+      }
+      var initPercent = 100;
+  
+      var each = initPercent / (number - 1);
+  
+      var resArr = [];
+      for(var i = 0; i < number; i++) {
+          for(var j = 0; j < number; j++) {
+              resArr.push([
+                  j*each, i*each
+              ])
+          }
+      }
+      return resArr
     },
     snowFlake() {
       let args = arguments[0],
@@ -2753,7 +2765,6 @@ class waterMark {
     let h = document.body.offsetHeight;
     let spans = '';
     let counts = Math.round(w * h / (width * height));
-    console.log(counts);
     for (let i = 0; i < counts; i++) {
       spans += `
                 <span style="

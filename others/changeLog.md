@@ -10,6 +10,12 @@
 
 >修订版本号：每周末（看心情）会进行日常`bugfix`更新
 
+###v3.3.16  <span style="font-size: 16px;">2023/07/26</span>
+##### Improvements:
+1. [图片放大动画](../plugins/animateImgShow.md)支持展示任意数量的配置啦, 快去看看吧
+
+>是否兼容现有代码：是
+
 ###v3.2.16  <span style="font-size: 16px;">2023/05/15</span>
 ##### Add:
 1. 与君离别, 江湖再见

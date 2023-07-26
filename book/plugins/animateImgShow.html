@@ -765,6 +765,7 @@
 <pre><code class="lang-js">xui.showAnimatedImg({
     img: src,
     divide: number,
+    number: number,
     delay: string,
     animatedStyle: string,
 });
@@ -772,7 +773,8 @@
 <ul>
 <li>&#x7ED9;&#x56FE;&#x7247;&#x4E00;&#x4E2A;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;(&#x6216;&#x8005;&#x522B;&#x7684;),&#x7136;&#x540E;&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x5373;&#x53EF;&#x67E5;&#x770B;&#x5927;&#x56FE;</li>
 <li><code>img</code>&#x8868;&#x793A;&#x56FE;&#x7247;&#x7684;<code>src</code> <strong>&#x5FC5;&#x4F20;</strong></li>
-<li><code>divide</code>&#x8868;&#x793A;&#x56FE;&#x7247;&#x5206;&#x4E3A;&#x51E0;&#x5757;&#x5C55;&#x793A;, &#x9ED8;&#x8BA4;4, &#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x4E3A;9</li>
+<li><code>divide</code>&#x8868;&#x793A;&#x56FE;&#x7247;&#x5206;&#x4E3A;&#x51E0;&#x5757;&#x5C55;&#x793A;, &#x9ED8;&#x8BA4;4, &#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x4E3A;9&#xFF0C;&#x540E;&#x671F;&#x5E9F;&#x5F03;</li>
+<li><code>number</code>&#x8868;&#x793A;&#x56FE;&#x7247;&#x5206;&#x4E3A;&#x51E0;&#x5757;&#x5C55;&#x793A;, &#x9ED8;&#x8BA4;4&#xFF0C;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x5176;&#x4ED6;&#x6570;&#x5B57;</li>
 <li><code>delay</code>&#x8868;&#x793A;&#x56FE;&#x7247;&#x5206;&#x5272;&#x4E4B;&#x540E;&#x7684;&#x52A8;&#x753B;&#x5EF6;&#x65F6;</li>
 <li><code>animatedStyle</code>&#x8868;&#x793A;&#x56FE;&#x7247;&#x6253;&#x5F00;&#x4E4B;&#x540E;&#x7684;&#x52A8;&#x753B;&#x6548;&#x679C;, &#x53EF;&#x9009;<code>translate</code>, <code>rotate</code>, <code>skew</code>, <code>scale</code></li>
 <li>&#x6CA1;&#x6709;&#x4F60;&#x60F3;&#x8981;&#x7684;&#x529F;&#x80FD;? &#x5FEB;&#x8054;&#x7CFB;&#x6211;: <code>xumeng0611@gmail.com</code>&#x6DFB;&#x52A0;&#x5427;</li>
@@ -797,7 +799,7 @@ document.getElementById('showImg').onclick = function(e){
 });
 </code></pre>
 <p>2.&#x6211;&#x4EEC;&#x8FD8;&#x53EF;&#x4EE5;&#x7ED9;&#x56FE;&#x7247;&#x8BBE;&#x7F6E;&#x66F4;&#x591A;&#x5C5E;&#x6027;, &#x9009;&#x62E9;&#x52A8;&#x753B;, &#x7136;&#x540E;&#x70B9;&#x51FB;&#x56FE;&#x7247;</p>
-<p>&#x9009;&#x62E9;&#x52A8;&#x753B;:</p>
+<p>&#x9009;&#x62E9;&#x52A8;&#x753B;<code>animatedStyle</code>:</p>
 <select class="xui_select" id="style">
     <option value="translate">translate</option>
     <option value="rotate">rotate</option>
@@ -805,14 +807,23 @@ document.getElementById('showImg').onclick = function(e){
     <option value="scale">scale</option>
 </select>
 
-<p>&#x9009;&#x62E9;&#x5206;&#x5272;&#x6570;&#x91CF;:</p>
+<p>&#x9009;&#x62E9;&#x5206;&#x5272;&#x6570;&#x91CF;<code>number</code>:</p>
 <select class="xui_select" id="count">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
     <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
     <option value="9">9</option>
+    <option value="10">10</option>
 </select>
 
-<p>&#x9009;&#x62E9;&#x5EF6;&#x65F6;delay:</p>
+<p>&#x9009;&#x62E9;&#x5EF6;&#x65F6;<code>delay</code>:</p>
 <select class="xui_select" id="delay">
+    <option value="0.05">0.05s</option>
     <option value="0.1">0.1s</option>
     <option value="0.2">0.2s</option>
     <option value="0.3">0.3s</option>
@@ -856,7 +867,7 @@ imgExample.onclick = function(e){
     var delay = document.getElementById('delay').value;
     xui.showAnimatedImg({
         img: e.target,
-        divide: count,
+        number: count,
         delay: delay,
         animatedStyle: style,
     });
@@ -865,7 +876,7 @@ imgExample.onclick = function(e){
 
 <pre><code class="lang-js">xui.showAnimatedImg({
     img: e.target,
-    divide: <span class="hljs-number">9</span>,
+    number: <span class="hljs-number">9</span>,
     delay: <span class="hljs-number">.2</span>,
     animatedStyle: <span class="hljs-string">&apos;scale&apos;</span>,
 });
@@ -913,7 +924,7 @@ imgExample.onclick = function(e){
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3.3.3 图片动画 animateImgShow","level":"1.4.23","depth":2,"next":{"title":"3.3.4 返回顶部 backToTop","level":"1.4.24","depth":2,"path":"plugins/backToTop.md","ref":"plugins/backToTop.md","articles":[]},"previous":{"title":"3.3.2 数字动画 digitalScroll","level":"1.4.22","depth":2,"path":"plugins/digitalScroll.md","ref":"plugins/digitalScroll.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"code":{"copyButtons":true},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"xumeng","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"XUI文档简介","links":{"sidebar":{"xui-vue":"https://xumengzi.github.io/xui-vue/book/index.html#/","xui-react":"https://xumengzi.github.io/xui-react/build/index"}},"gitbook":"*","description":"一个原生js的ui框架"},"file":{"path":"plugins/animateImgShow.md","mtime":"2020-12-21T10:45:58.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-05-15T10:48:11.290Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3.3.3 图片动画 animateImgShow","level":"1.4.23","depth":2,"next":{"title":"3.3.4 返回顶部 backToTop","level":"1.4.24","depth":2,"path":"plugins/backToTop.md","ref":"plugins/backToTop.md","articles":[]},"previous":{"title":"3.3.2 数字动画 digitalScroll","level":"1.4.22","depth":2,"path":"plugins/digitalScroll.md","ref":"plugins/digitalScroll.md","articles":[]},"dir":"ltr"},"config":{"plugins":["code"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"code":{"copyButtons":true},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"xumeng","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"XUI文档简介","links":{"sidebar":{"xui-vue":"https://xumengzi.github.io/xui-vue/book/index.html#/","xui-react":"https://xumengzi.github.io/xui-react/build/index"}},"gitbook":"*","description":"一个原生js的ui框架"},"file":{"path":"plugins/animateImgShow.md","mtime":"2023-07-26T07:33:32.350Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-07-26T07:42:28.909Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
