@@ -1,0 +1,332 @@
+<html>
+  <head>
+    <title>xui-router</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../assets/xui.css" />
+  </head>
+  <style type="text/css">
+    .router-demo {
+      margin: 0.5em;
+      align-items: baseline;
+    }
+    #router {
+      display: flex;
+      flex-direction: column;
+      width: 400px;
+      height: 400px;
+      /* padding: 0.5em; */
+      border: 1px #ccc solid;
+    }
+    .xui-router-link {
+      background: #b1ebc9;
+      padding: 0.4em;
+    }
+    .xui-route {
+      display: inline-block;
+      margin: 0 0.2em;
+      cursor: pointer;
+    }
+    .xui-route:hover {
+      color: blue;
+      text-decoration: underline;
+    }
+    .xui-router-view {
+      flex: 1;
+      padding: 0.4em;
+      background: antiquewhite;
+    }
+  </style>
+  <body>
+    <div class="xui-flex router-demo">
+      <div class="xui-col-1">
+        <h2>xui-router</h2>
+        请在左侧配置相关路由，文本等信息，点击预览即可查看
+        <button id="preview" class="xui_btn xui_btn_default">预览</button>
+        <textarea
+          class="xui_textarea"
+          style="width: 600px; height: 312px"
+          id="code"
+        ></textarea>
+      </div>
+      <div class="xui-flex xui-col-1"><div id="router"></div></div>
+    </div>
+
+    <script type="text/javascript" src="../assets/xui.js"></script>
+    <script>
+      // 虚拟数据
+      var routerView = document.getElementById('router')
+      var routeList = [
+        {
+          name: 'index',
+          path: 'index',
+          vDom: [
+            {
+              tag: 'b',
+              text: '我是首页index',
+              attrs: {
+                id: 'a',
+                class: 'b',
+              },
+            },
+          ],
+        },
+        {
+          name: 'list',
+          path: 'list',
+          vDom: [
+            {
+              tag: 'div',
+              text: '这是列表页list',
+              attrs: {
+                style: {
+                  color: 'red',
+                  fontSize: 20,
+                  zIndex: 11,
+                },
+                'data-tag': 'xui-index',
+              },
+            },
+          ],
+        },
+        {
+          name: 'about',
+          path: 'about',
+          vDom: [
+            {
+              tag: 'h2',
+              text: '关于我about',
+              children: [
+                {
+                  tag: 'a',
+                  attrs: {
+                    href: 'https://www.baidu.com/',
+                    target: '_blank',
+                  },
+                  text: '百度',
+                },
+              ],
+            },
+          ],
+        },
+      ]
+    </script>
+    <script>
+      // 标签事件
+      const htmlEvents = [
+        'click',
+        'dblclick',
+        'mousedown',
+        'mouseup',
+        'mouseover',
+        'mouseout',
+        'mousemove',
+        'mouseenter',
+        'mouseleave',
+        'keydown',
+        'keyup',
+        'keypress',
+        'submit',
+        'change',
+        'blur',
+        'focus',
+        'load',
+        'beforeunload',
+        'unload',
+        'contextmenu',
+        'drag',
+        'dragstart',
+        'dragend',
+        'dragenter',
+        'dragover',
+        'dragleave',
+        'drop',
+        'touchstart',
+        'touchmove',
+        'touchend',
+        'touchcancel',
+        'input',
+        'resize',
+        'scroll',
+        'hashchange',
+        'popstate',
+      ]
+
+      // vdom 变真实dom
+      function virtual2Dom(arr) {
+        const content = document.createElement('div')
+        function _add(arr, bool) {
+          var tempDom = ''
+          arr.forEach((item, index) => {
+            tempDom = document.createElement(item.tag)
+            tempDom.innerHTML = item.text || ''
+            if (item.attrs) {
+              for (var i in item.attrs) {
+                const val = item.attrs[i]
+                if (i === 'style') {
+                  for (var j in val) {
+                    tempDom.style[j] = val[j]
+                  }
+                } else {
+                  tempDom.setAttribute(i, val)
+                }
+              }
+            }
+            if (item.events) {
+              for (var k in item.events) {
+                const fn = item.events[k]
+                if (typeof fn === 'function' && htmlEvents.includes(k)) {
+                  tempDom.addEventListener(k, fn, false)
+                } else {
+                  console.warn('事件不合法')
+                }
+              }
+            }
+
+            if (item.children && item.children.length) {
+              tempDom.appendChild(_add(item.children))
+            }
+            if (bool) {
+              content.appendChild(tempDom)
+            }
+          })
+          return tempDom
+        }
+        content.appendChild(_add(arr, true))
+        return content
+      }
+    </script>
+    <script type="text/javascript">
+      // 自定义路由库
+      class Router {
+        constructor(routes, options) {
+          if (routes && Array.isArray(routes)) {
+            const defaultOpts = {
+              mode: 'history',
+            }
+            // 路由点击和hashchange的引用
+            this.clickFn = null
+            this.hashChangeFn = null
+            this.opts = Object.assign({}, defaultOpts, options)
+            this.routeList = routes
+            this.routerView = document.getElementById('router')
+            this.oldHash = location.hash.replace('#', '')
+            this.matchRouteData = this.matchRouter(this.oldHash)
+            this.init()
+          } else {
+            throw new Error('路由格式非法')
+          }
+        }
+        init() {
+          console.log('router inited')
+          let routeStr = '<div class="xui-router-link">'
+          this.routeList.forEach((item) => {
+            routeStr += `<span class="xui-route" data-path="${item.path}">${item.name}</span>`
+          })
+          routeStr += '</div><div class="xui-router-view"></div>'
+          this.routerView.innerHTML = routeStr
+          this.routerBox = this.routerView.querySelector('.xui-router-view')
+          this.addEventListener()
+          this.next()
+        }
+        addEventListener() {
+          this.clickFn = this.handleLinkClick.bind(this)
+          this.hashChangeFn = this.hashChange.bind(this)
+          this.routerView.addEventListener('click', this.clickFn, false)
+          window.addEventListener('hashchange', this.hashChangeFn, false)
+        }
+        destroy() {
+          this.routerView.removeEventListener('click', this.clickFn, false)
+          window.removeEventListener('hashchange', this.hashChangeFn, false)
+        }
+        hashChange(e) {
+          if (!e) {
+            return
+          }
+          const { oldURL, newURL } = e
+          const oldPath = this.getUrlpath(oldURL)
+          const newPath = this.getUrlpath(newURL)
+          const { path, vDom } = this.matchRouteData
+          if (newPath !== path) {
+            this.matchRouteData = this.matchRouter(newPath)
+            this.renderRouterView()
+          }
+          this.oldHash = oldPath
+        }
+        getUrlpath(url) {
+          const arr = url.split('#')
+          if (arr && arr.length === 2) {
+            return arr[1]
+          }
+        }
+        handleLinkClick(e) {
+          if (e && e.target.className === 'xui-route') {
+            const dataPath = e.target.getAttribute('data-path')
+            this.matchRouteData = this.matchRouter(dataPath)
+            const { path, vDom } = this.matchRouteData
+            console.log(location.hash, path)
+            if (location.hash.replace('#', '') === path) {
+              return
+            }
+            this.beforeRouteEnter(
+              this.oldHash,
+              path,
+              this.next.bind(this, path)
+            )
+          }
+        }
+        next(currentPath) {
+          const dataPath = currentPath || this.oldHash.replace('#', '')
+          const { path } = this.matchRouteData
+          location.hash = path
+          this.renderRouterView()
+        }
+        renderRouterView() {
+          const { vDom } = this.matchRouteData
+          const dom = virtual2Dom(vDom)
+          this.routerBox.innerHTML = ''
+          this.routerBox.append(dom)
+          this.afterRouteEnter()
+        }
+        matchRouter(path) {
+          return this.routeList.find((route) => route.path === path)
+        }
+        beforeRouteEnter(from, to, next) {
+          next()
+        }
+        afterRouteEnter() {}
+      }
+    </script>
+
+    <script>
+      const code = document.getElementById('code')
+      let router = null
+      code.value = JSON.stringify(routeList, null, 4)
+
+      randerRouter(JSON.parse(code.value))
+
+      function randerRouter(routeList) {
+        if (router) {
+          router.destroy()
+          routerView.innerHTML = ''
+          router = null
+        }
+        console.log(router)
+        router = new Router(routeList, {
+          mode: 'hash',
+        })
+        router.beforeRouteEnter = function (from, to, next) {
+          console.log('路由变化前', from, to)
+          next()
+        }
+        router.afterRouteEnter = function () {
+          console.log('路由变化后')
+        }
+      }
+
+      const p = document.getElementById('preview')
+      p.addEventListener('click', () => {
+        randerRouter(JSON.parse(code.value))
+      })
+    </script>
+  </body>
+</html>
