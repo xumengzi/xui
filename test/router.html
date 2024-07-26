@@ -3,12 +3,18 @@
     <title>xui-router</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="../assets/xui.css" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../others/xu_icon_40.ico"
+      media="screen"
+    />
   </head>
   <style type="text/css">
     .router-demo {
+      width: 80%;
       margin: 0.5em auto;
       align-items: baseline;
-      width: 1200px;
     }
     #router {
       display: flex;
@@ -56,7 +62,11 @@
           id="code"
         ></textarea>
       </div>
-      <div class="xui-flex xui-col-1"><div id="router"></div></div>
+      <div class="xui-col-1">
+        <button id="about" class="xui_btn xui_btn_default">about</button>
+
+        <div id="router"></div>
+      </div>
     </div>
 
     <script type="text/javascript" src="../assets/xui.js"></script>
@@ -69,6 +79,10 @@
         {
           name: 'index',
           path: 'index',
+          query: {
+            a: 1,
+            b: 2,
+          },
           vDom: [
             {
               tag: 'b',
@@ -77,12 +91,34 @@
                 id: 'a',
                 class: 'b',
               },
+              children: [
+                {
+                  tag: 'button',
+                  attrs: {
+                    class: 'xui_btn xui_btn_default',
+                  },
+                  text: 'about',
+                  events: {
+                    click() {
+                      router.push({
+                        path: 'about',
+                        query: {
+                          wtf: 66,
+                        },
+                      })
+                    },
+                  },
+                },
+              ],
             },
           ],
         },
         {
           name: 'list',
           path: 'list',
+          query: {
+            c: 2,
+          },
           vDom: [
             {
               tag: 'div',
@@ -225,8 +261,10 @@
             this.opts = Object.assign({}, defaultOpts, options)
             this.routeList = routes
             this.routerView = document.getElementById('router')
-            this.oldHash = location.hash.replace('#', '')
-            this.matchRouteData = this.matchRouter(this.oldHash)
+            this.oldHash = location.hash
+            if (this.oldHash === '') {
+              this.oldHash = routes[0].path
+            }
             this.init()
           } else {
             throw new Error('路由格式非法')
@@ -250,13 +288,22 @@
         addEventListener() {
           this.clickFn = this.handleLinkClick.bind(this)
           this.hashChangeFn = this.hashChange.bind(this)
-          this.routerView.addEventListener('click', this.clickFn, false)
+          this.routerLink.addEventListener('click', this.clickFn, false)
           window.addEventListener('hashchange', this.hashChangeFn, false)
         }
         destroy() {
-          this.routerView.removeEventListener('click', this.clickFn, false)
+          this.routerLink.removeEventListener('click', this.clickFn, false)
           window.removeEventListener('hashchange', this.hashChangeFn, false)
         }
+        push(args) {
+          if (typeof args === 'string') {
+            this.next(args)
+          } else {
+            const { path, query } = args
+            this.next(path, query)
+          }
+        }
+        go() {}
         hashChange(e) {
           if (!e) {
             return
@@ -274,24 +321,27 @@
         getUrlPath(url) {
           const arr = url.split('#')
           if (arr && arr.length === 2) {
-            return arr[1]
+            return this.getHash(arr[1])
           }
+        }
+        getHash(str) {
+          const reg = /\#([^#?]+)(\?*[^?]*)/g
+          const res = str.replace(reg, `$1`)
+          return res
         }
         handleLinkClick(e) {
           if (e && e.target.classList.contains('xui-route')) {
             const dataPath = e.target.getAttribute('data-path')
             this.matchRouteData = this.matchRouter(dataPath)
-            const { path, vDom } = this.matchRouteData
-            console.log(location.hash, path)
+            const { path, query, vDom } = this.matchRouteData
             if (location.hash.replace('#', '') === path) {
               return
             }
             this.beforeRouteEnter(
               this.oldHash,
               path,
-              this.next.bind(this, path)
+              this.next.bind(this, path, query)
             )
-            this.setLinkStyle(path)
           }
         }
         setLinkStyle(path) {
@@ -304,13 +354,30 @@
             }
           })
         }
-        next(currentPath) {
-          const dataPath = currentPath || this.oldHash.replace('#', '')
-          const { path } = this.matchRouteData
-          location.hash = path
+        next(currentPath, currentQuery) {
+          const dataPath = currentPath || this.getHash(this.oldHash)
+          this.matchRouteData = this.matchRouter(dataPath)
+          const { path, query } = this.matchRouteData
+          const resQuerys = currentQuery || query
+          if (resQuerys) {
+            location.hash = path + this.formatQuerys(resQuerys)
+          } else {
+            location.hash = path
+          }
           this.renderRouterView()
+          this.setLinkStyle(path)
+        }
+        formatQuerys(querys) {
+          let str = '?'
+          for (const i in querys) {
+            str += `${i}=${querys[i]}`
+          }
+          return str
         }
         renderRouterView() {
+          if (!this.matchRouteData) {
+            return
+          }
           const { vDom } = this.matchRouteData
           const dom = virtual2Dom(vDom)
           this.routerBox.innerHTML = ''
@@ -318,11 +385,7 @@
           this.afterRouteEnter()
         }
         matchRouter(path) {
-          let tempPath = path
-          if (path === '') {
-            tempPath = this.routeList[0].path
-          }
-          return this.routeList.find((route) => route.path === tempPath)
+          return this.routeList.find((route) => route.path === path)
         }
         beforeRouteEnter(from, to, next) {
           next()
@@ -333,11 +396,14 @@
 
     <!-- demo相关代码 -->
     <script>
+      const about = document.getElementById('about')
       const code = document.getElementById('code')
+      const p = document.getElementById('preview')
+
       let router = null
       code.value = JSON.stringify(routeList, null, 4)
 
-      randerRouter(JSON.parse(code.value))
+      randerRouter(routeList)
 
       function randerRouter(routeList) {
         if (router) {
@@ -358,9 +424,30 @@
         }
       }
 
-      const p = document.getElementById('preview')
       p.addEventListener('click', () => {
-        randerRouter(JSON.parse(code.value))
+        xui.prompt({
+          tips: '是否重新渲染？',
+          text: '重新渲染后，按钮事件将消失！',
+          isShowClose: true,
+          confirmBtn: {
+            text: 'ok',
+            fn() {
+              randerRouter(JSON.parse(code.value))
+            },
+          },
+          cancelBtn: {
+            text: 'cancel',
+            fn() {},
+          },
+        })
+      })
+      about.addEventListener('click', () => {
+        router.push({
+          path: 'about',
+          query: {
+            wtf: 66,
+          },
+        })
       })
     </script>
   </body>
