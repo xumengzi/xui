@@ -6,8 +6,9 @@
   </head>
   <style type="text/css">
     .router-demo {
-      margin: 0.5em;
+      margin: 0.5em auto;
       align-items: baseline;
+      width: 1200px;
     }
     #router {
       display: flex;
@@ -21,13 +22,20 @@
       background: #b1ebc9;
       padding: 0.4em;
     }
+
     .xui-route {
       display: inline-block;
       margin: 0 0.2em;
       cursor: pointer;
+      padding: 0 0.2em;
+      transition: all 0.3s ease-out;
+    }
+    .xui-route-selected {
+      color: #bf341a;
+      background-color: cornsilk;
+      border-radius: 4px;
     }
     .xui-route:hover {
-      color: blue;
       text-decoration: underline;
     }
     .xui-router-view {
@@ -52,6 +60,8 @@
     </div>
 
     <script type="text/javascript" src="../assets/xui.js"></script>
+
+    <!-- 路由源数据 -->
     <script>
       // 虚拟数据
       var routerView = document.getElementById('router')
@@ -110,6 +120,8 @@
         },
       ]
     </script>
+
+    <!-- 事件相关常量 -->
     <script>
       // 标签事件
       const htmlEvents = [
@@ -195,7 +207,11 @@
         return content
       }
     </script>
-    <script type="text/javascript">
+
+    <!-- 路由相关代码 -->
+    <script>
+      const LINK_NAME_STYLE = 'xui-route'
+      const LINK_NAME_STYLE_SELECTED = 'xui-route-selected'
       // 自定义路由库
       class Router {
         constructor(routes, options) {
@@ -220,10 +236,13 @@
           console.log('router inited')
           let routeStr = '<div class="xui-router-link">'
           this.routeList.forEach((item) => {
-            routeStr += `<span class="xui-route" data-path="${item.path}">${item.name}</span>`
+            const isSelected =
+              item.path === this.oldHash ? LINK_NAME_STYLE_SELECTED : ''
+            routeStr += `<span class="${LINK_NAME_STYLE} ${isSelected}" data-path="${item.path}">${item.name}</span>`
           })
           routeStr += '</div><div class="xui-router-view"></div>'
           this.routerView.innerHTML = routeStr
+          this.routerLink = this.routerView.querySelector('.xui-router-link')
           this.routerBox = this.routerView.querySelector('.xui-router-view')
           this.addEventListener()
           this.next()
@@ -243,8 +262,8 @@
             return
           }
           const { oldURL, newURL } = e
-          const oldPath = this.getUrlpath(oldURL)
-          const newPath = this.getUrlpath(newURL)
+          const oldPath = this.getUrlPath(oldURL)
+          const newPath = this.getUrlPath(newURL)
           const { path, vDom } = this.matchRouteData
           if (newPath !== path) {
             this.matchRouteData = this.matchRouter(newPath)
@@ -252,14 +271,14 @@
           }
           this.oldHash = oldPath
         }
-        getUrlpath(url) {
+        getUrlPath(url) {
           const arr = url.split('#')
           if (arr && arr.length === 2) {
             return arr[1]
           }
         }
         handleLinkClick(e) {
-          if (e && e.target.className === 'xui-route') {
+          if (e && e.target.classList.contains('xui-route')) {
             const dataPath = e.target.getAttribute('data-path')
             this.matchRouteData = this.matchRouter(dataPath)
             const { path, vDom } = this.matchRouteData
@@ -272,7 +291,18 @@
               path,
               this.next.bind(this, path)
             )
+            this.setLinkStyle(path)
           }
+        }
+        setLinkStyle(path) {
+          const linkDom = this.routerLink.childNodes.forEach((item) => {
+            const dataPath = item.getAttribute('data-path')
+            if (dataPath === path) {
+              item.classList.add(LINK_NAME_STYLE_SELECTED)
+            } else {
+              item.classList.remove(LINK_NAME_STYLE_SELECTED)
+            }
+          })
         }
         next(currentPath) {
           const dataPath = currentPath || this.oldHash.replace('#', '')
@@ -288,7 +318,11 @@
           this.afterRouteEnter()
         }
         matchRouter(path) {
-          return this.routeList.find((route) => route.path === path)
+          let tempPath = path
+          if (path === '') {
+            tempPath = this.routeList[0].path
+          }
+          return this.routeList.find((route) => route.path === tempPath)
         }
         beforeRouteEnter(from, to, next) {
           next()
@@ -297,6 +331,7 @@
       }
     </script>
 
+    <!-- demo相关代码 -->
     <script>
       const code = document.getElementById('code')
       let router = null
