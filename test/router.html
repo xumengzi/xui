@@ -85,7 +85,7 @@
           },
           vDom: [
             {
-              tag: 'b',
+              tag: 'div',
               text: '我是首页index',
               attrs: {
                 id: 'a',
@@ -106,6 +106,34 @@
                           wtf: 66,
                         },
                       })
+                    },
+                  },
+                },
+                {
+                  tag: 'input',
+                  attrs: {
+                    placeholder: '请输入',
+                    class: 'xui_input',
+                  },
+                  events: {
+                    input(e) {
+                      console.log('input', e.target.value)
+                    },
+                    change(e) {
+                      console.log('change', e.target.value)
+                    },
+                  },
+                },
+                {
+                  tag: 'code',
+                  text: "console.log('hello, world')",
+                },
+                {
+                  tag: 'img',
+                  attrs: {
+                    src: '../img/bubbleSort.gif',
+                    style: {
+                      width: 380,
                     },
                   },
                 },
@@ -201,12 +229,14 @@
 
       // vdom 变真实dom
       function virtual2Dom(arr) {
-        const content = document.createElement('div')
+        const content = document.createDocumentFragment()
+        // content.classList.add('wtf')
         function _add(arr, bool) {
-          var tempDom = ''
+          let fragment = document.createDocumentFragment()
           arr.forEach((item, index) => {
-            tempDom = document.createElement(item.tag)
-            tempDom.innerHTML = item.text || ''
+            let tempDom = document.createElement(item.tag)
+            tempDom.textContent = item.text
+            fragment.appendChild(tempDom)
             if (item.attrs) {
               for (var i in item.attrs) {
                 const val = item.attrs[i]
@@ -229,17 +259,13 @@
                 }
               }
             }
-
             if (item.children && item.children.length) {
               tempDom.appendChild(_add(item.children))
             }
-            if (bool) {
-              content.appendChild(tempDom)
-            }
           })
-          return tempDom
+          return fragment
         }
-        content.appendChild(_add(arr, true))
+        content.appendChild(_add(arr))
         return content
       }
     </script>
