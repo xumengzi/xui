@@ -64,6 +64,7 @@
       </div>
       <div class="xui-col-1">
         <button id="about" class="xui_btn xui_btn_default">about</button>
+        <button id="back" class="xui_btn xui_btn_default">go(-1)</button>
 
         <div id="router"></div>
       </div>
@@ -284,6 +285,7 @@
             // 路由点击和hashchange的引用
             this.clickFn = null
             this.hashChangeFn = null
+            this.routerStack = []
             this.opts = Object.assign({}, defaultOpts, options)
             this.routeList = routes
             this.routerView = document.getElementById('router')
@@ -329,7 +331,14 @@
             this.next(path, query)
           }
         }
-        go() {}
+        go(delta) {
+          const l = this.routerStack.length
+          if (l && l > 1) {
+            const tempRouter = this.routerStack.splice(l - 2, 1)
+            const nima = this.getHash(tempRouter[0])
+            this.next(nima, null, false)
+          }
+        }
         hashChange(e) {
           if (!e) {
             return
@@ -380,7 +389,7 @@
             }
           })
         }
-        next(currentPath, currentQuery) {
+        next(currentPath, currentQuery, isSaveRouter = true) {
           const dataPath = currentPath || this.getHash(this.oldHash)
           this.matchRouteData = this.matchRouter(dataPath)
           const { path, query } = this.matchRouteData
@@ -389,6 +398,9 @@
             location.hash = path + this.formatQuerys(resQuerys)
           } else {
             location.hash = path
+          }
+          if (isSaveRouter) {
+            this.routerStack.push(location.hash)
           }
           this.renderRouterView()
           this.setLinkStyle(path)
@@ -423,6 +435,7 @@
     <!-- demo相关代码 -->
     <script>
       const about = document.getElementById('about')
+      const back = document.getElementById('back')
       const code = document.getElementById('code')
       const p = document.getElementById('preview')
 
@@ -437,7 +450,6 @@
           routerView.innerHTML = ''
           router = null
         }
-        console.log(router)
         router = new Router(routeList, {
           mode: 'hash',
         })
@@ -474,6 +486,9 @@
             wtf: 66,
           },
         })
+      })
+      back.addEventListener('click', () => {
+        router.go(-1)
       })
     </script>
   </body>
