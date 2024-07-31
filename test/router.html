@@ -335,8 +335,8 @@
           const l = this.routerStack.length
           if (l && l > 1) {
             const tempRouter = this.routerStack.splice(l - 2, 1)
-            const nima = this.getHash(tempRouter[0])
-            this.next(nima, null, false)
+            const prevHash = this.getHash(tempRouter[0])
+            this.setLocationHash(prevHash)
           }
         }
         hashChange(e) {
