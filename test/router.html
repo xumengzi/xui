@@ -325,10 +325,10 @@
         }
         push(args) {
           if (typeof args === 'string') {
-            this.next(args)
+            this.setLocationHash(args)
           } else {
             const { path, query } = args
-            this.next(path, query)
+            this.setLocationHash(path, query)
           }
         }
         go(delta) {
@@ -346,12 +346,17 @@
           const { oldURL, newURL } = e
           const oldPath = this.getUrlPath(oldURL)
           const newPath = this.getUrlPath(newURL)
-          const { path, vDom } = this.matchRouteData
-          if (newPath !== path) {
-            this.matchRouteData = this.matchRouter(newPath)
-            this.renderRouterView()
+          if (!this.matchRouteData) {
+            return
           }
+          this.matchRouteData = this.matchRouter(newPath)
+          const { path, vDom, query } = this.matchRouteData
           this.oldHash = oldPath
+          this.beforeRouteEnter(
+            oldPath,
+            path,
+            this.next.bind(this, path, query)
+          )
         }
         getUrlPath(url) {
           const arr = url.split('#')
@@ -360,38 +365,26 @@
           }
         }
         getHash(str) {
-          const reg = /\#([^#?]+)(\?*[^?]*)/g
+          /*
+          匹配 index #index  #index?a=1  #index?a=1&b=2
+          最终返回 index
+          */
+          const reg = /\#?([^#?]+)(\?*[^?]*)/g
           const res = str.replace(reg, `$1`)
           return res
         }
         handleLinkClick(e) {
           if (e && e.target.classList.contains('xui-route')) {
-            const dataPath = e.target.getAttribute('data-path')
-            this.matchRouteData = this.matchRouter(dataPath)
-            const { path, query, vDom } = this.matchRouteData
-            if (location.hash.replace('#', '') === path) {
-              return
-            }
-            this.beforeRouteEnter(
-              this.oldHash,
-              path,
-              this.next.bind(this, path, query)
-            )
+            const nowPath = e.target.getAttribute('data-path')
+            this.setLocationHash(nowPath)
           }
         }
-        setLinkStyle(path) {
-          const linkDom = this.routerLink.childNodes.forEach((item) => {
-            const dataPath = item.getAttribute('data-path')
-            if (dataPath === path) {
-              item.classList.add(LINK_NAME_STYLE_SELECTED)
-            } else {
-              item.classList.remove(LINK_NAME_STYLE_SELECTED)
-            }
-          })
-        }
-        next(currentPath, currentQuery, isSaveRouter = true) {
-          const dataPath = currentPath || this.getHash(this.oldHash)
-          this.matchRouteData = this.matchRouter(dataPath)
+        setLocationHash(nowPath, currentQuery) {
+          const prevPath = this.getHash(location.hash)
+          if (prevPath === nowPath) {
+            return
+          }
+          this.matchRouteData = this.matchRouter(nowPath)
           const { path, query } = this.matchRouteData
           const resQuerys = currentQuery || query
           if (resQuerys) {
@@ -399,11 +392,26 @@
           } else {
             location.hash = path
           }
+        }
+        setLinkStyle(path) {
+          const tempPath = this.getHash(path)
+          const linkDom = this.routerLink.childNodes.forEach((item) => {
+            const dataPath = item.getAttribute('data-path')
+            if (dataPath === tempPath) {
+              item.classList.add(LINK_NAME_STYLE_SELECTED)
+            } else {
+              item.classList.remove(LINK_NAME_STYLE_SELECTED)
+            }
+          })
+        }
+        next(currentPath, currentQuery, isSaveRouter = true) {
+          const dataPath = currentPath || this.oldHash
+          this.matchRouteData = this.matchRouter(dataPath)
           if (isSaveRouter) {
             this.routerStack.push(location.hash)
           }
+          this.setLinkStyle(dataPath)
           this.renderRouterView()
-          this.setLinkStyle(path)
         }
         formatQuerys(querys) {
           let str = '?'
@@ -423,7 +431,8 @@
           this.afterRouteEnter()
         }
         matchRouter(path) {
-          return this.routeList.find((route) => route.path === path)
+          const tempPath = this.getHash(path)
+          return this.routeList.find((route) => route.path === tempPath)
         }
         beforeRouteEnter(from, to, next) {
           next()
