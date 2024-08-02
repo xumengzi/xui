@@ -118,7 +118,8 @@
                   },
                   events: {
                     input(e) {
-                      console.log('input', e.target.value)
+                      router.getDom('#inpShow').innerHTML =
+                        '输入框的值：' + e.target.value
                     },
                     change(e) {
                       console.log('change', e.target.value)
@@ -126,16 +127,35 @@
                   },
                 },
                 {
+                  tag: 'div',
+                  attrs: {
+                    id: 'inpShow',
+                  },
+                  text: '输入框的值：',
+                },
+                {
                   tag: 'code',
                   text: "console.log('hello, world')",
                 },
                 {
                   tag: 'img',
+                  src: '../img/bubbleSort.gif',
                   attrs: {
-                    src: '../img/bubbleSort.gif',
+                    alt: 'js冒泡排序',
                     style: {
                       width: 380,
                     },
+                  },
+                },
+                {
+                  tag: 'div',
+                  text: '这里一首歌《dreamItPossible》送给你，希望你喜欢',
+                },
+                {
+                  tag: 'audio',
+                  src: '../resources/dreamItPossible.mp3',
+                  attrs: {
+                    controls: true,
                   },
                 },
               ],
@@ -159,6 +179,19 @@
                   zIndex: 11,
                 },
                 'data-tag': 'xui-index',
+              },
+            },
+            {
+              tag: 'br',
+            },
+            {
+              tag: 'embed',
+              src: '../resources/test.pdf',
+              attrs: {
+                style: {
+                  width: '100%',
+                  height: '80%',
+                },
               },
             },
           ],
@@ -228,16 +261,27 @@
         'popstate',
       ]
 
+      const tagHasSrcs = [
+        'img',
+        'script',
+        'iframe',
+        'audio',
+        'vedio',
+        'embed',
+        'input',
+      ]
       // vdom 变真实dom
       function virtual2Dom(arr) {
         const content = document.createDocumentFragment()
-        // content.classList.add('wtf')
         function _add(arr, bool) {
           let fragment = document.createDocumentFragment()
           arr.forEach((item, index) => {
             let tempDom = document.createElement(item.tag)
             tempDom.textContent = item.text
             fragment.appendChild(tempDom)
+            if (tagHasSrcs.includes(item.tag)) {
+              tempDom.src = item.src
+            }
             if (item.attrs) {
               for (var i in item.attrs) {
                 const val = item.attrs[i]
@@ -318,6 +362,12 @@
           this.hashChangeFn = this.hashChange.bind(this)
           this.routerLink.addEventListener('click', this.clickFn, false)
           window.addEventListener('hashchange', this.hashChangeFn, false)
+        }
+        getDom(ele, multiple = false) {
+          if (multiple) {
+            return this.routerBox.querySelectorAll(ele)
+          }
+          return this.routerBox.querySelector(ele)
         }
         destroy() {
           this.routerLink.removeEventListener('click', this.clickFn, false)
