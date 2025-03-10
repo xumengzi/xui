@@ -33,18 +33,14 @@
   };
 
   function toList(args) {
-    var list = '';
-    for (var i in args) {
-      if (args.hasOwnProperty(i)) {
-        list += args[i] + ',';
-      }
-    };
-    list = list.substr(0, list.length - 1);
-    return list;
+    return Object.keys(args)
+      .filter(key => args.hasOwnProperty(key))
+      .map(key => args[key])
+      .join(',');
   }
 
   function jsonS(data) {
-    return typeof json === 'string' ? JSON.parse(data) : JSON.stringify(data);
+    return typeof data === 'string' ? JSON.parse(data) : JSON.stringify(data);
   };
 
   w.addEventListener('error', function (event) {
