@@ -46,11 +46,16 @@ include most functions and styles etc.
           reg = /^([\u4e00-\u9fa5]+|([a-zA-Z]+\s?)+)$/;
           break;
         case "mobile":
-          reg = /^1[34578]\d{9}$/;
+          // Fix: 放宽号段，覆盖 13x/14x/15x/16x/17x/18x/19x
+          reg = /^1[3-9]\d{9}$/;
           break;
         case "email":
           reg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/;
           break;
+        default:
+          // Fix: 之前无 default，未知 type 会走到 `reg.test(str)` 抛
+          //      Cannot read property 'test' of undefined
+          throw new Error('checkLegal: unsupported type "' + type + '"');
       };
       return reg.test(str);
     },
@@ -93,7 +98,7 @@ include most functions and styles etc.
           end = this.now(args.endDate);
         let diff = (end - start) / 1000;
         let day = parseInt((diff / 24 / 3600), 10),
-          hour = parseInt((diff % (24 * 3600) / 3600), 10) - 8,
+          hour = parseInt((diff % (24 * 3600) / 3600), 10),
           minute = parseInt((diff % 3600 / 60), 10),
           second = parseInt((diff % 60), 10);
         day = this.zeroFill(day);
@@ -192,7 +197,10 @@ include most functions and styles etc.
             ele = tar.nextElementSibling,
             search = ele.querySelector('.xui_input_search');
           ele.addEventListener('click', this.choose, false);
-          document.body.onclick = function (e) {
+          // Fix: 原来使用 `document.body.onclick = fn` 会覆盖已有 handler，
+          //      导致同页面多个组件（如 calendar / dropDown）互相冲掉。
+          //      改用 addEventListener 以便共存。
+          document.body.addEventListener('click', function (e) {
             let tar = e.target.classList;
             if (!(tar.contains('xui_drop_li') || tar.contains('xui_drop_btn') || tar.contains('xui_input_search'))) {
               let newArr = [...(document.querySelectorAll('.xui_drop_list'))];
@@ -208,7 +216,7 @@ include most functions and styles etc.
                 }
               };
             }
-          };
+          }, false);
           search && search.addEventListener('keyup', this.search, false);
         },
         search(e) {
@@ -289,7 +297,8 @@ include most functions and styles etc.
       return year + '-' + month + '-' + day;
     },
     formatNumber(number) {
-      if (!isNaN) {
+      // Fix: 原来的 `if (!isNaN)` 是对全局函数取反，恒为 false，校验从未生效
+      if (typeof number !== 'number' || Number.isNaN(number)) {
         throw new Error('Not a number');
       };
       var temp = number.toString().split('.');
@@ -383,14 +392,15 @@ include most functions and styles etc.
       // };
       // return '';
     },
-    loading(isShow, ele, string) {
+    loading(isShow, ele, string, type) {
       //delete already exists
       this.deleteEle('.xui_loading');
       if (!isShow) {
         return;
       };
       let tar = document.createElement('div');
-      type = undefined;
+      // Fix: 原来 `type = undefined;` 会污染全局并让所有分支都走 else，
+      //      导致 type=1/2 的加载动画永远无法触发。这里显式接收 type 参数。
       if (type == 1) {
         tar.innerHTML = `
           <div>
@@ -459,15 +469,17 @@ include most functions and styles etc.
       return typeof fn === 'function';
     },
     isMobile() {
-      return Math.random() > .5
-        ?
-        /(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)
-        :
-        'ontouchstart' in window;
+      // Fix: 原来用 Math.random() 二选一，导致每次结果不一致。
+      //      正确做法：任一条件命中即视为移动端。
+      const isMobileUA = /(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent);
+      const isTouchDevice = 'ontouchstart' in window;
+      return isMobileUA || isTouchDevice;
     },
     message() {
       //delete already exists
-      this.deleteEle('xui_message');
+      // Fix: 原来传 'xui_message' 缺 '.' 前缀，被当成标签选择器 <xui_message>，
+      //      导致旧的 message 从未被清理，同页面连续调用会残留多个提示。
+      this.deleteEle('.xui_message');
       let tar = document.createElement('div');
       tar.innerHTML = `
             <span>${arguments[0]}</span>
@@ -586,15 +598,20 @@ include most functions and styles etc.
       if (!value) {
         throw new Error("cookie'value is required");
       };
-      let now = new Date();
-      let date = now.setDate(days);
-      let newDate = new Date(date);
+      // Fix: 原来 `now.setDate(days)` 是把日期直接设为第 days 天，
+      //      而不是"当前时间 + days 天"。正确做法应加上现有 date。
+      let expires;
+      if (typeof days === 'number') {
+        const d = new Date();
+        d.setDate(d.getDate() + days);
+        expires = d.toUTCString();
+      }
       switch (arguments.length) {
         case 3:
-          document.cookie = name + '=' + value + '; expires=' + newDate;
+          document.cookie = name + '=' + value + '; expires=' + expires;
           break;
         case 4:
-          document.cookie = name + '=' + value + '; expires=' + newDate + '; path=/' + path;
+          document.cookie = name + '=' + value + '; expires=' + expires + '; path=/' + path;
           break;
         default:
           document.cookie = name + '=' + value;
@@ -603,7 +620,8 @@ include most functions and styles etc.
     },
     showImg() {
       let that = this;
-      that.deleteEle('xui_img');
+      // Fix: 原写法 `deleteEle('xui_img')` 缺 '.' 前缀，且类名也错（应为 xui_img_content）
+      that.deleteEle('.xui_img_content');
       let tar = document.createElement('div');
       tar.innerHTML = `
             <span class="xui_close"></span>
@@ -678,7 +696,8 @@ include most functions and styles etc.
       opts = Object.assign(defaultOpts, opts);
       const { img, delay, animatedStyle, number } = opts;
       let that = this;
-      that.deleteEle('xui_img_slider');
+      // Fix: 缺 '.' 前缀
+      that.deleteEle('.xui_img_slider');
       let sqrt = number;
       let div = document.createElement('div');
       div.classList.add('xui_img_slider');
@@ -938,7 +957,8 @@ here is a calendar plugin
     };
     //init
     cal.init();
-    document.body.onclick = function (e) {
+    // Fix: 同 dropDown，避免覆盖已有 body handler
+    document.body.addEventListener('click', function (e) {
       let o = e.target.classList;
       let isClose = o.contains('xui_date_input') || o.contains('xui_calendar_icon') || o.contains('xui_date_picker');
       if (!isClose) {
@@ -948,7 +968,7 @@ here is a calendar plugin
       if (o.contains('xui_close_small')) {
         e.target.parentNode.querySelector('.xui_date_input').value = ''
       };
-    };
+    }, false);
   };
   const cal = {
     config: {},
