@@ -8,6 +8,7 @@ _book/
 .vitepress-cache/
 docs/.vitepress/dist/
 docs/.vitepress/cache/
+docs/public/xui-assets/
 
 # Editor / OS
 .vscode/

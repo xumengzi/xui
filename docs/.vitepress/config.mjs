@@ -1,4 +1,13 @@
 import { defineConfig } from 'vitepress'
+import { fileURLToPath, URL } from 'node:url'
+
+// 解析 docs/public 的绝对路径（避免受 srcDir 相对基准影响）
+const publicDirAbs = fileURLToPath(new URL('../public', import.meta.url))
+
+// 站点 base；本地开发默认 '/xui/'，可用 DOCS_BASE=/ 覆盖
+const SITE_BASE = process.env.DOCS_BASE ?? '/xui/'
+const withBase = (p) =>
+  SITE_BASE.endsWith('/') ? SITE_BASE + p.replace(/^\//, '') : SITE_BASE + p
 
 /**
  * VitePress 用 Vue 编译器解析 Markdown。原 GitBook 时代 md 里习惯写：
@@ -184,15 +193,24 @@ export default defineConfig({
   lang: 'zh-CN',
   // 部署到 https://xumengzi.github.io/xui/ 时子路径为 /xui/
   // 本地开发时若想用 '/'，可用环境变量覆盖：DOCS_BASE=/ npm run docs:dev
-  base: process.env.DOCS_BASE ?? '/xui/',
+  base: SITE_BASE,
+
+  // 在所有页面的 <head> 里直接引入 xui.css / xui.js
+  // 用带 base 前缀的绝对路径，避免相对路径在子目录页面下解析错误
+  // 目录用 xui-assets/ 避开与 VitePress 内部 assets/ 的命名冲突
+  head: [
+    ['link', { rel: 'stylesheet', href: withBase('xui-assets/xui.css') }],
+    ['script', { src: withBase('xui-assets/xui.js'), defer: '' }],
+  ],
 
   // 允许 README 里指向仓库文件（LICENSE 等）的相对链接
   ignoreDeadLinks: [/^\.\/LICENSE$/i, /^\.\/CHANGELOG\.md$/i],
 
   // 直接把仓库根目录作为文档根，避免大迁移
   srcDir: '..',
-  // 把仓库根的 assets/ 作为 VitePress 静态资源目录
-  // 页面里的 /assets/xui.js、/assets/xui.css 将直接命中
+  // 显式指定绝对路径的 publicDir，指向 docs/public/
+  // （srcDir 改到 '..' 后，默认相对基准会指向仓库根 public/，不存在）
+  publicDir: publicDirAbs,
   outDir: '../book',
   cacheDir: '../.vitepress-cache',
 
