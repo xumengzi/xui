@@ -1,0 +1,65 @@
+{
+  "name": "xui-vanilla",
+  "version": "3.3.16",
+  "description": "一个基于原生 JS 的组件库，提供丰富的方法、组件与插件",
+  "author": "xumeng <xumeng0611@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/xui.umd.cjs",
+  "module": "dist/xui.js",
+  "exports": {
+    ".": {
+      "import": "./dist/xui.js",
+      "require": "./dist/xui.umd.cjs"
+    },
+    "./style": "./dist/xui.css"
+  },
+  "files": [
+    "dist",
+    "packages",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss",
+    "**/*.less"
+  ],
+  "scripts": {
+    "dev": "vite --config vite.lib.config.js",
+    "build": "vite build --config vite.lib.config.js",
+    "preview": "vite preview --config vite.lib.config.js",
+    "lint": "eslint \"packages/**/*.js\" \"assets/**/*.js\"",
+    "lint:fix": "eslint \"packages/**/*.js\" \"assets/**/*.js\" --fix",
+    "prepublishOnly": "npm run build",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "less": "^4.2.0",
+    "sass": "^1.77.0",
+    "vite": "^5.2.0",
+    "vitepress": "^1.3.0"
+  },
+  "keywords": [
+    "xui",
+    "ui",
+    "component",
+    "vanilla-js",
+    "native-js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xumengzi/xui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xumengzi/xui/issues"
+  },
+  "homepage": "https://xumengzi.github.io/xui/"
+}

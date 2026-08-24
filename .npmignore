@@ -1,0 +1,36 @@
+# npm publish blacklist（发布到 npm 时排除的内容）
+# 注意：package.json 的 "files" 字段是白名单模式，二者取交集
+
+# 文档源与产物
+docs/
+book/
+_book/
+
+# 私人内容 / 非组件库资源
+apologize/
+farewell/
+love/
+summary/
+upgrade/
+test/
+resources/
+img/
+plugins/
+methods/
+styles/
+collection/
+others/
+
+# 站点元数据
+_config.yml
+SUMMARY.md
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+PULL_REQUEST_TEMPLATE.md
+
+# 配置
+.eslintrc.cjs
+.prettierrc
+.github/
+.vscode/
+vite.lib.config.js

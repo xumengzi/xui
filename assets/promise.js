@@ -3,62 +3,62 @@
 */
 class Xpromise {
   constructor(callback) {
-    this.resolve = undefined;
-    this.error = undefined;
-    this.status = 'pending';
+    this.resolve = undefined
+    this.error = undefined
+    this.status = 'pending'
 
-    this.onResolvedCallbacks = [];
-    this.onRejectedCallbacks = [];
+    this.onResolvedCallbacks = []
+    this.onRejectedCallbacks = []
     const resolve = (val) => {
       if (this.status === 'pending') {
-        this.status = 'resolved';
-        this.resolve = val;
+        this.status = 'resolved'
+        this.resolve = val
         this.onResolvedCallbacks.forEach(fn => {
-          this.isFunction(fn) && fn();
-        });
-      };
-    };
+          this.isFunction(fn) && fn()
+        })
+      }
+    }
     const reject = (err) => {
       if (this.status === 'pending') {
-        this.status = 'rejected';
-        this.error = err;
+        this.status = 'rejected'
+        this.error = err
         this.onRejectedCallbacks.forEach(fn => {
-          this.isFunction(fn) && fn();
-        });
-      };
-    };
-    this.isFunction(callback) && callback(resolve, reject);
+          this.isFunction(fn) && fn()
+        })
+      }
+    }
+    this.isFunction(callback) && callback(resolve, reject)
   }
   isFunction(fn) {
-    return typeof fn === 'function';
+    return typeof fn === 'function'
   }
   then(onfulfilled, onrejected) {
     if (this.status === 'resolved') {
-      this.isFunction(onfulfilled) && onfulfilled(this.resolve);
-    };
+      this.isFunction(onfulfilled) && onfulfilled(this.resolve)
+    }
     if (this.status === 'rejected') {
-      this.isFunction(onrejected) && onrejected(this.error);
-    };
+      this.isFunction(onrejected) && onrejected(this.error)
+    }
     if (this.status === 'pending') {
       this.onResolvedCallbacks.push(() => {
-        onfulfilled(this.resolve);
-      });
+        onfulfilled(this.resolve)
+      })
 
       this.onRejectedCallbacks.push(() => {
-        onrejected(this.error);
-      });
-    };
+        onrejected(this.error)
+      })
+    }
   }
-};
+}
 
 const promise = new Xpromise((resolve, reject) => {
   setTimeout(() => {
-    resolve('success');
-  }, 1000);
-});
+    resolve('success')
+  }, 1000)
+})
 
 promise.then(res => {
-  console.log('res', res);
+  console.log('res', res)
 }, err => {
-  console.log('err', err);
-});
+  console.log('err', err)
+})

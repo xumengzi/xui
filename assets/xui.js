@@ -1,31 +1,7 @@
-//这段代码是GA, 可以删掉
-; (function (w, d, s, l, i) {
-  w[l] = w[l] || []; w[l].push({
-    'gtm.start':
-      new Date().getTime(), event: 'gtm.js'
-  }); var f = d.getElementsByTagName(s)[0],
-    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-      'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-})(window, document, 'script', 'dataLayer', 'GTM-NFNL3B9');
+// 说明：Google Tag Manager 和"哀悼日置灰"逻辑属于文档站点的副作用，
+// 已从组件库中剥离，改由文档站点单独加载（见 assets/site.js）。
 
 var xuiVersion = '3.3.16';
-
-; (function () {
-  /*
-    哀悼日纪念
-    2020年4月4日, 哀悼抗击新冠肺炎疫情斗争牺牲的烈士和逝世同胞
-    5月12日则是汶川地震发生时间
-    12月13日是南京大屠杀纪念日
-    待续...
-  */
-  const date = ['4.4', '5.12', '12.13'];
-  let d = new Date();
-  let mm = d.getMonth() + 1;
-  let dd = d.getDate();
-  if (date.includes(`${mm}.${dd}`)) {
-    document.getElementsByTagName('html')[0].style.filter = 'grayscale(1)';
-  };
-})();
 
 /*
   created by xumeng
@@ -2802,7 +2778,6 @@ class waterMark {
   }
 }
 
-new waterMark({
-  title: `xui v${xuiVersion}`,
-  color: 'rgba(255,255,255, .2)',
-})
+// 注意：waterMark 定义保留，但不再自动实例化。
+// 库的使用者若需要水印，请显式调用：new waterMark({ title: 'xxx' })
+// 文档站点若需展示版本水印，请在文档模板层面单独引入。
