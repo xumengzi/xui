@@ -36,14 +36,47 @@ jobs:
       - name: Build VitePress docs
         run: npm run docs:build
 
+      # 组装最终发布目录：
+      # - book/*      -> _site/            （VitePress 生成的文档主站，位于 /xui/）
+      # - assets/     -> _site/assets/     （老 HTML 用相对路径 ../assets/xui.js 引用）
+      # - farewell/   -> _site/farewell/   （静态 HTML 页面）
+      # - love/       -> _site/love/
+      # - test/       -> _site/test/
+      # - others/     -> _site/others/
+      # - apologize/  -> _site/apologize/
+      # - summary/    -> _site/summary/
+      # - img/        -> _site/img/        （老页面共用的图片）
+      # - resources/  -> _site/resources/  （老页面共用的资源，比如音频）
+      - name: Assemble site
+        run: |
+          set -e
+          rm -rf _site
+          mkdir -p _site
+          # 1) VitePress 产物 -> _site 根
+          cp -R book/. _site/
+          # 2) 静态 HTML 目录 -> _site/<dir>
+          #    使用 <src>/. <dst>/ 保证是"合并"而不是"作为子目录写入"，
+          #    这样 assets/ 会与 VitePress 生成的 _site/assets/ 正确合并。
+          for d in assets farewell love test others apologize summary img resources; do
+            if [ -d "$d" ]; then
+              mkdir -p "_site/$d"
+              cp -R "$d/." "_site/$d/"
+              echo "included: $d"
+            fi
+          done
+          echo '---_site top level:'
+          ls _site/
+          echo '---sanity check:'
+          test -f _site/assets/xui.js && echo "OK: assets/xui.js exists"
+          test -f _site/assets/xui.css && echo "OK: assets/xui.css exists"
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # 与 docs/.vitepress/config.mjs 里的 outDir 保持一致
-          path: book
+          path: _site
 
   deploy:
     needs: build

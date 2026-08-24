@@ -39,7 +39,10 @@
     "docs:copy-assets": "node scripts/copy-public-assets.mjs",
     "docs:dev": "npm run docs:copy-assets && vitepress dev docs",
     "docs:build": "npm run docs:copy-assets && vitepress build docs && npm run docs:copy-assets",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "site:assemble": "node scripts/assemble-site.mjs",
+    "site:build": "npm run docs:build && npm run site:assemble",
+    "site:preview": "npx --yes serve _site -l 4173"
   },
   "devDependencies": {
     "eslint": "^8.57.0",

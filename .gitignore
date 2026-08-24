@@ -5,6 +5,7 @@ node_modules/
 dist/
 book/
 _book/
+_site/
 .vitepress-cache/
 docs/.vitepress/dist/
 docs/.vitepress/cache/

@@ -227,6 +227,7 @@ export default defineConfig({
     'dist/**',
     'book/**',
     '_book/**',
+    '_site/**',
     'packages/**',
     'assets/**',
     'test/**',
