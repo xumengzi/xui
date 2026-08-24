@@ -48,6 +48,17 @@ function stripLegacyAssetTags() {
         '$1data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=$2'
       )
 
+      // 4.5) md 里散落的 <style> 是 Vue SFC 全局样式（会污染整个站点），
+      //      统一改成 scoped，只作用于当前页面容器。
+      //      同时移除 type="text/css"（SFC 不需要）。
+      out = out.replace(/<style\b([^>]*)>/g, (m, attrs) => {
+        // 去掉 type="text/css" 或 type='text/css'
+        let a = attrs.replace(/\s+type\s*=\s*["']text\/css["']/gi, '')
+        // 已有 scoped 就不重复加
+        if (!/\bscoped\b/.test(a)) a += ' scoped'
+        return `<style${a}>`
+      })
+
       // 5) 若提取到内联脚本，追加一个合法的 <script setup>，在 onMounted 里执行
       if (inlineScripts.length > 0) {
         const merged = inlineScripts.join('\n\n')
