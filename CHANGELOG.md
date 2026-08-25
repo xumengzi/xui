@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **`slider`**: 保存 `bind` 后的函数引用，`removeEventListener` 现在能真正解绑
+- **`scroll` (滚动加载)**: 移除模块级 `let that = null`，改用实例 `this`，允许同页多实例
+- **`backToTop`**: 保存 `requestAnimationFrame` 返回的 id 用于 `cancelAnimationFrame`
+  （原来传入的是 `bind` 生成的新函数，永远无法真正取消动画）
+- **`fullPage`**: wheel 事件加 800ms 冷却式节流，避免一次滑动跳好几页
+- **`calendar`**: 修复第 1063 行 `${isStarted} ${isStarted}` 笔误 → `${isStarted} ${isEnded}`
+
+### Removed
+
+- **`digConverse`**（进制转换）: 使用原生 `(255).toString(16)` / `parseInt('ff', 16)` 替代。
+  原实现使用模块级共享 `var arr / sign`，并发调用会互相污染
+- **`Array.prototype.xmap` / `xfind` / `xreduce`**: 停止污染 `Array.prototype`；
+  原实现的 `xfind` 语义实为 `filter`；`xreduce` 与原生 reduce 累加器初值逻辑不同；
+  `if (initVal)` 会把 `0/''/false` 误判为"未传初值"
+- **`generateBooks`**: 文档站首页 demo 专属代码（硬编码 `#myBook`），不属于通用组件库能力
+
 ### Changed
 
 - **工程化改造**：引入 `package.json` + Vite 构建，产出 ESM / UMD / CSS 双入口，支持 tree-shaking
@@ -14,8 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **CI/CD**：新增 GitHub Actions workflow，自动跑 lint/build，并部署文档到 GitHub Pages
 - **配置对齐**：ESLint 与 Prettier 规则统一（2 空格 / 单引号 / 无尾分号）
 - **`.gitignore` / `.npmignore` 分工明确**：git 只忽略真正不入库的产物，npm 发布白名单由 `package.json` 的 `files` 字段控制
+- **新增架构文档 `assets/xui.review.md`**：16 个组件深度 review + 未来重构路径（Phase 1~4）
 
-### Removed
+### Removed (之前的)
 
 - 从 `assets/xui.js` 剥离 Google Tag Manager、哀悼日置灰、自动水印实例化等副作用（改由文档站点脚本 `assets/site.js` / VitePress theme 引入）
 - 移除 `build.sh` / `serve.sh` / `book.json`（GitBook 时代产物）

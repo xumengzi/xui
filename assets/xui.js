@@ -321,63 +321,9 @@ include most functions and styles etc.
       };
       return res;
     },
-    generateBooks() {
-      var tar = document.getElementById('myBook');
-      var colorArr = [
-        'rgb(200,200,169)',
-        'rgb(203, 12, 249)',
-        'rgb(131,175,155)',
-        'rgb(6,157,128)',
-        'rgb(252,157,154)',
-        'rgb(229,187,129)',
-        'rgb(227,160,93)',
-        'rgb(241, 77, 159)',
-        'rgb(228, 101, 243)',
-        'rgb(137, 101, 243)',
-        'rgb(253, 133, 182)',
-      ];
-      var num = 1;
-      var isClick = true;
-      function magic() {
-        var ele = tar.querySelectorAll('.xui_book_page');
-        ele.forEach((item, index) => {
-          item.style.background = colorArr[xui.randomNum(0, ele.length - 1)];
-          item.style.zIndex = 1000 - index;
-          item.style.display = 'flex';
-        });
-      };
-      magic();
-      tar.querySelector('.xui_book_box').addEventListener('click', (e) => {
-        if (e.target.classList.contains('xui_book_box')) {
-          return;
-        };
-        if (e.target.classList.contains('last')) {
-          var ele = tar.querySelectorAll('.xui_book_page');
-          num = 1;
-          isClick = false;
-          ele.forEach((item, index) => {
-            item.style.background = colorArr[xui.randomNum(0, ele.length - 1)];
-            ; (function (index) {
-              setTimeout(() => {
-                item.style.transform = `rotateY(0)`;
-                if (index == 9) {
-                  isClick = true
-                  magic();
-                }
-              }, 500 * (index));
-            })(index);
-          });
-          return;
-        };
-        if (!isClick) {
-          return
-        }
-        num++;
-        var rot = 180 - num;
-        e.target.style.transform = `rotateY(-${rot}deg)`;
-        e.target.style.zIndex = 1010 + num;
-      }, false);
-    },
+    // generateBooks() 已删除 —— 这原本是文档站首页某个 demo 的专属代码
+    // （硬编码 #myBook），不属于通用组件库能力。如需保留 demo，请把它移到
+    // 文档站点脚本，而不是组件库源码。
     getCookie(name) {
       let myCookie = document.cookie;
       let reg = new RegExp("([\\s]?)" + name + "=([\\d\\w]+)");
@@ -1060,7 +1006,7 @@ here is a calendar plugin
           };
           tds += `
 						<td>
-							<div data-date=${prevd} title=${prevd} class="xui_calendar_valid xui_calendar_prev ${isStarted} ${isStarted}">
+							<div data-date=${prevd} title=${prevd} class="xui_calendar_valid xui_calendar_prev ${isStarted} ${isEnded}">
 								${lastDays - i}
 							</div>
 						</td>
@@ -1348,12 +1294,15 @@ here is a slider plugin
   Slider.prototype.event = function () {
     let ele = document.getElementById(this.defaults.id);
     let dot = ele.querySelector('.xui_slider_dot_con');
-    dot.addEventListener('mouseover', this.handleCountAng.bind(this), false);
-    dot.addEventListener('mouseout', this.autoAnimated.bind(this), false);
+    // Fix: 保存 bind 后的函数引用，否则 removeEventListener 每次都拿到新函数，无法解绑
+    this._boundHandleCountAng = this.handleCountAng.bind(this);
+    this._boundAutoAnimated = this.autoAnimated.bind(this);
+    dot.addEventListener('mouseover', this._boundHandleCountAng, false);
+    dot.addEventListener('mouseout', this._boundAutoAnimated, false);
 
     let ang = ele.querySelector('.xui_slider_tab_con');
-    ang.addEventListener('click', this.handleCountAng.bind(this), false);
-    ang.addEventListener('mouseout', this.autoAnimated.bind(this), false);
+    ang.addEventListener('click', this._boundHandleCountAng, false);
+    ang.addEventListener('mouseout', this._boundAutoAnimated, false);
   };
   Slider.prototype.autoAnimated = function () {
     clearInterval(this.defaults.timer);
@@ -1366,7 +1315,8 @@ here is a slider plugin
   };
   Slider.prototype.handleCountAng = function (e) {
     clearInterval(this.defaults.timer);
-    document.querySelector('.xui_slider_tab_con').removeEventListener('click', this.handleCountAng.bind(this), false);
+    // Fix: 用保存的引用解绑（原来 `.bind(this)` 每次生成新函数，永远不匹配）
+    document.querySelector('.xui_slider_tab_con').removeEventListener('click', this._boundHandleCountAng, false);
     if (e.target.classList.contains('xui_slider_dot')) {
       let inx = e.target.getAttribute('data-index');
       this.defaults.index = inx;
@@ -1449,13 +1399,12 @@ here is a slider plugin
 here is a scrollLoad plugin
 */
 ; (function (w) {
-  let that = null;
+  // Fix: 原来模块级 `let that = null` 会导致同页多实例互相覆盖。
+  //      改为把 id 直接放到 this 上，所有原型方法用 this 访问。
   function Scroll() {
     this.id = arguments.length && arguments[0].id;
-    that = this;
   };
   Scroll.prototype.toBottomHeight = function () {
-    let diff = 0;
     if (this.getScrollTop() == 0) {
       return this.getClientHeight()
     } else {
@@ -1464,8 +1413,8 @@ here is a scrollLoad plugin
   };
   Scroll.prototype.getClientHeight = function () {
     let clientHeight = 0;
-    if (that.id) {
-      return document.getElementById(that.id).clientHeight;
+    if (this.id) {
+      return document.getElementById(this.id).clientHeight;
     };
     if (document.body.clientHeight && document.documentElement.clientHeight) {
       clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight);
@@ -1476,8 +1425,8 @@ here is a scrollLoad plugin
   };
   Scroll.prototype.getScrollTop = function () {
     let scrollTop = 0;
-    if (that.id) {
-      return document.getElementById(that.id).scrollTop;
+    if (this.id) {
+      return document.getElementById(this.id).scrollTop;
     };
     if (document.documentElement && document.documentElement.scrollTop) {
       scrollTop = document.documentElement.scrollTop;
@@ -1487,16 +1436,17 @@ here is a scrollLoad plugin
     return scrollTop;
   };
   Scroll.prototype.getScrollHeight = function () {
-    if (that.id) {
-      return document.getElementById(that.id).scrollHeight;
+    if (this.id) {
+      return document.getElementById(this.id).scrollHeight;
     };
     return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
   };
   Scroll.prototype.init = function () {
-    let tar = that.id ? document.getElementById(that.id) : window;
+    let self = this;
+    let tar = this.id ? document.getElementById(this.id) : window;
     tar.onscroll = function () {
-      let height = that.toBottomHeight();
-      that.onscroll(height);
+      let height = self.toBottomHeight();
+      self.onscroll(height);
     };
   };
   Object.getPrototypeOf(xui).scroll = Scroll;
@@ -1616,8 +1566,14 @@ here is a fullPage plugin, just for fun
           ele[i].style.transform = `translate${dir}(100%)`;
         };
       };
+      // Fix: 原来 wheel 无节流，一次滑动会连续触发几十次，会跳过好几页。
+      //      改为冷却式节流：触发后 800ms 内忽略后续 wheel。
+      let wheelLock = false;
       w.onwheel = (e) => {
+        if (wheelLock) return;
+        wheelLock = true;
         this.event(e);
+        setTimeout(() => { wheelLock = false; }, 800);
       };
       if (xui.isMobile()) {
         let startX = 0, endX = 0,
@@ -2349,97 +2305,23 @@ here is a pullLoad plugin
 })(window);
 
 /*
-试一试用js实现进制的转换
+digConverse（进制转换）已删除。
+原实现使用模块级共享 var arr/sign，并发调用会互相污染，且性能差。
+请直接使用原生：
+  (255).toString(16)        // 'ff'
+  (255).toString(2)         // '11111111'
+  parseInt('ff', 16)        // 255
 */
-; (function (w) {
-  var arr = [];
-  var sign = 0;
-  function digConverse(n, b) {
-    n -= 0;
-    b -= 0;
-    if (!n || !b) {
-      throw Error('must be valid')
-    };
-    if (isNaN(n) && isNaN(b)) {
-      throw Error('must be numbers');
-    };
-    if (sign) {
-      arr = [];
-      sign = 0;
-    };
-    if (n % b === 0) {
-      arr.unshift(0);
-      n = n / b;
-    } else {
-      arr.unshift(n % b);
-      n = Math.floor(n / b);
-    };
-    if (n === 0) {
-      sign = 1;
-      return arr.join('') - 0;
-    };
-    return digConverse(n, b);
-  };
-  Object.getPrototypeOf(xui).digConverse = digConverse;
-})(window);
 
 /*
-尝试用普通函数写一下map,reduce等高级方法
-*/
-; (function (w) {
-  var xArr = ['xmap', 'xfind', 'xreduce'];
-  xArr.forEach(function (item, index) {
-    if (typeof Array.prototype[item] === 'function') {
-      console.log(item + ' method already exsits');
-      return;
-    };
-  });
-  //实现map方法
-  Array.prototype.xmap = function (fn, args) {
-    var newArr, thisArg, prevArr;
-    prevArr = this;
-    if (Object.prototype.toString.call(prevArr) !== '[object Array]') {
-      throw new Error(prevArr + ' must be a array');
-    }
-    if (args) {
-      thisArg = args;
-    };
-    newArr = new Array(prevArr.length);
-    for (var i = 0, len = prevArr.length; i < len; i++) {
-      newArr[i] = xui.isFunction(fn) && fn.call(thisArg, prevArr[i], i, prevArr);
-    };
-    return newArr;
-  };
-  //实现find方法
-  Array.prototype.xfind = function (fn, args) {
-    var prevArr, thisArg;
+xmap / xfind / xreduce 已删除。
+原实现污染 Array.prototype，且行为与原生方法不一致：
+  - xfind 返回所有符合条件的元素（实为 filter 语义）
+  - xreduce 无初值时索引/累加器初值与原生 reduce 不同
+  - `if (initVal)` 会把 0/''/false 误判为"未传初值"
 
-    prevArr = this;
-    if (args) {
-      thisArg = args;
-    }
-    var newArr = new Array();
-    for (var i = 0, len = prevArr.length; i < len; i++) {
-      fn.call(thisArg, prevArr[i], i, prevArr) && newArr.push(prevArr[i]);
-    };
-    return newArr;
-  };
-  //实现reduce方法
-  Array.prototype.xreduce = function (fn, initVal) {
-    var NUM = 0, prevArr, initIndex = 1;
-    //如果提供了默认值, 那么索引值从0开始, 否则从1开始
-    if (initVal) {
-      NUM = initVal;
-      initIndex = 0;
-    };
-    prevArr = this;
-    for (var i = 0, len = prevArr.length; i < len; i++) {
-      NUM = fn.call(null, NUM, prevArr[i], initIndex, prevArr);
-      initIndex++;
-    };
-    return NUM;
-  };
-})(window);
+现代替代：直接使用原生 Array.prototype.map/find/filter/reduce（ES2015 起）。
+*/
 
 /*
 数字滚动插件 
@@ -2704,11 +2586,19 @@ here is a pullLoad plugin
       }
       if (window.requestAnimationFrame) {
         if (scrollHeight <= 0) {
-          cancelAnimationFrame(this.scroll.bind(this));
+          // Fix: 原来 `cancelAnimationFrame(this.scroll.bind(this))` 传入的是一个新函数，
+          //      而 cancelAnimationFrame 需要的是 requestAnimationFrame 返回的 id。
+          //      正确做法：保存 rAF 返回的 id，用它 cancel。
+          if (this.opts.rafId) {
+            cancelAnimationFrame(this.opts.rafId);
+            this.opts.rafId = null;
+          }
           this.opts.isScroll = true;
           fn && fn();
         } else {
-          requestAnimationFrame(this.scroll.bind(this));
+          // Fix: 复用同一个 bound handler，避免每次都新建函数
+          if (!this._boundScroll) this._boundScroll = this.scroll.bind(this);
+          this.opts.rafId = requestAnimationFrame(this._boundScroll);
         };
       } else {
         if (scrollHeight <= 0) {
@@ -2722,7 +2612,8 @@ here is a pullLoad plugin
       top.addEventListener('click', (e) => {
         if (!this.opts.isScroll) { return }
         if (window.requestAnimationFrame) {
-          requestAnimationFrame(this.scroll.bind(this));
+          if (!this._boundScroll) this._boundScroll = this.scroll.bind(this);
+          this.opts.rafId = requestAnimationFrame(this._boundScroll);
         } else {
           this.opts.timer = setInterval(this.scroll.bind(this), 16.7);
         };
